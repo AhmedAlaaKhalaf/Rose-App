@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Toaster } from "@/components/ui/sonner";
 import localFont from "next/font/local";
+
 type LocaleProps = {
   children: React.ReactNode;
   params: { locale: string };
