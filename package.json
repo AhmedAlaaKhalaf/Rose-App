@@ -34,6 +34,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.71.0",
+    "react-infinite-scroll-component": "^6.1.1",
     "react-phone-number-input": "^3.4.14",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",

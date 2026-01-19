@@ -23,6 +23,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import NotificationsSkeleton from "./notifications-skeleton";
 import Loading from "../loading";
 import useMarkNotificationRead from "@/hooks/notifications/use-mark-notification-read";
+import { useTranslations } from "next-intl";
 // import useDeleteNotification from "@/hooks/notifications/use-delete-notification";
 
 export default function Notifications() {
@@ -30,6 +31,9 @@ export default function Notifications() {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
 
+ // Translation
+  const t = useTranslations("notifications");
+  
   // hooks
   const {
     data: notificationsList,
@@ -89,7 +93,7 @@ export default function Notifications() {
         {/* Header */}
         <div className="text-xl p-4 bg-[#741C21] text-white dark:bg-[#FFC2D0] dark:text-zinc-800 font-bold">
           <h3>
-            Notifications
+            {t("title")}
             {notificationsList &&
               notificationsList?.pages[0]?.metadata?.unreadCount > 0 &&
               `(${notificationsList?.pages[0]?.metadata?.unreadCount})`}
@@ -103,13 +107,13 @@ export default function Notifications() {
           <div className="flex items-center gap-1 cursor-pointer">
             <BrushCleaning size={18} className="text-zinc-500" />
             <span className="text-xs font-semibold text-zinc-800 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-400 transition-all duration-300">
-              Clear all notifications
+              {t("clear-all-notifications")}
             </span>
           </div>
           <div className="flex items-center gap-1 cursor-pointer">
             <CheckCheck size={15} className="text-zinc-500" />
             <span className="text-xs font-semibold text-zinc-800 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-400 transition-all duration-300">
-              Mark all as read
+              {t("mark-all-as-read")}
             </span>
           </div>
         </div>
@@ -127,7 +131,7 @@ export default function Notifications() {
               <div className="p-4 border-t border-zinc-300 dark:border-zinc-600 h-56 flex flex-col items-center justify-center dark:bg-zinc-700">
                 <BellOff size={50} className="text-zinc-500 dark:text-zinc-400" />
                 <p className="p-4 text-zinc-500 dark:text-zinc-400 font-medium text-sm">
-                  No notifications to display.
+                  {t("no-notifications")}
                 </p>
               </div>
             ) : isLoading ? (
@@ -185,7 +189,7 @@ export default function Notifications() {
                                     className={`flex items-center gap-1 cursor-pointer text-zinc-800 dark:text-zinc-50 ${notification?.isRead ? "pointer-events-none text-zinc-400 dark:text-zinc-500" : ""}`}
                                   >
                                     <Check size={18} />
-                                    <span>Mark as read</span>
+                                    <span>{t("mark-as-read")}</span>
                                   </DropdownMenuItem>
                                   <DropdownMenuItem
                                     onClick={(e) => {
@@ -197,7 +201,7 @@ export default function Notifications() {
                                     className="flex items-center gap-1 cursor-pointer"
                                   >
                                     <Trash2 size={18} className="text-red-500" />
-                                    <span>Delete notification</span>
+                                    <span>{t("delete-notification")}</span>
                                   </DropdownMenuItem>
                                 </DropdownMenuGroup>
                               </DropdownMenuContent>

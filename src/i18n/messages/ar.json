@@ -7,5 +7,13 @@
     "description": "كلمات حقيقية من عملاء سعداء",
     "testimonials-card-content": "{content}",
     "testimonial-user-name": "{name}"
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "clear-all-notifications": "مسح كل الإشعارات",
+    "mark-all-as-read": "علم كلها كمقروءة",
+    "mark-as-read": "علم كمقروءة",
+    "delete-notification": "حذف الإشعار",
+    "no-notifications": "لا يوجد إشعارات لعرضها."
   }
 }
