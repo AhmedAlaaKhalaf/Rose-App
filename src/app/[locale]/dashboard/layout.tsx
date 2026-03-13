@@ -14,11 +14,13 @@ const nunitoSans = Nunito_Sans({
 
 export default function DashboardLayout({ children }: LayoutProps) {
   return (
-    <div className={`${nunitoSans.variable} gap-4 md:gap-0 grid grid-cols-10 bg-zinc-50`}>
+    <div
+      className={`${nunitoSans.variable} gap-4 md:gap-0 grid grid-cols-10 bg-zinc-50 font-inter`}
+    >
       {/* Side bar */}
       <DashboardSidebar />
 
-      <main className="flex flex-col gap-6 col-span-10 md:col-span-8 mx-auto container">
+      <main className="flex flex-col gap-4 col-span-10 md:col-span-8 mx-auto container">
         {/* Header */}
         <div className="hidden md:block border-black/10 border-b">
           <DashboardBreadcrumb />

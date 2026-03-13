@@ -287,7 +287,6 @@
             "update": "update Address"
           }
         },
-
         "city": {
           "title": "city",
           "placeholder": "Enter city name"
@@ -318,23 +317,6 @@
         "invalid": "Please enter a valid mobile number"
       }
     },
-    "related-products": {
-      "header": "Related Products"
-    },
-    "product-reviews": {
-      "header": "Product Reviews",
-      "second-head": "General rating:",
-      "general-rate": "{rate} <span>({count} rating)</span>",
-      "title-field": "Please Enter review title",
-      "login-need": "Please login to be able to review the product",
-      "form-rate-label": "Your rating:",
-      "title-field-label": "Title",
-      "review-comment": "Review",
-      "text-area-placholder": "What do you think of this product?",
-      "title-field-placholder": "Enter review title",
-      "review-form-button": "Add Review",
-      "add-review-toast": "You Review Added Successfully"
-    },
     "orders": {
       "title": "Orders",
       "no-orders": "You haven't placed any orders yet!",
@@ -363,16 +345,32 @@
       "failed-to-load": "Failed to load orders",
       "try-again": "Something went wrong. Please try again later.",
       "retry": "Retry"
-    },
-    "search-input": {
-      "placeholder": "What awesome gift are you looking for?",
-      "rate-count": "ratings",
-      "general-rate": "Rating",
-      "like-head": "Products you may like:",
-      "currency": "EGP"
     }
   },
-
+  "search-input": {
+    "placeholder": "What awesome gift are you looking for?",
+    "rate-count": "ratings",
+    "general-rate": "Rating",
+    "like-head": "Products you may like:",
+    "currency": "EGP"
+  },
+  "related-products": {
+    "header": "Related Products"
+  },
+  "product-reviews": {
+    "header": "Product Reviews",
+    "second-head": "General rating:",
+    "general-rate": "{rate} <span>({count} rating)</span>",
+    "title-field": "Please Enter review title",
+    "login-need": "Please login to be able to review the product",
+    "form-rate-label": "Your rating:",
+    "title-field-label": "Title",
+    "review-comment": "Review",
+    "text-area-placholder": "What do you think of this product?",
+    "title-field-placholder": "Enter review title",
+    "review-form-button": "Add Review",
+    "add-review-toast": "You Review Added Successfully"
+  },
   "product-listing": {
     "badge": {
       "new": "new",
@@ -396,5 +394,25 @@
     "nav-categories": "Categories",
     "nav-occasions": "Occasions",
     "nav-products": "Products"
+  },
+  "db-occasions": {
+    "update-toast": "Occasion updated",
+    "add-occasion": "successfully",
+    "occasion-name": "Name",
+    "view-occasion-image-button": "View occasion image",
+    "update-occasion-button": "Update Occasion",
+    "image-field": "Occasion image",
+    "upload-button": "Upload file",
+    "add-button": "Add Occasion",
+    "add-page-head": "Add a New Occasion",
+    "update-page-head": "Update Occasion:",
+    "edit-button": "Edit",
+    "delete-button": "Delete",
+    "delete-toast": "Occasion Deleted Successfully",
+    "products-QTY": "Products",
+    "table-head-QTY": "Products",
+    "occasions-overview-title": "All Occasions",
+    "occasions-overview-head-button": "Add a new occasion",
+    "search-placeholder": "Search..."
   }
 }

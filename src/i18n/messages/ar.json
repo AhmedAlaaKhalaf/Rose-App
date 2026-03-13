@@ -177,7 +177,6 @@
     "email-invalid": "البريد الإلكتروني غير صحيح.",
     "password-invalid": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم واحد، ورمز خاص واحد."
   },
-
   "product-listing": {
     "badge": {
       "new": "جديد",
@@ -190,7 +189,6 @@
     },
     "no-products-message": "لا توجد منتجات للعرض"
   },
-
   "user-address": {
     "modal": {
       "addresses-list": {
@@ -250,23 +248,6 @@
         "invalid": "رجاءً أدخل رقم محمول صالح"
       }
     },
-    "related-products": {
-      "header": "منتجات ذات الصلة"
-    },
-    "product-reviews": {
-      "header": "التعليقات",
-      "second-head": "التقييم العام:",
-      "title-field": "الرجاء إدخال عنوان المراجعة",
-      "general-rate": "{rate} <span>({count} تعليق)</span>",
-      "login-need": "الرجاء تسجيل الدخول لتتمكن من مراجعة المنتج",
-      "form-rate-label": "تقييمك:",
-      "title-field-label": "العنوان",
-      "review-comment": "رايك",
-      "text-area-placholder": "ما رأيك في هذا المنتج؟",
-      "title-field-placholder": "أدخل عنوان المراجعة",
-      "review-form-button": "أضف مراجعة",
-      "add-review-toast": "لقد قمت باضافه مراجعة بنجاح"
-    },
     "orders": {
       "title": "الطلبات",
       "no-orders": "لم تقم بأي طلبيات حتى الآن!",
@@ -304,26 +285,39 @@
       "password": {
         "label": "كلمة المرور"
       },
-
       "rememberMe": "تذكرني",
       "forgotPassword": "هل نسيت كلمة المرور؟",
       "submit": "تسجيل الدخول",
-
       "noAccount": "ليس لديك حساب؟",
       "createAccount": "أنشئ حسابًا الآن!",
-
       "email-invalid": "البريد الإلكتروني غير صحيح.",
       "password-invalid": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم واحد، ورمز خاص واحد."
-    },
-    "search-input": {
-      "placeholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
-      "rate-count": "تقييمات",
-      "general-rate": "تصنيف",
-      "like-head": "المنتجات التي قد تعجبك:",
-      "currency": "ج.م"
     }
   },
-
+  "related-products": {
+    "header": "منتجات ذات الصلة"
+  },
+  "product-reviews": {
+    "header": "التعليقات",
+    "second-head": "التقييم العام:",
+    "title-field": "الرجاء إدخال عنوان المراجعة",
+    "general-rate": "{rate} <span>({count} تعليق)</span>",
+    "login-need": "الرجاء تسجيل الدخول لتتمكن من مراجعة المنتج",
+    "form-rate-label": "تقييمك:",
+    "title-field-label": "العنوان",
+    "review-comment": "رايك",
+    "text-area-placholder": "ما رأيك في هذا المنتج؟",
+    "title-field-placholder": "أدخل عنوان المراجعة",
+    "review-form-button": "أضف مراجعة",
+    "add-review-toast": "لقد قمت باضافه مراجعة بنجاح"
+  },
+  "search-input": {
+    "placeholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
+    "rate-count": "تقييمات",
+    "general-rate": "تصنيف",
+    "like-head": "المنتجات التي قد تعجبك:",
+    "currency": "ج.م"
+  },
   "dashboard-layout": {
     "home-button": "الصفحه الرئيسية",
     "breadcrumb-segmentone": "لوحة التحكم",
@@ -335,5 +329,25 @@
     "nav-categories": "التصنيفات",
     "nav-occasions": "المناسبات",
     "nav-products": "المنتجات"
+  },
+  "db-occasions": {
+    "update-toast": "تم تحديث المناسبة",
+    "add-occasion": "تم اضافه مناسبه جديده بنجاح",
+    "occasion-name": "اسم المناسبه",
+    "view-occasion-image-button": "شاهد صورة المناسبة",
+    "update-occasion-button": "تحديث المناسبة",
+    "image-field": "صورة المناسبة",
+    "upload-button": "تحميل الملف",
+    "add-button": "أضف مناسبة",
+    "add-page-head": "أضف مناسبة جديدة",
+    "edit-button": "تعديل",
+    "delete-button": "حذف",
+    "update-page-head": " تحديث المناسبه :",
+    "delete-toast": "تم حذف المناسبة بنجاح",
+    "products-QTY": "منتج",
+    "table-head-QTY": "منتجات",
+    "occasions-overview-title": "جميع المناسبات",
+    "occasions-overview-head-button": "أضف مناسبة جديدة",
+    "search-placeholder": "يبحث..."
   }
 }
