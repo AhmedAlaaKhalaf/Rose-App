@@ -249,79 +249,81 @@
         "required": "رجاءً أدخل رقم المحمول",
         "invalid": "رجاءً أدخل رقم محمول صالح"
       }
-    },
-    "related-products": {
-      "header": "منتجات ذات الصلة"
-    },
-    "product-reviews": {
-      "header": "التعليقات",
-      "second-head": "التقييم العام:",
-      "title-field": "الرجاء إدخال عنوان المراجعة",
-      "general-rate": "{rate} <span>({count} تعليق)</span>",
-      "login-need": "الرجاء تسجيل الدخول لتتمكن من مراجعة المنتج",
-      "form-rate-label": "تقييمك:",
-      "title-field-label": "العنوان",
-      "review-comment": "رايك",
-      "text-area-placholder": "ما رأيك في هذا المنتج؟",
-      "title-field-placholder": "أدخل عنوان المراجعة",
-      "review-form-button": "أضف مراجعة",
-      "add-review-toast": "لقد قمت باضافه مراجعة بنجاح"
-    },
-    "orders": {
-      "title": "الطلبات",
-      "no-orders": "لم تقم بأي طلبيات حتى الآن!",
-      "no-orders-desc": "ابدأ بالتسوق وستظهر طلبياتك هنا.",
-      "go-home": "اذهب للرئيسية",
-      "order-header": "الطلب",
-      "created-in": "تم الإنشاء في:",
-      "total-price": "السعر الإجمالي:",
-      "payment-status": "حالة الدفع",
-      "paid": "مدفوعة",
-      "not-paid": "غير مدفوعة",
-      "status": "الحالة",
-      "payment-method": "طريقة الدفع:",
-      "delivery-status": "حالة التوصيل:",
-      "cash": "نقد",
-      "credit-card": "بطاقة ائتمان",
-      "pending": "قيد الانتظار",
-      "processing": "قيد المعالجة",
-      "delivered": "تم التسليم",
-      "cancelled": "ملغى",
-      "order-items": "عناصر الطلب:",
-      "show-all": "عرض الكل",
-      "show-less": "عرض أقل",
-      "rating": "التقييم:",
-      "quantity": "الكمية:",
-      "failed-to-load": "فشل تحميل الطلبيات",
-      "try-again": "حدث خطأ ما. يرجى المحاولة لاحقاً.",
-      "retry": "إعادة محاولة"
-    },
-    "login": {
-      "title": "مرحبًا بعودتك!",
-      "email": {
-        "label": "البريد الإلكتروني"
-      },
-      "password": {
-        "label": "كلمة المرور"
-      },
-
-      "rememberMe": "تذكرني",
-      "forgotPassword": "هل نسيت كلمة المرور؟",
-      "submit": "تسجيل الدخول",
-
-      "noAccount": "ليس لديك حساب؟",
-      "createAccount": "أنشئ حسابًا الآن!",
-
-      "email-invalid": "البريد الإلكتروني غير صحيح.",
-      "password-invalid": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم واحد، ورمز خاص واحد."
-    },
-    "search-input": {
-      "placeholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
-      "rate-count": "تقييمات",
-      "general-rate": "تصنيف",
-      "like-head": "المنتجات التي قد تعجبك:",
-      "currency": "ج.م"
     }
+  },
+  "related-products": {
+    "header": "منتجات ذات الصلة"
+  },
+  "checkout": {
+    "shipping-address": "عنوان الشحن",
+    "summary": "الملخص",
+    "total": "المجموع",
+    "subtotal": "المجموع الفرعي",
+    "add-address": "اضافه عنوان جديد",
+    "payment-method": "طريقة الدفع",
+    "checkout-success-cash": "تم إنشاء طلب الدفع بالنقدية بنجاح",
+    "checkout-success-credit": "تم إنشاء طلب الدفع بالبطاقة بنجاح",
+    "checkout-error": "فشل إنشاء الطلب",
+    "checkout-button": "إتمام الطلب",
+    "checkout-loading": "جاري التحميل...",
+    "coupon-code": "كود الخصم",
+    "apply-coupon": "تطبيق الخصم",
+    "no-coupons-applied": "لا يوجد خصمات مطبقة",
+    "discount-applied": "- {amount} ج.م خصم",
+    "currency": "ج.م",
+    "next": "التالي",
+    "back": "السابق",
+    "or": "أو"
+  },
+  "product-reviews": {
+    "header": "التعليقات",
+    "second-head": "التقييم العام:",
+    "title-field": "الرجاء إدخال عنوان المراجعة",
+    "general-rate": "{rate} <span>({count} تعليق)</span>",
+    "login-need": "الرجاء تسجيل الدخول لتتمكن من مراجعة المنتج",
+    "form-rate-label": "تقييمك:",
+    "title-field-label": "العنوان",
+    "review-comment": "رايك",
+    "text-area-placholder": "ما رأيك في هذا المنتج؟",
+    "title-field-placholder": "أدخل عنوان المراجعة",
+    "review-form-button": "أضف مراجعة",
+    "add-review-toast": "لقد قمت باضافه مراجعة بنجاح"
+  },
+  "orders": {
+    "title": "الطلبات",
+    "no-orders": "لم تقم بأي طلبيات حتى الآن!",
+    "no-orders-desc": "ابدأ بالتسوق وستظهر طلبياتك هنا.",
+    "go-home": "اذهب للرئيسية",
+    "order-header": "الطلب",
+    "created-in": "تم الإنشاء في:",
+    "total-price": "السعر الإجمالي:",
+    "payment-status": "حالة الدفع",
+    "paid": "مدفوعة",
+    "not-paid": "غير مدفوعة",
+    "status": "الحالة",
+    "payment-method": "طريقة الدفع:",
+    "delivery-status": "حالة التوصيل:",
+    "cash": "نقد",
+    "credit-card": "بطاقة ائتمان",
+    "pending": "قيد الانتظار",
+    "processing": "قيد المعالجة",
+    "delivered": "تم التسليم",
+    "cancelled": "ملغى",
+    "order-items": "عناصر الطلب:",
+    "show-all": "عرض الكل",
+    "show-less": "عرض أقل",
+    "rating": "التقييم:",
+    "quantity": "الكمية:",
+    "failed-to-load": "فشل تحميل الطلبيات",
+    "try-again": "حدث خطأ ما. يرجى المحاولة لاحقاً.",
+    "retry": "إعادة محاولة"
+  },
+  "search-input": {
+    "placeholder": "ما هي الهدية الرائعة التي تبحث عنها؟",
+    "rate-count": "تقييمات",
+    "general-rate": "تصنيف",
+    "like-head": "المنتجات التي قد تعجبك:",
+    "currency": "ج.م"
   },
 
   "dashboard-layout": {

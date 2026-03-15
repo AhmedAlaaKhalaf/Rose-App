@@ -37,3 +37,15 @@ export type TProduct = {
 export type TProductDetails = {
   product: TProduct;
 };
+
+export type TAllProducts = {
+  message: string;
+  metadata: {
+    currentPage: number;
+    totalPages: number;
+    limit: number;
+    totalItems: number;
+    nextPage?: number;
+  };
+  products: TProductCard[];
+};

@@ -12,18 +12,23 @@ import ClearButton from "./clear-button";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const OCCASION_OVERLAY_GRADIENT =
-   "linear-gradient(180deg, rgba(0, 0, 0, 0.1375) 0%, rgba(166, 37, 42, 0.55) 100%)";
+  "linear-gradient(180deg, rgba(0, 0, 0, 0.1375) 0%, rgba(166, 37, 42, 0.55) 100%)";
 const OCCASION_PARAM = "occasion";
 
-
 export default function OccasionFilter() {
-
   // Translations
   const t = useTranslations("Products");
 
   // Hooks
-  const { isPending, data: payload, error, refetch, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useOccasions();
+  const {
+    isPending,
+    data: payload,
+    error,
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useOccasions();
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -65,24 +70,20 @@ export default function OccasionFilter() {
 
   return (
     <section className="border-b border-zinc-100 dark:border-zinc-700 pb-5">
-        <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center">
         {/* filter title */}
         <h3 className="text-zinc-800 dark:text-zinc-50 font-medium text-lg ps-[5px]">
-            {t("occasion")}
+          {t("occasion")}
         </h3>
-        {hasActiveOccasion && (
-          <ClearButton onClick={handleClear} label={t("reset")} />
-        )}
-        </div>
-        {/* Occasions list */}
+        {hasActiveOccasion && <ClearButton onClick={handleClear} label={t("reset")} />}
+      </div>
+      {/* Occasions list */}
       <InfiniteScroll
         dataLength={occasions.length}
         next={fetchNextPage}
         hasMore={hasNextPage ?? false}
         loader={
-          <div className="w-full py-2 text-center text-sm text-zinc-500">
-            {t("loading-more")}
-          </div>
+          <div className="w-full py-2 text-center text-sm text-zinc-500">{t("loading-more")}</div>
         }
         height={260}
         className="hide-scroll flex flex-wrap justify-between overflow-x-hidden overscroll-contain"
