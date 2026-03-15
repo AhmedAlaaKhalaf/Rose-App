@@ -5,9 +5,10 @@ import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { getShippingAddress } from "@/lib/services/shipping-address.service";
 import type { TAddress } from "@/lib/types/addresses";
-import { MoveRight, Phone, Plus } from "lucide-react";
+import { MoveRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ShippingAddressSkeleton from "@/components/skeletons/shared/shipping-address.skeleton";
+import { AddAddressModalButton } from "./add-address-modal-button";
 
 type ShippingAddressProps = {
   selectedAddress: TAddress | null;
@@ -118,9 +119,7 @@ export default function ShippingAddress({ selectedAddress, onSelectAddress, onNe
         </div>
 
         {/* Add address button */}
-        <Button variant="secondary" className="w-full">
-          {t("add-address")}
-        </Button>
+        <AddAddressModalButton triggerClassName="w-full" />
       </div>
 
       {/* Next button */}

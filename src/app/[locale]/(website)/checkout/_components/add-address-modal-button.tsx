@@ -20,7 +20,11 @@ import { userAddressSchema } from "@/lib/schemas/user-address.schema";
 import { Input } from "@/components/ui/input";
 import { useSession } from "next-auth/react";
 
-export function AddAddressModalButton() {
+type AddAddressModalButtonProps = {
+  triggerClassName?: string;
+};
+
+export function AddAddressModalButton({ triggerClassName }: AddAddressModalButtonProps) {
   // Translation
   const t = useTranslations("user-address.modal.mutate-address");
   const tZod = useTranslations("user-address.validation");
@@ -229,7 +233,7 @@ export function AddAddressModalButton() {
   return (
     <Dialog open={modalState} onOpenChange={setModalState}>
       <DialogTrigger asChild>
-        <Button variant="secondary">{t("form-title.add")}</Button>
+        <Button variant="secondary" className={triggerClassName}>{t("form-title.add")}</Button>
       </DialogTrigger>
       <DialogContent aria-describedby="" className="gap-6">
         {/* Title */}
