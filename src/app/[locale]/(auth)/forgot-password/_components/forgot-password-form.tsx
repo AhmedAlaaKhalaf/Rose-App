@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import EmailStep from "./af-task/email-step";
 import NewPasswordStep from "./af-task/new-password-step";
@@ -9,7 +10,7 @@ export default function ForgotPasswordForm() {
   const [email, setEmail] = useState<string>("");
 
   return (
-    <div className="w-full max-w-md px-6 flex flex-col">
+    <div className="flex flex-col px-6 w-full max-w-md">
       {/* email step */}
       {step === "email" && (
         <EmailStep email={email} setEmail={setEmail} onNext={() => setStep("otp")} />

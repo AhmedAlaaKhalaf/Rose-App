@@ -4,7 +4,7 @@ export async function getOrderStatus(token: string): Promise<TOrderStatistics> {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API}/statistics/orders`, {
     method: "GET",
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -14,9 +14,7 @@ export async function getOrderStatus(token: string): Promise<TOrderStatistics> {
 
   const payload: ApiResponse<TOrderStatistics> = await response.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error as string);
-  }
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }

@@ -38,20 +38,20 @@ export default function Search() {
 
   const { watch } = form;
 
-  const searchTirm = watch("keyword");
+  const searchTrim = watch("keyword");
 
   // Hooks
-  const debounceSearchTirm = useDebounce(searchTirm, 200);
+  const debounceSearchTrim = useDebounce(searchTrim, 200);
 
   const { youLike, youLikeError, youLikeLoading } = useProductsYouMayLike({
     status: session.status,
   });
 
   const { result, error, fetchNextPage, hasNextPage, isFetching, isLoading } = useSearchResult({
-    keyword: debounceSearchTirm,
+    keyword: debounceSearchTrim,
     limit: 6,
     fields: fields,
-    open: form.formState.isDirty && !!debounceSearchTirm,
+    open: form.formState.isDirty && !!debounceSearchTrim,
   });
 
   // Variables
@@ -75,7 +75,7 @@ export default function Search() {
 
   // Return Search input & Modal UI
   return (
-    <div className="relative bg-white p-0 w-full rounded-lg" ref={refSearch}>
+    <div className="relative bg-white p-0 rounded-lg w-full" ref={refSearch}>
       {/* Search Input */}
       <Form {...form}>
         <form>
@@ -141,11 +141,14 @@ export default function Search() {
               {youLikeLoading
                 ? Array.from({ length: 6 }).map((_, idx) => <SearchCardSkeleton key={idx} />)
                 : session.status === "unauthenticated"
-                  ? youLike?.products.map((product) => (
-                      <SearchCard key={product._id} product={product} setOpen={setOpen} />
+                  ? youLike?.data.map((product) => (
+                      <SearchCard key={product.id} product={product} setOpen={setOpen} />
                     ))
-                  : youLike?.recommendations.map((product) => (
-                      <SearchCard key={product._id} product={product} setOpen={setOpen} />
+                  : // : youLike?.recommendations.map((product) => (
+                    //     <SearchCard key={product._id} product={product} setOpen={setOpen} />
+                    //   ))}
+                    youLike?.data.map((product) => (
+                      <SearchCard key={product.id} product={product} setOpen={setOpen} />
                     ))}
             </>
           )}
@@ -171,7 +174,7 @@ export default function Search() {
                     key={product._id}
                     product={product}
                     setOpen={setOpen}
-                    searchTerm={searchTirm}
+                    searchTerm={searchTrim}
                   />
                 ))
               )}

@@ -8,45 +8,44 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Form } from "@/components/ui/form";
 
-type FormValues = { 
-    min?: number;
-    max?: number 
+type FormValues = {
+  min?: number;
+  max?: number;
 };
 
 export default function PriceFilter() {
+  // Translations
+  const t = useTranslations("Products");
 
-    // Translations
-    const t = useTranslations("Products");
+  // Hooks
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-    // Hooks
-    const pathname = usePathname();
-    const router = useRouter();
-    const searchParams = useSearchParams();
+  // Form
+  const form = useForm<FormValues>({
+    defaultValues: {
+      min: Number(searchParams.get("minPrice")) || undefined,
+      max: Number(searchParams.get("maxPrice")) || undefined,
+    },
+  });
 
-    // Form
-    const form = useForm<FormValues>({
-        defaultValues: {
-        min: Number(searchParams.get("price[gte]")) || undefined,
-        max: Number(searchParams.get("price[lte]")) || undefined,
-        },
-    });
-    
-    // Form values
-    const { register, handleSubmit, reset, watch } = form;
-    const minValue = watch("min");
-    const maxValue = watch("max");
-    const hasPriceFilter = Boolean(minValue || maxValue);
+  // Form values
+  const { register, handleSubmit, reset, watch } = form;
+  const minValue = watch("min");
+  const maxValue = watch("max");
+  const hasPriceFilter = Boolean(minValue || maxValue);
 
-    const updateUrl = (min?: number, max?: number) => {
+  const updateUrl = (min?: number, max?: number) => {
     const params = new URLSearchParams(searchParams.toString());
 
     // remove old values first
-    params.delete("price[gte]");
-    params.delete("price[lte]");
+    params.delete("minPrice");
+    params.delete("maxPrice");
 
     // set new values
-    if (min) params.set("price[gte]", String(min));
-    if (max) params.set("price[lte]", String(max)); 
+    if (min) params.set("minPrice", String(min));
+    if (max) params.set("maxPrice", String(max));
 
     // build query string
     const query = params.toString().replace(/%5B/g, "[").replace(/%5D/g, "]");
@@ -69,20 +68,18 @@ export default function PriceFilter() {
   return (
     <Form {...form}>
       <div
-        className="border-b border-zinc-100 pb-5 pt-1 dark:border-zinc-700"
+        className="pt-1 pb-5 border-zinc-100 dark:border-zinc-700 border-b"
         onBlur={handleSubmit(onSubmit)}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex justify-between items-center">
           {/* filter title */}
-          <h3 className="ps-[5px] text-lg font-medium text-zinc-800 dark:text-zinc-50">
+          <h3 className="ps-[5px] font-medium text-zinc-800 dark:text-zinc-50 text-lg">
             {t("price")}
           </h3>
-          {hasPriceFilter && (
-            <ClearButton onClick={clearPrices} label={t("reset")} />
-          )}
+          {hasPriceFilter && <ClearButton onClick={clearPrices} label={t("reset")} />}
         </div>
-        <div className="flex items-center space-x-2 ps-1 pt-1 rtl:space-x-reverse">
-          <div className="flex w-1/2 flex-col gap-2">
+        <div className="flex items-center space-x-2 rtl:space-x-reverse ps-1 pt-1">
+          <div className="flex flex-col gap-2 w-1/2">
             {/* from label */}
             <Label htmlFor="min-price" className="lowercase">
               {t("from")}
@@ -94,7 +91,7 @@ export default function PriceFilter() {
               {...register("min", { valueAsNumber: true })}
             />
           </div>
-          <div className="flex w-1/2 flex-col gap-2">
+          <div className="flex flex-col gap-2 w-1/2">
             {/* from label */}
             <Label htmlFor="max-price" className="lowercase">
               {t("to")}

@@ -11,8 +11,8 @@ export default function useNewPassword() {
         newPassword: fields.password,
       });
 
-      if ("error" in payload) {
-        throw new Error(payload.error);
+      if ("message" in payload) {
+        throw new Error(payload.message);
       }
 
       return payload;

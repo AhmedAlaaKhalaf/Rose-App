@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-4 p-3 md:p-0 w-1/2 md:w-1/3 lg:w-1/4">
           <div className="flex items-center gap-2">
             <Link href="/" className="cursor-pointer">
-              <Image src="/assets/logo.png" alt="Logo" width={240} height={225} />
+              <Image sizes="auto" src="/assets/logo.png" alt="Logo" width={240} height={225} />
             </Link>
           </div>
           <div className="flex flex-col items-center gap-2">
@@ -47,6 +47,7 @@ export default function Footer() {
           {/* subscripe */}
           <div className="relative flex gap-2 w-full">
             <Input
+              autoComplete="additional-name"
               id="email"
               type="email"
               placeholder="Enter your email"

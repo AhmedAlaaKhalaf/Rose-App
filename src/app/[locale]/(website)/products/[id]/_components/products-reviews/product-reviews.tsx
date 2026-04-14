@@ -4,21 +4,23 @@ import Reviews from "./reviews";
 import ReviewsHeader from "./reviews-header";
 
 type ReviewsProps = {
-  productDetials: SuccessfulResponse<TProductDetails>;
+  productDetails: SuccessfulResponse<TProductDetails>;
 };
 
-export default async function ProductReviews({ productDetials }: ReviewsProps) {
+export default async function ProductReviews({ productDetails }: ReviewsProps) {
   // Variables
-  const { product } = productDetials;
+  const {
+    payload: { product },
+  } = productDetails;
 
   return (
     <section className="space-y-4 grid grid-cols-[50px_minmax(765px,_1fr)_484px]">
       {/* Section Header */}
-      <ReviewsHeader rateAvg={product?.rateAvg} rateCount={product?.rateCount} />
+      <ReviewsHeader rateAvg={product?.rating} rateCount={product?.ratings} />
 
       {/* Section Content */}
-      <Reviews />
-      <ReviewForm id={product?._id} />
+      <Reviews productId={product?.id} />
+      <ReviewForm id={product?.id} />
     </section>
   );
 }

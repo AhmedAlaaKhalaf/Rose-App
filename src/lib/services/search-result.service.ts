@@ -18,8 +18,8 @@ export async function getSearchResultService({ pageParam, keyword, limit, fields
 
   const payload: ApiResponse<TProductDetails> = await res.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error);
+  if ("message" in payload) {
+    throw new Error(payload.message);
   }
 
   return payload;

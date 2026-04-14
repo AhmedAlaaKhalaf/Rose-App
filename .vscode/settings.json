@@ -24,20 +24,12 @@
   },
   "prettier.requireConfig": true,
   "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
-  "i18n-ally.localesPaths": [
-    "src/i18n",
-    "src/i18n/messages"
-  ],
+  "i18n-ally.localesPaths": ["src/i18n", "src/i18n/messages"],
   "i18n-ally.keystyle": "nested",
   // Allow Tailwind IntelliSense to work inside shadcn `cn()` / `cva()` helpers
   "tailwindCSS.experimental.classRegex": [
-    [
-      "cn\\(([^)]*)\\)",
-      "[\"'`]([^\"'`]*)[\"'`]"
-    ],
-    [
-      "cva\\(([^)]*)\\)",
-      "[\"'`]([^\"'`]*)[\"'`]"
-    ]
-  ]
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"],
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"]
+  ],
+  "cSpell.words": ["bootcamp"]
 }

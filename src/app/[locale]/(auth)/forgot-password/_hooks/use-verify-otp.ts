@@ -6,9 +6,11 @@ export default function useVerifyOtp() {
   const { isPending, error, mutate } = useMutation({
     mutationFn: async (resetCode: VerifyOtpFields) => {
       const payload = await verifyOtp(resetCode);
-      if ("error" in payload) {
-        throw new Error(payload.error);
+
+      if ("message" in payload) {
+        throw new Error(payload.message);
       }
+
       return payload;
     },
   });

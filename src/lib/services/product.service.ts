@@ -6,8 +6,8 @@ import { TProductCard } from "../types/product";
 export async function getProducts(searchParams?: SearchParams) {
   const params = new URLSearchParams({
     limit: API_PRODUCTS_LIMIT.toString(),
-    fields: "imgCover,title,rateAvg,price,priceAfterDiscount,createdAt,sold,quantity",
-    sort: "-sold",
+    // fields: "cover,title,rating,price,discountType,createdAt,stock",
+    // sort: "-sold",
     ...searchParams,
   });
 
@@ -19,9 +19,7 @@ export async function getProducts(searchParams?: SearchParams) {
 
   const payload: ApiResponse<PaginatedData<TProductCard[]>> = await response.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error as string);
-  }
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }
@@ -45,9 +43,7 @@ export async function getDashboardProducts(searchParams?: SearchParams) {
 
   const payload: ApiResponse<PaginatedData<TDashboardProduct[]>> = await response.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error as string);
-  }
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }

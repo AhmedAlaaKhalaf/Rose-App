@@ -17,12 +17,15 @@ export default async function MostPopularSection({ searchParams }: MostPopularSe
   const t = await getTranslations("most-popular");
 
   // Services
-  const { occasions } = await getOccasions();
+  const {
+    payload: { data: occasions },
+  } = await getOccasions();
 
   // Variables
-  const defaultOccasionId = occasions[0]._id;
-  const occasionId = searchParams?.occasionId ?? defaultOccasionId;
-
+  const defaultOccasionId = occasions.length ? occasions[0].id : undefined;
+  const occasionId = defaultOccasionId && {
+    occasionId: searchParams?.occasionId ?? defaultOccasionId,
+  };
   return (
     <section className="flex flex-col gap-10 w-full">
       {/* Header */}
@@ -40,7 +43,7 @@ export default async function MostPopularSection({ searchParams }: MostPopularSe
 
       {/* Products */}
       <Suspense fallback={<ProductListSkeleton />}>
-        <ProductsList searchParams={{ occasion: occasionId }} />
+        <ProductsList searchParams={occasionId} />
       </Suspense>
     </section>
   );

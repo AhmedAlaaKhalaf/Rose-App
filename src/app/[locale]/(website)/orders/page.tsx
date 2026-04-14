@@ -19,8 +19,8 @@ async function getOrdersServer(accessToken: string): Promise<Order[]> {
     ? await response.json()
     : { error: await response.text() };
 
-  if (!response.ok || "error" in payload) {
-    const message = "error" in payload ? payload.error : "Failed to load orders";
+  if (!response.ok || "message" in payload) {
+    const message = "message" in payload ? payload.message : "Failed to load orders";
     throw new Error(message);
   }
 
@@ -41,9 +41,9 @@ export default async function OrdersPage() {
   const orders = await getOrdersServer(session.accessToken);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-[1280px] mx-auto">
-        <h1 className="text-5xl font-bold font-primary leading-none text-gray-800 mb-6">
+    <div className="mx-auto px-4 py-8 container">
+      <div className="mx-auto max-w-[1280px]">
+        <h1 className="mb-6 font-primary font-bold text-gray-800 text-5xl leading-none">
           {t("title")}
         </h1>
       </div>

@@ -1,21 +1,16 @@
-import { TTestimonialsResponse } from "@/lib/types/testimonials";
+import { TTestimonial } from "@/lib/types/testimonials";
 
 export async function testimonialsServices() {
-  const response = await fetch(`${process.env.API}/testimonials`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(`${process.env.API}/testimonials`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch the testimonials");
   }
 
-  const payload: ApiResponse<TTestimonialsResponse> = await response.json();
+  const payload: ApiResponse<PaginatedData<TTestimonial[]>> = await response.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error);
+  if ("message" in payload) {
+    throw new Error(payload.message);
   }
 
   return payload;

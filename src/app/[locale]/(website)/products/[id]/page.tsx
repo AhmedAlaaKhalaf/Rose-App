@@ -13,12 +13,12 @@ export default async function Page({ params: { locale, id } }: LocaleProps) {
   setRequestLocale(locale);
 
   // Fetch product details
-  const productDetials = await productDetailsServices(id);
+  const productDetails = await productDetailsServices(id);
 
   return (
     <main className="space-y-12 mx-auto container">
-      <ProductReviews productDetials={productDetials} />
-      <RelatedProducts id={productDetials.product.category} />
+      <ProductReviews productDetails={productDetails} />
+      <RelatedProducts id={productDetails.payload.product.category.id} />
     </main>
   );
 }

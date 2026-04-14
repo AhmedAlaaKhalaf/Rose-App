@@ -10,7 +10,7 @@ export async function getNotifications({
   pageParam = 1,
   limit = 10,
 }: GetNotificationsParams): Promise<TPaginatedNotifications> {
-  const res = await fetch(`/api/notifications?page=${pageParam}&limit=${limit}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/notifications?page=${pageParam}&limit=${limit}`);
 
   if (!res.ok) {
     let errorMessage = "Error fetching notifications";
@@ -22,5 +22,6 @@ export async function getNotifications({
   }
 
   const data = await res.json();
+
   return data;
 }

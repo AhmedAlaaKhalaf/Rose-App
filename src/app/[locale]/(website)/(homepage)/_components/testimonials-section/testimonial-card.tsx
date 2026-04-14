@@ -2,11 +2,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CarouselItem } from "@/components/ui/carousel";
 import RatingStars from "./rating-stars";
-import { TTestimonials } from "@/lib/types/testimonials";
+import { TTestimonial } from "@/lib/types/testimonials";
 import { useFormatter, useTranslations } from "next-intl";
 
 type TPageProps = {
-  item: TTestimonials;
+  item: TTestimonial;
 };
 
 export default function TestimonialCard({ item }: TPageProps) {
@@ -32,14 +32,14 @@ export default function TestimonialCard({ item }: TPageProps) {
     <CarouselItem className="flex justify-center items-center px-7 lg:basis-1/3 md:basis-1/2">
       <Card className="relative flex flex-col justify-center items-center gap-3 dark:bg-white m-w-[21.9rem] p-5 pt-14 rounded-3xl w-full h-[17rem]">
         <Avatar className="bottom-56 absolute border-4 border-white w-[7.5rem] h-[7.5rem]">
-          <AvatarImage src={item?.user?.photo} className="object-cover" />
+          <AvatarImage src={"https://prd.place/100?id=12"} className="object-cover" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
 
         <CardHeader>
           <CardTitle className="font-semibold text-zinc-800">
             {t("testimonial-user-name", {
-              name: `${item?.user.firstName} ${item?.user.lastName}`,
+              name: `${item?.name}`,
             })}
           </CardTitle>
         </CardHeader>

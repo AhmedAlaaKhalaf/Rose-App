@@ -30,7 +30,7 @@ export default function Header() {
         <div className="flex justify-between items-center px-2 lg:px-0">
           {/* logo */}
           <Link href="/" className="w-1/4 md:w-auto cursor-pointer">
-            <Image src="/assets/logo.png" alt="Logo" width={85} height={80} />
+            <Image sizes="auto" src="/assets/logo.png" alt="Logo" width={85} height={80} />
           </Link>
           {/* delivery location */}
           {/* {isLoggedIn && (
@@ -51,7 +51,7 @@ export default function Header() {
               placeholder="What awesome gift are you looking for?"
               className="w-full"
             /> */}
-            <Search />
+            {/* <Search /> */}
           </div>
 
           {/* icons */}
@@ -108,7 +108,7 @@ export default function Header() {
             <LanguageSwitcher />
           </div>
         </div>
-      </div>
+      </div>  
       {/* header nav */}
       <div className="hidden sm:block bg-primary mx-auto">
         <HeaderNavigation />

@@ -1,5 +1,5 @@
-import { getBestSellingProducts } from "@/lib/services/product.service";
-import { getProductsYouMayLike } from "@/lib/services/products-you-may-like.service";
+import { getProducts } from "@/lib/services/product.service";
+// import { getProductsYouMayLike } from "@/lib/services/products-you-may-like.service";
 import { useQuery } from "@tanstack/react-query";
 
 type TSearchParams = {
@@ -11,13 +11,14 @@ export function useProductsYouMayLike({ status }: TSearchParams) {
     queryKey: ["mayLike", status],
     queryFn: async () => {
       if (status === "unauthenticated") {
-        return await getBestSellingProducts();
+        return await getProducts();
       } else {
-        return getProductsYouMayLike();
+        // return getProductsYouMayLike();
+        return await getProducts();
       }
     },
     staleTime: 60 * 1000,
   });
 
-  return { youLike: data, youLikeError: error, youLikeLoading: isLoading };
+  return { youLike: data?.payload, youLikeError: error, youLikeLoading: isLoading };
 }

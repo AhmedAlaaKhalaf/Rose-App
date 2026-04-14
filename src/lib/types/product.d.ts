@@ -1,41 +1,53 @@
 export type TProductCard = {
-  _id: string;
+  id: string;
   title: string;
-  imgCover: string;
+  cover: string;
   createdAt: string;
-  price: number;
-  priceAfterDiscount: number;
-  quantity: number;
-  sold: number;
-  rateAvg: number;
-  rateCount: number;
+  price: string;
+  discountType: string;
+  discountValue: string;
+  stock: number;
+  rating: number;
+  ratings: number;
 };
 
 export type TProduct = {
-  _id: string;
+  id: string;
   title: string;
-  slug: string;
   description: string;
-  imgCover: string;
-  images: string[];
-  price: number;
-  priceAfterDiscount: number;
-  quantity: number;
-  sold: number;
-  category: string;
-  occasion: string;
-  rateAvg: number;
-  rateCount: number;
-  isSuperAdmin: boolean;
-  isInWishlist: boolean;
-  favoriteId: string | null;
+  rating: number;
+  ratings: number;
+  stock: number;
+  price: string;
+  discountType: string;
+  discountValue: string;
+  cover: string;
+  gallery: string;
+  categoryId: string;
+  subCategoryId: string;
+  immutable: boolean;
   createdAt: string;
   updatedAt: string;
-  __v: number;
+  category: {
+    id: string;
+    title: string;
+  };
+  subCategory: {
+    id: string;
+    title: string;
+  };
+  occasions: string[];
+  _count: {
+    reviews: number;
+    cartItems: number;
+    wishlistItems: number;
+  };
 };
 
 export type TProductDetails = {
-  product: TProduct;
+  payload: {
+    product: TProduct;
+  };
 };
 
 export type TAllProducts = {

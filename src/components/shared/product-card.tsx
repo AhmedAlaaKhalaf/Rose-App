@@ -17,12 +17,14 @@ export default async function ProductCard({ product }: ProductCardProps) {
   const locale = await getLocale();
 
   // Variables
-  const { imgCover, title, rateAvg, price, priceAfterDiscount, createdAt, quantity, sold, _id } =
-    product;
+  const { cover, title, rating, price, discountValue, discountType, createdAt, stock } = product;
   const productLifeTime =
     (new Date().getTime() - new Date(createdAt).getTime()) / (1000 * 60 * 60 * 24);
   const isNewProduct = productLifeTime < 7;
+  const sold = 0;
   const isHotProduct = sold > 150;
+  const priceAfterDiscount =
+    discountType === "PERCENT" ? +price - (+price * +discountValue) / 100 : +price - +discountValue;
 
   return (
     <section className="flex flex-col justify-between h-[22.75rem]">
@@ -42,7 +44,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
           {isNewProduct && <Badge variant="subtle">{t("new")}</Badge>}
 
           {/* Sold out badge */}
-          {!quantity && <Badge>{t("sold-out")}</Badge>}
+          {!stock && <Badge>{t("sold-out")}</Badge>}
 
           {/* Hot badge */}
           {isHotProduct && <Badge variant="secondary">{t("hot")}</Badge>}
@@ -50,7 +52,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
 
         {/* Cover  */}
         <Image
-          src={imgCover}
+          src={"https://prd.place/300"}
           alt="product-cover"
           fill
           sizes="auto"
@@ -75,7 +77,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
                 <Star
                   key={idx}
                   className={
-                    idx < Math.round(rateAvg)
+                    idx < Math.round(rating)
                       ? "fill-[#FBA707] flex text-[#FBA707] size-4"
                       : "flex text-[#FBA707] size-4"
                   }
@@ -89,7 +91,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
             {/* Price */}
             {price && (
               <span className="ps-2 font-medium text-zinc-400 dark:text-zinc-500 line-through">
-                {`${price?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
+                {`${Number(price)?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
               </span>
             )}
           </div>

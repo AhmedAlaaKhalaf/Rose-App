@@ -1,13 +1,13 @@
 "use client";
 
 import { Carousel, CarouselContent } from "@/components/ui/carousel";
-import { TTestimonials } from "@/lib/types/testimonials";
 import AutoScroll from "embla-carousel-auto-scroll";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import TestimonialCard from "./testimonial-card";
+import { TTestimonial } from "@/lib/types/testimonials";
 
 type PageProps = {
-  userReviews: TTestimonials[];
+  userReviews: TTestimonial[];
 };
 
 export default function TestimonialsCarousel({ userReviews }: PageProps) {

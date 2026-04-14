@@ -7,10 +7,10 @@ import ReviewCardSkeleton from "@/components/skeletons/review-card/review-card.s
 import ErrorBoundary from "@/components/shared/error-boundary";
 import { useLocale } from "next-intl";
 
-export default function Reviews() {
+export default function Reviews({ productId }: { productId: string }) {
   // Hooks
   const locale = useLocale();
-  const { reviewsOfProduct, isLoading, error, refetch } = useProductReviews();
+  const { reviewsOfProduct, isLoading, error, refetch } = useProductReviews(productId);
 
   // Handling Error
   if (error) return <ErrorBoundary onRetry={refetch} error={error} />;
@@ -24,7 +24,9 @@ export default function Reviews() {
         {isLoading ? (
           <ReviewCardSkeleton />
         ) : (
-          reviewsOfProduct?.reviews.map((review) => <ReviewCard key={review._id} review={review} />)
+          reviewsOfProduct?.payload.data.map((review) => (
+            <ReviewCard key={review._id} review={review} />
+          ))
         )}
       </div>
     </ScrollArea>

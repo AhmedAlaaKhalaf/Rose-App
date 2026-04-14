@@ -5,7 +5,7 @@ import CarouselFallback from "@/components/shared/carousel-fallback";
 
 export default function BestSellingSection() {
   return (
-    <section className="flex flex-col gap-9">
+    <section className="flex gap-9">
       {/* Text  */}
       <BestSellingHeading />
 

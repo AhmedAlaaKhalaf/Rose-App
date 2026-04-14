@@ -12,16 +12,13 @@ export type NewPasswordFields = z.infer<ReturnType<typeof newPasswordSchems>>;
 
 // Response Types
 export type loginResponse = {
-  token: string;
-  user: User["user"];
+  payload: {
+    user: User["user"];
+    token: string;
+  };
 };
 
 export type RegisterResponse = {
-  token: string;
-  user: User["user"];
-};
-
-export type loginResponse = {
   token: string;
   user: User["user"];
 };
@@ -32,9 +29,4 @@ export type EmailStepResponse = {
 
 export type NewPasswordResponse = {
   token: string;
-};
-
-export type loginResponse = {
-  token: string;
-  user: User["user"];
 };

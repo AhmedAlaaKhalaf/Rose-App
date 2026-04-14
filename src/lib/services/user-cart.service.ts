@@ -7,7 +7,7 @@ export const getUserCart = async () => {
 
   const payload: ApiResponse<TUserCart> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error as string);
+  if ("message" in payload) throw new Error(payload.message as string);
 
   return payload;
 };

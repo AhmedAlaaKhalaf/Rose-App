@@ -1,4 +1,4 @@
-import { TAllProducts } from "../types/product";
+import { TProduct } from "../types/product";
 
 export async function getRelatedProducts(id: string) {
   // Variables
@@ -21,9 +21,9 @@ export async function getRelatedProducts(id: string) {
     throw new Error("Failed to fetch related products");
   }
 
-  const payload: ApiResponse<TAllProducts> = await response.json();
+  const payload: ApiResponse<PaginatedData<TProduct[]>> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error as string);
+  if ("message" in payload) throw new Error(payload.message as string);
 
   return payload;
 }

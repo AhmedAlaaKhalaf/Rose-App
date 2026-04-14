@@ -4,7 +4,7 @@ import { EmailStepField, EmailStepResponse, NewPasswordResponse } from "../types
 
 // verify otp
 export async function verifyOtp(data: VerifyOtpFields) {
-  const res = await fetch(`${process.env.API}/auth/verifyResetCode`, {
+  const res = await fetch(`${process.env.API}/auth/confirm-email-verification`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -18,7 +18,7 @@ export async function verifyOtp(data: VerifyOtpFields) {
 }
 
 export async function sendOTPAction(fields: EmailStepField) {
-  const response = await fetch(`${process.env.API}/auth/forgotPassword`, {
+  const response = await fetch(`${process.env.API}/auth/send-email-verification`, {
     method: "POST",
     body: JSON.stringify(fields),
     headers: {
@@ -31,8 +31,12 @@ export async function sendOTPAction(fields: EmailStepField) {
   return payload;
 }
 
-export async function newPasswordAction(fields: { newPassword: string; email: string }) {
-  const response = await fetch(`${process.env.API}/auth/resetPassword`, {
+export async function newPasswordAction(fields: {
+  newPassword: string;
+  token: string;
+  confirmPassword: string;
+}) {
+  const response = await fetch(`${process.env.API}/auth/reset-password`, {
     method: "POST",
     body: JSON.stringify(fields),
     headers: {

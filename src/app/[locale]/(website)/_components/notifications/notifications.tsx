@@ -24,6 +24,7 @@ import NotificationsSkeleton from "./notifications-skeleton";
 import useMarkNotificationRead from "@/hooks/notifications/use-mark-notification-read";
 import { useTranslations } from "next-intl";
 import Loading from "@/app/[locale]/loading";
+import { useSession } from "next-auth/react";
 // import useDeleteNotification from "@/hooks/notifications/use-delete-notification";
 
 export default function Notifications() {
@@ -35,13 +36,15 @@ export default function Notifications() {
   const t = useTranslations("notifications");
 
   // hooks
+  const session = useSession();
+
   const {
     data: notificationsList,
     isLoading,
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = useNotifications();
+  } = useNotifications(session.data?.accessToken);
 
   const { markRead } = useMarkNotificationRead();
 
@@ -91,7 +94,7 @@ export default function Notifications() {
         ${isOpen ? "visible" : "hidden"}`}
       >
         {/* Header */}
-        <div className="text-xl p-4 bg-primary text-white dark:bg-primary dark:text-zinc-800 font-bold">
+        <div className="bg-primary dark:bg-primary p-4 font-bold text-white dark:text-zinc-800 text-xl">
           <h3>
             {t("title")}
             {notificationsList &&
@@ -106,13 +109,13 @@ export default function Notifications() {
         >
           <div className="flex items-center gap-1 cursor-pointer">
             <BrushCleaning size={18} className="text-zinc-500" />
-            <span className="text-xs font-semibold text-zinc-800 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-400 transition-all duration-300">
+            <span className="font-semibold text-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-400 dark:text-zinc-500 text-xs transition-all duration-300">
               {t("clear-all-notifications")}
             </span>
           </div>
           <div className="flex items-center gap-1 cursor-pointer">
             <CheckCheck size={15} className="text-zinc-500" />
-            <span className="text-xs font-semibold text-zinc-800 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-400 transition-all duration-300">
+            <span className="font-semibold text-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-400 dark:text-zinc-500 text-xs transition-all duration-300">
               {t("mark-all-as-read")}
             </span>
           </div>
@@ -128,9 +131,9 @@ export default function Notifications() {
             className="flex-1 overflow-y-auto hide-scroll"
           >
             {flatNotifications.length === 0 && !isLoading ? (
-              <div className="p-4 border-t border-zinc-300 dark:border-zinc-600 h-56 flex flex-col items-center justify-center dark:bg-zinc-700">
+              <div className="flex flex-col justify-center items-center dark:bg-zinc-700 p-4 border-zinc-300 dark:border-zinc-600 border-t h-56">
                 <BellOff size={50} className="text-zinc-500 dark:text-zinc-400" />
-                <p className="p-4 text-zinc-500 dark:text-zinc-400 font-medium text-sm">
+                <p className="p-4 font-medium text-zinc-500 dark:text-zinc-400 text-sm">
                   {t("no-notifications")}
                 </p>
               </div>
@@ -155,7 +158,7 @@ export default function Notifications() {
                           notification?.isRead ? "bg-transparent" : "bg-zinc-200 dark:bg-zinc-800"
                         }`}
                       >
-                        <div className="flex items-start justify-between">
+                        <div className="flex justify-between items-start">
                           <p className="text-zinc-800 dark:text-zinc-50">{notification?.title}</p>
 
                           <DropdownMenu
@@ -169,14 +172,14 @@ export default function Notifications() {
                               <button aria-label="Open menu" className="focus-visible:outline-none">
                                 <EllipsisVertical
                                   size={20}
-                                  className="cursor-pointer text-zinc-500"
+                                  className="text-zinc-500 cursor-pointer"
                                 />
                               </button>
                             </DropdownMenuTrigger>
                             <DropdownMenuPortal container={refNotifications.current}>
                               <DropdownMenuContent
                                 data-dropdown-menu
-                                className="w-52 p-3 shadow-[0px_4px_9px_0px_rgba(0,0,0,0.15)] dark:bg-zinc-700 dark:shadow-[0px_4px_9px_0px_rgba(0,0,0,0.25)]"
+                                className="dark:bg-zinc-700 shadow-[0px_4px_9px_0px_rgba(0,0,0,0.15)] dark:shadow-[0px_4px_9px_0px_rgba(0,0,0,0.25)] p-3 w-52"
                                 align="end"
                               >
                                 <DropdownMenuGroup>
@@ -209,7 +212,7 @@ export default function Notifications() {
                           </DropdownMenu>
                         </div>
 
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">
+                        <p className="mt-1 text-zinc-500 dark:text-zinc-400 text-sm">
                           {notification?.body}
                         </p>
                       </li>

@@ -18,13 +18,13 @@ export default function OccasionsFilterLinks({
   return (
     // Occasions Filter
     <ul className="flex gap-6">
-      {occasions.map(({ name, _id }) => {
-        const isActive = activeOccasionId === _id;
+      {occasions.map(({ name, id }) => {
+        const isActive = activeOccasionId === id;
 
         return (
           // Occasions link
           <li
-            key={_id}
+            key={id}
             className={cn(
               "font-medium capitalize transition-colors cursor-pointer",
               isActive
@@ -32,7 +32,7 @@ export default function OccasionsFilterLinks({
                 : "text-zinc-700 dark:text-zinc-400 hover:text-maroon-600"
             )}
           >
-            <Link scroll={false} href={`?occasionId=${_id}`} className="text-inherit">
+            <Link scroll={false} href={`?occasionId=${id}`} className="text-inherit">
               {name}
             </Link>
           </li>

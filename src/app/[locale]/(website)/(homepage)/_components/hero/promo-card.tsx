@@ -13,9 +13,10 @@ import { useTranslations } from "next-intl";
 export default function PromoCard() {
   const t = useTranslations("promoCardheroSection");
   return (
-    <div className="relative  w-full h-[27.5rem] max-w-[18.8125rem] aspect-[301/439] rounded-2xl overflow-hidden bg-black/10 ">
+    <div className="relative bg-black/10 rounded-2xl w-full max-w-[18.8125rem] h-[27.5rem] aspect-[301/439] overflow-hidden">
       {/* Image Background */}
       <Image
+        sizes="auto"
         className="object-cover"
         src={"/assets/images/promo-card.png"}
         fill
@@ -24,18 +25,18 @@ export default function PromoCard() {
       />
 
       {/* Content Overlay */}
-      <div className="absolute bottom-0 p-6 space-y-2.5">
+      <div className="bottom-0 absolute space-y-2.5 p-6">
         {/* Badge */}
         <Badge className="rounded-full" variant="secondary">
           {t("badge")}
         </Badge>
 
         {/* Heading / Title */}
-        <p className="text-white font-semibold leading-6 text-2xl h-20">{t("title")}</p>
+        <p className="h-20 font-semibold text-white text-2xl leading-6">{t("title")}</p>
 
         {/* Move to Shop Now Page */}
         <Link href={"#"}>
-          <Button className=" rounded-xl " variant="secondary">
+          <Button className="rounded-xl" variant="secondary">
             {t("button")}
             <ArrowRight />
           </Button>

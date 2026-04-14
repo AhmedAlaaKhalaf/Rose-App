@@ -8,8 +8,8 @@ export default function useSendOTP() {
     mutationFn: async (fields: EmailStepField) => {
       const payload = await sendOTPAction(fields);
 
-      if ("error" in payload) {
-        throw new Error(payload.error);
+      if ("message" in payload) {
+        throw new Error(payload.message);
       }
 
       return payload;

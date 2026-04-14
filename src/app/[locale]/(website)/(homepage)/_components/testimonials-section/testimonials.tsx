@@ -4,15 +4,17 @@ import TestimonialsCarousel from "./testimonials-carousel";
 
 export default async function Testimonials() {
   // variables
-  const testimonials = await testimonialsServices();
+  const {
+    payload: { data: testimonials },
+  } = await testimonialsServices();
 
   return (
     <section className="flex flex-col gap-10 w-screen">
-      {/* Sectio head */}
+      {/* Section head */}
       <TestimonialHeader />
 
       {/* Section content */}
-      <TestimonialsCarousel userReviews={testimonials.testimonials} />
+      <TestimonialsCarousel userReviews={testimonials} />
     </section>
   );
 }

@@ -19,9 +19,7 @@ export async function getOverAllStatistics() {
 
   const payload: ApiResponse<TOverAllStatistics> = await response.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error as string);
-  }
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }

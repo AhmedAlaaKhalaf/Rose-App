@@ -62,23 +62,23 @@ export default function OrderCard({ order }: OrderCardProps) {
     : "N/A";
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-white max-w-[1280px] mx-auto">
+    <div className="bg-white shadow-md mx-auto border border-gray-200 rounded-2xl max-w-[1280px] overflow-hidden">
       {/* Header */}
-      <div className="bg-[#A6252A] text-white flex items-center justify-between px-4 h-14">
-        <div className="text-2xl font-semibold font-primary leading-none">
+      <div className="flex justify-between items-center bg-[#A6252A] px-4 h-14 text-white">
+        <div className="font-primary font-semibold text-2xl leading-none">
           {t("order-header")} {order.orderNumber || `#${order._id}` || "N/A"}
         </div>
-        <div className="text-base font-normal font-primary leading-none">
+        <div className="font-primary font-normal text-base leading-none">
           {t("created-in")} {formattedCreatedAt}
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-4 pt-4 pb-6 bg-gray-50 border-t border-gray-200">
+      <div className="bg-gray-50 px-4 pt-4 pb-6 border-gray-200 border-t">
         {/* Total + Payment */}
-        <div className="flex items-center justify-between pb-4 mb-4">
+        <div className="flex justify-between items-center mb-4 pb-4">
           <div className="flex items-center gap-3">
-            <span className="text-2xl font-medium font-primary leading-none text-gray-900">
+            <span className="font-primary font-medium text-gray-900 text-2xl leading-none">
               {t("total-price")} {formatPrice(order.totalPrice || 0)} EGP
             </span>
             <span
@@ -89,7 +89,7 @@ export default function OrderCard({ order }: OrderCardProps) {
           </div>
 
           <div className="flex items-center gap-2.5">
-            <span className="font-semibold text-base font-primary leading-none text-black">
+            <span className="font-primary font-semibold text-black text-base leading-none">
               {t("status")}:
             </span>
             <span
@@ -100,16 +100,16 @@ export default function OrderCard({ order }: OrderCardProps) {
           </div>
         </div>
 
-        <div className="h-px w-full bg-gray-200 mb-4" />
+        <div className="bg-gray-200 mb-4 w-full h-px" />
 
         {/* Payment + Delivery */}
-        <div className="mb-6 text-sm space-y-3">
+        <div className="space-y-3 mb-6 text-sm">
           <div className="flex items-center gap-2">
             <span className="font-medium" style={{ color: "#71717A" }}>
               {t("payment-method")}
             </span>
             <div className="flex items-center gap-2">
-              <Banknote className="h-5 w-5" style={{ color: "#71717A" }} />
+              <Banknote className="w-5 h-5" style={{ color: "#71717A" }} />
               <span
                 className="font-primary font-semibold text-[16px] leading-none"
                 style={{ color: "#71717A" }}
@@ -124,7 +124,7 @@ export default function OrderCard({ order }: OrderCardProps) {
             <div className="flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-yellow-600"
+                className="w-5 h-5 text-yellow-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -150,25 +150,26 @@ export default function OrderCard({ order }: OrderCardProps) {
 
         {/* Products */}
         <div>
-          <div className="font-semibold mb-4 text-gray-800">{t("order-items")}</div>
+          <div className="mb-4 font-semibold text-gray-800">{t("order-items")}</div>
 
-          <div className="bg-white rounded-xl p-5">
+          <div className="bg-white p-5 rounded-xl">
             <div
               className={`relative ${
                 !showAll && showToggle ? "max-h-[240px] overflow-hidden" : ""
               }`}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="gap-5 grid grid-cols-1 md:grid-cols-2">
                 {(showAll ? orderItems : orderItems.slice(0, maxProducts))
                   .slice(0, previewCount)
                   .map((item, index) => (
                     <div
                       key={`${item.product._id}-preview-${index}`}
-                      className="flex gap-0 items-stretch pr-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden min-h-[150px]"
+                      className="flex items-stretch gap-0 shadow-sm hover:shadow-md pr-5 border border-gray-200 rounded-xl min-h-[150px] overflow-hidden transition-all duration-300"
                       style={{ backgroundColor: "#FAFAFA" }}
                     >
-                      <div className="relative w-[120px] min-h-full flex-shrink-0">
+                      <div className="relative flex-shrink-0 w-[120px] min-h-full">
                         <Image
+                          sizes="auto"
                           src={item.product?.imgCover || "/placeholder.png"}
                           alt={item.product?.title || "Product"}
                           fill
@@ -176,27 +177,27 @@ export default function OrderCard({ order }: OrderCardProps) {
                         />
                       </div>
 
-                      <div className="flex-1 flex flex-col justify-between min-w-0 pl-4 pt-1 pb-3">
+                      <div className="flex flex-col flex-1 justify-between pt-1 pb-3 pl-4 min-w-0">
                         <div className="space-y-1">
                           <h3 className="font-semibold text-[#8B1538] text-base line-clamp-2">
                             {item.product?.title || "Product"}
                           </h3>
                           <div className="flex items-center gap-1.5">
                             <span className="text-yellow-500 text-lg">★</span>
-                            <span className="text-sm font-medium text-gray-700">
+                            <span className="font-medium text-gray-700 text-sm">
                               {t("rating")} {formatRating(item.product?.rateAvg)}/5
                             </span>
-                            <span className="text-sm text-blue-600">
+                            <span className="text-blue-600 text-sm">
                               ({format.number(item.product?.rateCount || 0)} rating
                               {item.product?.rateCount === 1 ? "" : "s"})
                             </span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-sm text-red-500 font-medium">
+                          <span className="font-medium text-red-500 text-sm">
                             (×{item.quantity || 1})
                           </span>
-                          <span className="font-bold text-lg text-gray-900">
+                          <span className="font-bold text-gray-900 text-lg">
                             {formatPrice(item.price || 0)} <span className="text-base">EGP</span>
                           </span>
                         </div>
@@ -209,14 +210,15 @@ export default function OrderCard({ order }: OrderCardProps) {
                   .map((item, index) => (
                     <div
                       key={`${item.product._id}-fade-${index}`}
-                      className="flex gap-0 items-stretch pr-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden min-h-[150px]"
+                      className="flex items-stretch gap-0 shadow-sm hover:shadow-md pr-5 border border-gray-200 rounded-xl min-h-[150px] overflow-hidden transition-all duration-300"
                       style={{
                         backgroundColor: "#FAFAFA",
                         opacity: showAll || !showToggle ? 1 : 0.5,
                       }}
                     >
-                      <div className="relative w-[120px] min-h-full flex-shrink-0">
+                      <div className="relative flex-shrink-0 w-[120px] min-h-full">
                         <Image
+                          sizes="auto"
                           src={item.product?.imgCover || "/placeholder.png"}
                           alt={item.product?.title || "Product"}
                           fill
@@ -224,27 +226,27 @@ export default function OrderCard({ order }: OrderCardProps) {
                         />
                       </div>
 
-                      <div className="flex-1 flex flex-col justify-between min-w-0 pl-4 pt-1 pb-3">
+                      <div className="flex flex-col flex-1 justify-between pt-1 pb-3 pl-4 min-w-0">
                         <div className="space-y-1">
                           <h3 className="font-semibold text-[#8B1538] text-base line-clamp-2">
                             {item.product?.title || "Product"}
                           </h3>
                           <div className="flex items-center gap-1.5">
                             <span className="text-yellow-500 text-lg">★</span>
-                            <span className="text-sm font-medium text-gray-700">
+                            <span className="font-medium text-gray-700 text-sm">
                               {t("rating")} {formatRating(item.product?.rateAvg)}/5
                             </span>
-                            <span className="text-sm text-blue-600">
+                            <span className="text-blue-600 text-sm">
                               ({format.number(item.product?.rateCount || 0)} rating
                               {item.product?.rateCount === 1 ? "" : "s"})
                             </span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-sm text-red-500 font-medium">
+                          <span className="font-medium text-red-500 text-sm">
                             (×{item.quantity || 1})
                           </span>
-                          <span className="font-bold text-lg text-gray-900">
+                          <span className="font-bold text-gray-900 text-lg">
                             {formatPrice(item.price || 0)} <span className="text-base">EGP</span>
                           </span>
                         </div>
@@ -254,13 +256,13 @@ export default function OrderCard({ order }: OrderCardProps) {
               </div>
 
               {!showAll && showToggle && (
-                <div className="absolute inset-x-0 bottom-0 flex justify-center pt-4 pb-4 bg-gradient-to-t from-white to-transparent">
+                <div className="bottom-0 absolute inset-x-0 flex justify-center bg-gradient-to-t from-white to-transparent pt-4 pb-4">
                   <button
                     onClick={() => setShowAll(true)}
-                    className="text-[#A6252A] text-base font-medium leading-none flex flex-col items-center hover:opacity-70 transition-opacity"
+                    className="flex flex-col items-center hover:opacity-70 font-medium text-[#A6252A] text-base leading-none transition-opacity"
                   >
                     <span>{t("show-all")}</span>
-                    <ChevronDown className="h-6 w-6 text-[#A6252A] mt-1" />
+                    <ChevronDown className="mt-1 w-6 h-6 text-[#A6252A]" />
                   </button>
                 </div>
               )}
@@ -268,10 +270,10 @@ export default function OrderCard({ order }: OrderCardProps) {
           </div>
 
           {showToggle && showAll && (
-            <div className="mt-6 flex justify-center">
+            <div className="flex justify-center mt-6">
               <button
                 onClick={() => setShowAll((s: boolean) => !s)}
-                className="text-[#A6252A] text-base font-medium leading-none hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 font-medium text-[#A6252A] text-base hover:underline leading-none"
               >
                 {showAll ? (
                   <>

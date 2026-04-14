@@ -1,5 +1,5 @@
 export type TOccasion = {
-  _id: string;
+  id: string;
   name: string;
   slug: string;
   image: string;

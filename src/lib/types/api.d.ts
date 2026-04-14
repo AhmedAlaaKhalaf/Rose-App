@@ -1,20 +1,33 @@
 declare type SuccessfulResponse<T> = {
-  message: string;
+  status: boolean;
+  code: number;
 } & T;
 
-declare type PaginatedData<T> = {
-  metadata: {
-    currentPage: number;
-    totalPages: number;
-    limit: number;
-    totalItems: number;
-    nextPage?: number;
+declare type DataResponse<T> = {
+  payload: {
+    data: T;
   };
-  [key: string]: T;
+};
+
+declare type PaginatedData<T> = {
+  payload: {
+    data: T;
+    metadata: {
+      page: number;
+      limit: number;
+      total: number;
+      totalPages: number;
+    };
+  };
 };
 
 declare type ErrorResponse = {
-  error: string;
+  status: boolean;
+  code: number;
+  message: string;
+  errors: ValidationErrorResponse[];
 };
 
 declare type ApiResponse<T> = SuccessfulResponse<T> | ErrorResponse;
+
+type ValidationErrorResponse = { path: "string"; message: "string" };

@@ -17,15 +17,15 @@ export async function deleteDashboardProductAction(productId: string) {
     if (!response.ok) {
       const payload: ErrorResponse = await response.json();
 
-      throw new Error(payload.error);
+      throw new Error(payload.message);
     }
 
     revalidateTag("dashboard-products");
 
     const payload: ApiResponse<void> = await response.json();
 
-    if ("error" in payload) {
-      throw new Error(payload.error);
+    if ("message" in payload) {
+      throw new Error(payload.message);
     }
 
     return payload;

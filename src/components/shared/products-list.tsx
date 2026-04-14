@@ -13,24 +13,25 @@ type ProductsListProps = {
 
 const ProductsList = React.forwardRef<HTMLDivElement, ProductsListProps>(
   async ({ searchParams, className }, ref) => {
-    // Translations
     const t = await getTranslations("product-listing");
 
     // Hooks
     const locale = await getLocale();
 
     // Services
-    const payload = await getProducts(searchParams);
+    const {
+      payload: { data: products },
+    } = await getProducts(searchParams);
 
     return (
       <div ref={ref} className={cn("gap-6 grid grid-cols-4", className)}>
         {/* Data  */}
-        {payload.products.map((product) => (
-          <ProductCard key={product._id} product={product} />
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
 
         {/* No data to display.  */}
-        {!payload.products.length && (
+        {!products.length && (
           <div
             className={cn(
               locale === "ar" && "font-tajawal",

@@ -17,14 +17,12 @@ export default function Occasions() {
   const locale = useLocale() as "en" | "ar";
 
   return (
-    <section
-      className="grid w-full gap-6
-            [grid-template-columns:repeat(auto-fit,minmax(16.94rem,1fr))]"
-    >
+    <section className="gap-6 grid w-full [grid-template-columns:repeat(auto-fit,minmax(16.94rem,1fr))]">
       {OccasionsHeroSectionData.map((item, index) => (
-        <div key={index} className="relative w-full aspect-[410/271] rounded-2xl overflow-hidden">
+        <div key={index} className="relative rounded-2xl w-full aspect-[410/271] overflow-hidden">
           {/* Background image */}
           <Image
+            sizes="auto"
             src={`/assets/images/${item.image}`}
             fill
             alt={item.title[locale]}
@@ -32,18 +30,14 @@ export default function Occasions() {
           />
 
           {/* Overlay content */}
-          <div
-            className="absolute inset-0 flex w-full flex-col
-                        justify-end gap-2.5 p-6
-                        bg-gradient-to-r from-black/50 to-transparent"
-          >
+          <div className="absolute inset-0 flex flex-col justify-end gap-2.5 bg-gradient-to-r from-black/50 to-transparent p-6 w-full">
             {/* Category badge */}
-            <Badge className="w-fit rounded-full " variant="secondary">
+            <Badge className="rounded-full w-fit" variant="secondary">
               {item.category[locale]}
             </Badge>
 
             {/* Card title */}
-            <p className="text-2xl font-semibold leading-none text-white">{item.title[locale]}</p>
+            <p className="font-semibold text-white text-2xl leading-none">{item.title[locale]}</p>
           </div>
         </div>
       ))}

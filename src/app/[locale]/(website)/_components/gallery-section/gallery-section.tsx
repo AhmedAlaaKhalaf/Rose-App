@@ -8,18 +8,20 @@ export default function GallerySection() {
   const t = useTranslations("gallery");
 
   return (
-    <section id="gallery" className="w-full px-4 py-8">
+    <section id="gallery" className="px-4 py-8 w-full">
       {/* Gallery Header */}
-      <div className="mb-12 flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-2 mb-12">
         <SectionTitle>{t("badge")}</SectionTitle>
         <SectionHead>{t("heading")}</SectionHead>
       </div>
 
       {/* Gallery Grid */}
-      <div className="relative mx-auto h-[1147px] w-full max-w-[1281px]">
+      <div className="relative mx-auto w-full max-w-[1281px] h-[1147px]">
         {/* Image 1 - Large Left */}
-        <div className="absolute left-0 top-0 h-[617px] w-[418px] overflow-hidden">
+        <div className="top-0 left-0 absolute w-[418px] h-[617px] overflow-hidden">
           <Image
+            priority
+            sizes="auto"
             src="/assets/images/gallery-1.png"
             alt="Wedding and anniversary gift boxes"
             fill
@@ -28,8 +30,9 @@ export default function GallerySection() {
         </div>
 
         {/* Image 2 - Top Middle */}
-        <div className="absolute left-[431px] top-0 h-[411px] w-[419px] overflow-hidden">
+        <div className="top-0 left-[431px] absolute w-[419px] h-[411px] overflow-hidden">
           <Image
+            sizes="auto"
             src="/assets/images/gallery-2.png"
             alt="Birthday gift box with red ribbon"
             fill
@@ -38,8 +41,9 @@ export default function GallerySection() {
         </div>
 
         {/* Image 3 - Top Right */}
-        <div className="absolute left-[863px] top-0 h-[411px] w-[418px] overflow-hidden">
+        <div className="top-0 left-[863px] absolute w-[418px] h-[411px] overflow-hidden">
           <Image
+            sizes="auto"
             src="/assets/images/gallery-3.png"
             alt="Engagement ring box"
             fill
@@ -48,8 +52,9 @@ export default function GallerySection() {
         </div>
 
         {/* Image 4 - Bottom Left */}
-        <div className="absolute left-0 top-[631px] h-[406px] w-[418px] overflow-hidden">
+        <div className="top-[631px] left-0 absolute w-[418px] h-[406px] overflow-hidden">
           <Image
+            sizes="auto"
             src="/assets/images/gallery-4.png"
             alt="Roses and chocolates"
             fill
@@ -58,8 +63,9 @@ export default function GallerySection() {
         </div>
 
         {/* Image 5 - Bottom Middle */}
-        <div className="absolute left-[431px] top-[426px] h-[611px] w-[419px] overflow-hidden">
+        <div className="top-[426px] left-[431px] absolute w-[419px] h-[611px] overflow-hidden">
           <Image
+            sizes="auto"
             src="/assets/images/gallery-5.png"
             alt="Ring box with flowers"
             fill
@@ -68,8 +74,9 @@ export default function GallerySection() {
         </div>
 
         {/* Image 6 - Bottom Right */}
-        <div className="absolute left-[863px] top-[426px] h-[611px] w-[418px] overflow-hidden">
+        <div className="top-[426px] left-[863px] absolute w-[418px] h-[611px] overflow-hidden">
           <Image
+            sizes="auto"
             src="/assets/images/gallery-6.png"
             alt="Engagement congratulations card"
             fill

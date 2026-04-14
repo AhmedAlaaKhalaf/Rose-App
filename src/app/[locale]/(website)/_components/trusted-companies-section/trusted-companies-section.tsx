@@ -17,23 +17,29 @@ export default function TrustedCompaniesSection() {
 
   return (
     <section className="w-full">
-      <div className="mx-auto max-w-[1280px] px-4">
+      <div className="mx-auto px-4 max-w-[1280px]">
         {/* Background Container */}
-        <div className="flex flex-col items-center justify-center gap-6 rounded-3xl bg-[#FFE0E7] px-8 py-8 h-[207px]">
+        <div className="flex flex-col justify-center items-center gap-6 bg-[#FFE0E7] px-8 py-8 rounded-3xl h-[207px]">
           {/* Heading */}
-          <h2 className="font-primary text-center text-3xl font-bold text-[#741C21]">
+          <h2 className="font-primary font-bold text-[#741C21] text-3xl text-center">
             {t("heading.trusted-by")} <span className="text-[#FF668B]">{t("heading.count")}</span>{" "}
             {t("heading.companies")}
           </h2>
 
           {/* Logos Grid */}
-          <div className="flex w-full max-w-[1232px] flex-wrap items-center justify-center gap-8">
+          <div className="flex flex-wrap justify-center items-center gap-8 w-full max-w-[1232px]">
             {companies.map((company, index) => (
               <div
                 key={index}
-                className="relative h-[51px] w-[146px] opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+                className="relative opacity-60 hover:opacity-100 grayscale hover:grayscale-0 w-[146px] h-[51px] transition-all"
               >
-                <Image src={company.logo} alt={company.name} fill className="object-contain" />
+                <Image
+                  sizes="auto"
+                  src={company.logo}
+                  alt={company.name}
+                  fill
+                  className="object-contain"
+                />
               </div>
             ))}
           </div>

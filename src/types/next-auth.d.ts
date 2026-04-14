@@ -7,17 +7,21 @@ declare module "next-auth" {
   interface User {
     accessToken: string;
     user: {
-      _id: string;
+      id: string;
+      username: string;
+      email: string;
+      phone: string;
       firstName: string;
       lastName: string;
-      email: string;
-      gender: "male" | "female" | string;
-      phone: string;
+      gender: "MALE" | "FEMALE";
       photo: string;
-      role: "user" | "admin" | string;
       wishlist: [];
       addresses: [];
+      emailVerified: boolean;
+      phoneVerified: boolean;
+      role: "USER" | "ADMIN" | "SUPER_ADMIN";
       createdAt: string;
+      updatedAt: string;
     };
     rememberMe: boolean;
   }
@@ -34,19 +38,7 @@ declare module "next-auth/jwt" {
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface JWT {
     accessToken: string;
-    user: {
-      _id: string;
-      firstName: string;
-      lastName: string;
-      email: string;
-      gender: "male" | "female" | string;
-      phone: string;
-      photo: string;
-      role: "user" | "admin" | string;
-      wishlist: [];
-      addresses: [];
-      createdAt: string;
-    };
+    user: User["user"];
     rememberMe?: boolean;
   }
 }

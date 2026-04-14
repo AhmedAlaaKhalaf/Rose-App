@@ -7,7 +7,7 @@ export async function getProductsYouMayLike() {
 
   // Fetch Recommendations data
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/related/recommendations/${token?.user._id}`,
+    `${process.env.NEXT_PUBLIC_API}/related/recommendations/${token?.user.id}`,
     {
       method: "GET",
       headers: {
@@ -23,8 +23,8 @@ export async function getProductsYouMayLike() {
 
   const payload: ApiResponse<TRecommendationResponse> = await res.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error);
+  if ("message" in payload) {
+    throw new Error(payload.message);
   }
 
   return payload;

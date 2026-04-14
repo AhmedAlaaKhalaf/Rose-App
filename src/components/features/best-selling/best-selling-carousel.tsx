@@ -12,7 +12,9 @@ import { cn } from "@/lib/utils/tailwind-merge";
 
 export default async function BestSellingCarousel() {
   // Services
-  const { products } = await getProducts({ limit: "6" });
+  const {
+    payload: { data: products },
+  } = await getProducts({ limit: "6" });
 
   // Variables
   const carouselButtonStyle = "bg-maroon-600 rounded-3xl size-10 text-maroon-50";
@@ -27,8 +29,8 @@ export default async function BestSellingCarousel() {
       <CarouselContent>
         {/* Products  */}
         {products.map((product) => (
-          <CarouselItem key={product._id} className="sm:basis-1/1 md:basis-1/2 lg:basis-1/3">
-            <Link key={product._id} href={`products/${product._id}`}>
+          <CarouselItem key={product.id} className="sm:basis-1/1 md:basis-1/2 lg:basis-1/3">
+            <Link key={product.id} href={`products/${product.id}`}>
               <ProductCard product={product} />
             </Link>
           </CarouselItem>

@@ -1,25 +1,18 @@
-import { TReviews } from "../types/reviews";
+import { TReview } from "../types/reviews";
 
-export async function getProductReviews() {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/products/673e2e1f1159920171828153/reviews`,
-    {
-      cache: "no-store",
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+export async function getProductReviews(productId: string) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/reviews/${productId}`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch Reviews");
   }
 
-  const payload: ApiResponse<TReviews> = await response.json();
+  const payload: ApiResponse<PaginatedData<TReview[]>> = await response.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error);
+  if ("message" in payload) {
+    throw new Error(payload.message);
   }
 
   return payload;

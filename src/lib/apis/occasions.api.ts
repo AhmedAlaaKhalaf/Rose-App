@@ -1,4 +1,4 @@
-import { TAllOccasions } from "../types/all-occasions";
+import { TOccasion } from "../types/occasion";
 
 export async function getOccasions({
   pageParam = 1,
@@ -12,13 +12,11 @@ export async function getOccasions({
     throw new Error("Failed to fetch occasions");
   }
 
-  const payload: ApiResponse<TAllOccasions> = await response.json();
+  const payload: ApiResponse<PaginatedData<TOccasion[]>> = await response.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error as string);
-  }
+  if ("message" in payload) throw new Error(payload.message);
 
-  const sortedOccasions = [...payload.occasions].sort((a, b) =>
+  const sortedOccasions = [...payload.payload.data].sort((a, b) =>
     a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
   );
 

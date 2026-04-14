@@ -12,7 +12,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   return (
     <main className="gap-6 grid grid-cols-10 dark:bg-zinc-800 mx-auto mt-16 mb-44 max-w-[91.5%]">
       {/* Filtration Sidebar  */}
-      <aside className="col-span-3 h-full border-e border-zinc-100 dark:border-zinc-700 pe-[21px]">
+      <aside className="col-span-2 pe-[21px] border-e border-zinc-100 dark:border-zinc-700 h-full">
         <OccasionFilter />
         <PriceFilter />
       </aside>

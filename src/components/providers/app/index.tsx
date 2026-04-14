@@ -1,12 +1,20 @@
 import { NextIntlClientProvider } from "next-intl";
-import ReactQueryProvider from "./components/react-query.provider";
 import NextAuthProvider from "./components/next-auth.provider";
+import ReactQueryProvider from "./components/react-query.provider";
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+type ProvidersProps = {
+  children: React.ReactNode;
+  locale: string;
+  messages: Record<string, unknown>;
+};
+
+export default function Providers({ children, locale, messages }: ProvidersProps) {
   return (
     <NextAuthProvider>
       <ReactQueryProvider>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
       </ReactQueryProvider>
     </NextAuthProvider>
   );

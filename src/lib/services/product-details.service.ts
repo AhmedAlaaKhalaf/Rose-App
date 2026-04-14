@@ -1,12 +1,7 @@
 import { TProductDetails } from "@/lib/types/product";
 
 export async function productDetailsServices(id: string) {
-  const response = await fetch(`${process.env.API}/products/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(`${process.env.API}/products/${id}`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch the product details");
@@ -14,8 +9,8 @@ export async function productDetailsServices(id: string) {
 
   const payload: ApiResponse<TProductDetails> = await response.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error);
+  if ("message" in payload) {
+    throw new Error(payload.message);
   }
 
   return payload;

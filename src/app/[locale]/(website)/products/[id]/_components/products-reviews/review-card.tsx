@@ -20,6 +20,7 @@ export default function ReviewCard({ review }: ReviewProps) {
       {/* User Info */}
       <div className="flex items-center gap-2 mb-2">
         <Image
+          sizes="auto"
           src={review.user.photo}
           alt="userImage"
           className="bg-maroon-600 rounded-full h-11 object-cover"

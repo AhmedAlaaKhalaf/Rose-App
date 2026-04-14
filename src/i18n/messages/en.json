@@ -211,7 +211,7 @@
     "submit": "Login",
     "noAccount": "Don’t have an account yet?",
     "createAccount": "Create one now!",
-    "email-invalid": "Invalid email address.",
+    "username-invalid": "Invalid user name.",
     "password-invalid": "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
   },
 

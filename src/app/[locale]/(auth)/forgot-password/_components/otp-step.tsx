@@ -98,21 +98,21 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
   }, []);
 
   return (
-    <section className="flex flex-col items-center justify-center">
+    <section className="flex flex-col justify-center items-center">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full flex flex-col gap-y-4 mb-9">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4 mb-9 w-full">
           <div className="space-y-1">
-            <h2 className="font-semibold text-2xl text-zinc-800 dark:text-zinc-50">
+            <h2 className="font-semibold text-zinc-800 dark:text-zinc-50 text-2xl">
               {t("otp-title")}
             </h2>
-            <div className="flex items-center gap-1 border-b border-zinc-200 dark:border-zinc-700 pb-4">
+            <div className="flex items-center gap-1 pb-4 border-zinc-200 dark:border-zinc-700 border-b">
               <p className="leading-none">
                 {t.rich("otp-description", {
                   email: email ? email : "user@example.com.",
                   span: (chunk) => (
                     <span
                       onClick={() => onBack()}
-                      className="text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition cursor-pointer active:scale-90 underline"
+                      className="font-medium text-blue-700 hover:text-blue-800 dark:hover:text-blue-300 dark:text-blue-400 underline active:scale-90 transition cursor-pointer"
                     >
                       {chunk}
                     </span>
@@ -128,7 +128,7 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
             control={form.control}
             render={({ field }) => (
               <InputOTP maxLength={6} value={field.value} onChange={field.onChange}>
-                <InputOTPGroup className="mt-4 w-full justify-center gap-x-3">
+                <InputOTPGroup className="justify-center gap-x-3 mt-4 w-full">
                   {[0, 1, 2, 3, 4, 5].map((i) => (
                     <InputOTPSlot
                       key={i}
@@ -144,14 +144,14 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
           />
 
           {/* timer */}
-          <div className="w-full flex justify-end">
-            <p className="text-zinc-700 dark:text-zinc-400 text-center text-sm mt-6">
+          <div className="flex justify-end w-full">
+            <p className="mt-6 text-zinc-700 dark:text-zinc-400 text-sm text-center">
               {timer > 0 ? (
                 <>
                   {t.rich("otp-time-left", {
                     time: timer,
                     span: (chunk) => (
-                      <span className="text-primary dark:text-primary font-medium">{chunk}</span>
+                      <span className="font-medium text-primary dark:text-primary">{chunk}</span>
                     ),
                   })}
                 </>
@@ -159,7 +159,7 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
                 <button
                   type="button"
                   onClick={handleResend}
-                  className="inline-flex items-center justify-end gap-1 text-end font-medium text-primary hover:text-maroon-800 dark:text-primary hover:dark:text-softPink-300 transition cursor-pointer active:scale-90"
+                  className="inline-flex justify-end items-center gap-1 font-medium text-primary hover:dark:text-softPink-300 hover:text-maroon-800 dark:text-primary text-end active:scale-90 transition cursor-pointer"
                 >
                   {isPending ? (
                     <>
@@ -187,7 +187,7 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
           <Button
             type="submit"
             disabled={isVerifyPending}
-            className="w-full mt-4 flex items-center justify-center gap-x-2"
+            className="flex justify-center items-center gap-x-2 mt-4 w-full"
           >
             {isVerifyPending ? (
               <>
@@ -199,7 +199,7 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
           </Button>
         </form>
       </Form>
-      <div className="font-medium flex items-center justify-center gap-1 text-sm border-t border-t-zinc-200 dark:border-t-zinc-700 pt-5 w-full">
+      <div className="flex justify-center items-center gap-1 pt-5 border-t border-t-zinc-200 dark:border-t-zinc-700 w-full font-medium text-sm">
         <p className="font-medium text-zinc-800 dark:text-zinc-50 text-sm text-center">
           {t.rich("otp-need-help", {
             a: (chunk) => (

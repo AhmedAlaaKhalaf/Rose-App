@@ -37,7 +37,7 @@ export default function DashboardSidebar() {
 
       {/* Mobile Screen */}
       <header className="md:hidden flex items-center gap-2 col-span-10 bg-white pr-4 pl-4">
-        <Image src="/assets/logo.png" alt="Logo" width={60} height={57} />
+        <Image sizes="auto" src="/assets/logo.png" alt="Logo" width={60} height={57} />
 
         <div className="flex-1">
           <DashboardBreadcrumb />

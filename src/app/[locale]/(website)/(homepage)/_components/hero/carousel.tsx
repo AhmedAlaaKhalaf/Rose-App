@@ -52,7 +52,7 @@ export default function CarouselSection() {
   }, [api, updateCurrent]);
 
   return (
-    <div className="mx-auto w-full relative max-w-full h-full rounded-2xl flex flex-col overflow-hidden">
+    <div className="relative flex flex-col mx-auto rounded-2xl w-full max-w-full h-full overflow-hidden">
       {/* Carousel*/}
       <Carousel
         setApi={setApi}
@@ -62,12 +62,13 @@ export default function CarouselSection() {
       >
         <CarouselContent>
           {imagesCarouselHeroSectionData.map((item, index) => (
-            <CarouselItem className="relative aspect-[955/440] w-full h-[27.5rem]" key={index}>
+            <CarouselItem className="relative w-full h-[27.5rem] aspect-[955/440]" key={index}>
               <Image
+                sizes="auto"
                 src={`/assets/${item}`}
                 fill
                 alt={item}
-                className="object-cover rounded-2xl"
+                className="rounded-2xl object-cover"
               />
             </CarouselItem>
           ))}
@@ -75,14 +76,14 @@ export default function CarouselSection() {
       </Carousel>
 
       {/* Overlay content */}
-      <div className="flex flex-col justify-between p-9 bg-gradient-to-r absolute w-full h-full from-black/80 to-transparent">
+      <div className="absolute flex flex-col justify-between bg-gradient-to-r from-black/80 to-transparent p-9 w-full h-full">
         {/* Dots navigation */}
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex justify-end items-center gap-2">
           {imagesCarouselHeroSectionData.map((_, index) => (
             <button
               key={index}
               onClick={() => api?.scrollTo(index)}
-              className={cn("h-2.5 w-2.5 rounded-full bg-white", {
+              className={cn("bg-white rounded-full w-2.5 h-2.5", {
                 "bg-maroon-600 w-9": current === index + 1,
               })}
             />
@@ -90,14 +91,14 @@ export default function CarouselSection() {
         </div>
 
         {/* Hero text and buttons */}
-        <section className="w-full flex flex-col justify-end text-white">
+        <section className="flex flex-col justify-end w-full text-white">
           <p className="font-semibold text-4xl">{t("heading")}</p>
-          <p className="h-12  text-base">{t("subheading")}</p>
-          <div className="flex items-center justify-between">
+          <p className="h-12 text-base">{t("subheading")}</p>
+          <div className="flex justify-between items-center">
             {/* Primary CTA */}
             <Link href={"#"}>
               <Button
-                className="bg-maroon-50 rounded-xl py-2.5 text-maroon-700"
+                className="bg-maroon-50 py-2.5 rounded-xl text-maroon-700"
                 variant="secondary"
               >
                 {t("cta")}
@@ -105,7 +106,7 @@ export default function CarouselSection() {
             </Link>
 
             {/* Manual navigation arrows */}
-            <div className="rounded-full w-fit flex gap-3.5 items-center text-gray-500 bg-maroon-50">
+            <div className="flex items-center gap-3.5 bg-maroon-50 rounded-full w-fit text-gray-500">
               <ChevronLeft
                 className={`size-8 ${locale == "ar" ? "rotate-180" : ""}  cursor-pointer hover:text-maroon-700`}
                 onClick={() => api?.scrollPrev()}
