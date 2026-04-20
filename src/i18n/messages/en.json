@@ -355,7 +355,8 @@
     "text-area-placholder": "What do you think of this product?",
     "title-field-placholder": "Enter review title",
     "review-form-button": "Add Review",
-    "add-review-toast": "You Review Added Successfully"
+    "add-review-toast": "You Review Added Successfully",
+    "no-reviews-found": "No reviews found for this product"
   },
   "orders": {
     "title": "Orders",

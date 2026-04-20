@@ -17,7 +17,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
   const locale = await getLocale();
 
   // Variables
-  const { cover, title, rating, price, discountValue, discountType, createdAt, stock } = product;
+  const { title, rating, price, discountValue, discountType, createdAt, stock } = product;
   const productLifeTime =
     (new Date().getTime() - new Date(createdAt).getTime()) / (1000 * 60 * 60 * 24);
   const isNewProduct = productLifeTime < 7;

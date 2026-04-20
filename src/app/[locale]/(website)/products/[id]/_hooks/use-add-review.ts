@@ -12,10 +12,10 @@ export default function useAddReview() {
 
       const payload = await addReviewAction(
         {
-          product: fields.productId,
+          productId: fields.productId,
           rating: fields.rating,
-          title: fields.title,
-          comment: fields.comment,
+          headline: fields.title,
+          content: fields.comment,
         },
         token
       );

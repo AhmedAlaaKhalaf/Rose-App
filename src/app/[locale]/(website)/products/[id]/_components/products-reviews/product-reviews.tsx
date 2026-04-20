@@ -20,7 +20,7 @@ export default async function ProductReviews({ productDetails }: ReviewsProps) {
 
       {/* Section Content */}
       <Reviews productId={product?.id} />
-      <ReviewForm id={product?.id} />
+      {/* <ReviewForm id={product?.id} /> */}
     </section>
   );
 }

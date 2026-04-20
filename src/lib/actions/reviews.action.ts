@@ -5,10 +5,10 @@ import { cookies } from "next/headers";
 
 export async function addReviewAction(
   fields: {
-    product: string;
+    productId: string;
     rating: number;
-    title: string;
-    comment: string;
+    headline: string;
+    content: string;
   },
   userToken: string | null
 ) {

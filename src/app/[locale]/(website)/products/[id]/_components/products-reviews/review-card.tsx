@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useFormatter } from "next-intl";
 import { Rating } from "@/components/ui/star-rating";
 import { Star } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 type ReviewProps = {
   review: TReview;
@@ -14,6 +15,7 @@ export default function ReviewCard({ review }: ReviewProps) {
 
   // Hooks
   const format = useFormatter();
+  const session = useSession();
 
   return (
     <div className="mb-3 pb-4 border-zinc-100 border-b w-full overflow-hidden">
@@ -21,7 +23,7 @@ export default function ReviewCard({ review }: ReviewProps) {
       <div className="flex items-center gap-2 mb-2">
         <Image
           sizes="auto"
-          src={review.user.photo}
+          src={session.data?.user.photo || "/public/assets/logo.png"}
           alt="userImage"
           className="bg-maroon-600 rounded-full h-11 object-cover"
           width={45}
@@ -42,12 +44,12 @@ export default function ReviewCard({ review }: ReviewProps) {
       </div>
 
       {/* Review Title */}
-      <h2 className="mt-2 font-semibold text-black">{review.title}</h2>
+      <h2 className="mt-2 font-semibold text-black">{review.headline}</h2>
 
       {/* Review Comment */}
       <p className="mt-1 text-zinc-600">
-        {review.comment} {review.comment} {review.comment} {review.comment} {review.comment}{" "}
-        {review.comment}
+        {review.content} {review.content} {review.content} {review.content} {review.content}{" "}
+        {review.content}
       </p>
     </div>
   );

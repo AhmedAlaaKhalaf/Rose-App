@@ -2,25 +2,24 @@ import z from "zod";
 import { reviewSchema } from "../schemes/reviews.schema";
 
 export type TReview = {
-  _id: string;
-  product: {
-    _id: string;
-    title: string;
-    imgCover: string;
-    id: string;
-  };
+  id: string;
+  userId: string;
+  productId: string;
+  headline: string;
+  content: string;
+  rating: 4;
+  createdAt: string;
+  updatedAt: string;
   user: {
-    _id: string;
+    id: string;
+    username: string;
     firstName: string;
     lastName: string;
-    photo: string;
   };
-  rating: number;
-  title: string;
-  comment: string;
-  status: string;
-  createdAt: Date;
-  updatedAt: string;
+  product: {
+    id: string;
+    title: string;
+  };
 };
 
 export type TReviews = {

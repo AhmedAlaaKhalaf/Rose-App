@@ -1,7 +1,11 @@
 import { TReview } from "../types/reviews";
 
 export async function getProductReviews(productId: string) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/reviews/${productId}`, {
+  const params = new URLSearchParams({
+    productId: productId,
+  });
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/reviews?${params.toString()}`, {
     cache: "no-store",
   });
 

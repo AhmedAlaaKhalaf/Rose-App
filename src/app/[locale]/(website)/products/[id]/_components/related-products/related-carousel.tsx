@@ -35,12 +35,12 @@ export default function RelatedCarousel({ id }: { id: string }) {
         direction: direction,
       }}
     >
-      {data?.products.length === 0 ? (
+      {data?.payload.data.length === 0 ? (
         <p className="py-10 text-zinc-500 text-sm text-center">No related products found</p>
       ) : (
         <CarouselContent className="px-2 py-3" dir={direction}>
-          {data?.products.map((product) => (
-            <CarouselItem key={product._id} className="sm:basis-1/1 md:basis-1/3 lg:basis-1/4">
+          {data?.payload.data.map((product) => (
+            <CarouselItem key={product.id} className="sm:basis-1/1 md:basis-1/3 lg:basis-1/4">
               <Link href={"/products"}>
                 <ProductCard product={product} />
               </Link>

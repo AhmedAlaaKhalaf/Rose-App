@@ -367,7 +367,9 @@
     "text-area-placholder": "ما رأيك في هذا المنتج؟",
     "title-field-placholder": "أدخل عنوان المراجعة",
     "review-form-button": "أضف مراجعة",
-    "add-review-toast": "لقد قمت باضافه مراجعة بنجاح"
+    "add-review-toast": "لقد قمت باضافه مراجعة بنجاح",
+    "no-reviews-found": "لا توجد مراجعات لهذا المنتج"
+
   },
   "orders": {
     "title": "الطلبات",

@@ -10,3 +10,4 @@ export function useProductReviews(productId: string) {
 
   return { reviewsOfProduct: data, isLoading, error, refetch };
 }
+ 
