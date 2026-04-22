@@ -3,12 +3,13 @@ import z from "zod";
 
 export const emailStepSchema = (t: Translation) =>
   z.object({
-    email: z.email(t("validation-email")).nonempty(t("email-require")),
+    email: z.string().email(t("validation-email")).nonempty(t("email-require")),
   });
 
 export const newPasswordSchems = (t: Translation) =>
   z
     .object({
+      token: z.string().nonempty(t("token-require")),
       password: z
         .string()
         .nonempty(t("password-require"))

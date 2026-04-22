@@ -1,5 +1,5 @@
-import RegisterForm from "./_components/register-form";
+import RegisterStepper from "./_components/register-stepper";
 
 export default function RegisterPage() {
-  return <RegisterForm />;
+  return <RegisterStepper />;
 }

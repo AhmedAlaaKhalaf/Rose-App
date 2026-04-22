@@ -67,16 +67,20 @@
           "placeholder": "Shams"
         }
       },
+      "username": {
+        "title": "username",
+        "placeholder": "abdulrahman_shams"
+      },
       "email": {
         "title": "email",
         "placeholder": "user@example.com"
       },
       "phone": {
-        "title": "phone",
+        "title": "phone (optional)",
         "placeholder": "1012345678"
       },
       "gender": {
-        "title": "gender",
+        "title": "gender (optional)",
         "placeholder": "Select gender",
         "options": {
           "male": "male",
@@ -96,6 +100,12 @@
       "link": "login"
     },
     "validation": {
+      "username": {
+        "required": "Please enter a username",
+        "min": "Username must be at least {min} characters",
+        "max": "Username must be at most {max} characters",
+        "invalid": "Username can contain letters, numbers and underscores only"
+      },
       "firstName": {
         "required": "Please enter your first name",
         "min": "Please enter at least {min} characters for the first name",
@@ -126,8 +136,11 @@
         "special": "Password must contain at least one special character",
         "mismatch": "Passwords do not match, please check"
       },
-      "rePassword": {
+      "confirmPassword": {
         "required": "Please confirm your password"
+      },
+      "token": {
+        "required": "Please enter the reset token from your email"
       },
       "gender": {
         "required": "Please select your gender"
@@ -192,14 +205,22 @@
     "otp-time-left": "You can request another code in: <span>{time}s</span>",
     "otp-resend": "Send a new code",
     "otp-resending": "Sending a new code",
-    "verify-otp": "Verify OTP",
+    "verify-otp": "Continue",
     "verifying-otp": "Verifying OTP",
     "otp-need-help": "Need help? <a>Contact us</a>",
     "otp-required": "Please enter a valid otp (6 digits)",
+    "token-label": "Reset token",
+    "token-placeholder": "Paste the token from your email",
+    "token-required": "Please enter the reset token from your email",
+    "token-require": "Please enter the reset token from your email",
     "new-password-success-toast": "your password changed successfully, please login"
   },
   "login": {
     "title": "Welcome back!",
+    "username": {
+      "label": "Username",
+      "placeholder": "Enter your username"
+    },
     "email": {
       "label": "Email"
     },

@@ -10,31 +10,32 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "@/i18n/navigation";
 import { EmailStepField } from "@/lib/types/auth";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { emailStepSchema } from "@/lib/schemes/af-task-schema/auth.schema";
-import useForgotPassword from "../../_hooks/use-forgot-password";
+import useSendOTP from "../../forgot-password/_hooks/af-task/use-send-otp";
 import { toast } from "sonner";
 import { OTP_COOLDOWN_KEY } from "@/lib/constants/global-constants";
-import ErrorAlert from "../../../_components/error-alert";
-import { getOtpTimeLeft, startOtpTimer } from "../../../_utils/otp-timer-presisted";
+import ErrorAlert from "../../_components/error-alert";
+import { getOtpTimeLeft, startOtpTimer } from "../../_utils/otp-timer-presisted";
+import { Loader2 } from "lucide-react";
 
-type EmailStepProps = {
+type Props = {
   email: string;
   setEmail: (email: string) => void;
   onNext: () => void;
 };
 
-export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
+export default function RegisterEmailStep({ email, setEmail, onNext }: Props) {
   const t = useTranslations("forgot-password");
+  const tReg = useTranslations("auth.register");
 
-  const { isPending, error, forgotPassword } = useForgotPassword();
+  const { isPending, error, sendOTP } = useSendOTP();
 
   const form = useForm<EmailStepField>({
-    defaultValues: { email: email || "" },
+    defaultValues: { email },
     resolver: zodResolver(emailStepSchema(t)),
   });
 
@@ -43,6 +44,7 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
       typeof window !== "undefined" ? localStorage.getItem(OTP_COOLDOWN_KEY) : null;
     const diff = getOtpTimeLeft();
 
+    // If we still have an active cooldown, skip re-sending and go straight to OTP step
     if (otpCooldown && diff > 0) {
       toast.error(t.rich("otp-cooldown-error-toast", { duration: diff }));
       setEmail(values.email);
@@ -50,7 +52,7 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
       return;
     }
 
-    forgotPassword(values, {
+    sendOTP(values, {
       onSuccess: () => {
         toast.success(t("sendotp-toast"));
         startOtpTimer();
@@ -63,7 +65,9 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
   return (
     <>
       <header className="mb-5 pb-3 border-zinc-200 border-b w-full">
-        <h1 className="font-semibold text-zinc-800 dark:text-zinc-50 text-2xl">{t("title")}</h1>
+        <h1 className="font-semibold text-zinc-800 dark:text-zinc-50 text-2xl">
+          {tReg("header")}
+        </h1>
         <p className="text-zinc-800 dark:text-zinc-50">{t("desc")}</p>
       </header>
 
@@ -90,22 +94,16 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
             className="w-full"
             disabled={isPending || (!form.formState.isValid && form.formState.isSubmitted)}
           >
-            {t("email-form-button")}
+            {isPending ? (
+              <span className="inline-flex items-center gap-2">
+                {t("email-form-button")} <Loader2 className="animate-spin" />
+              </span>
+            ) : (
+              t("email-form-button")
+            )}
           </Button>
         </form>
       </Form>
-
-      <footer className="mt-9 pt-5 border-zinc-200 border-t w-full">
-        <p className="font-medium text-zinc-800 dark:text-zinc-50 text-sm text-center">
-          {t.rich("footer", {
-            a: (chunk) => (
-              <Link href={"/register"} className="font-bold text-maroon-700 dark:text-pink-300">
-                {chunk}
-              </Link>
-            ),
-          })}
-        </p>
-      </footer>
     </>
   );
 }

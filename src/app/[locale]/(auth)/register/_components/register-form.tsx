@@ -29,7 +29,11 @@ import SubmittingErrorForm from "../../_components/submitting-error-form";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { useTranslations } from "next-intl";
 
-export default function RegisterForm() {
+type Props = {
+  email?: string;
+};
+
+export default function RegisterForm({ email = "" }: Props) {
   // Translation
   const t = useTranslations("auth.register");
   const tZod = useTranslations("auth.validation");
@@ -40,13 +44,14 @@ export default function RegisterForm() {
   // Form
   const form = useForm<RegisterFormFields>({
     defaultValues: {
+      username: "",
       firstName: "",
       lastName: "",
-      email: "",
+      email,
       password: "",
-      rePassword: "",
+      confirmPassword: "",
       phone: "",
-      gender: "male",
+      gender: undefined,
     },
     resolver: zodResolver(registerSchema(tZod)),
   });
@@ -57,33 +62,27 @@ export default function RegisterForm() {
   };
 
   return (
-    // Form
     <section className="flex flex-col gap-5">
-      {/* Header  */}
+      {/* Header */}
       <header className="pb-4 border-b border-b-zinc-200 font-greatVibes text-maroon-700 dark:text-softPink-300 text-5xl text-center">
         {t("header")}
       </header>
 
       {/* Form */}
       <Form {...form}>
-        {/* Fields */}
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           id="register-form"
-          className="flex flex-col justify-between"
+          className="flex flex-col gap-4"
         >
-          {/*  Name  */}
+          {/* Name */}
           <div className="gap-5 grid grid-cols-2">
-            {/* First name  */}
             <FormField
               control={form.control}
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  {/* Label */}
-                  <Label> {t("name.first.title")}</Label>
-
-                  {/* Input */}
+                  <Label>{t("name.first.title")}</Label>
                   <FormControl>
                     <Input
                       aria-invalid={!!form.formState.errors.firstName}
@@ -91,23 +90,17 @@ export default function RegisterForm() {
                       placeholder={t("name.first.placeholder")}
                     />
                   </FormControl>
-
-                  {/* Validation Message  */}
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            {/* Last name  */}
             <FormField
               control={form.control}
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  {/* Label */}
-                  <Label> {t("name.last.title")}</Label>
-
-                  {/* Input Field */}
+                  <Label>{t("name.last.title")}</Label>
                   <FormControl>
                     <Input
                       aria-invalid={!!form.formState.errors.lastName}
@@ -115,49 +108,63 @@ export default function RegisterForm() {
                       placeholder={t("name.last.placeholder")}
                     />
                   </FormControl>
-
-                  {/* Validation Message  */}
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
 
-          {/* Email  */}
+          {/* Username */}
           <FormField
             control={form.control}
-            name="email"
+            name="username"
             render={({ field }) => (
               <FormItem>
-                {/* Label */}
-                <Label>{t("email.title")}</Label>
-
-                {/* Input Field */}
+                <Label>{t("username.title")}</Label>
                 <FormControl>
                   <Input
-                    aria-invalid={!!form.formState.errors.email}
-                    type="email"
+                    aria-invalid={!!form.formState.errors.username}
                     {...field}
-                    placeholder={t("email.placeholder")}
+                    autoComplete="username"
+                    placeholder={t("username.placeholder")}
                   />
                 </FormControl>
-
-                {/* Validation Message  */}
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          {/* Phone  */}
+          {/* Email */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <Label>{t("email.title")}</Label>
+                <FormControl>
+                  <Input
+                    aria-invalid={!!form.formState.errors.email}
+                    type="email"
+                    {...field}
+                    readOnly={!!email}
+                    placeholder={t("email.placeholder")}
+                    className={cn(
+                      email && "bg-zinc-100 dark:bg-zinc-800 cursor-not-allowed select-none"
+                    )}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Phone (optional) */}
           <FormField
             control={form.control}
             name="phone"
             render={({ field }) => (
               <FormItem>
-                {/* Label */}
                 <Label>{t("phone.title")}</Label>
-
-                {/* Input Field */}
                 <FormControl>
                   <div className="relative">
                     <PhoneInput
@@ -170,7 +177,6 @@ export default function RegisterForm() {
                       initialValueFormat="national"
                       international
                     />
-                    {/* Custom placeholder  */}
                     <span
                       className={cn(
                         "top-4 left-1/3 absolute text-zinc-500 text-sm",
@@ -181,56 +187,45 @@ export default function RegisterForm() {
                     </span>
                   </div>
                 </FormControl>
-
-                {/* Validation Message  */}
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          {/* Gender  */}
+          {/* Gender (optional) */}
           <FormField
             control={form.control}
             name="gender"
             render={({ field }) => (
               <FormItem>
-                {/* Label */}
                 <FormLabel>{t("gender.title")}</FormLabel>
-
-                {/* Gender  */}
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value}
                   aria-invalid={!!form.formState.errors.gender}
                 >
                   <FormControl>
-                    <SelectTrigger className="capitalize">
+                    <SelectTrigger className="capitalize w-full">
                       <SelectValue placeholder={t("gender.placeholder")} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="male">{t("gender.options.male")}</SelectItem>
-                    <SelectItem value="female">{t("gender.options.female")}</SelectItem>
+                    <SelectItem value="MALE">{t("gender.options.male")}</SelectItem>
+                    <SelectItem value="FEMALE">{t("gender.options.female")}</SelectItem>
                   </SelectContent>
                 </Select>
-
-                {/* Validation Message  */}
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          {/* Password  */}
+          {/* Password */}
           <FormField
-            aria-invalid={!!form.formState.errors.password}
             control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
-                {/* Label */}
                 <Label>{t("password.title")}</Label>
-
-                {/* Input Field */}
                 <FormControl>
                   <Input
                     aria-invalid={!!form.formState.errors.password}
@@ -239,40 +234,33 @@ export default function RegisterForm() {
                     {...field}
                   />
                 </FormControl>
-                {/* Validation Message  */}
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          {/* Confirm Password  */}
+          {/* Confirm Password */}
           <FormField
-            aria-invalid={!!form.formState.errors.password}
             control={form.control}
-            name="rePassword"
+            name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                {/* Label */}
                 <Label>{t("confirm-password.title")}</Label>
-
-                {/* Input Field */}
                 <FormControl>
                   <Input
-                    aria-invalid={!!form.formState.errors.rePassword}
+                    aria-invalid={!!form.formState.errors.confirmPassword}
                     type="password"
                     placeholder={t("confirm-password.placeholder")}
                     {...field}
                   />
                 </FormControl>
-
-                {/* Validation Message  */}
                 <FormMessage />
               </FormItem>
             )}
           />
         </form>
 
-        {/* Button  */}
+        {/* Button */}
         <footer className="flex flex-col gap-2">
           {error && <SubmittingErrorForm errorMsg={error.message} />}
           <Button
@@ -285,7 +273,6 @@ export default function RegisterForm() {
           </Button>
         </footer>
 
-        {/* Create account */}
         <p className="pt-5 border-t border-t-zinc-200 font-medium text-zinc-800 dark:text-zinc-50 text-sm text-center">
           {t("user-question")}{" "}
           <Link

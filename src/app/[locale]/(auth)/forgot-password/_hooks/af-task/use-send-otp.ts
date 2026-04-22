@@ -1,15 +1,15 @@
-import { sendOTPAction } from "@/lib/actions/auth.actions";
+import { sendEmailVerificationAction } from "@/lib/actions/auth.actions";
 import { EmailStepField } from "@/lib/types/auth";
 import { useMutation } from "@tanstack/react-query";
 
+// Sends a 6-digit OTP for the registration email-verification flow
 export default function useSendOTP() {
-  // Mutation
   const { isPending, error, mutate } = useMutation({
     mutationFn: async (fields: EmailStepField) => {
-      const payload = await sendOTPAction(fields);
+      const payload = await sendEmailVerificationAction(fields);
 
-      if ("message" in payload) {
-        throw new Error(payload.message);
+      if (payload?.status === false) {
+        throw new Error(payload.message || "Failed to send verification code");
       }
 
       return payload;

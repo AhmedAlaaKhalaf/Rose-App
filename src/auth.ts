@@ -42,8 +42,10 @@ export const authOptions: NextAuthOptions = {
         // Parse API response
         const payload: ApiResponse<loginResponse> = await res.json();
 
-        // Throw error if authentication fails
-        if ("message" in payload) throw new Error(payload.message);
+        // Throw error if authentication fails (status === false)
+        if (payload?.status === false) {
+          throw new Error(payload.message || "Invalid credentials");
+        }
 
         // Return user object to NextAuth
         return {

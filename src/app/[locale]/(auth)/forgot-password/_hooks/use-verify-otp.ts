@@ -1,14 +1,14 @@
-import { verifyOtp } from "@/lib/actions/auth.actions";
-import { VerifyOtpFields } from "@/lib/types/auth-types/forgot-password";
+import { confirmEmailVerificationAction } from "@/lib/actions/auth.actions";
 import { useMutation } from "@tanstack/react-query";
 
+// Confirms the OTP from the registration email-verification flow
 export default function useVerifyOtp() {
   const { isPending, error, mutate } = useMutation({
-    mutationFn: async (resetCode: VerifyOtpFields) => {
-      const payload = await verifyOtp(resetCode);
+    mutationFn: async (fields: { email: string; code: string }) => {
+      const payload = await confirmEmailVerificationAction(fields);
 
-      if ("message" in payload) {
-        throw new Error(payload.message);
+      if (payload?.status === false) {
+        throw new Error(payload.message || "Invalid verification code");
       }
 
       return payload;

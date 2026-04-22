@@ -13,12 +13,13 @@ export default function useRegister() {
     mutationFn: async (fields: RegisterFormFields) => {
       const payload = await registerAction(fields);
 
-      if ("message" in payload) throw new Error(payload.message);
+      if (payload?.status === false) {
+        throw new Error(payload.message || "Registration failed");
+      }
 
       return payload;
     },
     onSuccess: () => {
-      // Show toast
       toast.success("Your account has been created successfully.");
 
       setTimeout(() => {

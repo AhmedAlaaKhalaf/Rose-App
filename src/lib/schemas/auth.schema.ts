@@ -5,6 +5,15 @@ import { Translation } from "../types/global";
 export const registerSchema = (t: Translation) =>
   z
     .object({
+      // Username
+      username: z
+        .string()
+        .nonempty({ message: t("username.required") })
+        .trim()
+        .min(3, { message: t("username.min", { min: 3 }) })
+        .max(20, { message: t("username.max", { max: 20 }) })
+        .regex(/^[a-zA-Z0-9_]+$/, { message: t("username.invalid") }),
+
       // First name
       firstName: z
         .string()
@@ -30,16 +39,17 @@ export const registerSchema = (t: Translation) =>
         .min(5, { message: t("email.tooShort") })
         .max(128, { message: t("email.tooLong") }),
 
-      // Phone
+      // Phone (optional in API)
       phone: z
         .string()
-        .nonempty({ message: t("phone.required") })
-        .refine(isValidPhoneNumber, { message: t("phone.invalid") }),
+        .trim()
+        .optional()
+        .refine((val) => !val || isValidPhoneNumber(val), {
+          message: t("phone.invalid"),
+        }),
 
-      // Gender
-      gender: z.enum(["male", "female"], {
-        message: t("gender.required"),
-      }),
+      // Gender (optional in API; values are MALE | FEMALE)
+      gender: z.enum(["MALE", "FEMALE"]).optional(),
 
       // Password
       password: z
@@ -54,9 +64,32 @@ export const registerSchema = (t: Translation) =>
         .regex(/[!@#$%^&*()_\-+={[}\]|:;"'<,>.?]/, { message: t("password.special") }),
 
       // Confirm password
-      rePassword: z.string().nonempty({ message: t("rePassword.required") }),
+      confirmPassword: z.string().nonempty({ message: t("confirmPassword.required") }),
     })
-    .refine((data) => data.password === data.rePassword, {
+    .refine((data) => data.password === data.confirmPassword, {
       message: t("password.mismatch"),
-      path: ["rePassword"],
+      path: ["confirmPassword"],
+    });
+
+// Reset password (used by forgot-password flow with a token from email)
+export const resetPasswordSchema = (t: Translation) =>
+  z
+    .object({
+      token: z
+        .string()
+        .nonempty({ message: t("token.required") })
+        .trim(),
+      newPassword: z
+        .string()
+        .nonempty({ message: t("password.required") })
+        .trim()
+        .min(8, { message: t("password.min", { min: 8 }) })
+        .regex(/[A-Z]/, { message: t("password.upper") })
+        .regex(/[a-z]/, { message: t("password.lower") })
+        .regex(/[0-9]/, { message: t("password.number") }),
+      confirmPassword: z.string().nonempty({ message: t("confirmPassword.required") }),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: t("password.mismatch"),
+      path: ["confirmPassword"],
     });
