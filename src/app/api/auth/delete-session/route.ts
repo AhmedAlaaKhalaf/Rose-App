@@ -1,15 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 /**
  * This endpoint deletes the NextAuth session cookie.
  * Called when a user without "Remember Me" opens a new tab after closing the previous one.
  */
-export async function POST(req: NextRequest) {
+export async function POST() {
   try {
     const isSecure = process.env.NODE_ENV === "production";
-    const cookieName = isSecure
-      ? "__Secure-next-auth.session-token"
-      : "next-auth.session-token";
+    const cookieName = isSecure ? "__Secure-next-auth.session-token" : "next-auth.session-token";
 
     const response = NextResponse.json({ success: true });
 
@@ -23,9 +21,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Also delete CSRF token cookie
-    const csrfCookieName = isSecure
-      ? "__Host-next-auth.csrf-token"
-      : "next-auth.csrf-token";
+    const csrfCookieName = isSecure ? "__Host-next-auth.csrf-token" : "next-auth.csrf-token";
     response.cookies.set(csrfCookieName, "", {
       httpOnly: true,
       secure: isSecure,
@@ -49,9 +45,6 @@ export async function POST(req: NextRequest) {
     return response;
   } catch (error) {
     console.error("Error deleting session:", error);
-    return NextResponse.json(
-      { error: "Failed to delete session" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to delete session" }, { status: 500 });
   }
 }

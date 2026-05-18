@@ -1,20 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Input } from "../../ui/input";
-import { Globe, Heart, ShoppingCart } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+// import { Input } from "../../ui/input";
+import { Heart, ShoppingCart } from "lucide-react";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
 import HeaderNavigation from "./header-navigation";
 import MobileNavigation from "./mobile-navigation";
-import LoginIcon from "./login-icon";
+// import LoginIcon from "./login-icon";
 import LanguageSwitcher from "@/components/ui/language-switcher";
 import Notifications from "@/app/[locale]/(website)/_components/notifications/notifications";
 import UserDropdown from "./user-dropdown";
-import Search from "../search/search";
+// import Search from "../search/search";
 // import { getServerSession } from "next-auth";
 // import { authOptions } from "@/auth";
 
@@ -108,7 +108,7 @@ export default function Header() {
             <LanguageSwitcher />
           </div>
         </div>
-      </div>  
+      </div>
       {/* header nav */}
       <div className="hidden sm:block bg-primary mx-auto">
         <HeaderNavigation />

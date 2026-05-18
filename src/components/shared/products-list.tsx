@@ -7,7 +7,7 @@ import { SearchParams } from "@/lib/types/global";
 import { getLocale, getTranslations } from "next-intl/server";
 
 type ProductsListProps = {
-  searchParams?: SearchParams;
+  searchParams?: SearchParams | string;
   className?: string;
 };
 

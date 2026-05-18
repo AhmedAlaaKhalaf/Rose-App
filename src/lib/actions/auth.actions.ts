@@ -32,9 +32,10 @@ export async function sendOTPAction(fields: EmailStepField) {
 }
 
 export async function newPasswordAction(fields: {
+  email: string;
   newPassword: string;
-  token: string;
-  confirmPassword: string;
+  token?: string;
+  confirmPassword?: string;
 }) {
   const response = await fetch(`${process.env.API}/auth/reset-password`, {
     method: "POST",

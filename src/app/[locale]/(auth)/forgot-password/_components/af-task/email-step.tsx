@@ -28,7 +28,7 @@ type EmailStepProps = {
   onNext: () => void;
 };
 
-export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
+export default function EmailStep({ setEmail, onNext }: EmailStepProps) {
   // Translation
   const t = useTranslations("forgot-password");
 
@@ -45,7 +45,7 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
 
   // Functions
   const onSubmit: SubmitHandler<EmailStepField> = (values) => {
-    // Variabls
+    // Variable
     const otpCooldown = localStorage.getItem(OTP_COOLDOWN_KEY);
 
     const diff = getOtpTimeLeft();
@@ -65,7 +65,7 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
 
     sendOTP(values, {
       onSuccess: () => {
-        toast.success(t("sendotp-toast"));
+        toast.success(t("send-otp-toast"));
 
         startOtpTimer();
         setEmail(values.email);
@@ -91,8 +91,8 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                {/* Lable */}
-                <FormLabel>{t("field-lable")}</FormLabel>
+                {/* Label */}
+                <FormLabel>{t("field-label")}</FormLabel>
 
                 {/* Field */}
                 <FormControl>

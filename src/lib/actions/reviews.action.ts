@@ -26,6 +26,7 @@ export async function addReviewAction(
       cookies: {
         [cookieName]: rawToken,
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any,
   });
 

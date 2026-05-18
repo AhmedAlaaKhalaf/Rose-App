@@ -8,4 +8,6 @@ export async function getOrderStatus() {
   }
 
   const payload: ApiResponse<TOrderStatistics> = await response.json();
+
+  return payload;
 }

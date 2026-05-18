@@ -138,7 +138,7 @@
     "badge": "GALLERY",
     "heading": "Check Out our Wonderful Gallery"
   },
-  "promoCardheroSection": {
+  "promo-card-hero-section": {
     "badge": "Starting from 10.99 EGP",
     "title": "Special Gifts For The People You Love",
     "button": "Shop Now"
@@ -161,7 +161,7 @@
       "fast-delivery": "Fast & Reliable Delivery"
     }
   },
-  "carouselheroSection": {
+  "carousel-hero-section": {
     "heading": "Say It with Flowers",
     "subheading": "Elegant gifts for every special moment.",
     "cta": "I’m buying!"
@@ -169,7 +169,7 @@
   "forgot-password": {
     "title": "Forgot Password?",
     "desc": "Worry not, we’ll send you instructions to help you reset it.",
-    "field-lable": "Email",
+    "field-label": "Email",
     "footer": "Don’t have an account yet? <a>Create one now!</a>",
     "email-form-button": "Continue",
     "new-password-title": "Create a new password",
@@ -184,7 +184,7 @@
     "rePassword-require": "Please enter your confirm password",
     "password-confirmPassword": "password and confirm Password don't match",
     "strong-password": "Password must be at least 8 characters, one uppercase letter,one lowercase letter and one special character",
-    "sendotp-toast": "OTP sent to your email",
+    "send-otp-toast": "OTP sent to your email",
     "otp-cooldown-error-toast": "You cannot ask for another OTP right now, please wait for {duration}s",
     "otp-title": "Enter the OTP Code",
     "otp-description": "We have sent a 6-digit code to {email} <span>edit</span>",
@@ -352,8 +352,8 @@
     "form-rate-label": "Your rating:",
     "title-field-label": "Title",
     "review-comment": "Review",
-    "text-area-placholder": "What do you think of this product?",
-    "title-field-placholder": "Enter review title",
+    "text-area-placeholder": "What do you think of this product?",
+    "title-field-placeholder": "Enter review title",
     "review-form-button": "Add Review",
     "add-review-toast": "You Review Added Successfully",
     "no-reviews-found": "No reviews found for this product"
@@ -409,7 +409,7 @@
   },
   "dashboard-layout": {
     "home-button": "Preview website",
-    "breadcrumb-segmentone": "Dashboard",
+    "breadcrumb-segment": "Dashboard",
     "breadcrumb-categories": "Categories",
     "breadcrumb-occasions": "Occasions",
     "breadcrumb-products": "Products",

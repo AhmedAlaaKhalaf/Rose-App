@@ -42,10 +42,10 @@ export default function DashboardProductSearch() {
     }
 
     router.replace(`?${params.toString()}`, { scroll: false });
-  }, [debounceSearchTrim]);
+  }, [debounceSearchTrim, router, searchParams]);
 
   return (
-    <div className="relative bg-white p-0 w-full rounded-lg">
+    <div className="relative bg-white p-0 rounded-lg w-full">
       {/* Search Input */}
       <Form {...form}>
         <form>

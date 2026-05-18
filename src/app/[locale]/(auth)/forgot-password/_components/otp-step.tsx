@@ -32,7 +32,7 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
 
   // hooks
   const { verifyOtp, isVerifyPending, verifyError } = useVerifyOtp();
-  const { isPending, error, sendOTP } = useSendOTP();
+  const { isPending, sendOTP } = useSendOTP();
 
   // react hook form
   const form = useForm<VerifyOtpFields>({
@@ -73,7 +73,7 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
     } else {
       form.clearErrors("resetCode");
     }
-  }, [otpValue]);
+  }, [form, otpValue, verifyOtp]);
 
   // resend otp
   const handleResend = () => {

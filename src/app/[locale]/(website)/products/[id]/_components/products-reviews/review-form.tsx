@@ -97,7 +97,7 @@ export default function ReviewForm({ id }: { id: string }) {
 
                 {/* Field */}
                 <FormControl>
-                  <Input {...field} type="text" placeholder={t("title-field-placholder")} />
+                  <Input {...field} type="text" placeholder={t("title-field-placeholder")} />
                 </FormControl>
 
                 {/* Validation Message */}
@@ -117,7 +117,7 @@ export default function ReviewForm({ id }: { id: string }) {
 
                 {/* Field */}
                 <FormControl>
-                  <Textarea {...field} placeholder={t("text-area-placholder")} />
+                  <Textarea {...field} placeholder={t("text-area-placeholder")} />
                 </FormControl>
 
                 {/* Validation Message */}

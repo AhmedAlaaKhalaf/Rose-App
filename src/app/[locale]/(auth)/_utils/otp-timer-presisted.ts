@@ -1,4 +1,4 @@
-export const OtpExpirTime = 60;
+export const OtpExpireTime = 60;
 
 export const startOtpTimer = () => {
   if (typeof window === "undefined") return;
@@ -11,7 +11,7 @@ export const getOtpTimeLeft = () => {
   const savedTime = localStorage.getItem("otp_time");
   if (!savedTime) return 0;
 
-  const diff = OtpExpirTime - Math.floor((Date.now() - Number(savedTime)) / 1000);
+  const diff = OtpExpireTime - Math.floor((Date.now() - Number(savedTime)) / 1000);
 
   return diff > 0 ? diff : 0;
 };

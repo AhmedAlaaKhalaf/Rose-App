@@ -1,5 +1,4 @@
 import { TProductDetails } from "@/lib/types/product";
-import ReviewForm from "./review-form";
 import Reviews from "./reviews";
 import ReviewsHeader from "./reviews-header";
 

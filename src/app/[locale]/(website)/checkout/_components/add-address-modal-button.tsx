@@ -37,7 +37,7 @@ export function AddAddressModalButton({ triggerClassName }: AddAddressModalButto
     lng: 31.2357,
   });
   //Hooks
-  const { mutateAsync: AddUserAddress, isPending, error } = useAddUserAddress();
+  const { mutateAsync: AddUserAddress, isPending } = useAddUserAddress();
 
   // Variables
   const username = useSession().data?.user.firstName as string;
@@ -178,7 +178,7 @@ export function AddAddressModalButton({ triggerClassName }: AddAddressModalButto
       case 1: {
         return (
           // Google map
-          <section className="h-[400px] w-full rounded-xl overflow-hidden shadow-lg">
+          <section className="shadow-lg rounded-xl w-full h-[400px] overflow-hidden">
             <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
               <Map
                 defaultCenter={selectedPosition}
@@ -233,7 +233,9 @@ export function AddAddressModalButton({ triggerClassName }: AddAddressModalButto
   return (
     <Dialog open={modalState} onOpenChange={setModalState}>
       <DialogTrigger asChild>
-        <Button variant="secondary" className={triggerClassName}>{t("form-title.add")}</Button>
+        <Button variant="secondary" className={triggerClassName}>
+          {t("form-title.add")}
+        </Button>
       </DialogTrigger>
       <DialogContent aria-describedby="" className="gap-6">
         {/* Title */}
@@ -245,9 +247,9 @@ export function AddAddressModalButton({ triggerClassName }: AddAddressModalButto
         {/* Content  */}
         <section className="flex flex-col gap-4">
           {/* Title  */}
-          <header className="flex items-center gap-4 border-b border-zinc-200 pb-3 font-medium text-2xl leading-none text-maroon-600">
+          <header className="flex items-center gap-4 pb-3 border-zinc-200 border-b font-medium text-maroon-600 text-2xl leading-none">
             {isLastStep && (
-              <Button type="button" className="size-9 rounded-full" onClick={handleBackButton}>
+              <Button type="button" className="rounded-full size-9" onClick={handleBackButton}>
                 <ArrowLeft strokeWidth={1.46} />
               </Button>
             )}
@@ -273,14 +275,14 @@ export function AddAddressModalButton({ triggerClassName }: AddAddressModalButto
                   <Button
                     type="button"
                     onClick={handleNextButton}
-                    className="rounded-xl mt-9 w-full"
+                    className="mt-9 rounded-xl w-full"
                   >
                     {t("button-steps.first")}
                   </Button>
                 )}
 
                 {isLastStep && (
-                  <Button type="submit" className="rounded-xl mt-9 w-full" disabled={isPending}>
+                  <Button type="submit" className="mt-9 rounded-xl w-full" disabled={isPending}>
                     {t("button-steps.second.add")}
                   </Button>
                 )}

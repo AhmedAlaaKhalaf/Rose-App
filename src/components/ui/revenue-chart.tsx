@@ -14,7 +14,6 @@ import {
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -33,20 +32,20 @@ export const description = "An interactive area chart"
 
 export function RevenueChartSkeleton() {
   return (
-    <Card className="pt-0 border-none shadow-none">
-      <CardHeader className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between px-0">
-        <div className="grid flex-1 gap-1">
-          <div className="flex flex-wrap items-center justify-between gap-2 gap-y-3">
-            <Skeleton className="h-8 w-24" />
+    <Card className="shadow-none pt-0 border-none">
+      <CardHeader className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 px-0 py-5">
+        <div className="flex-1 gap-1 grid">
+          <div className="flex flex-wrap justify-between items-center gap-2 gap-y-3">
+            <Skeleton className="w-24 h-8" />
             <div className="inline-flex items-center gap-3">
-              <Skeleton className="h-4 w-16 rounded-md" />
-              <Skeleton className="h-4 w-20 rounded-md" />
+              <Skeleton className="rounded-md w-16 h-4" />
+              <Skeleton className="rounded-md w-20 h-4" />
             </div>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="pt-4 pb-0 sm:pt-6 px-0">
-        <Skeleton className="aspect-auto h-[300px] w-full rounded-lg" />
+      <CardContent className="px-0 pt-4 sm:pt-6 pb-0">
+        <Skeleton className="rounded-lg w-full h-[300px] aspect-auto" />
       </CardContent>
     </Card>
   )
@@ -169,11 +168,11 @@ export function RevenueChart({ monthlyRevenue = [], dailyRevenue = [] }: Revenue
     v >= 1e6 ? `${(v / 1e6).toFixed(1)}M` : v >= 1e3 ? `${(v / 1e3).toFixed(1)}K` : String(v)
 
   return (
-    <Card className="pt-0 border-none shadow-none">
-      <CardHeader className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between px-0">
-        <div className="grid flex-1 gap-1">
-          <div className="flex flex-wrap items-center justify-between gap-2 gap-y-3">
-            <CardTitle className="text-2xl font-bold">
+    <Card className="shadow-none pt-0 border-none">
+      <CardHeader className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 px-0 py-5">
+        <div className="flex-1 gap-1 grid">
+          <div className="flex flex-wrap justify-between items-center gap-2 gap-y-3">
+            <CardTitle className="font-bold text-2xl">
               Revenue
             </CardTitle>
             <div role="tablist" className="inline-flex items-center gap-3">
@@ -182,7 +181,7 @@ export function RevenueChart({ monthlyRevenue = [], dailyRevenue = [] }: Revenue
                 aria-selected={activeTab === "monthly"}
                 onClick={() => setActiveTab("monthly")}
                 className={cn(
-                  "text-sm font-medium transition-colors",
+                  "font-medium text-sm transition-colors",
                   activeTab === "monthly" ? "text-primary" : "text-[#969696]"
                 )}
               >
@@ -193,7 +192,7 @@ export function RevenueChart({ monthlyRevenue = [], dailyRevenue = [] }: Revenue
                 aria-selected={activeTab === "last-week"}
                 onClick={() => setActiveTab("last-week")}
                 className={cn(
-                  "text-sm font-medium transition-colors",
+                  "font-medium text-sm transition-colors",
                   activeTab === "last-week" ? "text-primary" : "text-[#969696]"
                 )}
               >
@@ -203,10 +202,10 @@ export function RevenueChart({ monthlyRevenue = [], dailyRevenue = [] }: Revenue
           </div>
         </div>
       </CardHeader>
-      <CardContent className="pt-4 pb-0 sm:pt-6 px-0">
+      <CardContent className="px-0 pt-4 sm:pt-6 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="aspect-auto h-[300px] w-full [&_.recharts-cartesian-axis-tick_text]:!fill-black"
+          className="[&_.recharts-cartesian-axis-tick_text]:!fill-black w-full h-[300px] aspect-auto"
         >
           <AreaChart data={filteredData}>
             <defs>

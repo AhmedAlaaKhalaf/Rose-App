@@ -119,12 +119,12 @@
     }
   },
 
-  "promoCardheroSection": {
+  "promo-card-hero-section": {
     "badge": "ابتداءً من 10.99 ج.م",
     "title": "هدايا مميزة للأشخاص الذين تحبهم",
     "button": "تسوق الآن"
   },
-  "carouselheroSection": {
+  "carousel-hero-section": {
     "heading": "قلها بالزهور",
     "subheading": "هدايا أنيقة لكل لحظة خاصة.",
     "cta": "اشتري الآن!"
@@ -132,7 +132,7 @@
   "forgot-password": {
     "title": "اعاده تعيين كلمه السر؟",
     "desc": "لا تقلق، سنرسل إليك تعليمات لمساعدتك في إعادة ضبطه.",
-    "field-lable": "البريد الاكتروني",
+    "field-label": "البريد الاكتروني",
     "footer": "ليس لديك حساب؟ \n<a>أنشئ واحدًا الآن!</a>",
     "email-form-button": "متابعه",
     "new-password-title": "قم بإنشاء كلمة مرور جديدة",
@@ -147,7 +147,7 @@
     "rePassword-require": "الرجاء إدخال تأكيد كلمة المرور الخاصة بك",
     "password-confirmPassword": "كلمة المرور وتأكيد كلمة المرور غير متطابقة",
     "strong-password": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل، حرف واحد كبير وحرف صغير وحرف خاص واحد",
-    "sendotp-toast": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
+    "send-otp-toast": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
     "otp-cooldown-error-toast": "لا يمكنك طلب رمز التحقق لمرة واحده أخرى الآن، يرجى الانتظار  {duration}ث",
     "otp-title": "أدخل رمز التحقق",
     "otp-description": "لقد أرسلنا رمزًا مكونًا من 6 أرقام إلى {email} <span>تعديل</span>",
@@ -364,12 +364,11 @@
     "form-rate-label": "تقييمك:",
     "title-field-label": "العنوان",
     "review-comment": "رايك",
-    "text-area-placholder": "ما رأيك في هذا المنتج؟",
-    "title-field-placholder": "أدخل عنوان المراجعة",
+    "text-area-placeholder": "ما رأيك في هذا المنتج؟",
+    "title-field-placeholder": "أدخل عنوان المراجعة",
     "review-form-button": "أضف مراجعة",
     "add-review-toast": "لقد قمت باضافه مراجعة بنجاح",
     "no-reviews-found": "لا توجد مراجعات لهذا المنتج"
-
   },
   "orders": {
     "title": "الطلبات",
@@ -410,7 +409,7 @@
 
   "dashboard-layout": {
     "home-button": "الصفحه الرئيسية",
-    "breadcrumb-segmentone": "لوحة التحكم",
+    "breadcrumb-segment": "لوحة التحكم",
     "breadcrumb-categories": "التصنيفات",
     "breadcrumb-occasions": "المناسبات",
     "breadcrumb-products": "المنتجات",

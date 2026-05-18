@@ -20,7 +20,7 @@ export default function OccasionFilter() {
   const t = useTranslations("Products");
 
   // Hooks
-  const { isPending, data: payload, error, refetch, fetchNextPage, hasNextPage } = useOccasions();
+  const { isPending, error, refetch, fetchNextPage, hasNextPage } = useOccasions();
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -57,7 +57,7 @@ export default function OccasionFilter() {
   if (isPending) return <OccasionFilterSkeleton />;
 
   // Data variables
-  const imageBaseUrl = "https://flower.elevateegy.com/uploads/";
+  // const imageBaseUrl = "https://flower.elevateegy.com/uploads/";
   // const occasions = payload?.pages.flatMap((page) => page.occasions) ?? [
   //   { id: "0", name: "wedding" },
   //   { id: "1", name: "apology" },
