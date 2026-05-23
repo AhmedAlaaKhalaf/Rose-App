@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { loginResponse } from "./lib/types/auth";
+
 // NextAuth configuration options
 export const authOptions: NextAuthOptions = {
   // Custom pages for authentication flow
@@ -10,30 +11,33 @@ export const authOptions: NextAuthOptions = {
     signOut: "/auth/login",
     error: "/auth/login",
   },
+
   // Session configuration - 30 days for persistent sessions
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
+
   // Authentication providers
   providers: [
     CredentialsProvider({
       id: "login",
       name: "login",
       credentials: {
-        username: {},
+        email: {},
         password: {},
         rememberMe: {},
       },
+
       // Function to authorize credentials and return user object
       async authorize(credentials) {
         const data = {
-          username: credentials?.username,
+          email: credentials?.email,
           password: credentials?.password,
         };
 
         // Call backend API for login
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/signin`, {
           method: "POST",
           body: JSON.stringify(data),
           headers: { "Content-Type": "application/json" },
@@ -43,13 +47,13 @@ export const authOptions: NextAuthOptions = {
         const payload: ApiResponse<loginResponse> = await res.json();
 
         // Throw error if authentication fails
-        if ("message" in payload) throw new Error(payload.message);
+        if ("error" in payload) throw new Error(payload.error);
 
         // Return user object to NextAuth
         return {
-          id: payload.payload.user.id,
-          accessToken: payload.payload.token,
-          user: payload.payload.user,
+          id: payload.user._id,
+          accessToken: payload.token,
+          user: payload.user,
           rememberMe: credentials?.rememberMe === "true",
         };
       },

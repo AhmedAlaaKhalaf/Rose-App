@@ -4,7 +4,7 @@ export async function getRelatedProducts(id: string) {
   // Variables
   const params = new URLSearchParams({
     limit: "10",
-    categoryId: id,
+    category: id,
   });
 
   // API Call
@@ -16,9 +16,9 @@ export async function getRelatedProducts(id: string) {
     throw new Error("Failed to fetch related products");
   }
 
-  const payload: ApiResponse<PaginatedData<TProduct[]>> = await response.json();
+  const payload: ApiResponse<PaginatedData<{ products: TProduct[] }>> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message as string);
+  if ("error" in payload) throw new Error(payload.error);
 
   return payload;
 }

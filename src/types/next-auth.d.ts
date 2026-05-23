@@ -7,7 +7,7 @@ declare module "next-auth" {
   interface User {
     accessToken: string;
     user: {
-      id: string;
+      _id: string;
       username: string;
       email: string;
       phone: string;
@@ -16,7 +16,7 @@ declare module "next-auth" {
       gender: "MALE" | "FEMALE";
       photo: string;
       wishlist: [];
-      addresses: [];
+      addresses: TAddress[];
       emailVerified: boolean;
       phoneVerified: boolean;
       role: "USER" | "ADMIN" | "SUPER_ADMIN";

@@ -19,7 +19,7 @@ export async function getProducts(searchParams?: SearchParams) {
 
   const payload: ApiResponse<PaginatedData<TProductCard[]>> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message);
+  if ("error" in payload) throw new Error(payload.error);
 
   return payload;
 }
@@ -43,7 +43,7 @@ export async function getDashboardProducts(searchParams?: SearchParams) {
 
   const payload: ApiResponse<PaginatedData<TDashboardProduct[]>> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message);
+  if ("error" in payload) throw new Error(payload.error);
 
   return payload;
 }
