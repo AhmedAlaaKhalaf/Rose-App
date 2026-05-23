@@ -10,10 +10,10 @@ declare type DataResponse<T> = {
 
 declare type PaginatedData<T> = {
   metadata: {
-    page: number;
-    limit: number;
-    total: number;
+    currentPage: number;
     totalPages: number;
+    limit: number;
+    totalItems: number;
   };
 } & T;
 

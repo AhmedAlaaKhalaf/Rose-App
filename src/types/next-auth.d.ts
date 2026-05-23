@@ -1,3 +1,4 @@
+import { TAddress } from "@/lib/types/addresses";
 import { User } from "next-auth";
 declare module "next-auth" {
   /**
