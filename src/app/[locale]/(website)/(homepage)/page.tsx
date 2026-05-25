@@ -14,7 +14,7 @@ type HomePageProps = {
 
 export default function HomePage({ searchParams }: HomePageProps) {
   return (
-    <main className="flex flex-col items-center gap-36 mx-auto mt-10 mb-36 container">
+    <main className="flex flex-col items-center gap-36 mb-36">
       <Hero />
 
       {/* Best Selling */}

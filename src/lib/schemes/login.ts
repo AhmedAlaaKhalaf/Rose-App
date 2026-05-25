@@ -5,7 +5,7 @@ type Ttranslations = Awaited<ReturnType<typeof getTranslations>>;
 
 export const loginSchema = (t: Ttranslations) =>
   z.object({
-    email: z.string(t("email-invalid")),
+    email: z.string().email(t("email-invalid")),
     password: z
       .string()
       .regex(

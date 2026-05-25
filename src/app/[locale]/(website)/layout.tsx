@@ -12,7 +12,7 @@ export default function LocaleLayout({ children }: LocaleProps) {
       <Header />
 
       {/* Children */}
-      {children}
+      <div className="mx-auto px-4 container">{children}</div>
 
       {/* Footer */}
       <Footer />

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Link, useRouter } from "@/i18n/navigation";
-import { newPasswordSchems } from "@/lib/schemes/af-task-schema/auth.schema";
+import { newPasswordSchema } from "@/lib/schemes/af-task-schema/auth.schema";
 import { NewPasswordFields } from "@/lib/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -39,7 +39,7 @@ export default function NewPasswordStep({ email }: NewPasswordProps) {
       password: "",
       confirmPassword: "",
     },
-    resolver: zodResolver(newPasswordSchems(t)),
+    resolver: zodResolver(newPasswordSchema(t)),
   });
 
   // Functions
