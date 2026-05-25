@@ -1,23 +1,21 @@
+import { getUserCart } from "@/lib/services/user-cart.service";
 import CartItem from "./cart-item";
 import { TUserCart } from "@/lib/types/cart";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { ShoppingCart } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { use } from "react";
+import { useLocale  } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-type CartItemsListProps = {
-  getUserCart: () => Promise<SuccessfulResponse<TUserCart>>;
-};
 
-export default function CartItemsList({ getUserCart }: CartItemsListProps) {
+
+export default async function CartItemsList({locale}:{locale:string}) {
   // Translations
-  const t = useTranslations("cart.empty-cart");
+  const t = await getTranslations("cart.empty-cart");
 
-  // Hooks
-  const locale = useLocale();
+
 
   // Services
-  const payload = use(getUserCart());
+  const payload = await getUserCart();
 
   return !payload.cart.cartItems.length ? (
     <div

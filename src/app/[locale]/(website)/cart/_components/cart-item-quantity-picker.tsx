@@ -42,36 +42,36 @@ export default function CartItemQuantityPicker({
 
   // Functions
   const handleIncreaseQuantity = () => {
-    try {
-      startTransition(async () => {
+    startTransition(async () => {
+      try {
         await updateCartItemAction(productId, quantityTrim + 1);
-      });
-    } catch (error) {
-      void error;
-      toast.error(t("fail.edit"), {
-        className: cn(
-          locale === "ar" ? "font-tajawal" : "font-inter",
-          "font-semibold text-sm text-zinc-800 capitalize"
-        ),
-      });
-    }
-  };
-  const handleDecreaseQuantity = () => {
-    try {
-      startTransition(async () => {
-        await updateCartItemAction(productId, quantityTrim - 1);
-      });
-    } catch (error) {
-      void error;
-      toast.error(t("fail.edit"), {
-        className: cn(
-          locale === "ar" ? "font-tajawal" : "font-inter",
-          "font-semibold text-sm text-zinc-800 capitalize"
-        ),
-      });
-    }
+      } catch (error) {
+        void error;
+        toast.error(t("fail.edit"), {
+          className: cn(
+            locale === "ar" ? "font-tajawal" : "font-inter",
+            "font-semibold text-sm text-zinc-800 capitalize"
+          ),
+        });
+      }
+    });
   };
 
+  const handleDecreaseQuantity = () => {
+    startTransition(async () => {
+      try {
+        await updateCartItemAction(productId, quantityTrim - 1);
+      } catch (error) {
+        void error;
+        toast.error(t("fail.edit"), {
+          className: cn(
+            locale === "ar" ? "font-tajawal" : "font-inter",
+            "font-semibold text-sm text-zinc-800 capitalize"
+          ),
+        });
+      }
+    });
+  };
   return (
     <ButtonGroup className="gap-2 lg:mt-auto w-full">
       <Button

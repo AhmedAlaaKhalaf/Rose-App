@@ -81,16 +81,14 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
                 />
               ))}
             </div>
-
             {/* PriceAfterDiscount */}
             {`${priceAfterDiscount?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
-
             {/* Price */}
-            {price && (
+            {price && priceAfterDiscount < +price && (
               <span className="ps-2 font-medium text-zinc-400 dark:text-zinc-500 line-through">
                 {`${Number(price)?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
               </span>
-            )}
+            )}{" "}
           </div>
 
           {/* Add to cart */}

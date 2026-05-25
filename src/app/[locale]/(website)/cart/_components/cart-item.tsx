@@ -48,18 +48,17 @@ export default function CartItem({ item: { product, price, quantity } }: CartIte
               </span>
             </span>
           </div>
-
           {/* Cart price */}
           <p className="mt-auto font-medium text-primary text-sm">
             {/* Item quantity */}
             (× {quantity}){""}
             {/* Item price */}
             <span className="mt-auto px-1 font-bold text-zinc-800 text-2xl leading-none">
-              {product.discount ? product.priceAfterDiscount : price}
+              {product.discount > 0 ? product.priceAfterDiscount : price}
             </span>
             {/* Item currency */}
             <span className="font-medium text-zinc-800"> {tCart("item.currency")}</span>
-          </p>
+          </p>{" "}
         </div>
 
         {/* Cart actions */}

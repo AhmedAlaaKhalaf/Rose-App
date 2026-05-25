@@ -22,9 +22,9 @@ export default function RemoveCartItemButton({ children, itemId }: RemoveCartIte
   const locale = useLocale();
 
   // Functions
-  const handleClearCart = () => {
-    try {
-      startTransition(async () => {
+  const handleRemoveItem = () => {
+    startTransition(async () => {
+      try {
         await removeCartItemAction(itemId);
 
         toast.success(t("success.delete"), {
@@ -33,22 +33,22 @@ export default function RemoveCartItemButton({ children, itemId }: RemoveCartIte
             "font-semibold text-sm text-zinc-800 capitalize"
           ),
         });
-      });
-    } catch (error) {
-      void error;
-      toast.success(t("fail.delete"), {
-        className: cn(
-          locale === "ar" ? "font-tajawal" : "font-inter",
-          "font-semibold text-sm text-zinc-800 capitalize"
-        ),
-      });
-    }
+      } catch (error) {
+        void error;
+        toast.error(t("fail.delete"), {
+          className: cn(
+            locale === "ar" ? "font-tajawal" : "font-inter",
+            "font-semibold text-sm text-zinc-800 capitalize"
+          ),
+        });
+      }
+    });
   };
   return (
     <Button
       disabled={isPending}
       className="ms-auto w-full lg:w-[5.8203125rem] font-medium text-sm capitalize leading-none"
-      onClick={handleClearCart}
+      onClick={handleRemoveItem}
     >
       {isPending ? <Spinner /> : children}
     </Button>

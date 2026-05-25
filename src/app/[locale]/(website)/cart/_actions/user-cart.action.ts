@@ -9,11 +9,8 @@ export async function AddCartItemAction(itemId: string) {
 
   const response = await fetch(`${process.env.API}/cart/${itemId}`, {
     method: "POST",
-    next: {
-      tags: ["user-cart", itemId],
-    },
     headers: {
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -36,10 +33,10 @@ export async function updateCartItemAction(itemId: string, quantity: number) {
   const response = await fetch(`${process.env.API}/cart/${itemId}`, {
     method: "PUT",
     headers: {
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ quantity: quantity }),
+    body: JSON.stringify({ quantity }),
   });
 
   if (!response.ok) {
@@ -61,7 +58,7 @@ export async function clearCartAction() {
   const response = await fetch(`${process.env.API}/cart`, {
     method: "DELETE",
     headers: {
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -84,7 +81,7 @@ export async function removeCartItemAction(itemId: string) {
   const response = await fetch(`${process.env.API}/cart/${itemId}`, {
     method: "DELETE",
     headers: {
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 

@@ -3,7 +3,7 @@ import z from "zod";
 
 export const emailStepSchema = (t: Translation) =>
   z.object({
-    email: z.email(t("validation-email")).nonempty(t("email-require")),
+    email: z.string().nonempty(t("email-require")).email(t("validation-email")),
   });
 
 export const newPasswordSchema = (t: Translation) =>

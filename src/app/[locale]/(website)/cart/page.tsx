@@ -52,7 +52,7 @@ export default async function CartPage({ locale }: CartPageProps) {
 
           {/* Cart items  */}
           <Suspense fallback={<CartItemsListSkeleton />}>
-            <CartItemsList getUserCart={getUserCart} />
+            <CartItemsList locale={locale} />
           </Suspense>
 
           {/* Continue shopping button */}
