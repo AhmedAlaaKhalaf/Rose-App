@@ -4,18 +4,19 @@ import { TUserCart } from "../types/cart";
 export async function getUserCart() {
   const token = await getDecodedToken();
 
-  const response = await fetch("/api/cart", {
+  const response = await fetch(`${process.env.API}/cart`, {
+    next: {
+      tags: ["user-cart"],
+    },
     headers: {
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 
-  if (!response.ok) throw new Error("Failed to fetch user cart");
-
   const payload: ApiResponse<TUserCart> = await response.json();
 
-  if (payload.message !== "success") {
-    throw new Error(payload.message);
+  if ("error" in payload) {
+    throw new Error(payload.error);
   }
 
   return payload;

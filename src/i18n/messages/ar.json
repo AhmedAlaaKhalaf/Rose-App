@@ -174,7 +174,7 @@
     "submit": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب؟",
     "createAccount": "أنشئ حسابًا الآن!",
-    "username-invalid": "اسم المستخدم غير صحيح.",
+    "email-invalid": "اسم المستخدم غير صحيح.",
     "password-invalid": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم واحد، ورمز خاص واحد."
   },
   "auth": {
@@ -418,5 +418,35 @@
     "nav-categories": "التصنيفات",
     "nav-occasions": "المناسبات",
     "nav-products": "المنتجات"
+  },
+  "cart": {
+    "title": "السلة",
+    "item": {
+      "ratings-count": "التقييمات",
+      "rating": "التقييم",
+      "currency": "ج.م"
+    },
+    "buttons": {
+      "clear": "تفريغ السلة",
+      "remove": "إزالة",
+      "continue-shopping": "متابعة التسوق"
+    },
+    "products": "المنتجات",
+    "empty-cart": {
+      "title": "السلة فارغة",
+      "description": "يبدو أنك لم تضف أي منتجات بعد."
+    },
+    "toast-messages": {
+      "success": {
+        "clear": "تم إفراغ السلة بنجاح",
+        "delete": "تم حذف المنتج بنجاح",
+        "update": "تم تعديل المنتج بنجاح"
+      },
+      "fail": {
+        "clear": "فشل إفراغ السلة",
+        "delete": "فشل حذف المنتج",
+        "update": "فشل تعديل المنتج"
+      }
+    }
   }
 }

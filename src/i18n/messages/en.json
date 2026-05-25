@@ -211,7 +211,7 @@
     "submit": "Login",
     "noAccount": "Don’t have an account yet?",
     "createAccount": "Create one now!",
-    "username-invalid": "Invalid user name.",
+    "email-invalid": "Invalid user name.",
     "password-invalid": "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
   },
 
@@ -418,5 +418,35 @@
     "nav-categories": "Categories",
     "nav-occasions": "Occasions",
     "nav-products": "Products"
+  },
+  "cart": {
+    "title": "cart",
+    "item": {
+      "ratings-count": "ratings",
+      "rating": "rating",
+      "currency": "EGP"
+    },
+    "buttons": {
+      "clear": "clear cart",
+      "remove": "remove",
+      "continue-shopping": "Continue Shopping"
+    },
+    "products": "products",
+    "empty-cart": {
+      "title": "Your cart is empty",
+      "description": "Looks like you haven’t added anything yet."
+    },
+    "toast-messages": {
+      "success": {
+        "clear": "Cart cleared successfully",
+        "delete": "Product removed successfully",
+        "update": "Product updated successfully"
+      },
+      "fail": {
+        "clear": "Failed to clear cart",
+        "delete": "Failed to remove product",
+        "update": "Failed to update product"
+      }
+    }
   }
 }
