@@ -31,7 +31,7 @@ export default function CartItemQuantityPicker({
   //  Forms
   const form = useForm({
     defaultValues: {
-      quantity: quantity,
+      quantity: quantity ?? 1,
     },
   });
 
