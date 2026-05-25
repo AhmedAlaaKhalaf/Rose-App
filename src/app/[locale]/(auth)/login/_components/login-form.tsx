@@ -65,7 +65,11 @@ export function LoginForm() {
       if (!response?.ok) {
         setError(response?.error || "Login failed");
         setIsPending(false);
-        console.log(response);
+        if (!response?.ok) {
+          setError(response?.error || "Login failed");
+          setIsPending(false);
+          return;
+        }
         return;
       }
 
