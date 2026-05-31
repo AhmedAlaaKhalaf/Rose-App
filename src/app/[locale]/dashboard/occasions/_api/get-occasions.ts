@@ -5,8 +5,15 @@ export async function getDbOccasions({
   limit = 6,
   keyword, // will use in case the endpoint support the search tec.
 }: { pageParam?: number; limit?: number; keyword?: string } = {}) {
+  void keyword;
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/occasions?page=${pageParam}&limit=${limit}`
+    `${process.env.NEXT_PUBLIC_API}/occasions?page=${pageParam}&limit=${limit}`,
+    {
+      next: {
+        tags: ["occasions"],
+      },
+    }
   );
 
   if (!response.ok) {
@@ -16,7 +23,7 @@ export async function getDbOccasions({
   const payload: ApiResponse<TAllOccasions> = await response.json();
 
   if ("error" in payload) {
-    throw new Error(payload.error as string);
+    throw new Error(payload.error);
   }
 
   const sortedOccasions = [...payload.occasions].sort((a, b) => b.productsCount - a.productsCount);

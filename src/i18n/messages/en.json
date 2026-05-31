@@ -408,7 +408,10 @@
     "update-page-head": "Update Occasion:",
     "edit-button": "Edit",
     "delete-button": "Delete",
-    "delete-toast": "Occasion Deleted Successfully",
+    "delete-toast": {
+      "successfully": "Occasion Deleted Successfully",
+      "failed": "failed to delete Occasion, try again"
+    },
     "products-QTY": "Products",
     "table-head-QTY": "Products",
     "occasions-overview-title": "All Occasions",

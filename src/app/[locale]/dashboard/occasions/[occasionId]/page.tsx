@@ -12,7 +12,7 @@ export default async function Page({ params: { occasionId } }: PageParams) {
   // Translation
   const t = await getTranslations("db-occasions");
 
-  // Fetch Occasion Data
+  // Services
   const occasionDetails = await getOccasionData(occasionId);
 
   return (

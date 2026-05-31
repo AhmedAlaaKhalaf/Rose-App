@@ -1,46 +1,38 @@
 "use server";
 
+import { getDecodedToken } from "@/hooks/shared/use-decoded-token";
 import { DeleteResponse } from "@/lib/types/dashboard/occasions-db";
-import { getToken } from "next-auth/jwt";
-import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 
-export async function deleteOccasionAction(occasionId: string, userToken: string | null) {
-  let accessToken;
+export async function deleteOccasionAction(occasionId: string) {
+  const token = await getDecodedToken();
 
-  // Build a minimal "req" object for getToken using cookies
-  const cookieStore = cookies();
-  const isSecure = process.env.NODE_ENV === "production";
-  const cookieName = isSecure ? "__Secure-next-auth.session-token" : "next-auth.session-token";
-  const rawToken = cookieStore.get(cookieName)?.value;
+  if (token) {
+    try {
+      const response = await fetch(`${process.env.API}/occasions/${occasionId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  // Get Token
-  const token = await getToken({
-    req: {
-      cookies: {
-        [cookieName]: rawToken,
-      },
-    } as any,
-  });
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
 
-  if (!userToken) {
-    accessToken = token?.accessToken;
+      const payload: ApiResponse<DeleteResponse> = await response.json();
+
+      if ("error" in payload) {
+        throw new Error(payload.error);
+      }
+
+      revalidateTag("occasions");
+
+      return payload;
+    } catch (error) {
+      console.log(error);
+    }
   } else {
-    accessToken = userToken;
+    throw new Error("Unauthorized: No access token found.");
   }
-
-  if (!accessToken) {
-    return { error: "Unauthorized: No access token found." };
-  }
-
-  // Update Occasion
-  const response = await fetch(`${process.env.API}/occasions/${occasionId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  const payload: ApiResponse<DeleteResponse> = await response.json();
-
-  return payload;
 }

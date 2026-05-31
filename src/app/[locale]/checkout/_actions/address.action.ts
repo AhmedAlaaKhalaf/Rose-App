@@ -33,7 +33,7 @@ export async function addUserAddressAction(newAddress: TUserAddressDetails) {
     const payload: ApiResponse<{ address: TUserAddress[] }> = await response.json();
 
     if ("error" in payload) {
-      console.log(payload.error);
+      throw new Error(payload.error);
     }
 
     return payload;
@@ -70,7 +70,7 @@ export async function updateUserAddressAction(updatedAddress: TUserAddress) {
     const payload: ApiResponse<{ addresses: TUserAddress[] }> = await response.json();
 
     if ("error" in payload) {
-      console.log(payload.error);
+      throw new Error(payload.error);
     }
 
     return payload;
@@ -99,7 +99,7 @@ export async function deleteUserAddressAction(addressId: string) {
     const payload: ApiResponse<{ address: TUserAddress[] }> = await response.json();
 
     if ("error" in payload) {
-      console.log(payload.error);
+      throw new Error(payload.error);
     }
 
     return payload;

@@ -343,7 +343,10 @@
     "edit-button": "تعديل",
     "delete-button": "حذف",
     "update-page-head": " تحديث المناسبه :",
-    "delete-toast": "تم حذف المناسبة بنجاح",
+    "delete-toast": {
+      "successfully": "تم حذف المناسبة بنجاح",
+      "failed": "فشل حذف المناسبة حاول  مره اخره"
+    },
     "products-QTY": "منتج",
     "table-head-QTY": "منتجات",
     "occasions-overview-title": "جميع المناسبات",

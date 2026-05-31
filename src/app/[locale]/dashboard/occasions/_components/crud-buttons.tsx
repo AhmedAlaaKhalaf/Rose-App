@@ -12,16 +12,16 @@ export default function CrudButtons({ id }: { id: string }) {
   const t = useTranslations("db-occasions");
 
   // Hooks
-  const { deleteOccasion, error, isPending } = useDeleteOccasion();
+  const { deleteOccasion, isPending } = useDeleteOccasion();
 
   // variables
   const handelClick = () => {
     deleteOccasion(id, {
       onSuccess: () => {
-        toast.success(t("delete-toast"));
+        toast.success(t("delete-toast.successfully"));
       },
       onError: () => {
-        toast.error(`${error?.message}`);
+        toast.error(t("delete-toast.failed"));
       },
     });
   };

@@ -43,8 +43,6 @@ export default function AddOccasionForm() {
   });
 
   const onSubmit: SubmitHandler<TAddOccasionFields> = (values) => {
-    console.log(values);
-
     addOccasion(values, {
       onSuccess: () => {
         router.replace("/dashboard/occasions");
