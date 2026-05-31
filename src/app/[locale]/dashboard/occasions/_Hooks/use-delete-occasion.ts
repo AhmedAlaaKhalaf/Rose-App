@@ -1,22 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { checkToken } from "@/lib/utils/check-token";
-import { deleteOccasionAction } from "../_actions/delete-occsion.action";
+import { deleteOccasionAction } from "../_actions/delete-occasion.action";
 
-export default function useDeleteOccasion() {
+export default function useDeleteOccasion(id: string) {
   // Mutation
   const { isPending, error, mutate } = useMutation({
-    mutationFn: async (id: string) => {
-      // Get token from sessionStorage or cookies
-      const token = checkToken();
-
-      const payload = await deleteOccasionAction(id, token);
-
-      if ("error" in payload) {
-        throw new Error(payload.error);
-      }
-
-      return payload;
-    },
+    mutationFn: () => deleteOccasionAction(id),
   });
 
   return { isPending, error, deleteOccasion: mutate };

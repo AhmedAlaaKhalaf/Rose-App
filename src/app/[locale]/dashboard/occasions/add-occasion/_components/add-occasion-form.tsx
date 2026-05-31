@@ -69,7 +69,7 @@ export default function AddOccasionForm() {
                   <Input
                     {...field}
                     type="text"
-                    placeholder="Enter occasion name"
+                    placeholder={t("occasion-name-placeholder")}
                     className="w-186"
                   />
                 </FormControl>
@@ -92,15 +92,17 @@ export default function AddOccasionForm() {
                 <FormControl>
                   <div className="relative w-186">
                     <Input
-                      {...field}
+                      name={field.name}
+                      onBlur={field.onBlur}
                       type="file"
                       accept="image/*"
+                      onChange={(e) => field.onChange(e.target.files?.[0])}
                       ref={(el) => {
                         field.ref(el);
                         fileInputRef.current = el;
                       }}
                       className="file:hidden w-186"
-                    />
+                    />{" "}
                     <Button
                       variant="ghost"
                       type="button"

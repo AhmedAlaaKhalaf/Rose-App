@@ -169,7 +169,7 @@
   "forgot-password": {
     "title": "Forgot Password?",
     "desc": "Worry not, we’ll send you instructions to help you reset it.",
-    "field-lable": "Email",
+    "field-label": "Email",
     "footer": "Don’t have an account yet? <a>Create one now!</a>",
     "email-form-button": "Continue",
     "new-password-title": "Create a new password",
@@ -366,8 +366,8 @@
     "form-rate-label": "Your rating:",
     "title-field-label": "Title",
     "review-comment": "Review",
-    "text-area-placholder": "What do you think of this product?",
-    "title-field-placholder": "Enter review title",
+    "text-area-placeholder": "What do you think of this product?",
+    "title-field-placeholder": "Enter review title",
     "review-form-button": "Add Review",
     "add-review-toast": "You Review Added Successfully"
   },
@@ -396,8 +396,8 @@
     "nav-products": "Products"
   },
   "db-occasions": {
-    "update-toast": "Occasion updated",
-    "add-occasion": "successfully",
+    "update-toast": "occasion updated successfully",
+    "add-occasion": "occasion addeded successfully",
     "occasion-name": "Name",
     "view-occasion-image-button": "View occasion image",
     "update-occasion-button": "Update Occasion",
@@ -416,6 +416,8 @@
     "table-head-QTY": "Products",
     "occasions-overview-title": "All Occasions",
     "occasions-overview-head-button": "Add a new occasion",
-    "search-placeholder": "Search..."
+    "search-placeholder": "Search...",
+    "occasion-input-placeholder": "Enter occasion name",
+    "occasions-actions": "actions"
   }
 }

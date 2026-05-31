@@ -9,7 +9,7 @@ export async function addUserAddressAction(newAddress: TUserAddressDetails) {
 
   if (token) {
     const response = await fetch(`${process.env.API}/addresses`, {
-      method: "PATCH",
+      method: "POST",
       body: JSON.stringify({
         street: newAddress.street,
         phone: newAddress.phone,
@@ -28,13 +28,13 @@ export async function addUserAddressAction(newAddress: TUserAddressDetails) {
       throw new Error(response.statusText);
     }
 
-    revalidateTag("user-addresses");
-
     const payload: ApiResponse<{ address: TUserAddress[] }> = await response.json();
 
     if ("error" in payload) {
       throw new Error(payload.error);
     }
+
+    revalidateTag("user-addresses");
 
     return payload;
   } else {

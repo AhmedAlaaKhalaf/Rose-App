@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -72,7 +73,7 @@ export default function UpdateOccasionForm({ occasionData }: PageParams) {
                     <Input
                       {...field}
                       type="text"
-                      placeholder="Enter occasion name"
+                      placeholder={t("occasion-input-placeholder")}
                       className="w-186"
                     />
                   </FormControl>

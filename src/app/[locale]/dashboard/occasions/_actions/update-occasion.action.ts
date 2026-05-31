@@ -37,7 +37,8 @@ export async function updateOccasionAction(
 
       return payload;
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      throw error instanceof Error ? error : new Error("Failed to update occasion");
     }
   } else {
     throw new Error("Unauthorized: No access token found.");

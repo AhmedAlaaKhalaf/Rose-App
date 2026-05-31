@@ -67,7 +67,7 @@ export default function Occasions() {
                 {t("table-head-QTY")}
               </th>
               <th scope="col" className="sr-only px-6 py-3 text-end">
-                Actions
+                {t("actions")}
               </th>
             </tr>
           </thead>

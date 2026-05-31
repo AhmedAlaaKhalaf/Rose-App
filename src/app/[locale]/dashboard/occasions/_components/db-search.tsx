@@ -59,10 +59,10 @@ export default function DbSearch() {
           {!form.formState.isDirty && (
             <SearchIcon className="top-4 absolute text-zinc-400 start-2" width={18} height={18} />
           )}
-
           {/* Clear Button */}
           {form.formState.isDirty && (
             <Button
+              type="button"
               variant={"subtle"}
               onClick={() => {
                 form.reset();

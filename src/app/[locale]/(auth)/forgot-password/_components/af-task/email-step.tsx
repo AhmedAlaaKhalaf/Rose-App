@@ -92,7 +92,7 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
             render={({ field }) => (
               <FormItem>
                 {/* Lable */}
-                <FormLabel>{t("field-lable")}</FormLabel>
+                <FormLabel>{t("field-label")}</FormLabel>
 
                 {/* Field */}
                 <FormControl>

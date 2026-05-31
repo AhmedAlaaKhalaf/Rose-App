@@ -132,7 +132,7 @@
   "forgot-password": {
     "title": "اعاده تعيين كلمه السر؟",
     "desc": "لا تقلق، سنرسل إليك تعليمات لمساعدتك في إعادة ضبطه.",
-    "field-lable": "البريد الاكتروني",
+    "field-label": "البريد الاكتروني",
     "footer": "ليس لديك حساب؟ \n<a>أنشئ واحدًا الآن!</a>",
     "email-form-button": "متابعه",
     "new-password-title": "قم بإنشاء كلمة مرور جديدة",
@@ -276,22 +276,6 @@
       "failed-to-load": "فشل تحميل الطلبيات",
       "try-again": "حدث خطأ ما. يرجى المحاولة لاحقاً.",
       "retry": "إعادة محاولة"
-    },
-    "login": {
-      "title": "مرحبًا بعودتك!",
-      "email": {
-        "label": "البريد الإلكتروني"
-      },
-      "password": {
-        "label": "كلمة المرور"
-      },
-      "rememberMe": "تذكرني",
-      "forgotPassword": "هل نسيت كلمة المرور؟",
-      "submit": "تسجيل الدخول",
-      "noAccount": "ليس لديك حساب؟",
-      "createAccount": "أنشئ حسابًا الآن!",
-      "email-invalid": "البريد الإلكتروني غير صحيح.",
-      "password-invalid": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم واحد، ورمز خاص واحد."
     }
   },
   "related-products": {
@@ -306,8 +290,8 @@
     "form-rate-label": "تقييمك:",
     "title-field-label": "العنوان",
     "review-comment": "رايك",
-    "text-area-placholder": "ما رأيك في هذا المنتج؟",
-    "title-field-placholder": "أدخل عنوان المراجعة",
+    "text-area-placeholder": "ما رأيك في هذا المنتج؟",
+    "title-field-placeholder": "أدخل عنوان المراجعة",
     "review-form-button": "أضف مراجعة",
     "add-review-toast": "لقد قمت باضافه مراجعة بنجاح"
   },
@@ -351,6 +335,8 @@
     "table-head-QTY": "منتجات",
     "occasions-overview-title": "جميع المناسبات",
     "occasions-overview-head-button": "أضف مناسبة جديدة",
-    "search-placeholder": "يبحث..."
+    "search-placeholder": "يبحث...",
+    "occasion-input-placeholder": "ادخل اسم المناسبه",
+    "occasions-actions": "اكشنز"
   }
 }

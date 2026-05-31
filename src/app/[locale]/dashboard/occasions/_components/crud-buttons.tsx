@@ -12,11 +12,11 @@ export default function CrudButtons({ id }: { id: string }) {
   const t = useTranslations("db-occasions");
 
   // Hooks
-  const { deleteOccasion, isPending } = useDeleteOccasion();
+  const { deleteOccasion, isPending } = useDeleteOccasion(id);
 
   // variables
   const handelClick = () => {
-    deleteOccasion(id, {
+    deleteOccasion(undefined, {
       onSuccess: () => {
         toast.success(t("delete-toast.successfully"));
       },
@@ -29,6 +29,7 @@ export default function CrudButtons({ id }: { id: string }) {
   return (
     <td className="flex justify-end gap-2 space-x-1 px-6 py-4 text-right whitespace-nowrap">
       <Button
+        asChild
         size="sm"
         className="flex items-center gap-1 bg-[#0063D01A] hover:bg-[#0063D033] shadow-none px-3 py-2 border-none focus:border-none focus:ring-0 text-blue-600"
       >
@@ -36,7 +37,7 @@ export default function CrudButtons({ id }: { id: string }) {
           <Pencil size={14} />
           <span className="sr-only md:not-sr-only">{t("edit-button")}</span>
         </Link>
-      </Button>
+      </Button>{" "}
       <Button
         onClick={handelClick}
         disabled={isPending}
