@@ -12,7 +12,7 @@ export async function getShippingAddress(token: string) {
 
   const payload: ApiResponse<TAddressResponse> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message as string);
+  if ("error" in payload) throw new Error(payload.error);
 
   return payload;
 }

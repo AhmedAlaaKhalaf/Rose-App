@@ -23,7 +23,7 @@ export async function addToWishlistAction(productId: string) {
 
   const payload: ApiResponse<TWishlist> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message);
+  if ("error" in payload) throw new Error(payload.error);
 
   return payload;
 }
@@ -44,7 +44,7 @@ export async function removeFromWishlistAction(productId: string) {
 
   const payload: ApiResponse<TWishlist> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message);
+  if ("error" in payload) throw new Error(payload.error);
 
   return payload;
 }

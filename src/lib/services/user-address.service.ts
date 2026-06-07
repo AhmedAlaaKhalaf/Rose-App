@@ -15,8 +15,8 @@ export async function getUserAddresses() {
 
   const payload: ApiResponse<{ addresses: TUserAddress[] }> = await response.json();
 
-  if ("message" in payload) {
-    throw new Error(payload.message);
+  if ("error" in payload) {
+    throw new Error(payload.error);
   }
 
   return payload;

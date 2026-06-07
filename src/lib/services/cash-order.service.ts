@@ -25,7 +25,7 @@ export async function cashOrderService(token: string, shippingAddress: TAddress)
 
   const payload: ApiResponse<TPayCashResponse> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message as string);
+  if ("error" in payload) throw new Error(payload.error);
 
   return payload;
 }

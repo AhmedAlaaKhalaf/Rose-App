@@ -3,7 +3,7 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { Toaster } from "@/components/ui/sonner";
-import { Great_Vibes, Sarabun, Tajawal, Inter } from "next/font/google";
+import { Great_Vibes, Sarabun, Tajawal, Inter, Mulish } from "next/font/google";
 import Providers from "@/components/providers/app";
 
 // Auth layout font
@@ -24,6 +24,12 @@ const sarabun = Sarabun({
   variable: "--font-sarabun",
   weight: ["400", "500", "600", "700"],
 });
+const mulish = Mulish({
+  subsets: ["latin"],
+  variable: "--font-mulish",
+  weight: ["600"],
+});
+
 // Arabic Font variants
 const tajawal = Tajawal({
   subsets: ["latin"],
@@ -64,7 +70,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Loc
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body
-        className={`${sarabun.variable} ${tajawal.variable} ${inter.variable} ${greatVibes.variable} antialiased`}
+        className={`${sarabun.variable} ${mulish.variable} ${tajawal.variable} ${inter.variable} ${greatVibes.variable} ${locale === "ar" ? tajawal.className : sarabun.className}  antialiased`}
       >
         <Providers locale={locale} messages={messages}>
           {children}

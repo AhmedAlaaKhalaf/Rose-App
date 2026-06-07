@@ -5,16 +5,13 @@ import { TProductCard } from "@/lib/types/product";
 import { Button } from "../ui/button";
 import WishlistButton from "../features/wishlist/wishlist-button";
 import { cn } from "@/lib/utils/tailwind-merge";
-import { getLocale, getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
-type ProductCardProps = { product: TProductCard };
+type ProductCardProps = { product: TProductCard; locale: string };
 
-export default async function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, locale }: ProductCardProps) {
   // Translations
-  const t = await getTranslations("product-listing.badge");
-
-  // Hooks
-  const locale = await getLocale();
+  const t = useTranslations("product-listing.badge");
 
   // Variables
   const { title, rating, price, discountValue, discountType, createdAt, stock } = product;
@@ -84,16 +81,14 @@ export default async function ProductCard({ product }: ProductCardProps) {
                 />
               ))}
             </div>
-
             {/* PriceAfterDiscount */}
             {`${priceAfterDiscount?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
-
             {/* Price */}
-            {price && (
+            {price && priceAfterDiscount < +price && (
               <span className="ps-2 font-medium text-zinc-400 dark:text-zinc-500 line-through">
                 {`${Number(price)?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
               </span>
-            )}
+            )}{" "}
           </div>
 
           {/* Add to cart */}

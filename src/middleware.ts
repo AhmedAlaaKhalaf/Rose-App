@@ -3,7 +3,7 @@ import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 
-const authPages = ["/login", "/register", "/forgot-password"];
+const authPages = ["/login", "/register", "/forgot-password", "/cart"];
 const publicPages = ["/", "/products", "/checkout"];
 
 // Matches product detail paths: /products/:id or /:locale/products/:id

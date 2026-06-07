@@ -44,7 +44,7 @@ export function LoginForm() {
   const form = useForm<z.infer<ReturnType<typeof loginSchema>>>({
     resolver: zodResolver(loginSchema(t)),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
@@ -56,7 +56,7 @@ export function LoginForm() {
 
     try {
       const response = await signIn("login", {
-        username: data.username,
+        email: data.email,
         password: data.password,
         rememberMe: rememberMe ? "true" : "false",
         redirect: false,
@@ -65,6 +65,11 @@ export function LoginForm() {
       if (!response?.ok) {
         setError(response?.error || "Login failed");
         setIsPending(false);
+        if (!response?.ok) {
+          setError(response?.error || "Login failed");
+          setIsPending(false);
+          return;
+        }
         return;
       }
 
@@ -91,7 +96,7 @@ export function LoginForm() {
     <form className="w-full" id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
       <FieldGroup className="gap-4">
         <Controller
-          name="username"
+          name="email"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field className="gap-1.5" data-invalid={fieldState.invalid}>

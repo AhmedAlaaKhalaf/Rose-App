@@ -30,7 +30,7 @@ export default function Header() {
         <div className="flex justify-between items-center px-2 lg:px-0">
           {/* logo */}
           <Link href="/" className="w-1/4 md:w-auto cursor-pointer">
-            <Image sizes="auto" src="/assets/logo.png" alt="Logo" width={85} height={80} />
+            <Image sizes="auto" src="/assets/logo.svg" alt="Logo" width={85} height={80} />
           </Link>
           {/* delivery location */}
           {/* {isLoggedIn && (
