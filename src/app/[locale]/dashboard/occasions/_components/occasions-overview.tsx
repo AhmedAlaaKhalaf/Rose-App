@@ -80,7 +80,7 @@ export default function Occasions() {
                 className="bg-transparent hover:bg-transparent text-maroon-500 text-sm"
                 onClick={() => refetch()}
               >
-                Try again
+                {t("try-again")}
               </Button>
             </p>
           ) : (

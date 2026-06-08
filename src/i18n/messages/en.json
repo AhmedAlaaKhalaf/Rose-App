@@ -397,7 +397,7 @@
   },
   "db-occasions": {
     "update-toast": "occasion updated successfully",
-    "add-occasion": "occasion addeded successfully",
+    "add-occasion": "occasion added successfully",
     "occasion-name": "Name",
     "view-occasion-image-button": "View occasion image",
     "update-occasion-button": "Update Occasion",

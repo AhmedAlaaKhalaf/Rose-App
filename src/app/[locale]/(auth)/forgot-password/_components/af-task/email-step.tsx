@@ -45,7 +45,8 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
 
   // Functions
   const onSubmit: SubmitHandler<EmailStepField> = (values) => {
-    // Variabls
+    // Variables
+    const otpCooldown = localStorage.getItem(OTP_COOLDOWN_KEY);
     const otpCooldown = localStorage.getItem(OTP_COOLDOWN_KEY);
 
     const diff = getOtpTimeLeft();
@@ -91,14 +92,12 @@ export default function EmailStep({ email, setEmail, onNext }: EmailStepProps) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                {/* Lable */}
-                <FormLabel>{t("field-label")}</FormLabel>
-
+                {/* Label */}
+                <FormLabel>{t("field-label")}</FormLabel> <FormLabel>{t("field-label")}</FormLabel>
                 {/* Field */}
                 <FormControl>
                   <Input {...field} type="email" placeholder="example@gmail.com" />
                 </FormControl>
-
                 {/* Validation Message */}
                 <FormMessage />
               </FormItem>
