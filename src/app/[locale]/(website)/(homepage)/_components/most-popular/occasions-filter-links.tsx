@@ -15,7 +15,6 @@ export default function OccasionsFilterLinks({
   // Variables
   const activeOccasionId = searchParams.occasionId;
 
-  console.log(activeOccasionId);
   return (
     // Occasions Filter
     <ul className="flex flex-wrap sm:justify-between gap-2">

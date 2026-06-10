@@ -18,13 +18,10 @@ export default function Features() {
         return (
           <div key={index} className="flex items-center gap-4">
             {/* Feature icon */}
-            <item.icon
-              strokeWidth={""}
-              className="bg-maroon-600 dark:bg-softPink-200 px-3 py-4 rounded-full w-16 h-16 text-white"
-            />
+            <item.icon className="bg-maroon-600 dark:bg-softPink-200 px-3 py-4 rounded-full w-16 h-16 text-white" />
             {/* Feature text */}
             <span>
-              <p className="dark:bg-softPink-200 font-semibold text-maroon-600 text-xl">
+              <p className="font-semibold text-maroon-600 dark:text-softPink-200 text-xl">
                 {item.title[locale]}
               </p>
               <p className="text-zinc-500 dark:text-zinc-300 text-sm">{item.description[locale]}</p>

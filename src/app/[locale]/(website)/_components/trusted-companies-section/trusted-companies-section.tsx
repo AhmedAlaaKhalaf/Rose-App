@@ -18,7 +18,7 @@ export default function TrustedCompaniesSection() {
   return (
     <div className="mx-auto container">
       {/* Background Container */}
-      <div className="flex flex-col justify-center items-center gap-6 bg-[#FFE0E7] p-8 px- rounded-3xl">
+      <div className="flex flex-col justify-center items-center gap-6 bg-[#FFE0E7] p-8 rounded-3xl">
         {/* Heading */}
         <h2 className="font-primary font-bold text-[#741C21] text-3xl text-center">
           {t("heading.trusted-by")} <span className="text-[#FF668B]">{t("heading.count")}</span>
