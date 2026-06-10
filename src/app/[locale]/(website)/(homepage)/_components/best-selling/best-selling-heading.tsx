@@ -7,7 +7,7 @@ export default function BestSellingHeading() {
   const t = useTranslations("best-selling");
 
   return (
-    <section className="flex flex-col justify-between max-w-80">
+    <section className="flex flex-col justify-between max-w-80 h-96">
       {/* Text  */}
       <div className="flex flex-col gap-2">
         {/* Best Selling  */}

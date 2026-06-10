@@ -9,8 +9,11 @@ import ProductCard from "@/components/shared/product-card";
 import { getProducts } from "@/lib/services/product.service";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/tailwind-merge";
+import { TLocale } from "@/lib/types/global";
 
-export default async function BestSellingCarousel() {
+type BestSellingCarouselProps = { locale: TLocale };
+
+export default async function BestSellingCarousel({ locale }: BestSellingCarouselProps) {
   // Services
   const {
     payload: { data: products },
@@ -24,14 +27,17 @@ export default async function BestSellingCarousel() {
       opts={{
         align: "start",
       }}
-      className="w-full"
+      className="mx-auto max-w-[20.25rem] sm:max-w-full"
     >
       <CarouselContent>
         {/* Products  */}
         {products.map((product) => (
-          <CarouselItem key={product.id} className="sm:basis-1/1 md:basis-1/2 lg:basis-1/3">
+          <CarouselItem
+            key={product.id}
+            className="sm:basis-1/1 md:basis-1/2 xl:basis-1/3 lg:basis-1/2"
+          >
             <Link key={product.id} href={`products/${product.id}`}>
-              <ProductCard product={product} />
+              <ProductCard product={product} locale={locale} />
             </Link>
           </CarouselItem>
         ))}

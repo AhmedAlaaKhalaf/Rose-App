@@ -17,9 +17,9 @@ import Features from "./features";
 
 export default function Hero() {
   return (
-    <section className="w-full space-y-6 p-6">
+    <section className="space-y-6 mx-auto py-6 w-full container">
       {/* Banner section: Promo card + Hero carousel */}
-      <div className="flex h-full items-center gap-6">
+      <div className="flex md:flex-row flex-col items-center gap-6 h-full">
         {/* Promotional static card */}
         <PromoCard />
 

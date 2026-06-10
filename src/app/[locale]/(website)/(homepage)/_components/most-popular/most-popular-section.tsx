@@ -21,17 +21,12 @@ export default async function MostPopularSection({ searchParams }: MostPopularSe
     payload: { data: occasions },
   } = await getOccasions();
 
-  // Variables
-  const defaultOccasionId = occasions.length ? occasions[0].id : undefined;
-  const occasionId = defaultOccasionId && {
-    occasionId: searchParams?.occasionId ?? defaultOccasionId,
-  };
   return (
     <section className="flex flex-col gap-10 w-full">
       {/* Header */}
-      <header className="flex justify-between items-center">
+      <header className="flex sm:flex-row flex-col justify-between items-center gap-4 sm:gap-0">
         {/* Heading */}
-        <SectionHead size={"sm"} className="ltr:capitalize">
+        <SectionHead size={"sm"} className="me-auto ltr:capitalize">
           {t("heading")}
         </SectionHead>
 
@@ -43,7 +38,7 @@ export default async function MostPopularSection({ searchParams }: MostPopularSe
 
       {/* Products */}
       <Suspense fallback={<ProductListSkeleton />}>
-        <ProductsList searchParams={occasionId} />
+        <ProductsList searchParams={searchParams} />
       </Suspense>
     </section>
   );

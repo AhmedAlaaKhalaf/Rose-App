@@ -6,15 +6,14 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "flower.elevateegy.com",
-        port: "",
-        pathname: "/uploads/**",
+        hostname: "rose-app.elevate-bootcamp.cloud",
+        pathname: "/storage/entities/**",
       },
       {
         protocol: "https",
-        hostname: "prd.place",
+        hostname: "placehold.net",
         port: "",
-        pathname: "/300",
+        pathname: "/*",
       },
     ],
   },

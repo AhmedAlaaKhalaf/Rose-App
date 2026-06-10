@@ -13,7 +13,7 @@ import { useTranslations } from "next-intl";
 export default function PromoCard() {
   const t = useTranslations("promo-card-hero-section");
   return (
-    <div className="relative bg-black/10 rounded-2xl w-full max-w-[18.8125rem] h-[27.5rem] aspect-[301/439] overflow-hidden">
+    <div className="relative bg-black/10 rounded-2xl w-full md:max-w-[18.8125rem] h-[27.5rem] aspect-[301/439] overflow-hidden">
       {/* Image Background */}
       <Image
         sizes="auto"
@@ -35,7 +35,7 @@ export default function PromoCard() {
         <p className="h-20 font-semibold text-white text-2xl leading-6">{t("title")}</p>
 
         {/* Move to Shop Now Page */}
-        <Link href={"#"}>
+        <Link href={"/products"}>
           <Button className="rounded-xl" variant="secondary">
             {t("button")}
             <ArrowRight />

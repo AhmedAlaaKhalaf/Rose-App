@@ -9,7 +9,7 @@ export default async function Testimonials() {
   } = await testimonialsServices();
 
   return (
-    <section className="flex flex-col gap-10 w-screen">
+    <section className="flex flex-col gap-10 mx-auto container">
       {/* Section head */}
       <TestimonialHeader />
 

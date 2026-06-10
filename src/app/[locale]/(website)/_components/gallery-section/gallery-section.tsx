@@ -14,74 +14,70 @@ export default function GallerySection() {
         <SectionTitle>{t("badge")}</SectionTitle>
         <SectionHead>{t("heading")}</SectionHead>
       </div>
-
       {/* Gallery Grid */}
-      <div className="relative mx-auto w-full max-w-[1281px] h-[1147px]">
-        {/* Image 1 - Large Left */}
-        <div className="top-0 left-0 absolute w-[418px] h-[617px] overflow-hidden">
-          <Image
-            priority
-            sizes="auto"
-            src="/assets/images/gallery-1.png"
-            alt="Wedding and anniversary gift boxes"
-            fill
-            className="object-cover"
-          />
+      <div className="gap-4 grid lg:grid-cols-3 mx-auto max-w-[1281px]">
+        {/* Column 1 */}
+        <div className="gap-4 grid">
+          <div className="relative aspect-[418/617] overflow-hidden">
+            <Image
+              priority
+              fill
+              src="/assets/images/gallery-1.png"
+              alt="Wedding and anniversary gift boxes"
+              className="object-cover"
+            />
+          </div>
+
+          <div className="relative aspect-[418/406] overflow-hidden">
+            <Image
+              fill
+              src="/assets/images/gallery-4.png"
+              alt="Roses and chocolates"
+              className="object-cover"
+            />
+          </div>
         </div>
 
-        {/* Image 2 - Top Middle */}
-        <div className="top-0 left-[431px] absolute w-[419px] h-[411px] overflow-hidden">
-          <Image
-            sizes="auto"
-            src="/assets/images/gallery-2.png"
-            alt="Birthday gift box with red ribbon"
-            fill
-            className="object-cover"
-          />
+        {/* Column 2 */}
+        <div className="gap-4 grid">
+          <div className="relative aspect-[419/411] overflow-hidden">
+            <Image
+              fill
+              src="/assets/images/gallery-2.png"
+              alt="Birthday gift box with red ribbon"
+              className="object-cover"
+            />
+          </div>
+
+          <div className="relative aspect-[419/611] overflow-hidden">
+            <Image
+              fill
+              src="/assets/images/gallery-5.png"
+              alt="Ring box with flowers"
+              className="object-cover"
+            />
+          </div>
         </div>
 
-        {/* Image 3 - Top Right */}
-        <div className="top-0 left-[863px] absolute w-[418px] h-[411px] overflow-hidden">
-          <Image
-            sizes="auto"
-            src="/assets/images/gallery-3.png"
-            alt="Engagement ring box"
-            fill
-            className="object-cover"
-          />
-        </div>
+        {/* Column 3 */}
+        <div className="gap-4 grid">
+          <div className="relative aspect-[418/411] overflow-hidden">
+            <Image
+              fill
+              src="/assets/images/gallery-3.png"
+              alt="Engagement ring box"
+              className="object-cover"
+            />
+          </div>
 
-        {/* Image 4 - Bottom Left */}
-        <div className="top-[631px] left-0 absolute w-[418px] h-[406px] overflow-hidden">
-          <Image
-            sizes="auto"
-            src="/assets/images/gallery-4.png"
-            alt="Roses and chocolates"
-            fill
-            className="object-cover"
-          />
-        </div>
-
-        {/* Image 5 - Bottom Middle */}
-        <div className="top-[426px] left-[431px] absolute w-[419px] h-[611px] overflow-hidden">
-          <Image
-            sizes="auto"
-            src="/assets/images/gallery-5.png"
-            alt="Ring box with flowers"
-            fill
-            className="object-cover"
-          />
-        </div>
-
-        {/* Image 6 - Bottom Right */}
-        <div className="top-[426px] left-[863px] absolute w-[418px] h-[611px] overflow-hidden">
-          <Image
-            sizes="auto"
-            src="/assets/images/gallery-6.png"
-            alt="Engagement congratulations card"
-            fill
-            className="object-cover"
-          />
+          <div className="relative aspect-[418/611] overflow-hidden">
+            <Image
+              fill
+              src="/assets/images/gallery-6.png"
+              alt="Engagement congratulations card"
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>

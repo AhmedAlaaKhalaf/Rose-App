@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import {
   Carousel,
@@ -25,7 +26,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 export default function CarouselSection() {
   // Translate
-  const t = useTranslations("carouselheroSection");
+  const t = useTranslations("carousel-hero-section");
   const locale = useLocale() as "en" | "ar";
 
   const [api, setApi] = React.useState<CarouselApi>();
@@ -94,7 +95,7 @@ export default function CarouselSection() {
         {/* Hero text and buttons */}
         <section className="flex flex-col justify-end w-full text-white">
           <p className="font-semibold text-4xl">{t("heading")}</p>
-          <p className="h-12 text-base">{t("subheading")}</p>
+          <p className="h-12 text-base">{t("sub-heading")}</p>
           <div className="flex justify-between items-center">
             {/* Primary CTA */}
             <Link href={"#"}>

@@ -6,8 +6,9 @@ import { Button } from "../ui/button";
 import WishlistButton from "../features/wishlist/wishlist-button";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { useTranslations } from "next-intl";
+import { TLocale } from "@/lib/types/global";
 
-type ProductCardProps = { product: TProductCard; locale: string };
+type ProductCardProps = { product: TProductCard; locale: TLocale };
 
 export default function ProductCard({ product, locale }: ProductCardProps) {
   // Translations
@@ -49,8 +50,8 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
 
         {/* Cover  */}
         <Image
-          src={"https://prd.place/300"}
-          alt="product-cover"
+          src={"https://placehold.net/product.svg"}
+          alt={title}
           fill
           sizes="auto"
           priority

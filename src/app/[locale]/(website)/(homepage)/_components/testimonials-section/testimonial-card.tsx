@@ -32,12 +32,12 @@ export default function TestimonialCard({ item }: TPageProps) {
     <CarouselItem className="flex justify-center items-center px-7 lg:basis-1/3 md:basis-1/2">
       <Card className="relative flex flex-col justify-center items-center gap-3 dark:bg-white m-w-[21.9rem] p-5 pt-14 rounded-3xl w-full h-[17rem]">
         <Avatar className="bottom-56 absolute border-4 border-white w-[7.5rem] h-[7.5rem]">
-          <AvatarImage src={"https://prd.place/100?id=12"} className="object-cover" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage src={"https://placehold.net/avatar-4.svg"} className="object-cover" />
+          {/* <AvatarFallback>CN</AvatarFallback> */}
         </Avatar>
 
         <CardHeader>
-          <CardTitle className="font-semibold text-zinc-800">
+          <CardTitle className="font-semibold text-zinc-800 capitalize">
             {t("testimonial-user-name", {
               name: `${item?.name}`,
             })}
@@ -47,7 +47,7 @@ export default function TestimonialCard({ item }: TPageProps) {
         <CardContent className="space-y-2 px-0">
           <RatingStars avgRate={item?.rating} />
 
-          <p className="font-medium text-zinc-800 line-clamp-3">
+          <p className="font-medium text-zinc-800 capitalize line-clamp-3">
             {t("testimonials-card-content", {
               content: `${item?.content}`,
             })}

@@ -19,7 +19,7 @@ export default function TestimonialsCarousel({ userReviews }: PageProps) {
 
   return (
     <Carousel
-      className="flex justify-center items-center bg-maroon-50 dark:bg-zinc-700 px-28 h-138"
+      className="flex justify-center items-center bg-maroon-50 dark:bg-zinc-700 px-0 h-138"
       plugins={[
         AutoScroll({
           speed: 1,

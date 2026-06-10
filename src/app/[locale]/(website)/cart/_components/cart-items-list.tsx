@@ -1,23 +1,17 @@
 import { getUserCart } from "@/lib/services/user-cart.service";
 import CartItem from "./cart-item";
-import { TUserCart } from "@/lib/types/cart";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { ShoppingCart } from "lucide-react";
-import { useLocale  } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
-
-
-export default async function CartItemsList({locale}:{locale:string}) {
+export default async function CartItemsList({ locale }: { locale: string }) {
   // Translations
   const t = await getTranslations("cart.empty-cart");
 
-
-
   // Services
-  const payload = await getUserCart();
+  const {payload} = await getUserCart();
 
-  return !payload.cart.cartItems.length ? (
+  return !payload.cartItems.length ? (
     <div
       className={cn(
         locale === "ar" && "font-tajawal",
@@ -30,8 +24,8 @@ export default async function CartItemsList({locale}:{locale:string}) {
     </div>
   ) : (
     <div className="space-y-5 p-5 border border-border rounded-md max-h-256 overflow-y-scroll scrollbar-primary">
-     {payload.cart.cartItems.map((item) => (
-        <CartItem key={item._id} item={item} />
+      {payload.cartItems.map((item) => (
+        <CartItem key={item.id} item={item} />
       ))}
     </div>
   );

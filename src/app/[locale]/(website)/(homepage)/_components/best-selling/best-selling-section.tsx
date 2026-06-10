@@ -2,16 +2,20 @@ import BestSellingCarousel from "@/components/features/best-selling/best-selling
 import BestSellingHeading from "./best-selling-heading";
 import { Suspense } from "react";
 import CarouselFallback from "@/components/shared/carousel-fallback";
+import { TLocale } from "@/lib/types/global";
 
-export default function BestSellingSection() {
+type BestSellingSectionProps = {
+  locale: TLocale;
+};
+export default function BestSellingSection({ locale }: BestSellingSectionProps) {
   return (
-    <section className="flex gap-9">
+    <section className="flex lg:flex-row flex-col gap-9 mx-auto container">
       {/* Text  */}
       <BestSellingHeading />
 
       {/* Products  */}
       <Suspense fallback={<CarouselFallback />}>
-        <BestSellingCarousel />
+        <BestSellingCarousel locale={locale} />
       </Suspense>
     </section>
   );

@@ -1,4 +1,4 @@
-export type TProductCard = {
+export type   TProductCard = {
   id: string;
   title: string;
   cover: string;

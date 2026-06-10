@@ -3,11 +3,11 @@ import ProductCard from "./product-card";
 import { Rose } from "lucide-react";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { getProducts } from "@/lib/services/product.service";
-import { SearchParams } from "@/lib/types/global";
+import { SearchParams, TLocale } from "@/lib/types/global";
 import { getLocale, getTranslations } from "next-intl/server";
 
 type ProductsListProps = {
-  searchParams?: SearchParams | string;
+  searchParams?: SearchParams;
   className?: string;
 };
 
@@ -16,7 +16,7 @@ const ProductsList = React.forwardRef<HTMLDivElement, ProductsListProps>(
     const t = await getTranslations("product-listing");
 
     // Hooks
-    const locale = await getLocale();
+    const locale = (await getLocale()) as TLocale;
 
     // Services
     const {
@@ -24,10 +24,16 @@ const ProductsList = React.forwardRef<HTMLDivElement, ProductsListProps>(
     } = await getProducts(searchParams);
 
     return (
-      <div ref={ref} className={cn("gap-6 grid grid-cols-4", className)}>
+      <div
+        ref={ref}
+        className={cn(
+          "gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+          className
+        )}
+      >
         {/* Data  */}
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} locale={locale} />
         ))}
 
         {/* No data to display.  */}

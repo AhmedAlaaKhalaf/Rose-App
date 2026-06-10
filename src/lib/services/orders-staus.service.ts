@@ -14,7 +14,7 @@ export async function getOrderStatus(token: string): Promise<TOrderStatistics> {
 
   const payload: ApiResponse<TOrderStatistics> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error);
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }

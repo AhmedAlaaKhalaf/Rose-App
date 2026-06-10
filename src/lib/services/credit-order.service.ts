@@ -25,7 +25,7 @@ export async function creditOrderService(token: string, shippingAddress: TAddres
 
   const payload: ApiResponse<TPayCreditResponse> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error);
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }

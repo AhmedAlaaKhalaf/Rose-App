@@ -13,7 +13,7 @@ export default function useRegister() {
     mutationFn: async (fields: RegisterFormFields) => {
       const payload = await registerAction(fields);
 
-      if ("error" in payload) throw new Error(payload.error);
+      if ("message" in payload) throw new Error(payload.message);
 
       return payload;
     },

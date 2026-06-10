@@ -2,14 +2,14 @@ import { Star, Trash2 } from "lucide-react";
 import CartItemQuantityPicker from "./cart-item-quantity-picker";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { TCartItem } from "@/lib/types/cart";
+import { TCartProduct } from "@/lib/types/cart";
 import RemoveCartItemButton from "./remove-cart-item-button";
 
 type CartItemProp = {
-  item: TCartItem;
+  item: TCartProduct;
 };
 
-export default function CartItem({ item: { product, price, quantity } }: CartItemProp) {
+export default function CartItem({ item }: CartItemProp) {
   // Translations
   const tCart = useTranslations("cart");
 
@@ -18,8 +18,8 @@ export default function CartItem({ item: { product, price, quantity } }: CartIte
       {/* Cart image */}
       <Image
         className="rounded-md max-h-[8.75rem]"
-        src={product.imgCover}
-        alt={product.title}
+        src={item.cover}
+        alt={item.title}
         width={117}
         height={140}
       />
@@ -32,7 +32,7 @@ export default function CartItem({ item: { product, price, quantity } }: CartIte
           <div className="space-y-2">
             {/* item name */}
             <p className="font-semibold text-primary text-lg capitalize leading-none">
-              {product.title}
+              {item.title}
             </p>
 
             {/* Cart title */}
@@ -41,30 +41,34 @@ export default function CartItem({ item: { product, price, quantity } }: CartIte
               <Star strokeWidth={1.46} fill="#FFA508" color="#FFA508" />
               {/* Item rating */}
               {tCart("item.rating")}:{" "}
-              <span className="text-black dark:text-zinc-50"> {product.rateAvg}/5</span>
+              <span className="text-black dark:text-zinc-50"> {item.rating}/5</span>
               {/* Item ratings count */}
               <span className="font-medium text-blue-600">
-                ({product.rateCount} {tCart("item.ratings-count")})
+                ({item.ratings} {tCart("item.ratings-count")})
               </span>
             </span>
           </div>
           {/* Cart price */}
           <p className="mt-auto font-medium text-primary text-sm">
             {/* Item quantity */}
-            (× {quantity}){""}
+            (× {item.stock}){""}
             {/* Item price */}
             <span className="mt-auto px-1 font-bold text-zinc-800 text-2xl leading-none">
-              {product.discount > 0 ? product.priceAfterDiscount : price}
+              {item.discountValue
+                ? item.discountType === "FIXED"
+                  ? Number(item.price) - Number(item.discountValue)
+                  : Number(item.price) * (1 - Number(item.discountValue) / 100)
+                : item.price}
             </span>
             {/* Item currency */}
             <span className="font-medium text-zinc-800"> {tCart("item.currency")}</span>
-          </p>{" "}
+          </p>
         </div>
 
         {/* Cart actions */}
         <div className="flex flex-col gap-4 lg:gap-0">
           {/* Item delete button */}
-          <RemoveCartItemButton itemId={product._id}>
+          <RemoveCartItemButton itemId={item.id}>
             {/* Button title */}
             {tCart("buttons.remove")}
 
@@ -73,7 +77,7 @@ export default function CartItem({ item: { product, price, quantity } }: CartIte
           </RemoveCartItemButton>
 
           {/* Item increase/decrease count button */}
-          <CartItemQuantityPicker quantity={quantity} productId={product._id} />
+          <CartItemQuantityPicker quantity={item.quantity} itemId={item.id} />
         </div>
       </div>
     </div>

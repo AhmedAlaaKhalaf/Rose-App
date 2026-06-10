@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
         const payload: ApiResponse<loginResponse> = await res.json();
 
         // Throw error if authentication fails
-        if ("error" in payload) throw new Error(payload.error);
+        if ("message" in payload) throw new Error(payload.message);
 
         // Return user object to NextAuth
         return {

@@ -11,16 +11,18 @@ import Link from "next/link";
 import ClearUserCartButton from "./_components/clean-user-cart-button";
 
 type CartPageProps = {
-  locale: string;
+  params: { locale: string };
 };
 
-export default async function CartPage({ locale }: CartPageProps) {
+export default async function CartPage({ params: { locale } }: CartPageProps) {
   // Translations
   const t = await getTranslations("search-input");
   const tCart = await getTranslations("cart");
 
   // Services
-  const payload = await getUserCart();
+  const {
+    payload: { cartItems },
+  } = await getUserCart();
 
   return (
     <main className="space-y-12 pb-40">
@@ -35,12 +37,12 @@ export default async function CartPage({ locale }: CartPageProps) {
               {tCart("title")}
               {/* Cart items count  */}
               <span className="ps-2 font-medium text-muted-foreground text-base">
-                {payload.numOfCartItems} {tCart("products")}
+                {cartItems.length} {tCart("products")}
               </span>
             </p>
             {/* Cart clear button   */}
 
-            {payload.numOfCartItems ? (
+            {cartItems.length ? (
               <ClearUserCartButton>
                 {/* Cart clear button icon   */}
                 <BrushCleaning className="size-5" />

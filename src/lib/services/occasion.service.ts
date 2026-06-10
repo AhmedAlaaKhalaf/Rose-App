@@ -5,7 +5,7 @@ export async function getOccasions(limit = 4) {
 
   const payload: ApiResponse<PaginatedData<TOccasion[]>> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error);
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }

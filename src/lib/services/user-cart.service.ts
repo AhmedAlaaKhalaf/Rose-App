@@ -1,8 +1,9 @@
-import { getDecodedToken } from "@/hooks/shared/use-decoded-token";
+import { authOptions } from "@/auth";
 import { TUserCart } from "../types/cart";
+import { getServerSession } from "next-auth";
 
 export async function getUserCart() {
-  const token = await getDecodedToken();
+  const token = await getServerSession(authOptions);
 
   if (!token) {
     throw new Error("Authentication token is required");
@@ -24,8 +25,8 @@ export async function getUserCart() {
 
     const payload: ApiResponse<TUserCart> = await response.json();
 
-    if ("error" in payload) {
-      throw new Error(payload.error);
+    if ("message" in payload) {
+      throw new Error(payload.message);
     }
 
     return payload;

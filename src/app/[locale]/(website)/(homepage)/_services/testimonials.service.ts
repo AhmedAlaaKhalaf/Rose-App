@@ -9,8 +9,8 @@ export async function testimonialsServices() {
 
   const payload: ApiResponse<PaginatedData<TTestimonial[]>> = await response.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error);
+  if ("message" in payload) {
+    throw new Error(payload.message);
   }
 
   return payload;

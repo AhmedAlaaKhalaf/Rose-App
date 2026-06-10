@@ -15,10 +15,11 @@ export default function OccasionsFilterLinks({
   // Variables
   const activeOccasionId = searchParams.occasionId;
 
+  console.log(activeOccasionId);
   return (
     // Occasions Filter
-    <ul className="flex gap-6">
-      {occasions.map(({ name, id }) => {
+    <ul className="flex flex-wrap sm:justify-between gap-2">
+      {occasions.map(({ title, id }) => {
         const isActive = activeOccasionId === id;
 
         return (
@@ -33,7 +34,7 @@ export default function OccasionsFilterLinks({
             )}
           >
             <Link scroll={false} href={`?occasionId=${id}`} className="text-inherit">
-              {name}
+              {title}
             </Link>
           </li>
         );

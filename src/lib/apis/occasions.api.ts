@@ -14,7 +14,7 @@ export async function getOccasions({
 
   const payload: ApiResponse<PaginatedData<TOccasion[]>> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error);
+  if ("message" in payload) throw new Error(payload.message);
 
   const sortedOccasions = [...payload.payload.data].sort((a, b) =>
     a.name.localeCompare(b.name, undefined, { sensitivity: "base" })

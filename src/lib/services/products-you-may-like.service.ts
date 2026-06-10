@@ -23,8 +23,8 @@ export async function getProductsYouMayLike() {
 
   const payload: ApiResponse<TRecommendationResponse> = await res.json();
 
-  if ("error" in payload) {
-    throw new Error(payload.error);
+  if ("message" in payload) {
+    throw new Error(payload.message);
   }
 
   return payload;

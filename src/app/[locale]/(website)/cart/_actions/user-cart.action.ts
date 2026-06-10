@@ -22,7 +22,7 @@ export async function AddCartItemAction(itemId: string) {
 
   const payload: ApiResponse<TUserCart> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error);
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }
@@ -47,7 +47,7 @@ export async function updateCartItemAction(itemId: string, quantity: number) {
 
   const payload: ApiResponse<TUserCart> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error);
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }
@@ -70,7 +70,7 @@ export async function clearCartAction() {
 
   const payload: ApiResponse<{ message: string }> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error);
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }
@@ -93,7 +93,7 @@ export async function removeCartItemAction(itemId: string) {
 
   const payload: ApiResponse<TUserCart> = await response.json();
 
-  if ("error" in payload) throw new Error(payload.error);
+  if ("message" in payload) throw new Error(payload.message);
 
   return payload;
 }

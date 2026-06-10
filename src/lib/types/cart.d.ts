@@ -1,24 +1,29 @@
 export type TCartProduct = {
-  _id: string;
+  id: string;
   title: string;
-  slug: string;
   description: string;
-  imgCover: string;
-  images: string[];
-  price: number;
-  priceAfterDiscount: number;
-  discount: number;
-  rateAvg: number;
-  rateCount: number;
-  sold: number;
+  rating: number;
+  ratings: number;
+  stock: number;
+  price: string;
+  discountType: "PERCENT" | "FIXED";
+  discountValue: string;
+  cover: string;
+  gallery: string;
+  categoryId: string;
   quantity: number;
-  category: string;
-  occasion: string;
-  isSuperAdmin: boolean;
+  subCategoryId: string;
+  immutable: boolean;
   createdAt: string;
   updatedAt: string;
-  __v: number;
-  id: string;
+  category: {
+    id: string;
+    title: string;
+  };
+  subCategory: {
+    id: string;
+    title: string;
+  };
 };
 export type TCartItem = {
   product: TCartProduct;
@@ -28,17 +33,7 @@ export type TCartItem = {
 };
 
 export type TUserCart = {
-  numOfCartItems: number;
-  cart: {
-    _id: string;
-    user: string;
-    cartItems: TCartItem[];
-    appliedCoupons: string[];
-    discount: number;
-    totalPrice: number;
-    totalPriceAfterDiscount: number;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
+  payload: {
+    cartItems: TCartProduct[];
   };
 };
