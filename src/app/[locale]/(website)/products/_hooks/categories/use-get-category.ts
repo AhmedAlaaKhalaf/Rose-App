@@ -7,8 +7,8 @@ export function useGetCategories() {
     queryFn: ({ pageParam = 1 }) => getCategories({ limit: 6, pageNumber: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      if (lastPage.metadata.currentPage < lastPage.metadata.totalPages) {
-        return lastPage.metadata.currentPage + 1;
+      if (lastPage.payload.metadata.page < lastPage.payload.metadata.totalPages) {
+        return lastPage.payload.metadata.page + 1;
       }
       return null;
     },

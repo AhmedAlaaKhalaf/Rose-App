@@ -51,7 +51,9 @@ export default function PriceFilter() {
     const query = params.toString().replace(/%5B/g, "[").replace(/%5D/g, "]");
 
     // push to url
-    router.push(query ? `${pathname}?${query}` : pathname);
+    router.push(query ? `${pathname}?${query}` : pathname, {
+      scroll: false,
+    });
   };
 
   // Submit handler

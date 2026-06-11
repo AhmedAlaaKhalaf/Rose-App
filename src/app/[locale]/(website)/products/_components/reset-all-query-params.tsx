@@ -8,7 +8,7 @@ import { useClearAllQueryParams } from "../_hooks/categories/use-clear-all-query
 
 export default function ResetAllQueryParams() {
   // Translations
-  const t = useTranslations("Products");
+  const t = useTranslations("products");
   //
   const { searchParams, clearAllQueryParams } = useClearAllQueryParams();
 

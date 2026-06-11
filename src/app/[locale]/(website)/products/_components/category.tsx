@@ -12,16 +12,16 @@ import { cn } from "@/lib/utils/tailwind-merge";
 
 export default function Category() {
   // Translations
-  const t = useTranslations("Products");
+  const t = useTranslations("products");
 
   // hooks
   const { data, isPending, fetchNextPage, hasNextPage } = useGetCategories();
   const { QueryParams, toggleQueryParams, clearQueryParams } = useQueryParams("categoryId");
 
   // Data variables
-  const ctaegoriesData = data?.pages.flatMap((page) => page.categories) ?? [];
+  const categoriesData = data?.pages.flatMap((page) => page.payload.data) ?? [];
   const isChoseCatogry = (id: string) => QueryParams == id;
-  const sorted = ctaegoriesData.sort((a, b) => a.name.localeCompare(b.name));
+  const sorted = categoriesData.sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <section className="space-y-2.5 px-1 pt-2.5 pb-5 w-full">
@@ -44,7 +44,7 @@ export default function Category() {
         <ul role="group" aria-label="Product categories" className="space-y-2.5 overflow-auto">
           {/* InfiniteScroll data */}
           <InfiniteScroll
-            dataLength={ctaegoriesData.length}
+            dataLength={categoriesData.length}
             next={fetchNextPage}
             hasMore={hasNextPage}
             loader={
@@ -59,12 +59,12 @@ export default function Category() {
             {sorted.map((categoryData) => (
               <li
                 onClick={() => {
-                  toggleQueryParams(categoryData._id);
+                  toggleQueryParams(categoryData.id);
                 }}
-                key={categoryData._id}
+                key={categoryData.id}
                 className={cn(
                   "rounded-sm h-9 cursor-pointer",
-                  isChoseCatogry(categoryData._id)
+                  isChoseCatogry(categoryData.id)
                     ? "bg-maroon-50 hover:bg-maroon-100 dark:bg-pink-100 dark:hover:bg-purple-200"
                     : "bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-700 dark:hover:bg-zinc-800"
                 )}
@@ -77,22 +77,22 @@ export default function Category() {
                 >
                   {/* category image */}
                   <div
-                    className={` ${isChoseCatogry(categoryData._id) ? "bg-maroon-600 dark:bg-pink-300" : "bg-zinc-500"} w-9 h-9 p-2  rounded-s-sm`}
+                    className={` ${isChoseCatogry(categoryData.id) ? "bg-maroon-600 dark:bg-pink-300" : "bg-zinc-500"} w-9 h-9 p-2  rounded-s-sm`}
                   >
                     <Image
                       style={{
                         filter:
                           "invert(100%) sepia(3%) saturate(2%) hue-rotate(307deg) brightness(203%) contrast(100%)",
                       }}
-                      src={categoryData.image}
+                      src={"https://placehold.net/7.png"}
                       width={36}
                       height={36}
-                      alt={categoryData.name}
+                      alt={categoryData.title}
                     />
                   </div>
 
                   {/* category name */}
-                  <span className="font-medium">{categoryData.name}</span>
+                  <span className="font-medium">{categoryData.title}</span>
                 </button>
               </li>
             ))}

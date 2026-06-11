@@ -8,9 +8,9 @@ import { useQueryParams } from "../_hooks/categories/use-query-params";
 
 export default function RatingFilter() {
   // Translations
-  const t = useTranslations("Products");
+  const t = useTranslations("products");
   //hooks
-  const { QueryParams, toggleQueryParams, clearQueryParams } = useQueryParams("rateAvg");
+  const { QueryParams, toggleQueryParams, clearQueryParams } = useQueryParams("minRating");
 
   return (
     <section className="space-y-2.5 px-1 pt-2.5 pb-5 w-full">
