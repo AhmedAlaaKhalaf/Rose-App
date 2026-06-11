@@ -7,8 +7,7 @@ export async function getCategories({ limit, pageNumber }: { limit: number; page
   );
 
   // not success
-  if (!res.ok) throw new Error("faild to fetch categories");
-
+  if (!res.ok) throw new Error("failed to fetch categories");
   // on success
   const payload: ApiResponse<PaginatedData<TCategory[]>> = await res.json();
 

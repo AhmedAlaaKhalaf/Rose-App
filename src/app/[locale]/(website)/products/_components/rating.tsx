@@ -15,12 +15,12 @@ export default function RatingFilter() {
   return (
     <section className="space-y-2.5 px-1 pt-2.5 pb-5 w-full">
       {/* head of components */}
-      <div aria-labelledby="Ratting-title" className="flex justify-between items-center">
+      <div aria-labelledby="Rating-title" className="flex justify-between items-center">
         {/* title */}
-        <h2 id="Ratting-title" className="font-inter font-semibold text-zinc-800 text-lg">
+        <h2 id="Rating-title" className="font-inter font-semibold text-zinc-800 text-lg">
           {t("rating")}
         </h2>
-
+        {t("rating")}
         {/* reset rating */}
         {QueryParams && QueryParams.length > 0 && (
           <ClearButton onClick={clearQueryParams} label={t("reset")} />

@@ -16,7 +16,7 @@ export default function ResetAllQueryParams() {
     <div className="py-4">
       <Button
         onClick={clearAllQueryParams}
-        disabled={!!searchParams.keys.length}
+        disabled={!searchParams.toString()}
         variant="secondary"
         className="w-full"
       >

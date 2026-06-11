@@ -1,6 +1,6 @@
 "use client";
 
-import CategoryKkelton from "@/components/skeletons/category.skelton";
+import CategorySkeleton from "@/components/skeletons/category.skelton";
 import Image from "next/image";
 import React from "react";
 import { useGetCategories } from "../_hooks/categories/use-get-category";
@@ -36,8 +36,8 @@ export default function Category() {
         )}
       </div>
 
-      {/* CategoryKkelton */}
-      {isPending && <CategoryKkelton />}
+      {/* CategorySkeleton */}
+      {isPending && <CategorySkeleton />}
 
       {/* Categories lists */}
       {!isPending && (
@@ -73,8 +73,9 @@ export default function Category() {
                   type="button"
                   className="flex items-center gap-2.5"
                   role="checkbox"
-                  aria-checked="false"
+                  aria-checked={isChoseCatogry(categoryData.id)}
                 >
+                  {" "}
                   {/* category image */}
                   <div
                     className={` ${isChoseCatogry(categoryData.id) ? "bg-maroon-600 dark:bg-pink-300" : "bg-zinc-500"} w-9 h-9 p-2  rounded-s-sm`}
@@ -90,9 +91,8 @@ export default function Category() {
                       alt={categoryData.title}
                     />
                   </div>
-
                   {/* category name */}
-                  <span className="font-medium">{categoryData.title}</span>
+                  <span className="font-medium text-sm lead">{categoryData.title}</span>
                 </button>
               </li>
             ))}
