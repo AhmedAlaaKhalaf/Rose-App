@@ -15,7 +15,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   return (
     <main className="flex md:flex-row flex-col gap-6 dark:bg-zinc-800 mx-auto mb-44 max-w-[91.5%]">
       {/* Filtration Sidebar  */}
-      <aside className="flex flex-col border-e border-zinc-100 dark:border-zinc-700 max-w-80 h-full">
+      <aside className="flex flex-col border-e border-zinc-100 dark:border-zinc-700 md:max-w-80 h-full">
         {/* Category filter  */}
         <Category />
 
