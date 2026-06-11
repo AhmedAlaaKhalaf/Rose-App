@@ -5,6 +5,9 @@ import { SearchParams } from "@/lib/types/global";
 import { Suspense } from "react";
 import OccasionFilter from "./_components/occasion-filter";
 import PriceFilter from "./_components/price-filter";
+import RatingFilter from "./_components/rating";
+import Category from "./_components/category";
+import ResetAllQueryParams from "./_components/reset-all-query-params";
 
 type ProductsPageProps = { searchParams: SearchParams };
 
@@ -13,9 +16,18 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     <main className="flex md:flex-row flex-col gap-6 dark:bg-zinc-800 mx-auto mb-44 max-w-[91.5%]">
       {/* Filtration Sidebar  */}
       <aside className="flex flex-col flex-1 pe-[21px] border-e border-zinc-100 dark:border-zinc-700 h-full">
-        <OccasionFilter />
+        {/* Category filter  */}
+        <Category />
 
+        <OccasionFilter />
+        {/* Raiting filter  */}
+        <RatingFilter />
+
+        {/* Prise filter  */}
         <PriceFilter />
+
+        {/* Reset all filters button  */}
+        <ResetAllQueryParams />
       </aside>
       {/* Content */}
       <div className="space-y-6">

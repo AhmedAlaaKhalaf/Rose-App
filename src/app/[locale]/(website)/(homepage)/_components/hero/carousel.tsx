@@ -61,7 +61,7 @@ export default function CarouselSection() {
           loop: true,
         }}
       >
-        <CarouselContent>
+        <CarouselContent dir="ltr">
           {imagesCarouselHeroSectionData.map((item, index) => (
             <CarouselItem className="relative w-full h-[27.5rem] aspect-[955/440]" key={index}>
               <Image

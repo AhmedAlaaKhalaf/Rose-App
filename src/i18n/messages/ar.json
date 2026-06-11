@@ -4,6 +4,9 @@
   },
   "products": {
     "occasion": "المناسبة",
+    "category": "الفئة",
+    "rating": "التقييم",
+    "Reset": "إعدة تعيين الكل",
     "price": "السعر",
     "from": "من",
     "to": "إلى",

@@ -4,6 +4,9 @@
   },
   "products": {
     "occasion": "Occasion",
+    "category": "Category",
+    "rating": "Rating",
+    "Reset": "Reset All",
     "price": "Price",
     "from": "from",
     "to": "to",
