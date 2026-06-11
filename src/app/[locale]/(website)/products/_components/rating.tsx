@@ -1,23 +1,23 @@
 "use client";
+
 import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
-import "@smastrom/react-rating/style.css";
 import ClearButton from "./clear-button";
 import { useQueryParams } from "../_hooks/categories/use-query-params";
 
-export default function Rating2() {
+export default function RatingFilter() {
   // Translations
   const t = useTranslations("Products");
   //hooks
   const { QueryParams, toggleQueryParams, clearQueryParams } = useQueryParams("rateAvg");
 
   return (
-    <section className="w-full space-y-2.5 px-1 pt-2.5  pb-5">
+    <section className="space-y-2.5 px-1 pt-2.5 pb-5 w-full">
       {/* head of components */}
-      <div aria-labelledby="Ratting-title" className="flex items-center justify-between">
+      <div aria-labelledby="Ratting-title" className="flex justify-between items-center">
         {/* title */}
-        <h2 id="Ratting-title" className="font-semibold font-inter text-lg text-zinc-800">
+        <h2 id="Ratting-title" className="font-inter font-semibold text-zinc-800 text-lg">
           {t("rating")}
         </h2>
 

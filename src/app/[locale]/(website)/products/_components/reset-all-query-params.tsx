@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { RotateCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -10,10 +11,15 @@ export default function ResetAllQueryParams() {
   const t = useTranslations("Products");
   //
   const { searchParams, clearAllQueryParams } = useClearAllQueryParams();
-  if (!searchParams.toString()) return null;
+
   return (
     <div className="py-4">
-      <Button onClick={clearAllQueryParams} variant="secondary" className="w-full">
+      <Button
+        onClick={clearAllQueryParams}
+        disabled={!!searchParams.keys.length}
+        variant="secondary"
+        className="w-full"
+      >
         <RotateCcw /> {t("Reset")}
       </Button>
     </div>

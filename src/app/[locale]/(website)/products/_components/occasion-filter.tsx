@@ -13,22 +13,14 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const OCCASION_OVERLAY_GRADIENT =
   "linear-gradient(180deg, rgba(0, 0, 0, 0.1375) 0%, rgba(166, 37, 42, 0.55) 100%)";
-const OCCASION_PARAM = "occasion";
+const OCCASION_PARAM = "occasionId";
 
 export default function OccasionFilter() {
   // Translations
   const t = useTranslations("Products");
 
   // Hooks
-  const {
-    isPending,
-    data: payload,
-    error,
-    refetch,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useOccasions();
+  const { isPending, data: payload, error, refetch, fetchNextPage, hasNextPage } = useOccasions();
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -62,6 +54,7 @@ export default function OccasionFilter() {
   }, [setOccasionParams]);
 
   if (error) return <ErrorBoundary onRetry={refetch} error={error} />;
+
   if (isPending) return <OccasionFilterSkeleton />;
 
   // Data variables
@@ -69,10 +62,10 @@ export default function OccasionFilter() {
   const occasions = payload?.pages.flatMap((page) => page.occasions) ?? [];
 
   return (
-    <section className="border-b border-zinc-100 dark:border-zinc-700 pb-5">
+    <section className="pb-5 border-zinc-100 dark:border-zinc-700 border-b">
       <div className="flex justify-between items-center">
         {/* filter title */}
-        <h3 className="text-zinc-800 dark:text-zinc-50 font-medium text-lg ps-[5px]">
+        <h3 className="ps-[5px] font-medium text-zinc-800 dark:text-zinc-50 text-lg">
           {t("occasion")}
         </h3>
         {hasActiveOccasion && <ClearButton onClick={handleClear} label={t("reset")} />}
@@ -83,10 +76,10 @@ export default function OccasionFilter() {
         next={fetchNextPage}
         hasMore={hasNextPage ?? false}
         loader={
-          <div className="w-full py-2 text-center text-sm text-zinc-500">{t("loading-more")}</div>
+          <div className="py-2 w-full text-zinc-500 text-sm text-center">{t("loading-more")}</div>
         }
         height={260}
-        className="hide-scroll flex flex-wrap justify-between overflow-x-hidden overscroll-contain"
+        className="flex flex-wrap justify-between overflow-x-hidden overscroll-contain hide-scroll"
       >
         {occasions.map((occasion) => {
           const isActive = activeOccasionIds.has(occasion._id);
@@ -94,7 +87,7 @@ export default function OccasionFilter() {
             <div
               key={occasion._id}
               className={cn(
-                "group w-1/2 cursor-pointer overflow-hidden pt-[10px] ps-[5px] pe-[5px] pb-[5px] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                "group ps-[5px] pe-[5px] pt-[10px] pb-[5px] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 w-1/2 overflow-hidden cursor-pointer",
                 isActive && "active"
               )}
               role="button"
@@ -109,7 +102,7 @@ export default function OccasionFilter() {
                   width={133}
                   height={74}
                   sizes="133px"
-                  className="h-[74px] w-full object-cover rounded-lg"
+                  className="rounded-lg w-full h-[74px] object-cover"
                 />
                 <div
                   className={cn(
@@ -120,7 +113,7 @@ export default function OccasionFilter() {
                   style={isActive ? { background: OCCASION_OVERLAY_GRADIENT } : undefined}
                   aria-hidden
                 />
-                <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-zinc-50 font-medium text-center text-nowrap">
+                <p className="top-1/2 left-1/2 absolute font-medium text-zinc-50 text-center text-nowrap -translate-x-1/2 -translate-y-1/2">
                   {occasion.name}
                 </p>
               </div>
