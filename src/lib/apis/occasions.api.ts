@@ -16,9 +16,11 @@ export async function getOccasions({
 
   if ("message" in payload) throw new Error(payload.message);
 
-  const sortedOccasions = [...payload.payload.data].sort((a, b) =>
-    a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
-  );
+  // const sortedOccasions = [...payload.payload.data].sort((a, b) =>
+  //   a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
+  // );
 
-  return { ...payload, occasions: sortedOccasions };
+  // return { ...payload, occasions: sortedOccasions };
+
+  return payload;
 }

@@ -15,7 +15,7 @@ type FormValues = {
 
 export default function PriceFilter() {
   // Translations
-  const t = useTranslations("Products");
+  const t = useTranslations("products");
 
   // Hooks
   const pathname = usePathname();

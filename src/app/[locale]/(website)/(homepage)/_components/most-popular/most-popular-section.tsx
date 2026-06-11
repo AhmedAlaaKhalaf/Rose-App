@@ -38,7 +38,10 @@ export default async function MostPopularSection({ searchParams }: MostPopularSe
 
       {/* Products */}
       <Suspense fallback={<ProductListSkeleton />}>
-        <ProductsList searchParams={searchParams} />
+        <ProductsList
+          className="gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          searchParams={searchParams}
+        />
       </Suspense>
     </section>
   );

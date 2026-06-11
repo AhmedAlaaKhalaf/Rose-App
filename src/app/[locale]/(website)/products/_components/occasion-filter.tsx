@@ -17,10 +17,10 @@ const OCCASION_PARAM = "occasionId";
 
 export default function OccasionFilter() {
   // Translations
-  const t = useTranslations("Products");
+  const t = useTranslations("products");
 
   // Hooks
-  const { isPending, error, refetch, fetchNextPage, hasNextPage } = useOccasions();
+  const { isPending, error, refetch, fetchNextPage, hasNextPage, data } = useOccasions();
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -43,7 +43,10 @@ export default function OccasionFilter() {
     (id: string) => {
       const current = new Set(searchParams.getAll(OCCASION_PARAM));
       if (current.has(id)) current.delete(id);
-      else current.add(id);
+      else {
+        current.clear();
+        current.add(id);
+      }
       setOccasionParams(current);
     },
     [searchParams, setOccasionParams]
@@ -54,33 +57,10 @@ export default function OccasionFilter() {
   }, [setOccasionParams]);
 
   if (error) return <ErrorBoundary onRetry={refetch} error={error} />;
+
   if (isPending) return <OccasionFilterSkeleton />;
 
-  // Data variables
-  // const imageBaseUrl = "https://flower.elevateegy.com/uploads/";
-  // const occasions = payload?.pages.flatMap((page) => page.occasions) ?? [
-  //   { id: "0", name: "wedding" },
-  //   { id: "1", name: "apology" },
-  //   { id: "2", name: "graduation" },
-  //   { id: "3", name: "wedding" },
-  //   { id: "4", name: "father's day" },
-  //   { id: "5", name: "graduation" },
-  // ];
-
-  const occasions = [
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e4", name: "wedding" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e5", name: "apology" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e6", name: "graduation" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e7", name: "wedding" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e8", name: "father's day" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e9", name: "graduation" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e3", name: "wedding" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e2", name: "apology" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e1", name: "graduation" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532e0", name: "wedding" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532a2", name: "father's day" },
-    { id: "2e225dea-502e-449c-8502-fbf4ae6532a1", name: "graduation" },
-  ];
+  const occasions = data?.pages.flatMap((page) => page.payload.data) ?? [];
 
   return (
     <section className="pb-5 border-zinc-100 dark:border-zinc-700 border-b">
@@ -93,7 +73,7 @@ export default function OccasionFilter() {
       </div>
       {/* Occasions list */}
       <InfiniteScroll
-        dataLength={occasions.length}
+        dataLength={occasions?.length}
         next={fetchNextPage}
         hasMore={hasNextPage ?? false}
         loader={
@@ -102,13 +82,13 @@ export default function OccasionFilter() {
         height={260}
         className="flex flex-wrap justify-between overflow-x-hidden overscroll-contain hide-scroll"
       >
-        {occasions.map((occasion) => {
+        {occasions?.map((occasion) => {
           const isActive = activeOccasionIds.has(occasion.id);
           return (
             <div
               key={occasion.id}
               className={cn(
-                "group ps-[5px] pe-[5px] pt-[10px] pb-[5px] border outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 w-1/2 overflow-hidden cursor-pointer",
+                "group ps-[5px] pe-[5px] pt-[10px] pb-[5px] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 w-1/2 overflow-hidden cursor-pointer",
                 isActive && "active"
               )}
               role="button"
@@ -118,9 +98,8 @@ export default function OccasionFilter() {
             >
               <div className="relative rounded-lg">
                 <Image
-                  src={"https://prd.place/300"}
-                  // src={`${imageBaseUrl}${occasion.image}`}
-                  alt={occasion.name}
+                  src={occasion.image}
+                  alt={occasion.title}
                   width={133}
                   height={74}
                   sizes="133px"
@@ -136,7 +115,7 @@ export default function OccasionFilter() {
                   aria-hidden
                 />
                 <p className="top-1/2 left-1/2 absolute font-medium text-zinc-50 text-center text-nowrap -translate-x-1/2 -translate-y-1/2">
-                  {occasion.name}
+                  {occasion.title}
                 </p>
               </div>
             </div>

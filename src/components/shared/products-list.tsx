@@ -24,13 +24,7 @@ const ProductsList = React.forwardRef<HTMLDivElement, ProductsListProps>(
     } = await getProducts(searchParams);
 
     return (
-      <div
-        ref={ref}
-        className={cn(
-          "gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
-          className
-        )}
-      >
+      <div ref={ref} className={className}>
         {/* Data  */}
         {products.map((product) => (
           <ProductCard key={product.id} product={product} locale={locale} />

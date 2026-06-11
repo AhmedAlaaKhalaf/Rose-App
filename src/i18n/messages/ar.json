@@ -2,7 +2,7 @@
   "Metadata": {
     "app-title": "محل الورد"
   },
-  "Products": {
+  "products": {
     "occasion": "المناسبة",
     "price": "السعر",
     "from": "من",

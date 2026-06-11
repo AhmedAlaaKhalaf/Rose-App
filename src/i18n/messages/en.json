@@ -2,7 +2,7 @@
   "Metadata": {
     "app-title": "Rose App"
   },
-  "Products": {
+  "products": {
     "occasion": "Occasion",
     "price": "Price",
     "from": "from",
