@@ -1,7 +1,7 @@
 import { TOccasion } from "../types/occasion";
 
 export async function getOccasions(limit = 4) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/occasions?limit=${limit}`);
+  const response = await fetch(`${process.env.API}/occasions?limit=${limit}`);
 
   const payload: ApiResponse<PaginatedData<TOccasion[]>> = await response.json();
 

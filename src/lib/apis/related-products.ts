@@ -9,7 +9,7 @@ export async function getRelatedProducts(id: string) {
   });
 
   // API Call
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/products?${params.toString()}`, {
+  const response = await fetch(`${process.env.API}/products?${params.toString()}`, {
     cache: "no-store",
     method: "GET",
     headers: {

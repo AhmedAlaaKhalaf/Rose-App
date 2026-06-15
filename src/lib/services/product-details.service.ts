@@ -1,12 +1,7 @@
 import { TProductDetails } from "../types/product";
 
 export async function productDetailsServices(id: string) {
-  const response = await fetch(`${process.env.API}/products/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(`${process.env.API}/products/${id}`, {});
 
   if (!response.ok) {
     throw new Error("Failed to fetch the product details");

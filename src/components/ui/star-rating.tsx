@@ -96,10 +96,7 @@ const RatingItem = ({
     (event: React.MouseEvent<HTMLLabelElement>) => {
       const { left, width } = event.currentTarget.getBoundingClientRect();
       if (width === 0 || !checkPrecision(precision)) return 0;
-      const x =
-        dir === "rtl"
-          ? left + width - event.clientX
-          : event.clientX - left;
+      const x = dir === "rtl" ? left + width - event.clientX : event.clientX - left;
       const fillRatio = x / width;
       const base = Math.ceil(point) - 1;
       return base + Math.ceil(fillRatio / precision) * precision;
@@ -119,7 +116,6 @@ const RatingItem = ({
     (event: React.MouseEvent<HTMLLabelElement>) => {
       if (!isInteractive) return;
       const newPoint = getRatingPoint(event);
-      // console.log("newPoint", newPoint, value);
       onValueHover(0);
       onValueChange?.(newPoint === value ? 0 : newPoint);
     },
@@ -150,8 +146,7 @@ const RatingItem = ({
         onMouseLeave={!readOnly ? onMouseLeave : undefined}
         className={cn(
           "[&_svg]:pointer-events-none",
-          isPartialPoint &&
-            "absolute top-0 overflow-hidden pointer-events-none",
+          isPartialPoint && "absolute top-0 overflow-hidden pointer-events-none",
           isPartialPoint && dir === "ltr" && "left-0",
           isPartialPoint && dir === "rtl" && "right-0",
           isInteractive && "cursor-pointer"
