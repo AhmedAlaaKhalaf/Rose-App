@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Rating } from "@/components/ui/star-rating";
 import { Textarea } from "@/components/ui/textarea";
 import { reviewSchema } from "@/lib/schemes/reviews.schema";
 import { TReviewFields } from "@/lib/types/reviews";
@@ -22,6 +21,7 @@ import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import LoginNeed from "./login-need";
 import { cn } from "@/lib/utils/tailwind-merge";
+import StarRating from "@/components/shared/star-rating";
 
 export default function ReviewForm({ id }: { id: string }) {
   // Translation
@@ -76,8 +76,8 @@ export default function ReviewForm({ id }: { id: string }) {
 
                 {/* Field */}
                 <FormControl>
-                  {/* <Rating value={rate}  /> */}
-                  <Rating value={field.value} variant="yellow" onValueChange={field.onChange} />
+                  <StarRating value={field.value} />
+                  {/* <Rating value={field.value} variant="yellow" onValueChange={field.onChange} /> */}
                 </FormControl>
 
                 {/* Validation Message */}

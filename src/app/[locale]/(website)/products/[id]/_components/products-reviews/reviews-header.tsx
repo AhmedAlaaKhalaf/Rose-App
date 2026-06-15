@@ -1,7 +1,7 @@
 import { SectionHead } from "@/components/ui/section-header";
 import { useFormatter, useTranslations } from "next-intl";
-import { Rating } from "@/components/ui/star-rating";
 import { Star } from "lucide-react";
+import StarRating from "@/components/shared/star-rating";
 
 type HeaderProps = {
   rateAvg: number;
@@ -28,7 +28,7 @@ export default function ReviewsHeader({ rateAvg, rateCount }: HeaderProps) {
         })}
       </p>
 
-      <Rating value={rateAvg} variant="yellow" Icon={<Star strokeWidth={0} size={20} />} />
+      <StarRating value={rateAvg} icon={<Star strokeWidth={0} size={20} />} />
     </header>
   );
 }

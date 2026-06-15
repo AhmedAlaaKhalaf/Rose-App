@@ -13,12 +13,15 @@ export default function Reviews({ productId }: { productId: string }) {
   // Translations
   const t = useTranslations("product-reviews");
 
+  // Services
+  const { reviewsOfProduct, isLoading, error, refetch } = useProductReviews(productId);
+
   // Hooks
   const locale = useLocale();
-  const { reviewsOfProduct, isLoading, error, refetch } = useProductReviews(productId);
 
   // Handling Loading state
   if (isLoading) return <ReviewCardSkeleton />;
+
   // Handling Error
   if (error) return <ErrorBoundary onRetry={refetch} error={error} />;
 

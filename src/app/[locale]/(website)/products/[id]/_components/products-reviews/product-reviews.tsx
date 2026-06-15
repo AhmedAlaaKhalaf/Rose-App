@@ -1,6 +1,7 @@
 import { TProductDetails } from "@/lib/types/product";
 import Reviews from "./reviews";
 import ReviewsHeader from "./reviews-header";
+import ReviewForm from "./review-form";
 
 type ReviewsProps = {
   productDetails: SuccessfulResponse<TProductDetails>;
@@ -19,7 +20,9 @@ export default async function ProductReviews({ productDetails }: ReviewsProps) {
 
       {/* Section Content */}
       <Reviews productId={product?.id} />
-      {/* <ReviewForm id={product?.id} /> */}
+
+      {/* Review form  */}
+      <ReviewForm id={product?.id} />
     </section>
   );
 }

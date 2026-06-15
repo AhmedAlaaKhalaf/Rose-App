@@ -1,9 +1,8 @@
 import { TReview } from "@/lib/types/reviews";
 import Image from "next/image";
 import { useFormatter } from "next-intl";
-import { Rating } from "@/components/ui/star-rating";
-import { Star } from "lucide-react";
 import { useSession } from "next-auth/react";
+import StarRating from "@/components/shared/star-rating";
 
 type ReviewProps = {
   review: TReview;
@@ -39,7 +38,9 @@ export default function ReviewCard({ review }: ReviewProps) {
 
       {/* Rating */}
       <div className="flex">
-        <Rating value={review.rating} size={20} variant="yellow" Icon={<Star strokeWidth={0} />} />
+        <StarRating value={review.rating} />
+
+        {/* <Rating value={}  variant="yellow" Icon={<Star strokeWidth={0} />} /> */}
         <span className="font-semibold text-zinc-800">({review.rating})</span>
       </div>
 

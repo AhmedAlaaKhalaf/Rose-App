@@ -7,6 +7,7 @@ import WishlistButton from "../features/wishlist/wishlist-button";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { useTranslations } from "next-intl";
 import { TLocale } from "@/lib/types/global";
+import { Link } from "@/i18n/navigation";
 
 type ProductCardProps = { product: TProductCard; locale: TLocale };
 
@@ -49,28 +50,33 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
         </header>
 
         {/* Cover  */}
-        <Image
-          src={"https://placehold.net/product.svg"}
-          alt={title}
-          fill
-          sizes="auto"
-          priority
-          className="rounded-3xl"
-          style={{
-            objectFit: "cover",
-          }}
-        />
+        <Link href={`/products/${product.id}`}>
+          <Image
+            src={"https://placehold.net/product.svg"}
+            alt={title}
+            fill
+            sizes="auto"
+            priority
+            className="rounded-3xl"
+            style={{
+              objectFit: "cover",
+            }}
+          />
+        </Link>
       </section>
 
       {/* Details */}
       <footer className="font-semibold text-maroon-700 dark:text-softPink-200 text-lg leading-none">
-        {title}
+        <Link href={`/products/${product.id}`} className="hover:text-[#FBA707]">
+          {title}
+        </Link>
         {/* Frame 328  */}
         <div className="flex justify-between items-center pt-3">
           {/* Frame 329 */}
           <div className="dark:text-softPink-200">
             {/* Rating */}
-            <div className="flex gap-1 pb-3">
+
+            <Link href={`/products/${product.id}`} className="flex gap-1 pb-3">
               {Array.from({ length: 5 }).map((_, idx) => (
                 <Star
                   key={idx}
@@ -81,15 +87,20 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
                   }
                 />
               ))}
-            </div>
+            </Link>
             {/* PriceAfterDiscount */}
-            {`${priceAfterDiscount?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
+            <Link href={`/products/${product.id}`}>
+              {`${priceAfterDiscount?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
+            </Link>
             {/* Price */}
             {price && priceAfterDiscount < +price && (
-              <span className="ps-2 font-medium text-zinc-400 dark:text-zinc-500 line-through">
+              <Link
+                className="ps-2 font-medium text-zinc-400 dark:text-zinc-500 line-through"
+                href={`/products/${product.id}`}
+              >
                 {`${Number(price)?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
-              </span>
-            )}{" "}
+              </Link>
+            )}
           </div>
 
           {/* Add to cart */}
