@@ -13,7 +13,7 @@ import {
 import { useRelatedProducts } from "@/hooks/related-products/use-related-products";
 import { Link } from "@/i18n/navigation";
 
-export default function RelatedCarousel({ id, locale }: { id: string; locale: string }) {
+export default function RelatedCarousel({ id }: { id: string }) {
   // Variables
   const direction =
     typeof document !== "undefined" && document.documentElement.dir === "rtl" ? "rtl" : "ltr";
@@ -35,15 +35,14 @@ export default function RelatedCarousel({ id, locale }: { id: string; locale: st
         direction: direction,
       }}
     >
-      {data?.products.length === 0 ? (
+      {data?.payload.data.length === 0 ? (
         <p className="py-10 text-zinc-500 text-sm text-center">No related products found</p>
       ) : (
         <CarouselContent className="px-2 py-3" dir={direction}>
-          {data?.products.map((product) => (
+          {data?.payload.data.map((product) => (
             <CarouselItem key={product.id} className="sm:basis-1/1 md:basis-1/3 lg:basis-1/4">
               <Link href={`/products/${product.id}`}>
-                {" "}
-                <ProductCard product={product} locale={locale} />
+                <ProductCard product={product} />
               </Link>{" "}
             </CarouselItem>
           ))}

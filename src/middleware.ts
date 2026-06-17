@@ -3,8 +3,8 @@ import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 
-const authPages = ["/login", "/register", "/forgot-password", "/cart"];
-const publicPages = ["/", "/products", "/checkout"];
+const authPages = ["/login", "/register", "/forgot-password"];
+const publicPages = ["/", "/products", "/products/[^/]+"];
 
 // Matches product detail paths: /products/:id or /:locale/products/:id
 const productDetailRegex = (locales: readonly string[]) =>

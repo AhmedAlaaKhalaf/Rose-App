@@ -135,6 +135,57 @@
       "gender": {
         "required": "Please select your gender"
       }
+    },
+    "promoCardheroSection": {
+      "badge": "Starting from 10.99 EGP",
+      "title": "Special Gifts For The People You Love",
+      "button": "Shop Now"
+    },
+    "carouselheroSection": {
+      "heading": "Say It with Flowers",
+      "subheading": "Elegant gifts for every special moment.",
+      "cta": "I’m buying!"
+    },
+    "forgot-password": {
+      "title": "Forgot Password?",
+      "desc": "Worry not, we’ll send you instructions to help you reset it.",
+      "field-lable": "Email",
+      "footer": "Don’t have an account yet? <a>Create one now!</a>",
+      "email-form-button": "Continue",
+      "new-password-title": "Create a new password",
+      "new-password-desc": "Set a strong password to secure your account.",
+      "new-password-field-one-label": "Password",
+      "new-password-button": "Reset Password",
+      "new-password-footer": "Need help? <a>Contact us</a>",
+      "new-password-field-two-label": "Confirm Password",
+      "validation-email": "In-Valid Email",
+      "email-require": "Email is Require",
+      "password-require": "Please enter your password",
+      "rePassword-require": "Please enter your confirm password",
+      "password-confirmPassword": "password and confirm Password don't match",
+      "strong-password": "Password must be at least 8 characters, one uppercase letter,one lowercase letter and one special character",
+      "sendotp-toast": "OTP sent to your email",
+      "otp-cooldown-error-toast": "You cannot ask for another OTP right now, please wait for {duration}s"
+    },
+    "login": {
+      "title": "Welcome back!",
+      "email": {
+        "label": "Email"
+      },
+
+      "password": {
+        "label": "Password"
+      },
+
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot your password?",
+      "submit": "Login",
+
+      "noAccount": "Don’t have an account yet?",
+      "createAccount": "Create one now!",
+
+      "email-invalid": "Invalid email address.",
+      "password-invalid": "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
     }
   },
   "gallery": {
@@ -321,6 +372,18 @@
         "invalid": "Please enter a valid mobile number"
       }
     }
+  },
+  "product-page": {
+    "left-in-stock": "left in stock",
+    "EGP": "EGP",
+    "out-of-stock": "Out of stock",
+    "rating": "Rating",
+    "ratings": "ratings",
+    "No-ratings-yet": "No Ratings Yet",
+    "Add-to-Cart": "Add to Cart",
+    "Adding-to-Cart": "adding to cart...",
+    "added-to-cart-success": "Product added to cart successfully",
+    "added-to-cart-error": "Failed to add product to cart"
   },
   "related-products": {
     "header": "Related Products"

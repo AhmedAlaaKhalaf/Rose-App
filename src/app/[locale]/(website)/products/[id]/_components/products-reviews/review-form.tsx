@@ -21,7 +21,7 @@ import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import LoginNeed from "./login-need";
 import { cn } from "@/lib/utils/tailwind-merge";
-import StarRating from "@/components/shared/star-rating";
+import { Rating } from "@/components/ui/star-rating";
 
 export default function ReviewForm({ id }: { id: string }) {
   // Translation
@@ -76,8 +76,7 @@ export default function ReviewForm({ id }: { id: string }) {
 
                 {/* Field */}
                 <FormControl>
-                  <StarRating value={field.value} />
-                  {/* <Rating value={field.value} variant="yellow" onValueChange={field.onChange} /> */}
+                  <Rating value={field.value} variant="yellow" onValueChange={field.onChange} />
                 </FormControl>
 
                 {/* Validation Message */}

@@ -1,7 +1,7 @@
 import { SectionHead } from "@/components/ui/section-header";
 import { useFormatter, useTranslations } from "next-intl";
 import { Star } from "lucide-react";
-import StarRating from "@/components/shared/star-rating";
+import { Rating } from "@/components/ui/star-rating";
 
 type HeaderProps = {
   rateAvg: number;
@@ -9,7 +9,7 @@ type HeaderProps = {
 };
 
 export default function ReviewsHeader({ rateAvg, rateCount }: HeaderProps) {
-  // Translation
+  // Translations
   const t = useTranslations("product-reviews");
   const format = useFormatter();
 
@@ -20,15 +20,17 @@ export default function ReviewsHeader({ rateAvg, rateCount }: HeaderProps) {
 
       <h2 className="font-semibold text-zinc-800 text-xl">{t("second-head")}</h2>
 
-      <p className="font-bold text-zinc-800 text-2xl">
+      <p className="font-bold text-zinc-800 text-2xl capitalize leading-none">
         {t.rich("general-rate", {
           rate: format.number(rateAvg, "numbers-only"),
           count: format.number(rateCount, "numbers-only"),
-          span: (chunk) => <span className="font-medium text-zinc-500 text-sm">{chunk}</span>,
+          span: (chunk) => (
+            <span className="font-medium text-zinc-500 text-sm leading-none">{chunk}</span>
+          ),
         })}
       </p>
 
-      <StarRating value={rateAvg} icon={<Star strokeWidth={0} size={20} />} />
+      <Rating value={rateAvg} variant="yellow" Icon={<Star strokeWidth={0} size={20} />} />
     </header>
   );
 }

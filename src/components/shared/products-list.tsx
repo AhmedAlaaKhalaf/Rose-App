@@ -27,7 +27,7 @@ const ProductsList = React.forwardRef<HTMLDivElement, ProductsListProps>(
       <div ref={ref} className={className}>
         {/* Data  */}
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} locale={locale} />
+          <ProductCard key={product.id} product={product}  />
         ))}
 
         {/* No data to display.  */}
@@ -39,6 +39,7 @@ const ProductsList = React.forwardRef<HTMLDivElement, ProductsListProps>(
             )}
           >
             <Rose className="size-12 text-zinc-500" strokeWidth={1.75} />
+            {t("no-products-message")}
             {t("no-products-message")}
           </div>
         )}

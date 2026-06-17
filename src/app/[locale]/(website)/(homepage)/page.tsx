@@ -31,6 +31,8 @@ export default function HomePage({ searchParams, locale }: HomePageProps) {
       <GallerySection />
 
       {/* Testimonials */}
+
+      {/* Testimonials */}
       <Testimonials />
 
       {/* Trusted Companies */}

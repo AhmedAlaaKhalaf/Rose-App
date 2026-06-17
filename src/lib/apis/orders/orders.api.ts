@@ -2,7 +2,7 @@
 // API functions for user orders
 
 export async function getUserOrders(token: string) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/orders`, {
+  const response = await fetch(`${process.env.API}/orders`, {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",

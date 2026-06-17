@@ -1,4 +1,4 @@
-import { TProductDetails } from "@/lib/types/product";
+import { TProductDetails } from "../types/product";
 
 export async function productDetailsServices(id: string) {
   const response = await fetch(`${process.env.API}/products/${id}`);
