@@ -39,7 +39,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         >
           {/* Add to wishlist */}
-          <WishlistButton product={product} />
+          <WishlistButton productId={id} />
 
           {/* New  badge */}
           {isNewProduct && <Badge variant="subtle">{t("new")}</Badge>}

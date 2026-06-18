@@ -9,9 +9,9 @@ import { HeartMinus, HeartPlus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 
-type WishlistButtonProp = { product: TProductCard };
+type WishlistButtonProp = { productId: string };
 
-export default function WishlistButton({ product }: WishlistButtonProp) {
+export default function WishlistButton({ productId }: WishlistButtonProp) {
   // Translations
   const t = useTranslations("product-listing.wishlist-button");
 
@@ -27,29 +27,39 @@ export default function WishlistButton({ product }: WishlistButtonProp) {
 
   // Variables
   const isLoggedIn = status === "authenticated";
-  const isWishlisted = wishlist.some((item) => item._id === product._id);
+  const isWishlisted = wishlist.some((item) => item.productId === productId);
   const isLoading = isAdding || isRemoving;
 
   // Functions
   const toggleUserWishlist = async () => {
     if (!isLoggedIn) {
-      toggleWishlist(product);
+      toggleWishlist(productId);
       return;
     }
 
     try {
       if (isWishlisted) {
-        await removeFromWishlist(product._id);
-
-        setWishlist((prev) => prev.filter((item) => item._id !== product._id));
+        const ApiWishlistIdExist = wishlist.find(
+          (item) => item.productId === productId
+        )?.ApiWishlistId;
+        if (ApiWishlistIdExist) {
+          await removeFromWishlist(ApiWishlistIdExist);
+        }
+        setWishlist((prev) => prev.filter((item) => item.productId !== productId));
       } else {
-        await addToWishlist(product._id);
+        const { payload } = await addToWishlist(productId);
+
+        const newApiWishlistItemId = payload.wishlistItem.id;
 
         setWishlist((prev) =>
-          prev.some((item) => item._id === product._id) ? prev : [...prev, product]
+          prev.some((item) => item.productId === productId)
+            ? prev
+            : [...prev, { productId, ApiWishlistId: newApiWishlistItemId }]
         );
       }
+      console.log(wishlist);
     } catch (error) {
+      console.log(wishlist);
       console.error("Wishlist update failed", error);
     }
   };

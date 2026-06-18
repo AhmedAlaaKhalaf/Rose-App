@@ -5,10 +5,15 @@ import { TProductCard } from "@/lib/types/product";
 import { useSession } from "next-auth/react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
+type TLocaleWishlistItem = {
+  productId: string;
+  ApiWishlistId: string;
+};
+
 type TWishlistContext = {
-  wishlist: TProductCard[];
-  toggleWishlist: (product: TProductCard) => void;
-  setWishlist: React.Dispatch<React.SetStateAction<TProductCard[]>>;
+  wishlist: TLocaleWishlistItem[];
+  toggleWishlist: (productId: string) => void;
+  setWishlist: React.Dispatch<React.SetStateAction<TLocaleWishlistItem[]>>;
 };
 
 const WishlistContext = createContext<TWishlistContext>({
@@ -18,7 +23,7 @@ const WishlistContext = createContext<TWishlistContext>({
 });
 
 export function WishlistProvider({ children }: { children: React.ReactNode }) {
-  const [wishlist, setWishlist] = useState<TProductCard[]>([]);
+  const [wishlist, setWishlist] = useState<TLocaleWishlistItem[]>([]);
   const hasSynced = useRef(false);
 
   const { status } = useSession();
@@ -47,13 +52,39 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
       try {
         hasSynced.current = true;
 
-        const localWishlist: TProductCard[] = JSON.parse(stored);
+        const localWishlist: TLocaleWishlistItem[] = JSON.parse(stored);
 
         await Promise.all(
-          localWishlist.map((item) =>
-            addUserWishlist(item._id).catch((error) => {
-              console.error(`Failed to sync product with id => ${item._id}`, error);
-            })
+          localWishlist.map(({ productId }) =>
+            addUserWishlist(productId)
+              .then(({ payload }) =>
+                setWishlist((prev) => {
+                  const exists = prev.some(
+                    (item) => item.productId === payload.wishlistItem.productId
+                  );
+
+                  const updated = exists
+                    ? [
+                        {
+                          productId: payload.wishlistItem.productId,
+                          ApiWishlistId: payload.wishlistItem.id,
+                        },
+                      ]
+                    : [
+                        ...prev,
+                        {
+                          productId: payload.wishlistItem.productId,
+                          ApiWishlistId: payload.wishlistItem.id,
+                        },
+                      ];
+                  console.log(updated);
+
+                  return updated;
+                })
+              )
+              .catch((error) => {
+                console.error(`Failed to sync product with id => ${productId}`, error);
+              })
           )
         );
 
@@ -66,16 +97,18 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
     syncWishlist();
   }, [isUserLoggedIn, addUserWishlist]);
 
-  const toggleWishlist = (product: TProductCard) => {
+  const toggleWishlist = (productId: string) => {
     setWishlist((prev) => {
-      const exists = prev.some((item) => item._id === product._id);
+      const exists = prev.some((item) => item.productId === productId);
 
-      const updated = exists ? prev.filter((item) => item._id !== product._id) : [...prev, product];
+      const updated = exists
+        ? prev.filter((item) => item.productId !== productId)
+        : [...prev, { productId, ApiWishlistId: "" }];
 
       if (!isUserLoggedIn) {
         localStorage.setItem("wishlist", JSON.stringify(updated));
       } else {
-        addUserWishlist(product._id).catch((err) =>
+        addUserWishlist(productId).catch((err) =>
           console.error("Failed to update server wishlist", err)
         );
       }
