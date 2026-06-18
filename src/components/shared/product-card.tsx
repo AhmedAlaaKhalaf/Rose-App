@@ -53,17 +53,19 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Cover  */}
         <Link href={`/products/${id}`}>
-          <Image
-            src={"https://placehold.net/product.svg"}
-            alt={title}
-            fill
-            sizes="auto"
-            priority
-            className="rounded-3xl"
-            style={{
-              objectFit: "cover",
-            }}
-          />
+          <div className="relative h-full">
+            <Image
+              src={"https://placehold.net/product.svg"}
+              alt={title}
+              fill
+              sizes="auto"
+              priority
+              className="rounded-3xl"
+              style={{
+                objectFit: "cover",
+              }}
+            />
+          </div>
         </Link>
       </section>
 

@@ -57,11 +57,9 @@ export default function WishlistButton({ productId }: WishlistButtonProp) {
             : [...prev, { productId, ApiWishlistId: newApiWishlistItemId }]
         );
       }
-      console.log(wishlist);
     } catch (error) {
-      console.log(wishlist);
       console.error("Wishlist update failed", error);
-    }
+    }     
   };
 
   return (

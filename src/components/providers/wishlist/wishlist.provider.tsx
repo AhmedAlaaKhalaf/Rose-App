@@ -64,12 +64,11 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
                   );
 
                   const updated = exists
-                    ? [
-                        {
-                          productId: payload.wishlistItem.productId,
-                          ApiWishlistId: payload.wishlistItem.id,
-                        },
-                      ]
+                    ? prev.map((item) =>
+                        item.productId === payload.wishlistItem.productId
+                          ? { productId: item.productId, ApiWishlistId: payload.wishlistItem.id }
+                          : item
+                      )
                     : [
                         ...prev,
                         {
@@ -77,7 +76,6 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
                           ApiWishlistId: payload.wishlistItem.id,
                         },
                       ];
-                  console.log(updated);
 
                   return updated;
                 })

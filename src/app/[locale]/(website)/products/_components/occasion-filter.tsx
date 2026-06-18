@@ -102,8 +102,9 @@ export default function OccasionFilter() {
                   alt={occasion.title}
                   width={133}
                   height={74}
-                  sizes="133px"
-                  className="rounded-lg w-full h-[74px] object-cover"
+                  sizes="auto"
+                  priority
+                  className="rounded-lg object-cover"
                 />
                 <div
                   className={cn(
