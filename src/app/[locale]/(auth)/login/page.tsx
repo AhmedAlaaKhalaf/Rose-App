@@ -4,10 +4,10 @@ import { useTranslations } from "next-intl";
 
 export default function Page() {
   // Translation
-  const t = useTranslations("login");
+  const t = useTranslations("auth.login");
 
   return (
-    <section className="space-y-6 w-full max-w-[25.5rem] mx-auto overflow-auto">
+    <section className="space-y-6 mx-auto w-full max-w-[25.5rem] overflow-auto">
       {/* Welcome message */}
       <p className="pb-4 dark:border-zinc-600 border-b w-full font-greatVibes text-maroon-700 dark:text-softPink-300 text-5xl text-center">
         {t("title")}

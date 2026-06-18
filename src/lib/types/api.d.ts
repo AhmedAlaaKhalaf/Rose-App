@@ -4,9 +4,7 @@ declare type SuccessfulResponse<T> = {
 } & T;
 
 declare type DataResponse<T> = {
-  payload: {
-    data: T;
-  };
+  payload: T;
 };
 
 declare type PaginatedData<T> = {

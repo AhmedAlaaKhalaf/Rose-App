@@ -98,6 +98,23 @@
       "user-question": "Already have an account?",
       "link": "login"
     },
+    "login": {
+      "title": "Welcome back!",
+      "username": {
+        "label": "username"
+      },
+      "password": {
+        "label": "Password"
+      },
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot your password?",
+      "submit": "Login",
+
+      "noAccount": "Don’t have an account yet?",
+      "createAccount": "Create one now!",
+      "email-invalid": "Invalid email address.",
+      "password-invalid": "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
+    },
     "validation": {
       "firstName": {
         "required": "Please enter your first name",
@@ -166,26 +183,6 @@
       "strong-password": "Password must be at least 8 characters, one uppercase letter,one lowercase letter and one special character",
       "sendotp-toast": "OTP sent to your email",
       "otp-cooldown-error-toast": "You cannot ask for another OTP right now, please wait for {duration}s"
-    },
-    "login": {
-      "title": "Welcome back!",
-      "email": {
-        "label": "Email"
-      },
-
-      "password": {
-        "label": "Password"
-      },
-
-      "rememberMe": "Remember me",
-      "forgotPassword": "Forgot your password?",
-      "submit": "Login",
-
-      "noAccount": "Don’t have an account yet?",
-      "createAccount": "Create one now!",
-
-      "email-invalid": "Invalid email address.",
-      "password-invalid": "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
     }
   },
   "gallery": {
@@ -252,23 +249,6 @@
     "otp-required": "Please enter a valid otp (6 digits)",
     "new-password-success-toast": "your password changed successfully, please login"
   },
-  "login": {
-    "title": "Welcome back!",
-    "email": {
-      "label": "Email"
-    },
-    "password": {
-      "label": "Password"
-    },
-    "rememberMe": "Remember me",
-    "forgotPassword": "Forgot your password?",
-    "submit": "Login",
-    "noAccount": "Don’t have an account yet?",
-    "createAccount": "Create one now!",
-    "email-invalid": "Invalid user name.",
-    "password-invalid": "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
-  },
-
   "dashboard": {
     "overview": {
       "1st-row": {

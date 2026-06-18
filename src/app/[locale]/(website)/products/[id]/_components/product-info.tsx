@@ -5,22 +5,23 @@ import { useTranslations } from "next-intl";
 import AddToCartButton from "./add-to-cart";
 import { Link } from "@/i18n/navigation";
 
-export default function ProductInfo({
-  id,
-  title,
-  description,
-  rating,
-  ratings,
-  stock,
-  price,
-  discountValue,
-  discountType,
-  _count: { wishlistItems },
-}: TProduct) {
+export default function ProductInfo(prodcut: TProduct) {
   // Translation
   const t = useTranslations("product-page");
 
   // Variables
+  const {
+    id,
+    title,
+    description,
+    rating,
+    ratings,
+    stock,
+    price,
+    discountValue,
+    discountType,
+    _count: { wishlistItems },
+  } = prodcut;
   const leftInStock = (stock ?? 0) - (ratings ?? 0);
   const outOfStock = (stock ?? 0) - (ratings ?? 0) === 0;
   const priceAfterDiscount =
@@ -29,22 +30,31 @@ export default function ProductInfo({
 
   return (
     <div className="flex flex-col justify-between h-full scroll-smooth">
-      <div>
+      {/* Wrapper  */}
+      <>
+        {/*  Product title  */}
         <h1 className="mb-2 font-semibold text-zinc-800 dark:text-zinc-50 text-xl lg:text-3xl capitalize">
           {title}
         </h1>
         <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1 text-xs sm:text-lg lg:text-3xl">
+          {/*  Product price details  */}
+          <span className="flex items-center gap-1">
+            {/*  Product price  */}
             {price && (
-              <del className="font-bold text-zinc-300 dark:text-zinc-500">
-                {`${Number(price)?.toFixed(2)}`} {t("EGP")}
+              <del className="font-bold text-zinc-300 dark:text-zinc-500 text-xl md:text-3xl leading-none">
+                {Number(price)}
               </del>
             )}
-            <span className="font-bold text-zinc-800 dark:text-zinc-50">
-              {`${Number(priceAfterDiscount)?.toFixed(2)}`} {t("EGP")}
+            {/* Final Product price  */}
+            <span className="font-semibold text-zinc-800 dark:text-zinc-50 text-xl md:text-3xl leading-none">
+              {/* Product After discount  */}
+              {`${Number(priceAfterDiscount)?.toFixed(2)}`}
+              {/* Product currency  */}
+              <span className="font-medium text-xl leading-none"> {t("EGP")}</span>
             </span>
           </span>
           <div className="flex justify-center items-center bg-zinc-100 dark:bg-zinc-700 px-4 py-2 rounded-full">
+            {/* Product stock count  */}
             <span className="flex items-center gap-2">
               {leftInStock > 0 ? (
                 <>
@@ -55,7 +65,9 @@ export default function ProductInfo({
                 </>
               ) : (
                 <>
+                  {/* Package Icon  */}
                   <Package size={20} className="text-red-600" />
+                  {/* Out of stock bagde  */}
                   <span className="font-medium text-red-600 dark:text-red-600 text-sm">
                     {t("out-of-stock")}
                   </span>
@@ -65,13 +77,16 @@ export default function ProductInfo({
           </div>
         </div>
         <div className="flex items-center gap-2 mt-8 text-xs sm:text-base">
-          <Star size={20} className="fill-yellow-400 border-none text-yellow-400" />
+          {/* Star Icon  */}
+          <Star size={20} className="fill-[#FFA508] border-none text-[#FFA508]" />
+          {/* Package Rating  */}
           {rating > 0 ? (
             <div className="flex items-center gap-1">
-              <span className="text-zinc-800 dark:text-zinc-50">
-                {t("rating")}: <span className="font-medium">{rating}/5</span>
+              <span className="text-black">
+                {t("rating")}: <span className="font-normal">{rating}/5</span>
               </span>
 
+              {/* Product rating  */}
               <Link
                 href={`/products/${id}#reviews`}
                 className="font-medium text-blue-600 dark:text-blue-400"
@@ -80,18 +95,22 @@ export default function ProductInfo({
               </Link>
             </div>
           ) : (
+            // No rating case
             <span className="font-medium text-zinc-800 dark:text-zinc-50">
               {t("No-ratings-yet")}
             </span>
           )}
         </div>
-        <p className="mt-8 h-44 lg:h-72 overflow-y-auto text-zinc-600 dark:text-zinc-400 text-xs sm:text-base hide-scroll">
+        {/* Product description*/}
+        <p className="mt-8 h-44 lg:h-72 overflow-y-auto text-zinc-600 dark:text-zinc-400 text-xs sm:text-base leading-none hide-scroll">
           {description}
         </p>
-      </div>
-      {/* add to wishlist & cart */}
+      </>
+      {/* Products buttons */}
       <div className="flex items-center gap-2 mt-4">
+        {/* Add to wishlist button */}
         <AddToWishlist wishlist={isInWishlist} />
+        {/* Add to cart button */}
         <AddToCartButton outOfStock={outOfStock} product={id} />
       </div>
     </div>

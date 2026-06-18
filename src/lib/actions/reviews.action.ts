@@ -1,6 +1,7 @@
 "use server";
 
 import { getToken } from "next-auth/jwt";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function addReviewAction(
@@ -49,6 +50,8 @@ export async function addReviewAction(
     },
     body: JSON.stringify(fields),
   });
+
+  revalidateTag("productReviews");
 
   const payload = await res.json();
 

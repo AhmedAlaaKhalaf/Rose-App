@@ -5,9 +5,7 @@ export async function getProductReviews(productId: string) {
     productId: productId,
   });
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/reviews?${params.toString()}`, {
-    cache: "no-store",
-  });
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/reviews?${params.toString()}`, {});
 
   if (!response.ok) {
     throw new Error("Failed to fetch Reviews");

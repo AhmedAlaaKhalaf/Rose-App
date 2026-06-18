@@ -1,17 +1,63 @@
-import { TProductCard } from "./product";
-
-export type TWishlistProduct = {
-  _id: string;
-  title: string;
-  imgCover: string;
-  price: number;
-  priceAfterDiscount: number;
-  rateAvg: number;
+export type TWishlistItem = {
   id: string;
+  userId: string;
+  productId: string;
+  createdAt: string;
+  product: {
+    id: string;
+    title: string;
+    description: string;
+    rating: number;
+    ratings: number;
+    stock: number;
+    price: string;
+    discountType: string;
+    discountValue: string;
+    cover: string;
+    gallery: string;
+    categoryId: string;
+    subCategoryId: string;
+    immutable: boolean;
+    createdAt: string;
+    updatedAt: string;
+    category: {
+      id: string;
+      title: string;
+    };
+    subCategory: {
+      id: string;
+      title: string;
+    };
+  };
+};
+
+export type TLocaleWishlistItem = {
+  id: string;
+  title: string;
+  description: string;
+  rating: number;
+  ratings: number;
+  stock: number;
+  price: string;
+  discountType: string;
+  discountValue: string;
+  cover: string;
+  gallery: string;
+  categoryId: string;
+  subCategoryId: string;
+  immutable: boolean;
+  createdAt: string;
+  updatedAt: string;
+  category: {
+    id: string;
+    title: string;
+  };
+  subCategory: {
+    id: string;
+    title: string;
+  };
 };
 
 export type TWishlist = {
-  _id: string;
-  user: string;
-  products: TProductCard[];
+  wishlistItems: TWishlistItem[];
 };

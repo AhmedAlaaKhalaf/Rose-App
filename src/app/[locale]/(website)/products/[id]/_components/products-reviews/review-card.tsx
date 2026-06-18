@@ -47,10 +47,7 @@ export default function ReviewCard({ review }: ReviewProps) {
       <h2 className="mt-2 font-semibold text-black capitalize">{review.headline}</h2>
 
       {/* Review Comment */}
-      <p className="mt-1 text-zinc-600">
-        {review.content} {review.content} {review.content} {review.content} {review.content}{" "}
-        {review.content}
-      </p>
+      <p className="mt-1 text-zinc-600">{review.content}</p>
     </div>
   );
 }

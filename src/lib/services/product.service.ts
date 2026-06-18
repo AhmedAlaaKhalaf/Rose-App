@@ -1,7 +1,7 @@
 import { API_DASHBOARD_PRODUCTS_LIMIT, API_PRODUCTS_LIMIT } from "../constants/global-constants";
 import { TDashboardProduct } from "../types/dashboard";
 import { SearchParams } from "../types/global";
-import { TProductCard } from "../types/product";
+import { TProduct } from "../types/product";
 
 export async function getProducts(searchParams?: SearchParams) {
   const params = new URLSearchParams({
@@ -17,7 +17,7 @@ export async function getProducts(searchParams?: SearchParams) {
     throw new Error("Failed to fetch products");
   }
 
-  const payload: ApiResponse<PaginatedData<TProductCard[]>> = await response.json();
+  const payload: ApiResponse<PaginatedData<TProduct[]>> = await response.json();
 
   if ("message" in payload) throw new Error(payload.message);
 

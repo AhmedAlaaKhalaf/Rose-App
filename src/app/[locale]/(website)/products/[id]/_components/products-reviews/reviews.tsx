@@ -27,11 +27,11 @@ export default function Reviews({ productId }: { productId: string }) {
 
   return (
     <ScrollArea
-      className="col-span-2 me-1 p-2 pe-4 border-e border-zinc-100"
+      className="lg:col-span-8 me-1 p-2 pe-4 border-border lg:border-e"
       dir={locale === "ar" ? "rtl" : "ltr"}
       id="reviews"
     >
-      <div className="h-80">
+      <div className="min-h-96">
         {/* Loading  */}
         {isLoading && <ReviewCardSkeleton />}
 

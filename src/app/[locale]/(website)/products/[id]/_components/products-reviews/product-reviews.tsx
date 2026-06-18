@@ -14,15 +14,18 @@ export default async function ProductReviews({ productDetails }: ReviewsProps) {
   } = productDetails;
 
   return (
-    <section className="space-y-4 grid grid-cols-[50px_minmax(765px,_1fr)_484px]">
+    <>
       {/* Section Header */}
       <ReviewsHeader rateAvg={product?.rating} rateCount={product?.ratings} />
 
       {/* Section Content */}
-      <Reviews productId={product?.id} />
+      <div className="lg:grid lg:grid-cols-12 lg:grid-cols-12">
+        {/* Product reviews */}
+        <Reviews productId={product?.id} />
 
-      {/* Review form  */}
-      <ReviewForm id={product?.id} />
-    </section>
+        {/* Review form  */}
+        <ReviewForm id={product?.id} />
+      </div>
+    </>
   );
 }

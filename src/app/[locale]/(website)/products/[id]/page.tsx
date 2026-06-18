@@ -17,7 +17,7 @@ export default async function ProductPage({ params: { locale, id } }: LocaleProp
   const productDetails = await productDetailsServices(id);
 
   return (
-    <main className="space-y-12 mx-auto px-3 lg:px-20 lg:pt-16">
+    <main className="space-y-12 mb-112 lg:pt-16">
       {/* product details */}
       <section className="gap-16 grid grid-cols-1 lg:grid-cols-2 mb-[50px]">
         {/* Product gallery */}
@@ -30,10 +30,10 @@ export default async function ProductPage({ params: { locale, id } }: LocaleProp
         {/* Product info */}
         <ProductInfo {...productDetails?.payload.product} />
       </section>
-      <section>
+      <section className="space-y-12">
         {/* Product reviews  */}
         <ProductReviews productDetails={productDetails} />
-        
+
         {/* Related products  */}
         <RelatedProducts id={productDetails.payload.product.category.id} />
       </section>

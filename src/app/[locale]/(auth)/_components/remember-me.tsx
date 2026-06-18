@@ -9,7 +9,7 @@ interface RememberMeProps {
 
 export default function RememberMe({ value, onChange }: RememberMeProps) {
   // Translation
-  const t = useTranslations("login");
+  const t = useTranslations("auth.login");
 
   return (
     <Field className="pt-5" orientation="horizontal">

@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
       id: "login",
       name: "login",
       credentials: {
-        email: {},
+        username: {},
         password: {},
         rememberMe: {},
       },
@@ -32,28 +32,28 @@ export const authOptions: NextAuthOptions = {
       // Function to authorize credentials and return user object
       async authorize(credentials) {
         const data = {
-          email: credentials?.email,
+          username: credentials?.username,
           password: credentials?.password,
         };
 
         // Call backend API for login
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/signin`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {
           method: "POST",
           body: JSON.stringify(data),
           headers: { "Content-Type": "application/json" },
         });
 
         // Parse API response
-        const payload: ApiResponse<loginResponse> = await res.json();
+        const payload: ApiResponse<{ payload: loginResponse }> = await res.json();
 
         // Throw error if authentication fails
         if ("message" in payload) throw new Error(payload.message);
 
         // Return user object to NextAuth
         return {
-          id: payload.user._id,
-          accessToken: payload.token,
-          user: payload.user,
+          id: payload.payload.user.id,
+          accessToken: payload.payload.token,
+          user: payload.payload.user,
           rememberMe: credentials?.rememberMe === "true",
         };
       },

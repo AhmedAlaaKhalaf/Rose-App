@@ -15,7 +15,7 @@ export default function ReviewsHeader({ rateAvg, rateCount }: HeaderProps) {
 
   // Review Section Head
   return (
-    <header className="space-y-0.5 col-span-3 pb-6 border-zinc-100 border-b">
+    <header className="space-y-0.5 col-span-3 pb-6 border-border border-b">
       <SectionHead size={"sm"}>{t("header")}</SectionHead>
 
       <h2 className="font-semibold text-zinc-800 text-xl">{t("second-head")}</h2>

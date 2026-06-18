@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { ShoppingCart, Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { TProductCard } from "@/lib/types/product";
+import { TProduct } from "@/lib/types/product";
 import { Button } from "../ui/button";
 import WishlistButton from "../features/wishlist/wishlist-button";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
-type ProductCardProps = { product: TProductCard };
+type ProductCardProps = { product: TProduct };
 
 export default function ProductCard({ product }: ProductCardProps) {
   // Translations
@@ -18,7 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const locale = useLocale();
 
   // Variables
-  const { title, rating, price, discountValue, discountType, createdAt, stock } = product;
+  const { title, rating, price, discountValue, discountType, createdAt, stock, id } = product;
   const productLifeTime =
     (new Date().getTime() - new Date(createdAt).getTime()) / (1000 * 60 * 60 * 24);
   const isNewProduct = productLifeTime < 7;
@@ -52,7 +52,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </header>
 
         {/* Cover  */}
-        <Link href={`/products/${product.id}`}>
+        <Link href={`/products/${id}`}>
           <Image
             src={"https://placehold.net/product.svg"}
             alt={title}
@@ -69,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Details */}
       <footer className="font-semibold text-maroon-700 dark:text-softPink-200 text-lg leading-none">
-        <Link href={`/products/${product.id}`} className="hover:text-[#FBA707]">
+        <Link href={`/products/${id}`} className="hover:text-[#FBA707]">
           {title}
         </Link>
         {/* Frame 328  */}
@@ -78,7 +78,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="dark:text-softPink-200">
             {/* Rating */}
 
-            <Link href={`/products/${product.id}`} className="flex gap-1 pb-3">
+            <Link href={`/products/${id}`} className="flex gap-1 pb-3">
               {Array.from({ length: 5 }).map((_, idx) => (
                 <Star
                   key={idx}
@@ -91,14 +91,14 @@ export default function ProductCard({ product }: ProductCardProps) {
               ))}
             </Link>
             {/* PriceAfterDiscount */}
-            <Link href={`/products/${product.id}`}>
+            <Link href={`/products/${id}`}>
               {`${priceAfterDiscount?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
             </Link>
             {/* Price */}
             {price && priceAfterDiscount < +price && (
               <Link
                 className="ps-2 font-medium text-zinc-400 dark:text-zinc-500 line-through"
-                href={`/products/${product.id}`}
+                href={`/products/${id}`}
               >
                 {`${Number(price)?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
               </Link>

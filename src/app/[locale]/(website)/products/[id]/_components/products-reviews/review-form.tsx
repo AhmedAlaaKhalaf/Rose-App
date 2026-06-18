@@ -22,6 +22,7 @@ import { useSession } from "next-auth/react";
 import LoginNeed from "./login-need";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { Rating } from "@/components/ui/star-rating";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ReviewForm({ id }: { id: string }) {
   // Translation
@@ -31,7 +32,7 @@ export default function ReviewForm({ id }: { id: string }) {
   const session = useSession();
 
   // Mutation
-  const { addReview, error, isPending } = useAddReview();
+  const { addReview, error, isPending } = useAddReview(id);
 
   // React Hook Form
   const form = useForm<TReviewFields>({
@@ -43,6 +44,8 @@ export default function ReviewForm({ id }: { id: string }) {
     resolver: zodResolver(reviewSchema(t)),
   });
 
+  // Variables
+  const queryClient = useQueryClient();
   // Functions
   const onSubmit: SubmitHandler<TReviewFields> = (values) => {
     addReview(
@@ -50,13 +53,17 @@ export default function ReviewForm({ id }: { id: string }) {
       {
         onSuccess: () => {
           toast.success(t("add-review-toast"));
+
+          queryClient.invalidateQueries({
+            queryKey: ["productReviews", id],
+          });
         },
       }
     );
   };
 
   return (
-    <div className="relative flex flex-col items-center">
+    <div className="relative lg:col-span-4">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

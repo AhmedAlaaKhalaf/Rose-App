@@ -1,7 +1,7 @@
 "use server";
 
 import { getDecodedToken } from "@/hooks/shared/use-decoded-token";
-import { TWishlist } from "../types/wishlist";
+import { TWishlistItem } from "../types/wishlist";
 
 export async function addToWishlistAction(productId: string) {
   const token = await getDecodedToken();
@@ -21,7 +21,11 @@ export async function addToWishlistAction(productId: string) {
     throw new Error("Failed to save products in your wishlist");
   }
 
-  const payload: ApiResponse<TWishlist> = await response.json();
+  const payload: ApiResponse<
+    DataResponse<{
+      wishlistItem: TWishlistItem;
+    }>
+  > = await response.json();
 
   if ("message" in payload) throw new Error(payload.message);
 
@@ -37,14 +41,14 @@ export async function removeFromWishlistAction(productId: string) {
       authorization: `Bearer ${token}`,
     },
   });
-
   if (!response.ok) {
+    console.log(token);
     throw new Error("Failed to delete product from your wishlist");
   }
 
-  const payload: ApiResponse<TWishlist> = await response.json();
+  const payload: ApiResponse<undefined> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message);
+  if (!payload.status) throw new Error(payload.message);
 
   return payload;
 }
