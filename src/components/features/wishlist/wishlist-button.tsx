@@ -59,7 +59,7 @@ export default function WishlistButton({ productId }: WishlistButtonProp) {
       }
     } catch (error) {
       console.error("Wishlist update failed", error);
-    }     
+    }
   };
 
   return (
@@ -78,7 +78,7 @@ export default function WishlistButton({ productId }: WishlistButtonProp) {
         <HeartPlus className="size-4" strokeWidth={1.48} />
       )}
 
-      <span className="opacity-0 group-hover:opacity-100 max-w-0 group-hover:max-w-[150px] whitespace-nowrap transition-all translate-x-[-8px] group-hover:translate-x-0 duration-300 ease-out">
+      <span className="opacity-0 group-hover:opacity-100 max-w-0 group-hover:max-w-[150px] capitalize whitespace-nowrap transition-all translate-x-[-8px] group-hover:translate-x-0 duration-300 ease-out">
         {isWishlisted ? t("remove") : t("add")}
       </span>
     </button>
