@@ -171,7 +171,7 @@ export default function Search() {
               ) : (
                 productSearch.map((product) => (
                   <SearchCard
-                    key={product._id}
+                    key={product.id}
                     product={product}
                     setOpen={setOpen}
                     searchTerm={searchTrim}
