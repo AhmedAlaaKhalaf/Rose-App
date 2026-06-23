@@ -82,21 +82,21 @@ export function CustomPagination({
     <nav
       role="navigation"
       aria-label="Pagination Navigation"
-      className={cn("flex items-center justify-center gap-2.5", className)}
+      className={cn("flex justify-center items-center gap-2.5", className)}
     >
       <button
         onClick={handleFirstPage}
         disabled={currentPage === 1}
         aria-label="Go to first page"
         className={cn(
-          "flex h-8 w-8 items-center justify-center rounded-[8px] border p-2.5 transition-colors",
+          "flex justify-center items-center p-2.5 border rounded-[8px] w-8 h-8 transition-colors",
           "border-[#F4F4F5] bg-white text-[#27272A]",
           "hover:bg-gray-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-300 dark:hover:bg-zinc-700",
           "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white dark:disabled:hover:bg-zinc-800",
           "rtl:rotate-180"
         )}
       >
-        <ChevronsLeft className="h-4 w-4 text-[#27272A]" />
+        <ChevronsLeft className="w-4 h-4 text-[#27272A]" />
       </button>
 
       <button
@@ -104,14 +104,14 @@ export function CustomPagination({
         disabled={currentPage === 1}
         aria-label="Go to previous page"
         className={cn(
-          "flex h-8 w-8 items-center justify-center rounded-[8px] border p-2.5 transition-colors",
+          "flex justify-center items-center p-2.5 border rounded-[8px] w-8 h-8 transition-colors",
           "border-[#F4F4F5] bg-white text-[#27272A]",
           "hover:bg-gray-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-300 dark:hover:bg-zinc-700",
           "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white dark:disabled:hover:bg-zinc-800",
           "rtl:rotate-180"
         )}
       >
-        <ChevronLeft className="h-4 w-4 text-[#27272A]" />
+        <ChevronLeft className="w-4 h-4 text-[#27272A]" />
       </button>
 
       {pageNumbers.map((pageNumber, index) => {
@@ -119,7 +119,7 @@ export function CustomPagination({
           return (
             <span
               key={`ellipsis-${index}`}
-              className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-white p-2.5 text-[#27272A]"
+              className="flex justify-center items-center bg-white p-2.5 rounded-[8px] w-8 h-8 text-[#27272A]"
               aria-hidden="true"
             >
               ...
@@ -132,11 +132,11 @@ export function CustomPagination({
         return (
           <button
             key={pageNumber}
-            onClick={() => handlePageClick(pageNumber)}
+            onClick={() => handlePageClick(+pageNumber)}
             aria-label={`Go to page ${pageNumber}`}
             aria-current={isActive ? "page" : undefined}
             className={cn(
-              "flex h-8 w-8 items-center justify-center rounded-[8px] border p-2.5 transition-colors font-medium",
+              "flex justify-center items-center p-2.5 border rounded-[8px] w-8 h-8 font-medium transition-colors",
               isActive
                 ? "border-transparent bg-[#A6252A] text-white"
                 : "border-[#F4F4F5] bg-white text-[#27272A] hover:bg-gray-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-300 dark:hover:bg-zinc-700"
@@ -152,14 +152,14 @@ export function CustomPagination({
         disabled={currentPage === totalPages}
         aria-label="Go to next page"
         className={cn(
-          "flex h-8 w-8 items-center justify-center rounded-[8px] border p-2.5 transition-colors",
+          "flex justify-center items-center p-2.5 border rounded-[8px] w-8 h-8 transition-colors",
           "border-[#F4F4F5] bg-white text-[#27272A]",
           "hover:bg-gray-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-300 dark:hover:bg-zinc-700",
           "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white dark:disabled:hover:bg-zinc-800",
           "rtl:rotate-180"
         )}
       >
-        <ChevronRight className="h-4 w-4 text-[#27272A]" />
+        <ChevronRight className="w-4 h-4 text-[#27272A]" />
       </button>
 
       <button
@@ -167,14 +167,14 @@ export function CustomPagination({
         disabled={currentPage === totalPages}
         aria-label="Go to last page"
         className={cn(
-          "flex h-8 w-8 items-center justify-center rounded-[8px] border p-2.5 transition-colors",
+          "flex justify-center items-center p-2.5 border rounded-[8px] w-8 h-8 transition-colors",
           "border-[#F4F4F5] bg-white text-[#27272A]",
           "hover:bg-gray-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-300 dark:hover:bg-zinc-700",
           "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white dark:disabled:hover:bg-zinc-800",
           "rtl:rotate-180"
         )}
       >
-        <ChevronsRight className="h-4 w-4 text-[#27272A]" />
+        <ChevronsRight className="w-4 h-4 text-[#27272A]" />
       </button>
     </nav>
   );

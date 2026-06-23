@@ -3,7 +3,6 @@
 import { useWishlistContext } from "@/components/providers/wishlist/wishlist.provider";
 import { useWishlistToAdd, useWishlistToRemove } from "@/hooks/wishlist/use-wishlist";
 
-import { TProductCard } from "@/lib/types/product";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { HeartMinus, HeartPlus } from "lucide-react";
 import { useSession } from "next-auth/react";

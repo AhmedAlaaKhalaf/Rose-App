@@ -5,17 +5,17 @@ import { TProduct } from "@/lib/types/product";
 import { Button } from "../ui/button";
 import WishlistButton from "../features/wishlist/wishlist-button";
 import { cn } from "@/lib/utils/tailwind-merge";
-import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 
 type ProductCardProps = { product: TProduct };
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default async function ProductCard({ product }: ProductCardProps) {
   // Translations
-  const t = useTranslations("product-listing.badge");
+  const t = await getTranslations("product-listing.badge");
 
   // Hooks
-  const locale = useLocale();
+  const locale = await getLocale();
 
   // Variables
   const { title, rating, price, discountValue, discountType, createdAt, stock, id } = product;

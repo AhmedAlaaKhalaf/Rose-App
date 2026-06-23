@@ -1,6 +1,6 @@
 import { TStatisticsObject } from "@/lib/types/statistics";
 import { cn } from "@/lib/utils/tailwind-merge";
-import { CircleDollarSign, ClipboardList, Package, ReceiptText } from "lucide-react";
+import { CircleDollarSign, ClipboardList, LucideIcon, Package, ReceiptText } from "lucide-react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 
 type OverAllStatisticsItemProps = {
@@ -29,7 +29,7 @@ export default function OverAllStatisticsItem({
   };
   const CUSTOM_STYLE = STYLES[name];
 
-  const ICONS: Record<keyof TStatisticsObject, React.ElementType> = {
+  const ICONS: Record<keyof TStatisticsObject, LucideIcon> = {
     totalProducts: Package,
     totalOrders: ReceiptText,
     totalCategories: ClipboardList,
@@ -40,7 +40,7 @@ export default function OverAllStatisticsItem({
   return (
     <div
       className={cn(
-        "p-4 gap-3 bg-maroon-50 rounded-3xl flex flex-col justify-between text-maroon-600",
+        "flex flex-col justify-between gap-3 bg-maroon-50 p-4 rounded-3xl text-maroon-600",
         CUSTOM_STYLE
       )}
     >
@@ -59,7 +59,7 @@ export default function OverAllStatisticsItem({
             })} ${locale === "ar" ? "ج.م" : "EGP"}`
           : format.number(value)}
 
-        <p className="font-medium text-zinc-800 mt-1 capitalize text-base leading-none">
+        <p className="mt-1 font-medium text-zinc-800 text-base capitalize leading-none">
           {t(`${name.slice(5).toLowerCase()}`)}
         </p>
       </div>

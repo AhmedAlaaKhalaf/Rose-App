@@ -10,7 +10,7 @@ export default async function CategoriesList() {
       {/* Category */}
       {categories.statistics.map((category) => (
         <CategoryItem key={category._id} category={category} />
-      ))}
+      ))}``
     </div>
   );
 }

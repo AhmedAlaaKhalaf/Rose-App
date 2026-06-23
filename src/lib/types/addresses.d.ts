@@ -9,6 +9,5 @@ export type TAddress = {
 };
 
 export type TAddressResponse = {
-  message: string;
   addresses: TAddress[];
 };

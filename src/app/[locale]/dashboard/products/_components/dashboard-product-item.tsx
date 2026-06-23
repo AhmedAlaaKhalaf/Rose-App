@@ -17,9 +17,8 @@ import { useFormatter, useLocale, useTranslations } from "next-intl";
 type DashboardProductItemProps = {
   product: TDashboardProduct;
 };
-export default function DashboardProductItem({
-  product: { _id, title, price, quantity, sold, rateAvg, rateCount },
-}: DashboardProductItemProps) {
+export default function DashboardProductItem({ product }: DashboardProductItemProps) {
+  const { id, title, price, stock, rating, ratings } = product;
   // Translations
   const t = useTranslations("dashboard.products.button");
 
@@ -28,18 +27,18 @@ export default function DashboardProductItem({
   const format = useFormatter();
 
   return (
-    <tr key={_id} className="border-b border-black/10 hover:bg-maroon-50/70 font-inter">
+    <tr key={id} className="hover:bg-maroon-50/70 border-black/10 border-b font-inter">
       <td className="ps-5 h-14 first:font-semibold">{title}</td>
       <td className={cn(locale === "ar" && "font-tajawal")}>
-        {format.number(price, {
+        {format.number(+price, {
           style: "currency",
           currency: "EGP",
           maximumFractionDigits: 0,
         })}
       </td>
-      <td>{quantity}</td>
-      <td>{sold}</td>
-      <td>{`${rateAvg}/5 (${rateCount})`}</td>
+      <td>{stock}</td>
+      {/* <td>{sold}</td> */}
+      <td>{`${rating}/5 (${ratings})`}</td>
       <td className={cn(locale === "ar" && "font-tajawal", "text-center")}>
         {/* Edit & Delete Buttons  On Mobile Screen  */}
         <ButtonGroup className="md:hidden">
@@ -49,7 +48,7 @@ export default function DashboardProductItem({
                 variant="outline"
                 size="icon"
                 aria-label="More Options"
-                className="border-zinc-300 hover:bg-zinc-50"
+                className="hover:bg-zinc-50 border-zinc-300"
               >
                 <EllipsisVertical className="text-zinc-400" size={18} strokeWidth={1} />
               </Button>
@@ -61,7 +60,7 @@ export default function DashboardProductItem({
                   <Button
                     asChild
                     variant={"secondary"}
-                    className="w-full text-blue-600 bg-[#0063D01A]/10 hover:bg-[#0063D01A]/20"
+                    className="bg-[#0063D01A]/10 hover:bg-[#0063D01A]/20 w-full text-blue-600"
                   >
                     <Link href={"/dashboard/products/edit"}>
                       <Pencil />
@@ -71,7 +70,7 @@ export default function DashboardProductItem({
                 </DropdownMenuItem>
 
                 <DropdownMenuTrigger asChild>
-                  <DeleteDashboardProductButton productId={_id} />
+                  <DeleteDashboardProductButton productId={id} />
                 </DropdownMenuTrigger>
               </DropdownMenuGroup>
             </DropdownMenuContent>
@@ -83,14 +82,14 @@ export default function DashboardProductItem({
           <Button
             asChild
             variant={"secondary"}
-            className="w-fit text-blue-600 bg-[#0063D01A]/10 hover:bg-[#0063D01A]/20"
+            className="bg-[#0063D01A]/10 hover:bg-[#0063D01A]/20 w-fit text-blue-600"
           >
             <Link href={"/dashboard/products/edit"}>
               <Pencil />
               {t("edit")}
             </Link>
           </Button>
-          <DeleteDashboardProductButton productId={_id} />
+          <DeleteDashboardProductButton productId={id} />
         </div>
       </td>
     </tr>

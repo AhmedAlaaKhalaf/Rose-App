@@ -25,7 +25,7 @@ import useMarkNotificationRead from "@/hooks/notifications/use-mark-notification
 import { useTranslations } from "next-intl";
 import Loading from "@/app/[locale]/loading";
 import { useSession } from "next-auth/react";
-// import useDeleteNotification from "@/hooks/notifications/use-delete-notification";
+import { markAllNotificationsAsRead } from "@/lib/actions/notification.action";
 
 export default function Notifications() {
   // state
@@ -49,14 +49,13 @@ export default function Notifications() {
   const { markRead } = useMarkNotificationRead();
 
   // todo delete notification
-  // const { deleteOneNotification } = useDeleteNotification();
 
   //   ref
   const refNotifications = useRef<HTMLDivElement>(null);
   const refBell = useRef<SVGSVGElement>(null);
 
   // flat notifications
-  const flatNotifications = notificationsList?.pages.flatMap((page) => page.notifications) ?? [];
+  const flatNotifications = notificationsList?.pages.flatMap((page) => page.payload.data) ?? [];
 
   //   handle click outside to close the notifications panel
   useEffect(() => {
@@ -98,8 +97,8 @@ export default function Notifications() {
           <h3>
             {t("title")}
             {notificationsList &&
-              notificationsList?.pages[0]?.metadata?.unreadCount > 0 &&
-              `(${notificationsList?.pages[0]?.metadata?.unreadCount})`}
+              notificationsList?.pages[0]?.payload.data.filter((item) => !item.isRead).length > 0 &&
+              `(${notificationsList?.pages[0]?.payload.data.filter((item) => !item.isRead).length})`}
           </h3>
         </div>
 
@@ -115,7 +114,10 @@ export default function Notifications() {
           </div>
           <div className="flex items-center gap-1 cursor-pointer">
             <CheckCheck size={15} className="text-zinc-500" />
-            <span className="font-semibold text-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-400 dark:text-zinc-500 text-xs transition-all duration-300">
+            <span
+              onClick={() => markAllNotificationsAsRead()}
+              className="font-semibold text-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-400 dark:text-zinc-500 text-xs transition-all duration-300"
+            >
               {t("mark-all-as-read")}
             </span>
           </div>
@@ -153,7 +155,7 @@ export default function Notifications() {
                   {flatNotifications &&
                     flatNotifications.map((notification) => (
                       <li
-                        key={notification?._id}
+                        key={notification?.id}
                         className={`p-4 border-t border-zinc-300 dark:border-zinc-600 font-semibold ${
                           notification?.isRead ? "bg-transparent" : "bg-zinc-200 dark:bg-zinc-800"
                         }`}
@@ -164,9 +166,9 @@ export default function Notifications() {
                           <DropdownMenu
                             modal={false}
                             onOpenChange={(open) =>
-                              setOpenDropdownId(open ? notification?._id : null)
+                              setOpenDropdownId(open ? notification?.id : null)
                             }
-                            open={openDropdownId === notification?._id}
+                            open={openDropdownId === notification?.id}
                           >
                             <DropdownMenuTrigger asChild>
                               <button aria-label="Open menu" className="focus-visible:outline-none">
@@ -186,7 +188,7 @@ export default function Notifications() {
                                   <DropdownMenuItem
                                     onClick={(e) => {
                                       e.stopPropagation();
-                                      markRead([notification?._id]);
+                                      markRead(notification?.id);
                                       setOpenDropdownId(null);
                                     }}
                                     className={`flex items-center gap-1 cursor-pointer text-zinc-800 dark:text-zinc-50 ${notification?.isRead ? "pointer-events-none text-zinc-400 dark:text-zinc-500" : ""}`}
@@ -198,7 +200,7 @@ export default function Notifications() {
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       // todo delete notification
-                                      // deleteOneNotification(notification?._id);
+                                      // deleteOneNotification(notification?.id);
                                       setOpenDropdownId(null);
                                     }}
                                     className="flex items-center gap-1 cursor-pointer"

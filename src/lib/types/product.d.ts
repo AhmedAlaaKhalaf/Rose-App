@@ -1,16 +1,3 @@
-export type TProductCard = {
-  id: string;
-  title: string;
-  cover: string;
-  createdAt: string;
-  price: string;
-  discountType: string;
-  discountValue: string;
-  stock: number;
-  rating: number;
-  ratings: number;
-};
-
 export type TProduct = {
   id: string;
   title: string;
@@ -43,21 +30,22 @@ export type TProduct = {
     wishlistItems: number;
   };
 };
+export type TProductCard = Pick<
+  TProduct,
+  | "id"
+  | "title"
+  | "cover"
+  | "createdAt"
+  | "price"
+  | "discountType"
+  | "discountValue"
+  | "stock"
+  | "rating"
+  | "ratings"
+>;
 
 export type TProductDetails = {
   payload: {
     product: TProduct;
   };
-};
-
-export type TAllProducts = {
-  message: string;
-  metadata: {
-    currentPage: number;
-    totalPages: number;
-    limit: number;
-    totalItems: number;
-    nextPage?: number;
-  };
-  products: TProductCard[];
 };

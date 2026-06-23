@@ -1,57 +1,40 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { markNotificationAsRead } from "@/lib/services/notifications-services/mark-notification-read.service";
-import { TPaginatedNotifications, TMarkReadResponse } from "@/lib/types/notifications";
+import { TNotification } from "@/lib/types/notifications";
+import { markNotificationAsRead } from "@/lib/actions/notification.action";
 
 export default function useMarkNotificationRead() {
   const queryClient = useQueryClient();
 
   const { mutate: markRead } = useMutation({
-    mutationFn: (ids: string[]) => markNotificationAsRead(ids),
-    onMutate: async (ids: string[]) => {
+    mutationFn: (id: string) => markNotificationAsRead(id),
+    onMutate: async (id: string) => {
       // cancel any outgoing refetches
       await queryClient.cancelQueries({ queryKey: ["notifications"] });
 
       // snapshot previous value
-      const previousData = queryClient.getQueryData<{ pages: TPaginatedNotifications[] }>([
-        "notifications",
-      ]);
+      const previousData = queryClient.getQueryData<TNotification[]>(["notifications"]);
 
       // optimistically update
-      queryClient.setQueryData<{ pages: TPaginatedNotifications[] }>(["notifications"], (old) => {
+      queryClient.setQueryData<TNotification[]>(["notifications"], (old) => {
         if (!old) return old;
 
         return {
-          ...old,
-          pages: old.pages.map((page) => ({
-            ...page,
-            notifications: page.notifications.map((n) =>
-              ids.includes(n._id) ? { ...n, isRead: true } : n
-            ),
-          })),
+          ...old.map((n) => (id.includes(n.id) ? { ...n, isRead: true } : n)),
         };
       });
 
       return { previousData };
     },
-    onError: (_err, _ids, context) => {
+    onError: (_err, _id, context) => {
       if (context?.previousData) {
         queryClient.setQueryData(["notifications"], context.previousData);
       }
     },
-    onSuccess: (data: TMarkReadResponse) => {
-      queryClient.setQueryData<{ pages: TPaginatedNotifications[] }>(["notifications"], (old) => {
+    onSuccess: (data) => {
+      queryClient.setQueryData<TNotification[]>(["notifications"], (old) => {
         if (!old) return old;
 
-        return {
-          ...old,
-          pages: old.pages.map((page) => ({
-            ...page,
-            metadata: {
-              ...page.metadata,
-              unreadCount: data.unreadCount,
-            },
-          })),
-        };
+        return [...old, data.payload.notification];
       });
     },
   });

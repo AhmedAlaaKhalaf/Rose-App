@@ -25,7 +25,7 @@ export default function CategoryItem({ category: { name, totalProducts } }: Cate
       <p>{name}</p>
 
       {/* Frame 375  */}
-      <span className="rounded-md py-1 px-2 font-medium text-sm bg-black/5">
+      <span className="bg-black/5 px-2 py-1 rounded-md font-medium text-sm">
         {`${totalProducts} ${t("products-count")}`}
       </span>
     </div>

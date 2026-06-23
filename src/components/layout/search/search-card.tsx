@@ -49,14 +49,14 @@ export default function SearchCard({ product, setOpen, searchTerm }: TCardProps)
   // Search Card UI
   return (
     <Link
-      href={`/products/${product._id}`}
+      href={`/products/${product.id}`}
       onClick={() => {
         setOpen(false);
       }}
       className="gap-4 grid grid-cols-11 hover:bg-zinc-50 p-2 border-zinc-100 border-b"
     >
       <Image
-        src={product.imgCover}
+        src={product.cover}
         alt="product image"
         width={80}
         height={80}
@@ -68,7 +68,7 @@ export default function SearchCard({ product, setOpen, searchTerm }: TCardProps)
           {highlightMatches(product.title, searchTerm)}
         </h2>
         <p className="font-bold text-zinc-800 text-xl">
-          {format.number(product.price, { style: "decimal" })}{" "}
+          {format.number(+product.price, { style: "decimal" })}{" "}
           <span className="font-medium text-zinc-800 text-xs">{t("currency")}</span>
         </p>
       </div>
@@ -78,11 +78,11 @@ export default function SearchCard({ product, setOpen, searchTerm }: TCardProps)
         <span className="text-black text-sm">
           {t("general-rate")}:{" "}
           <span className="font-medium text-black text-base">
-            {format.number(product.rateAvg, "numbers-only")}/{format.number(5, "numbers-only")}
+            {format.number(product.rating, "numbers-only")}/{format.number(5, "numbers-only")}
           </span>
         </span>
         <span className="font-medium text-blue-600 text-sm">
-          ({format.number(product.rateCount, "numbers-only")} {t("rate-count")})
+          ({format.number(product.ratings, "numbers-only")} {t("rate-count")})
         </span>
       </p>
     </Link>

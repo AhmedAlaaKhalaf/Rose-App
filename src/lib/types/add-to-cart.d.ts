@@ -9,7 +9,7 @@ export type TCart = {
   _id: string;
   user: string;
   cartItems: CartItem[];
-  appliedCoupons: any[];
+  appliedCoupons: string[];
   totalPrice: number;
   createdAt: string;
   updatedAt: string;

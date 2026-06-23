@@ -1,7 +1,6 @@
 "use client";
 
 import { useWishlistToAdd } from "@/hooks/wishlist/use-wishlist";
-import { TProductCard } from "@/lib/types/product";
 import { useSession } from "next-auth/react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 

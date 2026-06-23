@@ -77,7 +77,7 @@ export default function CartItem({ item }: CartItemProp) {
           </RemoveCartItemButton>
 
           {/* Item increase/decrease count button */}
-          <CartItemQuantityPicker quantity={item.quantity} itemId={item.id} />
+          <CartItemQuantityPicker quantity={item.quantity} productId={item.id} />
         </div>
       </div>
     </div>

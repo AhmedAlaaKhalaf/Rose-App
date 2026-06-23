@@ -11,19 +11,22 @@ export default function CartSummary() {
   const t = useTranslations("checkout");
 
   // Get user cart
-  const { data , } = useUserCart();
+  const { data } = useUserCart();
 
   // User cart data
-  const userCart = data?.cart ?? null;
+  const userCart = data?.payload ?? null;
   const userCartItems = userCart?.cartItems ?? [];
-  const userCartTotalPrice = userCart?.totalPrice ?? 0;
-  const userCartAppliedCoupons = userCart?.appliedCoupons ?? [];
+  const userCartTotalPrice = userCartItems.reduce(
+    (sum, item) => sum + Number(item.price) * item.quantity,
+    0
+  );
+  // const userCartAppliedCoupons = userCart?.appliedCoupons ?? [];
 
   // Calculate subtotal from cart items (price * quantity)
-  const subtotal = userCartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = userCartItems.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0);
 
   // Derive discount and total from API response
-  const total = userCartTotalPrice || subtotal;
+  const total = userCartTotalPrice;
   const discount = subtotal > total ? subtotal - total : 0;
 
   return (
@@ -43,7 +46,7 @@ export default function CartSummary() {
 
         {/* Applied Coupons */}
         <div className="flex flex-col gap-3 p-4 border border-zinc-300 rounded-sm min-h-[120px]">
-          {userCartAppliedCoupons.length === 0 ? (
+          {/* {userCartAppliedCoupons.length === 0 ? (
             <p className="text-zinc-400 italic">{t("no-coupons-applied")}</p>
           ) : (
             <div className="flex flex-wrap gap-2">
@@ -56,7 +59,7 @@ export default function CartSummary() {
                 </span>
               ))}
             </div>
-          )}
+          )} */}
         </div>
 
         {/* Subtotal */}

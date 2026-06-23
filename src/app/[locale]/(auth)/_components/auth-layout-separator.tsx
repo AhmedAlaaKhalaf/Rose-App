@@ -10,7 +10,6 @@ export default function AuthLayoutSeparator({ flip }: AuthLayoutSeparatorProps) 
   return (
     <Image
       src={layoutSeparator}
-      width={280}
       alt="Auth layout separator"
       className={cn("mx-auto", flip && "rotate-180")}
     />

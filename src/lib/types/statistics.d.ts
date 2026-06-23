@@ -1,5 +1,3 @@
-import { TCategory } from "./category";
-
 export type TCategory = {
   _id: string;
   name: string;

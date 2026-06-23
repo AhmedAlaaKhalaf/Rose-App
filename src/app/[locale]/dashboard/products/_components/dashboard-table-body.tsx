@@ -8,11 +8,11 @@ type DashboardTableBodyProps = {
 
 export default async function DashboardTableBody({ searchParams }: DashboardTableBodyProps) {
   // Services
-  const payload = await getDashboardProducts(searchParams);
+  const { payload } = await getDashboardProducts(searchParams);
 
   return (
     <tbody className="font-normal text-sm">
-      {payload?.products.map((product, key) => (
+      {payload?.data.map((product, key) => (
         <DashboardProductItem key={key} product={product} />
       ))}
     </tbody>

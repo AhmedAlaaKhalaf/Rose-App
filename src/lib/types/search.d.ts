@@ -1,10 +1,10 @@
 export type TProduct = {
-  _id: string;
+  id: string;
   title: string;
-  imgCover: string;
+  cover: string;
   price: number;
-  rateAvg: number;
-  rateCount: number;
+  rating: number;
+  ratings: number;
 };
 
 export type TProductDetails = {
@@ -21,11 +21,11 @@ export type TProductDetails = {
 export type TRecommendation = {
   _id: string;
   title: string;
-  imgCover: string;
+  cover: string;
   price: number;
   priceAfterDiscount: number;
-  rateAvg: number;
-  rateCount: number;
+  rating: number;
+  ratings: number;
   id: string;
 };
 

@@ -75,7 +75,7 @@ export default async function CartPage({ params: { locale } }: CartPageProps) {
         <SectionHead size={"sm"}> {t("like-head")}</SectionHead>
 
         {/* Section Content */}
-        <RelatedCarousel id={"69d988704461df0f939b57cc"} locale={locale} />
+        <RelatedCarousel id={"69d988704461df0f939b57cc"} />
       </>
     </main>
   );

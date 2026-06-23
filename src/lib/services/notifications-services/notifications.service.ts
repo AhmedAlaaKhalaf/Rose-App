@@ -1,26 +1,41 @@
-// import { TPaginatedNotifications } from "../../types/notifications";
+import { API_NOTIFICATIONS_LIMIT } from "@/lib/constants/global-constants";
+import { TNotification } from "../../types/notifications";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
 
-// interface GetNotificationsParams {
-//   pageParam?: number;
-//   limit?: number;
-// }
+interface GetNotificationsParams {
+  pageParam?: number;
+  limit?: number;
+  type?: "ORDER" | "PROMOTION" | "SYSTEM" | "REVIEW" | "OTHER";
+  isRead?: boolean;
+}
 
-// // fetch notifications
-// export async function getNotifications({
-//   pageParam = 1,
-//   limit = 10,
-// }: GetNotificationsParams): Promise<TPaginatedNotifications> {
-//   const res = await fetch(`/api/notifications?page=${pageParam}&limit=${limit}`);
+export async function getNotifications(searchParams: GetNotificationsParams) {
+  const token = await getServerSession(authOptions);
 
-//   if (!res.ok) {
-//     let errorMessage = "Error fetching notifications";
+  const { pageParam = 1, limit = API_NOTIFICATIONS_LIMIT } = searchParams;
 
-//     const errorData = await res.json();
-//     errorMessage = errorData.message || errorMessage;
+  const params = new URLSearchParams({
+    page: pageParam.toString(),
+    limit: limit.toString(),
+  });
 
-//     throw new Error(errorMessage);
-//   }
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API}/notifications?${params.toString()}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
-//   const data = await res.json();
-//   return data;
-// }
+  if (!response.ok) {
+    throw new Error("Failed to fetch notifications");
+  }
+
+  const payload: ApiResponse<PaginatedData<TNotification[]>> = await response.json();
+
+  if ("message" in payload) throw new Error(payload.message);
+
+  return payload;
+}

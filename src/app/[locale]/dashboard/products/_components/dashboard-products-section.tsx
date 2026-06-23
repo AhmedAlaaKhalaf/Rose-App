@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils/tailwind-merge";
 import DashboardProductSearch from "./dashboard.product.search";
 import { getDashboardProducts } from "@/lib/services/product.service";
 import { getLocale, getTranslations } from "next-intl/server";
-import { CustomPagination } from "@/components/shared/custom-pagination";
 type DashboardProductsSectionProps = {
   searchParams: SearchParams;
 };
@@ -19,7 +18,7 @@ export default async function DashboardProductsSection({
   const t = await getTranslations("dashboard.products");
 
   // Services
-  const payload = await getDashboardProducts(searchParams);
+  const { payload } = await getDashboardProducts(searchParams);
 
   // Hooks
   const locale = await getLocale();
@@ -35,7 +34,7 @@ export default async function DashboardProductsSection({
       >
         {/* Header  */}
         <header className="flex justify-between items-center">
-          <h1 className="font-semibold text-2xl leading-none text-zinc-800 capitalize">
+          <h1 className="font-semibold text-zinc-800 text-2xl capitalize leading-none">
             {t("header")}
           </h1>
           <Button asChild>
@@ -54,8 +53,8 @@ export default async function DashboardProductsSection({
       </section>
 
       {/* No data to display.  */}
-      <div className="h-full flex flex-col justify-end">
-        {!payload.products.length && (
+      <div className="flex flex-col justify-end h-full">
+        {!payload.data.length && (
           <div
             className={cn(
               locale === "ar" && "font-tajawal",
@@ -67,7 +66,7 @@ export default async function DashboardProductsSection({
           </div>
         )}
         {/* Pagination  */}
-        <CustomPagination />
+        {/* <CustomPagination /> */}
       </div>
     </section>
   );
