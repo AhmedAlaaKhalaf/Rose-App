@@ -1,14 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Input } from "../../ui/input";
 import { Heart, LocationEdit, ShoppingCart } from "lucide-react";
 import HeaderNavigation from "./header-navigation";
 import MobileNavigation from "./mobile-navigation";
 import LoginIcon from "./login-icon";
 import LanguageSwitcher from "@/components/ui/language-switcher";
 import Notifications from "@/app/[locale]/(website)/_components/notifications/notifications";
-import UserDropdown from "./user-dropdown";
-// import Search from "../search/search";
+// import UserDropdown from "./user-dropdown";
+import Search from "../search/search";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 export default async function Header() {
@@ -37,13 +36,7 @@ export default async function Header() {
 
           {/* search bar */}
           <div className="hidden md:block sm:w-2/3">
-            <Input
-              id="search"
-              type="text"
-              placeholder="What awesome gift are you looking for?"
-              className="w-full"
-            />
-            {/* <Search /> */}
+            <Search />
           </div>
 
           {/* icons */}
@@ -60,9 +53,9 @@ export default async function Header() {
               </div>
             )}
 
-            <div className="hidden sm:block">
+            {/* <div className="hidden sm:block">
               <UserDropdown />
-            </div>
+            </div> */}
             {/* mobile toggle */}
             <MobileNavigation />
             {/* icon group */}
