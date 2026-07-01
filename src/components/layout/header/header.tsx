@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Heart, LocationEdit, ShoppingCart } from "lucide-react";
 import HeaderNavigation from "./header-navigation";
 import MobileNavigation from "./mobile-navigation";
-import LoginIcon from "./login-icon";
+// import LoginIcon from "./login-icon";
 import LanguageSwitcher from "@/components/ui/language-switcher";
 import Notifications from "@/app/[locale]/(website)/_components/notifications/notifications";
 // import UserDropdown from "./user-dropdown";

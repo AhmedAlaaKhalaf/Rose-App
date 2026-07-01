@@ -1,5 +1,4 @@
 import { TProduct } from "../types/product";
-import { TProductDetails } from "../types/search";
 
 type TSearchParams = {
   pageParam: number;
@@ -8,7 +7,7 @@ type TSearchParams = {
   fields: string;
 };
 
-export async function getSearchResultService({ pageParam, keyword, limit, fields }: TSearchParams) {
+export async function getSearchResultService({ pageParam, limit }: TSearchParams) {
   const params = new URLSearchParams({
     limit: limit.toString(),
     page: pageParam.toString(),
