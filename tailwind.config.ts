@@ -169,6 +169,7 @@ const config: Config = {
         ar: ["var(--font-tajawal)", "sans-serif"],
         nunitoSans: ["var(--font-nunitoSans)", "sans-serif"],
         mulish: ["var(--font-mulish)", "sans-serif"],
+        sarabun: ["var(--font-sarabun)", "sans-serif"],
       },
     },
   },

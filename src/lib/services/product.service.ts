@@ -11,7 +11,7 @@ export async function getProducts(searchParams?: SearchParams) {
     ...searchParams,
   });
 
-  const response = await fetch(`${process.env.API}/products?${params.toString()}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/products?${params.toString()}`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch products");

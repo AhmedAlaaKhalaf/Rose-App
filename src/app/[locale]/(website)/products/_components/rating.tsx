@@ -20,7 +20,7 @@ export default function RatingFilter() {
         <h2 id="Rating-title" className="font-inter font-semibold text-zinc-800 text-lg">
           {t("rating")}
         </h2>
-        {t("rating")}
+
         {/* reset rating */}
         {QueryParams && QueryParams.length > 0 && (
           <ClearButton onClick={clearQueryParams} label={t("reset")} />

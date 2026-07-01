@@ -75,7 +75,6 @@ export default function Category() {
                   role="checkbox"
                   aria-checked={isChoseCatogry(categoryData.id)}
                 >
-                  {" "}
                   {/* category image */}
                   <div
                     className={` ${isChoseCatogry(categoryData.id) ? "bg-maroon-600 dark:bg-pink-300" : "bg-zinc-500"} w-9 h-9 p-2  rounded-s-sm`}
@@ -85,7 +84,7 @@ export default function Category() {
                         filter:
                           "invert(100%) sepia(3%) saturate(2%) hue-rotate(307deg) brightness(203%) contrast(100%)",
                       }}
-                      src={"https://placehold.net/7.png"}
+                      src={"/assets/category-placeholder.webp"}
                       width={36}
                       height={36}
                       alt={categoryData.title}

@@ -56,8 +56,8 @@ export default function SearchCard({ product, setOpen, searchTerm }: TCardProps)
       className="gap-4 grid grid-cols-11 hover:bg-zinc-50 p-2 border-zinc-100 border-b"
     >
       <Image
-        src={product.cover}
-        alt="product image"
+        src={"/assets/product-placeholder.webp"}
+        alt={product.title}
         width={80}
         height={80}
         className="col-span-1 rounded-sm h-20 object-cover"

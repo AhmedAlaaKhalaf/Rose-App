@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { CartItemsListSkeleton } from "./_skeletons/cart-items-list.skeleton";
 import { getUserCart } from "@/lib/services/user-cart.service";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import ClearUserCartButton from "./_components/clean-user-cart-button";
 
 type CartPageProps = {

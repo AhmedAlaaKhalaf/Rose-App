@@ -11,14 +11,18 @@ export function useProductsYouMayLike({ status }: TSearchParams) {
     queryKey: ["mayLike", status],
     queryFn: async () => {
       if (status === "unauthenticated") {
-        return await getProducts();
+        return await getProducts({
+          limit: "6",
+        });
       } else {
         // return getProductsYouMayLike();
-        return await getProducts();
+        return await getProducts({
+          limit: "6",
+        });
       }
     },
     staleTime: 60 * 1000,
   });
 
-  return { youLike: data?.payload, youLikeError: error, youLikeLoading: isLoading };
+  return { youLike: data?.payload.data, youLikeError: error, youLikeLoading: isLoading };
 }

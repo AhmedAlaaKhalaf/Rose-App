@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Heart, LocationEdit, ShoppingCart } from "lucide-react";
 import HeaderNavigation from "./header-navigation";
@@ -10,6 +10,7 @@ import Notifications from "@/app/[locale]/(website)/_components/notifications/no
 import Search from "../search/search";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
+import UserDropdown from "./user-dropdown";
 export default async function Header() {
   const session = await getServerSession(authOptions);
   const isLoggedIn = !!session;
@@ -48,14 +49,14 @@ export default async function Header() {
                 <p className="text-primary">{firstName}</p>
               </div>
             ) : (
+              // <div className="hidden sm:block">
+              //   <LoginIcon />
+              // </div>
               <div className="hidden sm:block">
-                <LoginIcon />
+                <UserDropdown />
               </div>
             )}
 
-            {/* <div className="hidden sm:block">
-              <UserDropdown />
-            </div> */}
             {/* mobile toggle */}
             <MobileNavigation />
             {/* icon group */}

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import LoginPopover from "./login-popover";
 
 export default function UserDropdown() {

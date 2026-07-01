@@ -1,3 +1,4 @@
+import { TProduct } from "../types/product";
 import { TProductDetails } from "../types/search";
 
 type TSearchParams = {
@@ -8,15 +9,18 @@ type TSearchParams = {
 };
 
 export async function getSearchResultService({ pageParam, keyword, limit, fields }: TSearchParams) {
-  const res = await fetch(
-    `https://flower.elevateegy.com/api/v1/products?page=${pageParam}&keyword=${keyword}&limit=${limit}&fields=${fields}`
-  );
+  const params = new URLSearchParams({
+    limit: limit.toString(),
+    page: pageParam.toString(),
+  });
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/products?${params.toString()}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch Products");
   }
 
-  const payload: ApiResponse<TProductDetails> = await res.json();
+  const payload: ApiResponse<PaginatedData<TProduct>> = await res.json();
 
   if ("message" in payload) {
     throw new Error(payload.message);
