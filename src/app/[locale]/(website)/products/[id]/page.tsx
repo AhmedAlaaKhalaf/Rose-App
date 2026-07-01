@@ -15,17 +15,14 @@ export default async function ProductPage({ params: { locale, id } }: LocaleProp
 
   // Fetch product details
   const productDetails = await productDetailsServices(id);
+  const { title, cover, gallery, category } = productDetails.payload.product;
 
   return (
     <main className="space-y-12 mb-112 lg:pt-16">
       {/* product details */}
       <section className="gap-16 grid grid-cols-1 lg:grid-cols-2 mb-[50px]">
         {/* Product gallery */}
-        <ProductGallery
-          title={productDetails.payload.product.title}
-          imgCover={productDetails.payload.product.cover}
-          images={Array(productDetails.payload.product.gallery)}
-        />
+        <ProductGallery title={title} imgCover={cover} images={Array(gallery)} />
 
         {/* Product info */}
         <ProductInfo {...productDetails?.payload.product} />
@@ -35,7 +32,7 @@ export default async function ProductPage({ params: { locale, id } }: LocaleProp
         <ProductReviews productDetails={productDetails} />
 
         {/* Related products  */}
-        <RelatedProducts id={productDetails.payload.product.category.id} />
+        <RelatedProducts id={category.id} />
       </section>
     </main>
   );

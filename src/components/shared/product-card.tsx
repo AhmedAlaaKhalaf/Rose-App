@@ -6,16 +6,16 @@ import { Button } from "../ui/button";
 import WishlistButton from "../features/wishlist/wishlist-button";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { Link } from "@/i18n/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
+import { useLocale, useTranslations } from "next-intl";
 
 type ProductCardProps = { product: TProduct };
 
-export default async function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   // Translations
-  const t = await getTranslations("product-listing.badge");
+  const t = useTranslations("product-listing.badge");
 
   // Hooks
-  const locale = await getLocale();
+  const locale = useLocale();
 
   // Variables
   const { title, rating, price, discountValue, discountType, createdAt, stock, id } = product;
@@ -55,7 +55,8 @@ export default async function ProductCard({ product }: ProductCardProps) {
         <Link href={`/products/${id}`}>
           <div className="relative h-full">
             <Image
-              src={"https://placehold.net/product.svg"}
+              // src={"https://placehold.net/product.svg"}
+              src={"/assets/product-placeholder.webp"}
               alt={title}
               fill
               sizes="auto"
