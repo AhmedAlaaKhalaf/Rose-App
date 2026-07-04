@@ -1,7 +1,7 @@
 "use client";
 
 import { HEADER_NAV } from "@/lib/constants/header-nav.constant";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils/tailwind-merge";
 

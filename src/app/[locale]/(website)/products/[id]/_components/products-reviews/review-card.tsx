@@ -23,7 +23,7 @@ export default function ReviewCard({ review }: ReviewProps) {
       <div className="flex items-center gap-2 mb-2">
         <Image
           sizes="auto"
-          src={session.data?.user.photo || "https://placehold.net/avatar.svg"}
+          src={session.data?.user.photo || "/assets/user-placeholder.webp"}
           alt="userImage"
           className="rounded-full h-11 object-cover"
           width={45}

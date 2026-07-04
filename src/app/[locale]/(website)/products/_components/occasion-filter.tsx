@@ -34,7 +34,9 @@ export default function OccasionFilter() {
       params.delete(OCCASION_PARAM);
       ids.forEach((id) => params.append(OCCASION_PARAM, id));
       const query = params.toString();
-      router.replace(query ? `${pathname}?${query}` : pathname);
+      router.replace(query ? `${pathname}?${query}` : pathname, {
+        scroll: false,
+      });
     },
     [pathname, router, searchParams]
   );
@@ -100,7 +102,7 @@ export default function OccasionFilter() {
                 <Image
                   src={occasion.image}
                   alt={occasion.title}
-                  width={133}
+                  width={153}
                   height={74}
                   sizes="auto"
                   priority

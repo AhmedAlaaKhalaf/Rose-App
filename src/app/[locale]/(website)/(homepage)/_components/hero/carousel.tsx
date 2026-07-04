@@ -13,7 +13,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
 /**
@@ -98,7 +98,7 @@ export default function CarouselSection() {
           <p className="h-12 text-base">{t("sub-heading")}</p>
           <div className="flex justify-between items-center">
             {/* Primary CTA */}
-            <Link href={"#"}>
+            <Link href={"/products"}>
               <Button
                 className="bg-maroon-50 py-2.5 rounded-xl text-maroon-700"
                 variant="secondary"

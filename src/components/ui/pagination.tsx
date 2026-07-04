@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { ButtonProps, buttonVariants } from "@/components/ui/button";
 

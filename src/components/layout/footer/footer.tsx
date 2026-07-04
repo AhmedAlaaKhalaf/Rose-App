@@ -1,6 +1,6 @@
 import { FOOTER_NAV } from "@/lib/constants/footer-nav.constant";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";

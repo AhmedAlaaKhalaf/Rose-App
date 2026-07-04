@@ -55,8 +55,9 @@ export default function Search() {
   });
 
   // Variables
-  const productSearch = result?.pages.flatMap((page) => page.products) ?? [];
-
+  const productSearch = result?.pages.flatMap(({ payload }) => payload.data) ?? [];
+  
+  console.log(productSearch);
   // Functions
   const handleCloseClick = (e: MouseEvent) => {
     if (e.target && refSearch.current && !refSearch.current.contains(e.target as Node)) {
@@ -126,11 +127,7 @@ export default function Search() {
           id="search-area"
         >
           {/* Error */}
-          {(error || youLikeError) && (
-            <p>
-              {error?.message} || {youLikeError?.message}
-            </p>
-          )}
+          {(error || youLikeError) && <p>{error?.message || youLikeError?.message}</p>}
 
           {/* Products you may like */}
           {open && !form.formState.isDirty && (
@@ -141,13 +138,13 @@ export default function Search() {
               {youLikeLoading
                 ? Array.from({ length: 6 }).map((_, idx) => <SearchCardSkeleton key={idx} />)
                 : session.status === "unauthenticated"
-                  ? youLike?.data.map((product) => (
+                  ? youLike?.map((product) => (
                       <SearchCard key={product.id} product={product} setOpen={setOpen} />
                     ))
                   : // : youLike?.recommendations.map((product) => (
                     //     <SearchCard key={product._id} product={product} setOpen={setOpen} />
                     //   ))}
-                    youLike?.data.map((product) => (
+                    youLike?.map((product) => (
                       <SearchCard key={product.id} product={product} setOpen={setOpen} />
                     ))}
             </>

@@ -14,18 +14,24 @@ interface ProductGalleryProps {
 
 export default function ProductGallery({ title, imgCover }: ProductGalleryProps) {
   // state
-  const [activeImage, setActiveImage] = useState("https://placehold.net/product.svg");
+  const [activeImage, setActiveImage] = useState("/assets/product-placeholder.webp");
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   //all images
   // const allImages = Array.from(new Set([imgCover, ...images]));
   const allImages = [
-    "https://placehold.net/product.svg",
-    "https://placehold.net/book.svg",
-    "https://placehold.net/shape.svg",
-    "https://placehold.net/building.svg",
-    "https://placehold.net/map-600x600.png",
-    "https://placehold.net/default.svg",
+    // "https://placehold.net/product.svg",
+    // "https://placehold.net/book.svg",
+    // "https://placehold.net/shape.svg",
+    // "https://placehold.net/building.svg",
+    // "https://placehold.net/map-600x600.png",
+    // "https://placehold.net/default.svg",
+    "/assets/product-placeholder.webp",
+    "/assets/product-placeholder.webp",
+    "/assets/product-placeholder.webp",
+    "/assets/product-placeholder.webp",
+    "/assets/product-placeholder.webp",
+    "/assets/product-placeholder.webp",
   ];
 
   //   functions

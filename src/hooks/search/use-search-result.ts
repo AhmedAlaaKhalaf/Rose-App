@@ -16,9 +16,9 @@ export function useSearchResult({ keyword, limit, fields, open }: TSearchParams)
     initialPageParam: 1,
 
     getNextPageParam: (lastPage) => {
-      if (lastPage.metadata.currentPage === lastPage.metadata.totalPages) return undefined;
+      if (lastPage.payload.metadata.page === lastPage.payload.metadata.totalPages) return undefined;
 
-      return lastPage.metadata.currentPage + 1;
+      return lastPage.payload.metadata.page + 1;
     },
     enabled: open,
   });

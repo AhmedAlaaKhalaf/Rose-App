@@ -62,7 +62,8 @@ export default function PriceFilter() {
   // Clear handler
   const clearPrices = () => {
     // reset form
-    reset();
+    reset({ min: 0, max: 0 });
+
     // update url
     updateUrl();
   };
