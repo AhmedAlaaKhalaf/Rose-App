@@ -4,10 +4,21 @@ import ProductReviews from "./_components/products-reviews/product-reviews";
 import RelatedProducts from "./_components/related-products/related-products";
 import ProductGallery from "./_components/product-gallery";
 import ProductInfo from "./_components/product-info";
+import { getProducts } from "@/lib/services/product.service";
+import { API_STATIC_PRODUCTS_LIMIT } from "@/lib/constants/global-constants";
 
 type LocaleProps = {
   params: { locale: string; id: string };
 };
+
+export async function generateStaticParams() {  
+  const { payload } = await getProducts({ limit: `${API_STATIC_PRODUCTS_LIMIT}` });
+  const products = payload.data;
+
+  return products.map(({ id }) => ({
+    id,
+  }));
+}
 
 export default async function ProductPage({ params: { locale, id } }: LocaleProps) {
   // Enable static rendering

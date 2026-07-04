@@ -1,7 +1,7 @@
 import { API_DASHBOARD_PRODUCTS_LIMIT, API_PRODUCTS_LIMIT } from "../constants/global-constants";
 import { TDashboardProduct } from "../types/dashboard";
 import { SearchParams } from "../types/global";
-import { TProduct } from "../types/product";
+import { TProduct } from "../types/product";  
 
 export async function getProducts(searchParams?: SearchParams) {
   const params = new URLSearchParams({
