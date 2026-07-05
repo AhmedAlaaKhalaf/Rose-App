@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils/tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const headingVariants = cva(
-  "relative font-sarabun font-bold text-primary dark:text-secondary text-4xl",
+  "relative font-sarabun font-bold text-primary dark:text-secondary text-2xl sm:text-3xl lg:text-4xl",
   {
     variants: {
       variant: {
@@ -13,9 +13,10 @@ const headingVariants = cva(
         ],
       },
       size: {
-        default: "before:w-[25.13rem] after:w-[9.82rem]",
-        sm: "before:w-[9.55rem] after:w-[3.75rem]",
-        md: "before:w-[13rem] after:w-[5.19rem]",
+        default:
+          "before:w-[min(25.13rem,100%)] lg:before:w-[25.13rem] after:w-[min(9.82rem,40%)] lg:after:w-[9.82rem]",
+        sm: "before:w-[min(9.55rem,100%)] lg:before:w-[9.55rem] after:w-[min(3.75rem,40%)] lg:after:w-[3.75rem]",
+        md: "before:w-[min(13rem,100%)] lg:before:w-[13rem] after:w-[min(5.19rem,40%)] lg:after:w-[5.19rem]",
       },
     },
     defaultVariants: {
@@ -41,7 +42,7 @@ const SectionTitle = React.forwardRef<HTMLHeadingElement, React.ComponentProps<"
       <h1
         ref={ref}
         className={cn(
-          "font-sarabun font-bold text-secondary dark:text-primary uppercase tracking-[0.3rem]",
+          "font-sarabun font-bold text-secondary dark:text-primary uppercase tracking-[0.2em] lg:tracking-[0.3rem]",
           className
         )}
         {...props}

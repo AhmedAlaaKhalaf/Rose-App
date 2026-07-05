@@ -21,7 +21,12 @@ export default async function MostPopularProductsList({
   } = await getProductsWithOccasionFallback(occasionId);
 
   return (
-    <div className={cn("gap-6 grid grid-cols-4", className)}>
+    <div
+      className={cn(
+        "gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+        className
+      )}
+    >
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
@@ -30,7 +35,7 @@ export default async function MostPopularProductsList({
         <div
           className={cn(
             locale === "ar" && "font-tajawal",
-            "flex flex-col justify-center items-center gap-3 col-span-4 py-20 font-medium text-zinc-500 text-sm capitalize leading-none"
+            "flex flex-col justify-center items-center gap-3 col-span-full lg:col-span-4 py-20 font-medium text-zinc-500 text-sm capitalize leading-none"
           )}
         >
           <Rose className="size-12 text-zinc-500" strokeWidth={1.75} />

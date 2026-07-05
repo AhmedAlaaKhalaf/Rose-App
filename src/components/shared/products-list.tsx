@@ -24,7 +24,7 @@ const ProductsList = React.forwardRef<HTMLDivElement, ProductsListProps>(
     } = await getProducts(searchParams);
 
     return (
-      <div ref={ref} className={cn("gap-6 grid grid-cols-4", className)}>
+      <div ref={ref} className={cn("gap-4 sm:gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4", className)}>
         {/* Data  */}
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
@@ -35,7 +35,7 @@ const ProductsList = React.forwardRef<HTMLDivElement, ProductsListProps>(
           <div
             className={cn(
               locale === "ar" && "font-tajawal",
-              "flex flex-col justify-center items-center gap-3 col-span-4 py-20 font-medium text-zinc-500 text-sm capitalize leading-none"
+              "flex flex-col justify-center items-center gap-3 col-span-full py-20 font-medium text-zinc-500 text-sm capitalize leading-none"
             )}
           >
             <Rose className="size-12 text-zinc-500" strokeWidth={1.75} />

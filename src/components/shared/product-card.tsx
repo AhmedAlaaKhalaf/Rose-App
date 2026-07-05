@@ -28,8 +28,8 @@ export default function ProductCard({ product }: ProductCardProps) {
     discountType === "PERCENT" ? +price - (+price * +discountValue) / 100 : +price - +discountValue;
 
   return (
-    <section className="flex flex-col justify-between h-[22.75rem]">
-      <div className="relative h-[17rem]">
+    <section className="flex flex-col justify-between min-h-[20rem] sm:h-[22.75rem]">
+      <div className="relative h-[14rem] sm:h-[17rem]">
         <header
           className={cn(
             locale === "ar" && "font-tajawal",

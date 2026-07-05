@@ -1,7 +1,7 @@
 import { API_PRODUCTS_LIMIT } from "../constants/global-constants";
 import { SearchParams } from "../types/global";
 
-const PRODUCT_FILTER_KEYS = ["occasionId", "categoryId", "minPrice", "maxPrice", "page", "sort"] as const;
+const PRODUCT_FILTER_KEYS = ["occasionId", "minPrice", "maxPrice", "page", "sort"] as const;
 
 function getSingleParam(
   searchParams: SearchParams | undefined,

@@ -17,11 +17,7 @@ export default function CartPageContent() {
   const { data, isLoading, error, refetch } = useUserCart();
 
   if (sessionStatus === "loading" || (sessionStatus === "authenticated" && isLoading)) {
-    return (
-      <div className="flex justify-center items-center py-24">
-        <LogoSpinner size={72} />
-      </div>
-    );
+    return <LogoSpinner fullScreen size={88} />;
   }
 
   if (error) {

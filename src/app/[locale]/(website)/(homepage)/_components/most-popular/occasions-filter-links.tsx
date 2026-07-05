@@ -12,7 +12,7 @@ export default function OccasionsFilterLinks({
   selectedOccasionId,
 }: OccasionsFilterLinksProps) {
   return (
-    <ul className="flex gap-6">
+    <ul className="flex flex-nowrap lg:flex-wrap gap-4 lg:gap-6 pb-1 lg:pb-0 w-full max-w-full overflow-x-auto lg:overflow-visible hide-scroll">
       {occasions.map(({ title, id }) => {
         const isActive = selectedOccasionId === id;
 
@@ -20,7 +20,7 @@ export default function OccasionsFilterLinks({
           <li
             key={id}
             className={cn(
-              "font-medium capitalize transition-colors cursor-pointer",
+              "font-medium text-sm lg:text-base capitalize transition-colors cursor-pointer shrink-0",
               isActive
                 ? "text-maroon-600 dark:text-softPink-200"
                 : "text-zinc-700 dark:text-zinc-400 hover:text-maroon-600"

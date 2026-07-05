@@ -39,7 +39,7 @@ export default function ContactPageContent() {
         <SectionHead size="sm">{t("subtitle")}</SectionHead>
       </header>
 
-      <div className="gap-8 grid lg:grid-cols-[360px_minmax(0,1fr)] items-start">
+      <div className="gap-8 grid lg:grid-cols-[minmax(0,360px)_1fr] items-start">
         <aside className="space-y-4 bg-maroon-700 p-8 rounded-3xl text-white">
           <h2 className="font-semibold text-xl">{t("info-title")}</h2>
 

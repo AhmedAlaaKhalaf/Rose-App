@@ -3,25 +3,22 @@ import ProductListSkeleton from "@/components/skeletons/shared/product-list.skel
 import { SearchParams } from "@/lib/types/global";
 import { serializeProductFiltersKey } from "@/lib/utils/product-filters";
 import { Suspense } from "react";
-import OccasionFilter from "./_components/occasion-filter";
-import PriceFilter from "./_components/price-filter";
+import ProductsFilters from "./_components/products-filters";
 
 type ProductsPageProps = { searchParams: SearchParams };
+
+export const PRODUCT_GRID_CLASS =
+  "gap-4 sm:gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
   const filtersKey = serializeProductFiltersKey(searchParams);
 
   return (
-    <main className="gap-6 grid grid-cols-10 dark:bg-zinc-800 mx-auto mt-16 mb-44 max-w-[91.5%]">
-      <aside className="col-span-2 pe-[21px] border-e border-zinc-100 dark:border-zinc-700 h-full">
-        <OccasionFilter />
-        <PriceFilter />
-      </aside>
-      <div className="space-y-6 col-span-8">
-        <Suspense key={filtersKey} fallback={<ProductListSkeleton />}>
-          <ProductsList searchParams={searchParams} className="gap-4 grid-cols-3" />
-        </Suspense>
-      </div>
+    <main className="mx-auto px-4 sm:px-6 lg:px-8 mt-24 md:mt-28 mb-16 md:mb-24 max-w-7xl">
+      <ProductsFilters />
+      <Suspense key={filtersKey} fallback={<ProductListSkeleton className={PRODUCT_GRID_CLASS} />}>
+        <ProductsList searchParams={searchParams} className={PRODUCT_GRID_CLASS} />
+      </Suspense>
     </main>
   );
 }

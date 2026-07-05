@@ -13,7 +13,6 @@ const publicPages = [
   "/occasions",
   "/cart",
   "/wishlist",
-  "/categories",
 ];
 
 // Matches product detail paths: /products/:id or /:locale/products/:id

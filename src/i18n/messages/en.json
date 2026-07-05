@@ -8,7 +8,13 @@
     "from": "from",
     "to": "to",
     "reset": "Reset",
-    "loading-more": "Loading more…"
+    "loading-more": "Loading more…",
+    "filters": "Filters",
+    "all-occasions": "All occasions",
+    "select-occasion": "Select occasion",
+    "select-price": "Price range",
+    "apply": "Apply",
+    "clear-filters": "Clear filters"
   },
   "testimonials": {
     "title": "Testimonials",
@@ -32,6 +38,16 @@
     "myOrders": "My Orders",
     "dashboard": "Dashboard",
     "logout": "Log out"
+  },
+  "navigation": {
+    "home": "Home",
+    "products": "Products",
+    "occasions": "Occasions",
+    "contact": "Contact",
+    "about": "About",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "faqs": "FAQs"
   },
   "trusted-companies": {
     "heading": {
@@ -564,11 +580,5 @@
     "subtitle": "Find the perfect gift for every celebration",
     "view-products": "Shop this occasion",
     "empty": "No occasions available yet."
-  },
-  "categoriesPage": {
-    "title": "Categories",
-    "subtitle": "Browse gifts by collection and style",
-    "view-products": "Shop this category",
-    "empty": "No categories available yet."
   }
 }

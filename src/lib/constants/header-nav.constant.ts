@@ -1,39 +1,34 @@
-import { ClipboardList, Gift, Headset, House, Info, LucideIcon, PartyPopper } from "lucide-react";
+import { Gift, Headset, House, Info, LucideIcon, PartyPopper } from "lucide-react";
 
 type HeaderNav = {
-  label: string;
+  labelKey: string;
   href: string;
   icon?: LucideIcon;
 };
 
 export const HEADER_NAV: HeaderNav[] = [
   {
-    label: "Home",
+    labelKey: "home",
     href: "/",
     icon: House,
   },
   {
-    label: "Products",
+    labelKey: "products",
     href: "/products",
     icon: Gift,
   },
   {
-    label: "Categories",
-    href: "/categories",
-    icon: ClipboardList,
-  },
-  {
-    label: "Occasions",
+    labelKey: "occasions",
     href: "/occasions",
     icon: PartyPopper,
   },
   {
-    label: "Contact",
+    labelKey: "contact",
     href: "/contact",
     icon: Headset,
   },
   {
-    label: "About",
+    labelKey: "about",
     href: "/about",
     icon: Info,
   },

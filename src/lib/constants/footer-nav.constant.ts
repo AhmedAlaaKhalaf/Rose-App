@@ -1,43 +1,39 @@
 type FooterNav = {
-  label: string;
+  labelKey: string;
   href: string;
 };
 
 export const FOOTER_NAV: FooterNav[] = [
   {
-    label: "Home",
+    labelKey: "home",
     href: "/",
   },
   {
-    label: "Products",
+    labelKey: "products",
     href: "/products",
   },
   {
-    label: "Categories",
-    href: "/categories",
-  },
-  {
-    label: "Occasions",
+    labelKey: "occasions",
     href: "/occasions",
   },
   {
-    label: "Contact",
+    labelKey: "contact",
     href: "/contact",
   },
   {
-    label: "About",
+    labelKey: "about",
     href: "/about",
   },
   {
-    label: "Terms & Conditions",
+    labelKey: "terms",
     href: "/terms-and-conditions",
   },
   {
-    label: "Privacy Policy",
+    labelKey: "privacy",
     href: "/privacy-policy",
   },
   {
-    label: "FAQs",
+    labelKey: "faqs",
     href: "/faqs",
   },
 ];

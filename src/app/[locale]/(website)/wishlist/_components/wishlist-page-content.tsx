@@ -31,11 +31,7 @@ export default function WishlistPageContent() {
   }, [contextItems, data?.items, sessionStatus]);
 
   if (sessionStatus === "loading" || (sessionStatus === "authenticated" && isLoading)) {
-    return (
-      <div className="flex justify-center items-center py-24">
-        <LogoSpinner size={72} />
-      </div>
-    );
+    return <LogoSpinner fullScreen size={88} />;
   }
 
   if (sessionStatus === "unauthenticated" && items.length === 0) {
