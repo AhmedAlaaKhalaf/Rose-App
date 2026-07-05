@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 import RegisterEmailStep from "./register-email-step";
-import RegisterOtpStep from "./register-otp-step";
 import RegisterForm from "./register-form";
+import RegisterOtpStep from "./register-otp-step";
 
 type Step = "email" | "otp" | "form";
 
 export default function RegisterStepper() {
   const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState<string>("");
+  const [emailVerified, setEmailVerified] = useState(false);
 
   return (
     <div className="flex flex-col w-full">
@@ -20,12 +21,17 @@ export default function RegisterStepper() {
       {step === "otp" && (
         <RegisterOtpStep
           email={email}
-          onNext={() => setStep("form")}
+          onNext={() => {
+            setEmailVerified(true);
+            setStep("form");
+          }}
           onBack={() => setStep("email")}
         />
       )}
 
-      {step === "form" && <RegisterForm email={email} />}
+      {step === "form" && emailVerified && (
+        <RegisterForm email={email} emailVerified={emailVerified} />
+      )}
     </div>
   );
 }

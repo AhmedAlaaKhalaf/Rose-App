@@ -2,35 +2,27 @@
 
 import { useWishlistContext } from "@/components/providers/wishlist/wishlist.provider";
 import { useWishlistToAdd, useWishlistToRemove } from "@/hooks/wishlist/use-wishlist";
-
 import { TProductCard } from "@/lib/types/product";
+import { productToWishlistItem, mergeWishlistItems, tryNormalizeWishlistPayload } from "@/lib/utils/wishlist";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { HeartMinus, HeartPlus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 type WishlistButtonProp = { product: TProductCard };
 
 export default function WishlistButton({ product }: WishlistButtonProp) {
-  // Translations
   const t = useTranslations("product-listing.wishlist-button");
-
-  //Context
-  const { wishlist, toggleWishlist, setWishlist } = useWishlistContext();
-
-  // Hooks
+  const { items, toggleWishlist, setItems, isWishlisted } = useWishlistContext();
   const { status } = useSession();
-
-  // Mutations
   const { mutateAsync: addToWishlist, isPending: isAdding } = useWishlistToAdd();
   const { mutateAsync: removeFromWishlist, isPending: isRemoving } = useWishlistToRemove();
 
-  // Variables
   const isLoggedIn = status === "authenticated";
-  const isWishlisted = wishlist.some((item) => item._id === product._id);
+  const wishlisted = isWishlisted(product.id);
   const isLoading = isAdding || isRemoving;
 
-  // Functions
   const toggleUserWishlist = async () => {
     if (!isLoggedIn) {
       toggleWishlist(product);
@@ -38,40 +30,50 @@ export default function WishlistButton({ product }: WishlistButtonProp) {
     }
 
     try {
-      if (isWishlisted) {
-        await removeFromWishlist(product._id);
+      if (wishlisted) {
+        const wishlistItem = items.find((item) => item.product.id === product.id);
 
-        setWishlist((prev) => prev.filter((item) => item._id !== product._id));
+        if (!wishlistItem) return;
+
+        await removeFromWishlist(wishlistItem.id);
+        setItems((prev) => prev.filter((item) => item.product.id !== product.id));
       } else {
-        await addToWishlist(product._id);
+        const payload = await addToWishlist(product.id);
+        const fromResponse = tryNormalizeWishlistPayload(payload);
+        const createdItem =
+          fromResponse?.items.find((item) => item.product.id === product.id) ??
+          productToWishlistItem(product);
 
-        setWishlist((prev) =>
-          prev.some((item) => item._id === product._id) ? prev : [...prev, product]
-        );
+        setItems((prev) => mergeWishlistItems(prev, [createdItem]));
       }
     } catch (error) {
-      console.error("Wishlist update failed", error);
+      toast.error(error instanceof Error ? error.message : "Failed to update wishlist");
     }
   };
 
   return (
     <button
-      onClick={toggleUserWishlist}
+      type="button"
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        void toggleUserWishlist();
+      }}
       disabled={isLoading}
       className={cn(
         "group flex justify-center items-center gap-1 px-2 py-2 rounded-full font-medium text-xs transition-all",
         isLoading && "opacity-50 cursor-not-allowed",
-        isWishlisted ? " bg-zinc-800  text-zinc-100" : "bg-white  text-maroon-600 "
+        wishlisted ? "bg-zinc-800 text-zinc-100" : "bg-white text-maroon-600"
       )}
     >
-      {isWishlisted ? (
+      {wishlisted ? (
         <HeartMinus className="size-4" strokeWidth={1.48} />
       ) : (
         <HeartPlus className="size-4" strokeWidth={1.48} />
       )}
 
       <span className="opacity-0 group-hover:opacity-100 max-w-0 group-hover:max-w-[150px] whitespace-nowrap transition-all translate-x-[-8px] group-hover:translate-x-0 duration-300 ease-out">
-        {isWishlisted ? t("remove") : t("add")}
+        {wishlisted ? t("remove") : t("add")}
       </span>
     </button>
   );

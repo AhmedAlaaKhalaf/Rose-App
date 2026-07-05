@@ -35,7 +35,7 @@ export type TProduct = {
   subCategory: {
     id: string;
     title: string;
-  };
+  } | null;
   occasions: string[];
   _count: {
     reviews: number;

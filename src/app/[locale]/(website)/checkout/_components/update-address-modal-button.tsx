@@ -1,6 +1,6 @@
 "use client";
 
-import { APIProvider, Map, AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
+import AddressMapPicker from "@/components/shared/address-map-picker";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils/tailwind-merge";
@@ -28,32 +28,29 @@ export function UpdateAddressModalButton({ userAddress }: { userAddress: TUserAd
   const [currentStep, setCurrentStep] = useState(0);
   const [modalState, setModalState] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState({
-    lat: Number(userAddress.lat) || 30.0444,
-    lng: Number(userAddress.long) || 31.2357,
+    lat: userAddress.latitude || 30.0444,
+    lng: userAddress.longitude || 31.2357,
   });
   //Hooks
   const { mutateAsync: updateUserAddress, isPending, error } = useUpdateUserAddress();
 
-  // Variables
-  const googleMapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-  const { city, street, phone, username, _id } = userAddress;
   const steps = [
     {
-      fields: ["city", "street", "phone"],
+      fields: ["title", "city", "street", "phone"] as const,
     },
     {
-      fields: ["lat", "lng"],
+      fields: [] as const,
     },
   ];
-  // const currentForm = steps[currentStep];
   const isLastStep = currentStep === steps.length - 1;
 
   // Form & validation
   const form = useForm<TUserAddressFormFields>({
     defaultValues: {
-      city,
-      street,
-      phone,
+      title: userAddress.title,
+      city: userAddress.city,
+      street: userAddress.street,
+      phone: userAddress.phone,
     },
     resolver: zodResolver(userAddressSchema(tZod)),
     // mode: "onChange",
@@ -63,11 +60,11 @@ export function UpdateAddressModalButton({ userAddress }: { userAddress: TUserAd
   const onSubmit: SubmitHandler<TUserAddressFormFields> = async (values) => {
     try {
       await updateUserAddress({
+        id: userAddress.id,
+        isPrimary: userAddress.isPrimary,
         ...values,
-        lat: `${selectedPosition.lat}`,
-        long: `${selectedPosition.lng}`,
-        username,
-        _id,
+        latitude: selectedPosition.lat,
+        longitude: selectedPosition.lng,
       });
 
       setModalState(false);
@@ -82,6 +79,24 @@ export function UpdateAddressModalButton({ userAddress }: { userAddress: TUserAd
       case 0: {
         return (
           <>
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <Label>{t("title.title")}</Label>
+                  <FormControl>
+                    <Input
+                      aria-invalid={!!form.formState.errors.title}
+                      {...field}
+                      placeholder={t("title.placeholder")}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             {/*  City  */}
             <FormField
               control={form.control}
@@ -175,34 +190,10 @@ export function UpdateAddressModalButton({ userAddress }: { userAddress: TUserAd
 
       case 1: {
         return (
-          // Google map
-          <section className="h-[400px] w-full rounded-xl overflow-hidden shadow-lg">
-            <APIProvider apiKey={googleMapApiKey as string}>
-              <Map
-                defaultCenter={selectedPosition}
-                defaultZoom={13}
-                // Required for Advanced Markers
-                mapId="YOUR_MAP_ID"
-                gestureHandling={"greedy"}
-                disableDefaultUI={false}
-                onClick={(e) => {
-                  if (!e.detail.latLng) return;
-
-                  const newLat = e.detail.latLng.lat;
-                  const newLng = e.detail.latLng.lng;
-
-                  setSelectedPosition({
-                    lat: newLat,
-                    lng: newLng,
-                  });
-                }}
-              >
-                <AdvancedMarker position={selectedPosition}>
-                  <Pin background={"#fbbf24"} glyphColor={"#000"} borderColor={"#000"} />
-                </AdvancedMarker>
-              </Map>
-            </APIProvider>
-          </section>
+          <AddressMapPicker
+            position={selectedPosition}
+            onPositionChange={setSelectedPosition}
+          />
         );
       }
 
@@ -213,9 +204,7 @@ export function UpdateAddressModalButton({ userAddress }: { userAddress: TUserAd
   };
   // Handlers
   const handleNextButton = async () => {
-    const currentFields = steps[currentStep].fields;
-
-    const isValid = await form.trigger(currentFields);
+    const isValid = currentStep === 0 ? await form.trigger(steps[0].fields) : true;
 
     if (isValid && !isLastStep) {
       setCurrentStep((prev) => prev + 1);

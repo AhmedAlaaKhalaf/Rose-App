@@ -1,28 +1,22 @@
 import { Link } from "@/i18n/navigation";
-import { SearchParams } from "@/lib/types/global";
 import { TOccasion } from "@/lib/types/occasion";
 import { cn } from "@/lib/utils/tailwind-merge";
 
 type OccasionsFilterLinksProps = {
-  searchParams: SearchParams;
+  selectedOccasionId: string;
   occasions: TOccasion[];
 };
 
 export default function OccasionsFilterLinks({
   occasions,
-  searchParams,
+  selectedOccasionId,
 }: OccasionsFilterLinksProps) {
-  // Variables
-  const activeOccasionId = searchParams.occasionId;
-
   return (
-    // Occasions Filter
     <ul className="flex gap-6">
-      {occasions.map(({ name, id }) => {
-        const isActive = activeOccasionId === id;
+      {occasions.map(({ title, id }) => {
+        const isActive = selectedOccasionId === id;
 
         return (
-          // Occasions link
           <li
             key={id}
             className={cn(
@@ -33,7 +27,7 @@ export default function OccasionsFilterLinks({
             )}
           >
             <Link scroll={false} href={`?occasionId=${id}`} className="text-inherit">
-              {name}
+              {title}
             </Link>
           </li>
         );

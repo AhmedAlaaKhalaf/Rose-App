@@ -1,8 +1,8 @@
 "use client";
 
 import { HEADER_NAV } from "@/lib/constants/header-nav.constant";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link } from "@/i18n/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/tailwind-merge";
 
 export default function HeaderNavigation() {

@@ -27,13 +27,15 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { Link } from "@/i18n/navigation";
 import SubmittingErrorForm from "../../_components/submitting-error-form";
 import { cn } from "@/lib/utils/tailwind-merge";
+import { CheckCircle2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 type Props = {
   email?: string;
+  emailVerified?: boolean;
 };
 
-export default function RegisterForm({ email = "" }: Props) {
+export default function RegisterForm({ email = "", emailVerified = false }: Props) {
   // Translation
   const t = useTranslations("auth.register");
   const tZod = useTranslations("auth.validation");
@@ -140,7 +142,15 @@ export default function RegisterForm({ email = "" }: Props) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <Label>{t("email.title")}</Label>
+                <div className="flex justify-between items-center">
+                  <Label>{t("email.title")}</Label>
+                  {emailVerified && (
+                    <span className="inline-flex items-center gap-1 font-medium text-emerald-600 text-xs">
+                      <CheckCircle2 className="size-3.5" />
+                      {t("email-verification.verified-badge")}
+                    </span>
+                  )}
+                </div>
                 <FormControl>
                   <Input
                     aria-invalid={!!form.formState.errors.email}
@@ -267,7 +277,11 @@ export default function RegisterForm({ email = "" }: Props) {
             type="submit"
             form="register-form"
             className="rounded-xl capitalize"
-            disabled={isPending || (!form.formState.isValid && form.formState.isSubmitted)}
+            disabled={
+              isPending ||
+              !emailVerified ||
+              (!form.formState.isValid && form.formState.isSubmitted)
+            }
           >
             {isPending ? `${t("button")} ...` : t("button")}
           </Button>

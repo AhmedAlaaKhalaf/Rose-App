@@ -1,7 +1,10 @@
+import { API_CACHE_REVALIDATE } from "../constants/api-cache";
 import { TProductDetails } from "@/lib/types/product";
 
 export async function productDetailsServices(id: string) {
-  const response = await fetch(`${process.env.API}/products/${id}`);
+  const response = await fetch(`${process.env.API}/products/${id}`, {
+    next: { revalidate: API_CACHE_REVALIDATE },
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch the product details");

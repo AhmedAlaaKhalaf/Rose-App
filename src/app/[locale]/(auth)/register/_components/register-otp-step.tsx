@@ -1,17 +1,17 @@
 "use client";
 
-import { Controller, useForm } from "react-hook-form";
+import ErrorAlert from "../../_components/error-alert";
+import { getOtpTimeLeft, startOtpTimer } from "../../_utils/otp-timer-presisted";
+import useConfirmEmailVerification from "../_hooks/use-confirm-email-verification";
+import useSendEmailVerification from "../_hooks/use-send-email-verification";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import { getOtpTimeLeft, startOtpTimer } from "../../_utils/otp-timer-presisted";
-import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
-import ErrorAlert from "../../_components/error-alert";
 import { cn } from "@/lib/utils/tailwind-merge";
+import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import useSendOTP from "../../forgot-password/_hooks/af-task/use-send-otp";
-import useVerifyOtp from "../../forgot-password/_hooks/use-verify-otp";
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
 type Props = {
   email: string;
@@ -23,11 +23,10 @@ type OtpForm = { code: string };
 
 export default function RegisterOtpStep({ email, onNext, onBack }: Props) {
   const [timer, setTimer] = useState(getOtpTimeLeft());
+  const t = useTranslations("auth.register.email-verification");
 
-  const t = useTranslations("forgot-password");
-
-  const { verifyOtp, isVerifyPending, verifyError } = useVerifyOtp();
-  const { isPending, sendOTP } = useSendOTP();
+  const { confirmEmailVerification, isPending, error } = useConfirmEmailVerification();
+  const { isPending: isResending, sendEmailVerification } = useSendEmailVerification();
 
   const form = useForm<OtpForm>({
     defaultValues: { code: "" },
@@ -35,13 +34,14 @@ export default function RegisterOtpStep({ email, onNext, onBack }: Props) {
 
   const codeValue = form.watch("code");
 
-  const onSubmit = (data: OtpForm) => {
-    if (data.code.length !== 6) {
+  const handleVerify = (code: string) => {
+    if (code.length !== 6) {
       form.setError("code", { message: t("otp-required") });
       return;
     }
-    verifyOtp(
-      { email, code: data.code },
+
+    confirmEmailVerification(
+      { email, code },
       {
         onSuccess: () => {
           if (typeof window !== "undefined") localStorage.removeItem("otp_time");
@@ -54,27 +54,21 @@ export default function RegisterOtpStep({ email, onNext, onBack }: Props) {
     );
   };
 
-  // Auto-submit when 6 digits are typed
+  const onSubmit = (data: OtpForm) => handleVerify(data.code);
+
   useEffect(() => {
     if (codeValue.length === 6) {
-      verifyOtp(
-        { email, code: codeValue },
-        {
-          onSuccess: () => {
-            if (typeof window !== "undefined") localStorage.removeItem("otp_time");
-            onNext();
-          },
-          onError: (err) => form.setError("code", { message: err.message }),
-        }
-      );
+      handleVerify(codeValue);
     } else {
       form.clearErrors("code");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codeValue, email]);
 
   const handleResend = () => {
     if (!email) return;
-    sendOTP(
+
+    sendEmailVerification(
       { email },
       {
         onSuccess: () => {
@@ -95,20 +89,19 @@ export default function RegisterOtpStep({ email, onNext, onBack }: Props) {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4 mb-9 w-full">
           <div className="space-y-1">
-            <h2 className="font-semibold text-zinc-800 dark:text-zinc-50 text-2xl">
-              {t("otp-title")}
-            </h2>
+            <h2 className="font-semibold text-zinc-800 dark:text-zinc-50 text-2xl">{t("otp-title")}</h2>
             <div className="flex items-center gap-1 pb-4 border-zinc-200 dark:border-zinc-700 border-b">
-              <p className="leading-none">
+              <p className="leading-relaxed text-sm">
                 {t.rich("otp-description", {
-                  email: email ? email : "user@example.com.",
+                  email: email || "user@example.com",
                   span: (chunk) => (
-                    <span
-                      onClick={() => onBack()}
+                    <button
+                      type="button"
+                      onClick={onBack}
                       className="font-medium text-blue-700 hover:text-blue-800 dark:hover:text-blue-300 dark:text-blue-400 underline active:scale-90 transition cursor-pointer"
                     >
                       {chunk}
-                    </span>
+                    </button>
                   ),
                 })}
               </p>
@@ -138,21 +131,19 @@ export default function RegisterOtpStep({ email, onNext, onBack }: Props) {
           <div className="flex justify-end w-full">
             <p className="mt-6 text-zinc-700 dark:text-zinc-400 text-sm text-center">
               {timer > 0 ? (
-                <>
-                  {t.rich("otp-time-left", {
-                    time: timer,
-                    span: (chunk) => (
-                      <span className="font-medium text-primary dark:text-primary">{chunk}</span>
-                    ),
-                  })}
-                </>
+                t.rich("otp-time-left", {
+                  time: timer,
+                  span: (chunk) => (
+                    <span className="font-medium text-primary dark:text-primary">{chunk}</span>
+                  ),
+                })
               ) : (
                 <button
                   type="button"
                   onClick={handleResend}
                   className="inline-flex justify-end items-center gap-1 font-medium text-primary hover:dark:text-softPink-300 hover:text-maroon-800 dark:text-primary text-end active:scale-90 transition cursor-pointer"
                 >
-                  {isPending ? (
+                  {isResending ? (
                     <>
                       {t("otp-resending")} <Loader2 className="animate-spin" />
                     </>
@@ -164,24 +155,16 @@ export default function RegisterOtpStep({ email, onNext, onBack }: Props) {
             </p>
           </div>
 
-          {form.formState.errors.code && (
-            <ErrorAlert message={form.formState.errors.code.message} />
-          )}
-          {!form.formState.errors.code && verifyError && (
-            <ErrorAlert message={verifyError.message} />
-          )}
+          {form.formState.errors.code && <ErrorAlert message={form.formState.errors.code.message} />}
+          {!form.formState.errors.code && error && <ErrorAlert message={error.message} />}
 
-          <Button
-            type="submit"
-            disabled={isVerifyPending}
-            className="flex justify-center items-center gap-x-2 mt-4 w-full"
-          >
-            {isVerifyPending ? (
+          <Button type="submit" disabled={isPending} className="flex justify-center items-center gap-x-2 mt-4 w-full">
+            {isPending ? (
               <>
                 {t("verifying-otp")} <Loader2 className="animate-spin" />
               </>
             ) : (
-              t("verify-otp")
+              t("confirm-button")
             )}
           </Button>
         </form>

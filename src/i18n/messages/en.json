@@ -97,7 +97,23 @@
       },
       "button": "create account",
       "user-question": "Already have an account?",
-      "link": "login"
+      "link": "login",
+      "success-toast": "Your account has been created successfully.",
+      "email-verification": {
+        "title": "Verify your email",
+        "desc": "Please verify your email first before creating your account. We'll send you a 6-digit code.",
+        "verify-button": "Verify Email",
+        "send-success": "Verification code sent to your email",
+        "verified-badge": "Email verified",
+        "otp-title": "Confirm your email",
+        "otp-description": "Enter the 6-digit code sent to {email}. <span>Change email</span>",
+        "otp-required": "Please enter a valid 6-digit code",
+        "otp-time-left": "You can request another code in: <span>{time}s</span>",
+        "otp-resend": "Resend code",
+        "otp-resending": "Resending code",
+        "confirm-button": "Confirm Email",
+        "verifying-otp": "Confirming email"
+      }
     },
     "validation": {
       "username": {
@@ -280,6 +296,9 @@
   },
 
   "user-address": {
+    "map": {
+      "pick-location": "Click on the map to set your delivery location"
+    },
     "modal": {
       "addresses-list": {
         "title": "my addresses",
@@ -313,6 +332,10 @@
           "title": "city",
           "placeholder": "Enter city name"
         },
+        "title": {
+          "title": "Address label",
+          "placeholder": "e.g. Home, Work"
+        },
         "address": {
           "title": "address",
           "placeholder": "Enter your full address"
@@ -324,6 +347,11 @@
       }
     },
     "validation": {
+      "title": {
+        "required": "Please enter an address label",
+        "min": "Label must be at least {min} characters",
+        "max": "Label must not exceed {max} characters"
+      },
       "city": {
         "required": "Please enter your city",
         "min": "City name must be at least {min} characters",
@@ -343,6 +371,46 @@
   "related-products": {
     "header": "Related Products"
   },
+  "cart": {
+    "title": "Shopping Cart",
+    "order-summary": "Order Summary",
+    "items-count": "{count} items",
+    "add-to-cart": "Add to Cart",
+    "added-success": "Product added to cart",
+    "add-failed": "Failed to add product to cart",
+    "login-required": "Please sign in to add items to your cart",
+    "out-of-stock": "This product is out of stock",
+    "remove-item": "Remove item",
+    "removed-success": "Item removed from cart",
+    "remove-failed": "Failed to remove item",
+    "update-failed": "Failed to update quantity",
+    "discount": "Discount",
+    "checkout": "Proceed to Checkout",
+    "continue-shopping": "Continue Shopping",
+    "empty-title": "Your cart is empty",
+    "empty-desc": "Looks like you haven't added any gifts yet. Explore our collection and find something special."
+  },
+  "wishlist": {
+    "title": "My Wishlist",
+    "summary": "Wishlist Summary",
+    "summary-desc": "Save your favorite gifts here and add them to cart whenever you're ready.",
+    "items-count": "{count} items",
+    "remove-item": "Remove item",
+    "removed-success": "Item removed from wishlist",
+    "remove-failed": "Failed to remove item",
+    "continue-shopping": "Continue Shopping",
+    "empty-title": "Your wishlist is empty",
+    "empty-desc": "Tap the heart on any product to save it here for later.",
+    "login-title": "Sign in to view your wishlist",
+    "login-desc": "Save your favorite gifts and access them from any device.",
+    "login-button": "Sign in"
+  },
+  "addresses": {
+    "title": "My Addresses",
+    "login-title": "Sign in to manage your addresses",
+    "login-desc": "Add, edit, and save delivery addresses for faster checkout.",
+    "login-button": "Sign in"
+  },
   "checkout": {
     "shipping-address": "Shipping Address",
     "summary": "Summary",
@@ -355,6 +423,13 @@
     "checkout-error": "Failed to create order",
     "checkout-button": "Checkout",
     "checkout-loading": "Loading...",
+    "cash-description": "You'll pay in cash when your order is delivered.",
+    "credit-description": "Enter your card details below to complete payment securely with Stripe.",
+    "complete-card-payment": "Complete card payment",
+    "pay-now": "Pay now",
+    "payment-processing": "Processing payment...",
+    "cart-empty-checkout": "Your cart is empty. Add items before checking out.",
+    "stripe-key-missing": "Stripe is not configured. Add NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY to .env (must match the API server's Stripe account), then restart the dev server.",
     "coupon-code": "Coupon Code",
     "apply-coupon": "Apply Coupon",
     "no-coupons-applied": "No coupons applied",
@@ -369,7 +444,12 @@
     "second-head": "General rating:",
     "general-rate": "{rate} <span>({count} rating)</span>",
     "title-field": "Please Enter review title",
+    "rating-required": "Please select a rating",
+    "comment-required": "Please enter your review",
     "login-need": "Please login to be able to review the product",
+    "login-button": "Sign in",
+    "write-review": "Write a Review",
+    "no-reviews": "No reviews yet. Be the first to share your experience.",
     "form-rate-label": "Your rating:",
     "title-field-label": "Title",
     "review-comment": "Review",
@@ -377,6 +457,14 @@
     "title-field-placholder": "Enter review title",
     "review-form-button": "Add Review",
     "add-review-toast": "You Review Added Successfully"
+  },
+  "product-details": {
+    "breadcrumb-home": "Home",
+    "breadcrumb-products": "Products",
+    "reviews-count": "{count} reviews",
+    "discount-badge": "{value}% OFF",
+    "in-stock": "{count} in stock",
+    "add-to-cart": "Add to Cart"
   },
   "orders": {
     "title": "Orders",
@@ -438,5 +526,49 @@
     "nav-categories": "Categories",
     "nav-occasions": "Occasions",
     "nav-products": "Products"
+  },
+  "aboutPage": {
+    "title": "About",
+    "subtitle": "Thoughtful gifts for every special moment",
+    "mission-title": "Our Mission",
+    "mission-text": "At Rose, we believe every celebration deserves a gift as memorable as the moment itself. From hand-picked flowers to elegantly packaged surprises, we help you express love, gratitude, and joy with ease.",
+    "values-title": "Why Choose Rose",
+    "cta": "Explore Products"
+  },
+  "contactPage": {
+    "title": "Contact",
+    "subtitle": "We're here to help with orders, gifts, and special requests",
+    "form-title": "Send us a message",
+    "name": "Full name",
+    "name-placeholder": "Your name",
+    "email": "Email",
+    "email-placeholder": "you@example.com",
+    "subject": "Subject",
+    "subject-placeholder": "How can we help?",
+    "message": "Message",
+    "message-placeholder": "Tell us more about your request...",
+    "submit": "Send Message",
+    "success": "Thanks! We'll get back to you soon.",
+    "info-title": "Get in touch",
+    "email-label": "Email",
+    "email-value": "hello@rose-app.com",
+    "phone-label": "Phone",
+    "phone-value": "+20 100 000 0000",
+    "address-label": "Address",
+    "address-value": "Cairo, Egypt",
+    "hours-label": "Working hours",
+    "hours-value": "Daily, 9:00 AM – 9:00 PM"
+  },
+  "occasionsPage": {
+    "title": "Occasions",
+    "subtitle": "Find the perfect gift for every celebration",
+    "view-products": "Shop this occasion",
+    "empty": "No occasions available yet."
+  },
+  "categoriesPage": {
+    "title": "Categories",
+    "subtitle": "Browse gifts by collection and style",
+    "view-products": "Shop this category",
+    "empty": "No categories available yet."
   }
 }

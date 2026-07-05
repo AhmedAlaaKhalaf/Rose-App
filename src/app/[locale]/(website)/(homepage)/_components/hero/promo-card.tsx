@@ -35,7 +35,7 @@ export default function PromoCard() {
         <p className="h-20 font-semibold text-white text-2xl leading-6">{t("title")}</p>
 
         {/* Move to Shop Now Page */}
-        <Link href={"#"}>
+        <Link href={"/products"}>
           <Button className="rounded-xl" variant="secondary">
             {t("button")}
             <ArrowRight />

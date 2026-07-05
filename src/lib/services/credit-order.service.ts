@@ -1,31 +1,37 @@
+import { formatApiError } from "../utils/api-error";
+import { extractOrderId } from "../utils/orders";
+import { normalizePaymentIntentResponse } from "../utils/payments";
 import type { TAddress } from "../types/addresses";
-import { TPayCreditResponse } from "../types/pay-credit";
+import { createOrder } from "./create-order.service";
 
-export async function creditOrderService(token: string, shippingAddress: TAddress) {
-  const body = {
-    shippingAddress: {
-      street: shippingAddress.street,
-      phone: shippingAddress.phone,
-      city: shippingAddress.city,
-      lat: shippingAddress.lat,
-      long: shippingAddress.long,
-    },
-  };
-
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/orders/checkout`, {
+async function createPaymentIntent(token: string, orderId: string) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/payments/create-intent`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify({ orderId }),
   });
 
-  if (!response.ok) throw new Error("Failed to create cash order");
+  const payload = await response.json();
 
-  const payload: ApiResponse<TPayCreditResponse> = await response.json();
-
-  if ("message" in payload) throw new Error(payload.message as string);
+  if (!response.ok || payload?.status === false) {
+    throw new Error(formatApiError(payload, "Failed to create payment intent"));
+  }
 
   return payload;
+}
+
+export async function creditOrderService(token: string, shippingAddress: TAddress) {
+  const orderResponse = await createOrder(token, shippingAddress, "CREDIT_CARD");
+  const orderId = extractOrderId(orderResponse);
+
+  if (!orderId) {
+    throw new Error("Order was created but no order ID was returned");
+  }
+
+  const paymentResponse = await createPaymentIntent(token, orderId);
+
+  return normalizePaymentIntentResponse(paymentResponse, orderId);
 }

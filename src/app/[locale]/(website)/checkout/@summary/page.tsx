@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { TicketPercent } from "lucide-react";
 import { useTranslations } from "next-intl";
 import useUserCart from "@/hooks/cart/use-user-cart";
+import { getCartItems } from "@/lib/utils/cart";
 
 export default function CartSummary() {
     // Translation
@@ -15,7 +16,7 @@ export default function CartSummary() {
 
     // User cart data
     const userCart = data?.cart ?? null;
-    const userCartItems = userCart?.cartItems ?? [];
+    const userCartItems = getCartItems(data);
     const userCartTotalPrice = userCart?.totalPrice ?? 0;
     const userCartAppliedCoupons = userCart?.appliedCoupons ?? [];
 

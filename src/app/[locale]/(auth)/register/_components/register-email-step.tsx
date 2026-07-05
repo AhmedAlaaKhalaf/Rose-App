@@ -10,17 +10,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { OTP_COOLDOWN_KEY } from "@/lib/constants/global-constants";
+import { emailStepSchema } from "@/lib/schemes/af-task-schema/auth.schema";
 import { EmailStepField } from "@/lib/types/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2, MailCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { emailStepSchema } from "@/lib/schemes/af-task-schema/auth.schema";
-import useSendOTP from "../../forgot-password/_hooks/af-task/use-send-otp";
 import { toast } from "sonner";
-import { OTP_COOLDOWN_KEY } from "@/lib/constants/global-constants";
 import ErrorAlert from "../../_components/error-alert";
 import { getOtpTimeLeft, startOtpTimer } from "../../_utils/otp-timer-presisted";
-import { Loader2 } from "lucide-react";
+import useSendEmailVerification from "../_hooks/use-send-email-verification";
 
 type Props = {
   email: string;
@@ -29,14 +29,14 @@ type Props = {
 };
 
 export default function RegisterEmailStep({ email, setEmail, onNext }: Props) {
-  const t = useTranslations("forgot-password");
-  const tReg = useTranslations("auth.register");
+  const t = useTranslations("auth.register");
+  const tValidation = useTranslations("forgot-password");
 
-  const { isPending, error, sendOTP } = useSendOTP();
+  const { isPending, error, sendEmailVerification } = useSendEmailVerification();
 
   const form = useForm<EmailStepField>({
     defaultValues: { email },
-    resolver: zodResolver(emailStepSchema(t)),
+    resolver: zodResolver(emailStepSchema(tValidation)),
   });
 
   const onSubmit: SubmitHandler<EmailStepField> = (values) => {
@@ -44,17 +44,16 @@ export default function RegisterEmailStep({ email, setEmail, onNext }: Props) {
       typeof window !== "undefined" ? localStorage.getItem(OTP_COOLDOWN_KEY) : null;
     const diff = getOtpTimeLeft();
 
-    // If we still have an active cooldown, skip re-sending and go straight to OTP step
     if (otpCooldown && diff > 0) {
-      toast.error(t.rich("otp-cooldown-error-toast", { duration: diff }));
+      toast.error(tValidation.rich("otp-cooldown-error-toast", { duration: diff }));
       setEmail(values.email);
       onNext();
       return;
     }
 
-    sendOTP(values, {
+    sendEmailVerification(values, {
       onSuccess: () => {
-        toast.success(t("sendotp-toast"));
+        toast.success(t("email-verification.send-success"));
         startOtpTimer();
         setEmail(values.email);
         onNext();
@@ -66,21 +65,21 @@ export default function RegisterEmailStep({ email, setEmail, onNext }: Props) {
     <>
       <header className="mb-5 pb-3 border-zinc-200 border-b w-full">
         <h1 className="font-semibold text-zinc-800 dark:text-zinc-50 text-2xl">
-          {tReg("header")}
+          {t("email-verification.title")}
         </h1>
-        <p className="text-zinc-800 dark:text-zinc-50">{t("desc")}</p>
+        <p className="text-zinc-600 dark:text-zinc-300 text-sm">{t("email-verification.desc")}</p>
       </header>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-9 w-full">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t("field-lable")}</FormLabel>
+                <FormLabel>{t("email.title")}</FormLabel>
                 <FormControl>
-                  <Input {...field} type="email" placeholder="example@gmail.com" />
+                  <Input {...field} type="email" placeholder={t("email.placeholder")} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -91,15 +90,19 @@ export default function RegisterEmailStep({ email, setEmail, onNext }: Props) {
 
           <Button
             type="submit"
-            className="w-full"
+            className="gap-2 w-full"
             disabled={isPending || (!form.formState.isValid && form.formState.isSubmitted)}
           >
             {isPending ? (
-              <span className="inline-flex items-center gap-2">
-                {t("email-form-button")} <Loader2 className="animate-spin" />
-              </span>
+              <>
+                {t("email-verification.verify-button")}
+                <Loader2 className="size-4 animate-spin" />
+              </>
             ) : (
-              t("email-form-button")
+              <>
+                <MailCheck className="size-4" />
+                {t("email-verification.verify-button")}
+              </>
             )}
           </Button>
         </form>

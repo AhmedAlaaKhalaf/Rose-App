@@ -3,7 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function useNotifications(token: string | undefined) {
   return useInfiniteQuery({
-    queryKey: ["notifications"],
+    queryKey: ["notifications", token],
     queryFn: ({ pageParam = 1 }) => getNotifications({ pageParam }),
     initialPageParam: 1,
     enabled: !!token,

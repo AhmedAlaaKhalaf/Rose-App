@@ -31,7 +31,9 @@ export default function UserInfo() {
       <div className="hidden md:flex items-center gap-3 pt-4 border-black/10 border-t w-full">
         {/* User Image */}
         <Avatar className="rounded-full w-12 h-12">
-          <AvatarImage src="/assets/images/avatar.png" alt={session.data?.user.firstName} />
+          {session.data?.user.photo && (
+            <AvatarImage src={session.data.user.photo} alt={session.data.user.firstName} />
+          )}
           <AvatarFallback style={{ backgroundColor: `hsl(${color})` }} className="text-xl">
             {fallback}
           </AvatarFallback>
@@ -85,7 +87,9 @@ export default function UserInfo() {
           <DropdownMenuTrigger asChild>
             {/* User Image */}
             <Avatar className="rounded-full w-14 h-14">
-              <AvatarImage src="/assets/images/avatar.png" alt={session.data?.user.firstName} />
+              {session.data?.user.photo && (
+                <AvatarImage src={session.data.user.photo} alt={session.data.user.firstName} />
+              )}
               <AvatarFallback style={{ backgroundColor: color }} className="text-xl">
                 {fallback}
               </AvatarFallback>

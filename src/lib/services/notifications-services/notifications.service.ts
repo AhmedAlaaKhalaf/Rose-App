@@ -5,23 +5,27 @@ interface GetNotificationsParams {
   limit?: number;
 }
 
-// fetch notifications
 export async function getNotifications({
   pageParam = 1,
   limit = 10,
 }: GetNotificationsParams): Promise<TPaginatedNotifications> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/notifications?page=${pageParam}&limit=${limit}`);
+  const res = await fetch(`/api/notifications?page=${pageParam}&limit=${limit}`, {
+    cache: "no-store",
+    credentials: "include",
+  });
 
   if (!res.ok) {
     let errorMessage = "Error fetching notifications";
 
-    const errorData = await res.json();
-    errorMessage = errorData.message || errorMessage;
+    try {
+      const errorData = await res.json();
+      errorMessage = errorData.message || errorData.error || errorMessage;
+    } catch {
+      // ignore parse errors
+    }
 
     throw new Error(errorMessage);
   }
 
-  const data = await res.json();
-
-  return data;
+  return res.json();
 }

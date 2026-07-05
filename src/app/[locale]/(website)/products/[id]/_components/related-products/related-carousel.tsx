@@ -11,7 +11,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useRelatedProducts } from "@/hooks/related-products/use-related-products";
-import { Link } from "@/i18n/navigation";
 
 export default function RelatedCarousel({ id }: { id: string }) {
   // Variables
@@ -27,6 +26,8 @@ export default function RelatedCarousel({ id }: { id: string }) {
   // Handling the Error
   if (error) return <ErrorBoundary onRetry={refetch} error={error} />;
 
+  const products = data?.payload?.data ?? [];
+
   // Related Products Carousel
   return (
     <Carousel
@@ -35,15 +36,13 @@ export default function RelatedCarousel({ id }: { id: string }) {
         direction: direction,
       }}
     >
-      {data?.products.length === 0 ? (
+      {products.length === 0 ? (
         <p className="py-10 text-zinc-500 text-sm text-center">No related products found</p>
       ) : (
         <CarouselContent className="px-2 py-3" dir={direction}>
-          {data?.products.map((product) => (
-            <CarouselItem key={product._id} className="sm:basis-1/1 md:basis-1/3 lg:basis-1/4">
-              <Link href={"/products"}>
-                <ProductCard product={product} />
-              </Link>
+          {products.map((product) => (
+            <CarouselItem key={product.id} className="basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+              <ProductCard product={product} />
             </CarouselItem>
           ))}
         </CarouselContent>

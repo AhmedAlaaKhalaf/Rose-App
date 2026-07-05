@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Input } from "../../ui/input";
-import { Globe, Heart, ShoppingCart } from "lucide-react";
+import { Globe } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,8 @@ import LoginIcon from "./login-icon";
 import LanguageSwitcher from "@/components/ui/language-switcher";
 import Notifications from "@/app/[locale]/(website)/_components/notifications/notifications";
 import UserDropdown from "./user-dropdown";
+import CartLink from "./cart-link";
+import WishlistLink from "./wishlist-link";
 import Search from "../search/search";
 // import { getServerSession } from "next-auth";
 // import { authOptions } from "@/auth";
@@ -77,13 +79,9 @@ export default function Header() {
             {/* icon group */}
             <div className="flex items-center gap-3 p-2 sm:p-4 border border-zinc-200 dark:border-zinc-700 border-t-0 border-b-0">
               {/* wishlist */}
-              <Link href="/wishlist" className="text-zinc-700 dark:text-zinc-50 cursor-pointer">
-                <Heart className="w-5 sm:w-6 h-5 sm:h-6" />
-              </Link>
+              <WishlistLink />
               {/* cart */}
-              <Link href="/cart" className="text-zinc-700 dark:text-zinc-50 cursor-pointer">
-                <ShoppingCart className="w-5 sm:w-6 h-5 sm:h-6" />
-              </Link>
+              <CartLink />
               {/* notifications */}
               <Link href="#" className="text-zinc-700 dark:text-zinc-50 cursor-pointer">
                 <Notifications />

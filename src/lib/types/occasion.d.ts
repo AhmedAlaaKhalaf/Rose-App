@@ -1,10 +1,9 @@
 export type TOccasion = {
   id: string;
-  name: string;
-  slug: string;
+  title: string;
+  description: string;
   image: string;
+  immutable: boolean;
   createdAt: string;
   updatedAt: string;
-  isSuperAdmin: boolean;
-  productsCount: number;
 };

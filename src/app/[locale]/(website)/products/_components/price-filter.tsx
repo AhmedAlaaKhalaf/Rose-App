@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 import ClearButton from "./clear-button";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Form } from "@/components/ui/form";
 
@@ -44,14 +45,12 @@ export default function PriceFilter() {
     params.delete("maxPrice");
 
     // set new values
-    if (min) params.set("minPrice", String(min));
-    if (max) params.set("maxPrice", String(max));
+    if (min !== undefined && !Number.isNaN(min)) params.set("minPrice", String(min));
+    if (max !== undefined && !Number.isNaN(max)) params.set("maxPrice", String(max));
 
-    // build query string
-    const query = params.toString().replace(/%5B/g, "[").replace(/%5D/g, "]");
+    const query = params.toString();
 
-    // push to url
-    router.push(query ? `${pathname}?${query}` : pathname);
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
   };
 
   // Submit handler

@@ -4,7 +4,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 
 const authPages = ["/login", "/register", "/forgot-password"];
-const publicPages = ["/", "/products", "/checkout"];
+const publicPages = [
+  "/",
+  "/products",
+  "/checkout",
+  "/about",
+  "/contact",
+  "/occasions",
+  "/cart",
+  "/wishlist",
+  "/categories",
+];
 
 // Matches product detail paths: /products/:id or /:locale/products/:id
 const productDetailRegex = (locales: readonly string[]) =>

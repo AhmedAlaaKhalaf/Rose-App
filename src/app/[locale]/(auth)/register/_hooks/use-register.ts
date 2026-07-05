@@ -3,12 +3,12 @@ import { RegisterFormFields } from "@/lib/types/auth";
 import { useRouter } from "next/navigation";
 import { registerAction } from "@/lib/actions/auth.action";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function useRegister() {
-  // Navigation
   const router = useRouter();
+  const t = useTranslations("auth.register");
 
-  // Mutation
   const { isPending, error, mutate } = useMutation({
     mutationFn: async (fields: RegisterFormFields) => {
       const payload = await registerAction(fields);
@@ -20,7 +20,7 @@ export default function useRegister() {
       return payload;
     },
     onSuccess: () => {
-      toast.success("Your account has been created successfully.");
+      toast.success(t("success-toast"));
 
       setTimeout(() => {
         router.push("/login");

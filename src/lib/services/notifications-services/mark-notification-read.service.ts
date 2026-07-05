@@ -5,6 +5,7 @@ export async function markNotificationAsRead(notificationId: string[]): Promise<
   const res = await fetch(`/api/notifications/mark-as-read`, {
     method: "POST",
     body: JSON.stringify({ notificationIds: notificationId }),
+    credentials: "include",
   });
 
   if (!res.ok) {

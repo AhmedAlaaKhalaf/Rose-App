@@ -1,10 +1,10 @@
 import OrderList from "@/components/features/orders/order-list";
 import { authOptions } from "@/auth";
-import { Order, OrdersResponse } from "@/lib/types/order";
+import { Order } from "@/lib/types/order";
+import { normalizeOrdersResponse } from "@/lib/utils/orders";
 import { getServerSession } from "next-auth";
 import { getTranslations } from "next-intl/server";
 
-// Functions
 async function getOrdersServer(accessToken: string): Promise<Order[]> {
   const response = await fetch(`${process.env.API}/orders?page=1&limit=40`, {
     headers: {
@@ -15,23 +15,23 @@ async function getOrdersServer(accessToken: string): Promise<Order[]> {
   });
 
   const contentType = response.headers.get("content-type") || "";
-  const payload: ApiResponse<OrdersResponse> = contentType.includes("application/json")
+  const payload = contentType.includes("application/json")
     ? await response.json()
-    : { error: await response.text() };
+    : { status: false, message: await response.text() };
 
-  if (!response.ok || "message" in payload) {
-    const message = "message" in payload ? payload.message : "Failed to load orders";
+  if (!response.ok) {
+    const message =
+      payload && typeof payload === "object" && "message" in payload
+        ? String(payload.message)
+        : "Failed to load orders";
     throw new Error(message);
   }
 
-  return payload.orders ?? [];
+  return normalizeOrdersResponse(payload);
 }
 
 export default async function OrdersPage() {
-  // Translation
   const t = await getTranslations("orders");
-
-  // Variables
   const session = await getServerSession(authOptions);
 
   if (!session?.accessToken) {

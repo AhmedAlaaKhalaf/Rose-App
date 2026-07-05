@@ -1,18 +1,23 @@
+import { normalizeAddressesResponse } from "../utils/addresses";
 import { TAddressResponse } from "../types/addresses";
 
-export async function getShippingAddress(token: string) {
+export async function getShippingAddress(token: string): Promise<TAddressResponse> {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API}/addresses`, {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
+    cache: "no-store",
   });
 
-  if (!response.ok) throw new Error("Failed to fetch shipping addresses");
+  const payload = await response.json();
 
-  const payload: ApiResponse<TAddressResponse> = await response.json();
+  if (!response.ok || payload?.status === false) {
+    throw new Error(payload?.message || "Failed to fetch shipping addresses");
+  }
 
-  if ("message" in payload) throw new Error(payload.message as string);
-
-  return payload;
+  return {
+    message: String(payload?.message ?? ""),
+    ...normalizeAddressesResponse(payload),
+  };
 }

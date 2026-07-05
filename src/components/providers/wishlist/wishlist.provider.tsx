@@ -1,41 +1,46 @@
 "use client";
 
+import useUserWishlist from "@/hooks/wishlist/use-user-wishlist";
 import { useWishlistToAdd } from "@/hooks/wishlist/use-wishlist";
 import { TProductCard } from "@/lib/types/product";
+import { TWishlistItem } from "@/lib/types/wishlist";
+import { parseGuestWishlist, productToWishlistItem, mergeWishlistItems } from "@/lib/utils/wishlist";
 import { useSession } from "next-auth/react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 type TWishlistContext = {
-  wishlist: TProductCard[];
+  items: TWishlistItem[];
   toggleWishlist: (product: TProductCard) => void;
-  setWishlist: React.Dispatch<React.SetStateAction<TProductCard[]>>;
+  setItems: React.Dispatch<React.SetStateAction<TWishlistItem[]>>;
+  isWishlisted: (productId: string) => boolean;
 };
 
 const WishlistContext = createContext<TWishlistContext>({
-  wishlist: [],
+  items: [],
   toggleWishlist: () => {},
-  setWishlist: () => {},
+  setItems: () => {},
+  isWishlisted: () => false,
 });
 
 export function WishlistProvider({ children }: { children: React.ReactNode }) {
-  const [wishlist, setWishlist] = useState<TProductCard[]>([]);
+  const [items, setItems] = useState<TWishlistItem[]>([]);
   const hasSynced = useRef(false);
 
   const { status } = useSession();
+  const { data: serverWishlist } = useUserWishlist();
   const { mutateAsync: addUserWishlist } = useWishlistToAdd();
 
   const isUserLoggedIn = status === "authenticated";
 
   useEffect(() => {
-    const stored = localStorage.getItem("wishlist");
-    if (!stored) return;
-
-    try {
-      setWishlist(JSON.parse(stored));
-    } catch (err) {
-      console.error("Failed to parse wishlist from localStorage", err);
-    }
+    setItems(parseGuestWishlist(localStorage.getItem("wishlist")));
   }, []);
+
+  useEffect(() => {
+    if (isUserLoggedIn && serverWishlist) {
+      setItems((prev) => mergeWishlistItems(prev, serverWishlist.items));
+    }
+  }, [isUserLoggedIn, serverWishlist]);
 
   useEffect(() => {
     if (!isUserLoggedIn || hasSynced.current) return;
@@ -47,12 +52,12 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
       try {
         hasSynced.current = true;
 
-        const localWishlist: TProductCard[] = JSON.parse(stored);
+        const localWishlist = parseGuestWishlist(stored);
 
         await Promise.all(
           localWishlist.map((item) =>
-            addUserWishlist(item._id).catch((error) => {
-              console.error(`Failed to sync product with id => ${item._id}`, error);
+            addUserWishlist(item.product.id).catch((error) => {
+              console.error(`Failed to sync product with id => ${item.product.id}`, error);
             })
           )
         );
@@ -66,18 +71,18 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
     syncWishlist();
   }, [isUserLoggedIn, addUserWishlist]);
 
-  const toggleWishlist = (product: TProductCard) => {
-    setWishlist((prev) => {
-      const exists = prev.some((item) => item._id === product._id);
+  const isWishlisted = (productId: string) => items.some((item) => item.product.id === productId);
 
-      const updated = exists ? prev.filter((item) => item._id !== product._id) : [...prev, product];
+  const toggleWishlist = (product: TProductCard) => {
+    setItems((prev) => {
+      const exists = prev.some((item) => item.product.id === product.id);
+
+      const updated = exists
+        ? prev.filter((item) => item.product.id !== product.id)
+        : [...prev, productToWishlistItem(product)];
 
       if (!isUserLoggedIn) {
         localStorage.setItem("wishlist", JSON.stringify(updated));
-      } else {
-        addUserWishlist(product._id).catch((err) =>
-          console.error("Failed to update server wishlist", err)
-        );
       }
 
       return updated;
@@ -85,7 +90,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <WishlistContext.Provider value={{ wishlist, toggleWishlist, setWishlist }}>
+    <WishlistContext.Provider value={{ items, toggleWishlist, setItems, isWishlisted }}>
       {children}
     </WishlistContext.Provider>
   );

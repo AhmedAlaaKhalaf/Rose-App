@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/carousel";
 import ProductCard from "@/components/shared/product-card";
 import { getProducts } from "@/lib/services/product.service";
-import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/tailwind-merge";
 
 export default async function BestSellingCarousel() {
@@ -30,9 +29,7 @@ export default async function BestSellingCarousel() {
         {/* Products  */}
         {products.map((product) => (
           <CarouselItem key={product.id} className="sm:basis-1/1 md:basis-1/2 lg:basis-1/3">
-            <Link key={product.id} href={`products/${product.id}`}>
-              <ProductCard product={product} />
-            </Link>
+            <ProductCard product={product} />
           </CarouselItem>
         ))}
       </CarouselContent>

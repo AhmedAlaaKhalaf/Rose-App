@@ -1,23 +1,27 @@
-import type { TProduct } from "./product";
+export type TCartProduct = {
+  id: string;
+  title: string;
+  cover: string;
+  price: string;
+};
 
 export type TCartItem = {
-  product: TProduct;
+  id: string;
+  product: TCartProduct;
   price: number;
   quantity: number;
-  _id: string;
 };
 
 export type TUserCart = {
   message: string;
   numOfCartItems: number;
   cart: {
-    _id: string;
-    user: string;
+    id: string;
+    userId: string;
     cartItems: TCartItem[];
     appliedCoupons: string[];
     totalPrice: number;
     createdAt: string;
     updatedAt: string;
-    __v: number;
   };
 };
