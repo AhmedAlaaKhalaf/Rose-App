@@ -1,8 +1,8 @@
 export type TPayCreditResponse = {
-  session: {
-    id: string;
-    url: string;
-    cancel_url: string;
-    success_url: string;
-  };
+  message: string;
+  orderId: string;
+  checkoutUrl?: string;
+  clientSecret?: string;
+  publishableKey?: string;
+  paymentIntentId?: string;
 };

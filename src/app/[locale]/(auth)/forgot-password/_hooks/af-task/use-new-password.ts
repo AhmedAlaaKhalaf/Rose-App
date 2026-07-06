@@ -1,18 +1,18 @@
-import { newPasswordAction } from "@/lib/actions/auth.actions";
+import { resetPasswordAction } from "@/lib/actions/auth.actions";
 import { NewPasswordFields } from "@/lib/types/auth";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useNewPassword() {
-  // Mutation
   const { isPending, error, mutate } = useMutation({
-    mutationFn: async (fields: NewPasswordFields & { email: string }) => {
-      const payload = await newPasswordAction({
-        email: fields.email,
+    mutationFn: async (fields: NewPasswordFields) => {
+      const payload = await resetPasswordAction({
+        token: fields.token,
         newPassword: fields.password,
+        confirmPassword: fields.confirmPassword,
       });
 
-      if ("message" in payload) {
-        throw new Error(payload.message);
+      if (payload?.status === false) {
+        throw new Error(payload.message || "Failed to reset password");
       }
 
       return payload;

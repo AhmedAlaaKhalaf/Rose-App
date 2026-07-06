@@ -10,15 +10,23 @@ interface GetNotificationsParams {
   isRead?: boolean;
 }
 
-export async function getNotifications(searchParams: GetNotificationsParams) {
-  const token = await getServerSession(authOptions);
+export async function getNotifications({
+  pageParam = 1,
+  limit = 10,
+}: GetNotificationsParams): Promise<TPaginatedNotifications> {
+  const res = await fetch(`/api/notifications?page=${pageParam}&limit=${limit}`, {
+    cache: "no-store",
+    credentials: "include",
+  });
 
   const { pageParam = 1, limit = API_NOTIFICATIONS_LIMIT } = searchParams;
 
-  const params = new URLSearchParams({
-    page: pageParam.toString(),
-    limit: limit.toString(),
-  });
+    try {
+      const errorData = await res.json();
+      errorMessage = errorData.message || errorData.error || errorMessage;
+    } catch {
+      // ignore parse errors
+    }
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API}/notifications?${params.toString()}`,
@@ -33,9 +41,5 @@ export async function getNotifications(searchParams: GetNotificationsParams) {
     throw new Error("Failed to fetch notifications");
   }
 
-  const payload: ApiResponse<PaginatedData<TNotification[]>> = await response.json();
-
-  if ("message" in payload) throw new Error(payload.message);
-
-  return payload;
+  return res.json();
 }

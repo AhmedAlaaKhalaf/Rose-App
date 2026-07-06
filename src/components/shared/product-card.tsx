@@ -1,24 +1,24 @@
+"use client";
+
 import Image from "next/image";
-import { ShoppingCart, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { TProduct } from "@/lib/types/product";
-import { Button } from "../ui/button";
+import { TProductCard } from "@/lib/types/product";
+import AddToCartButton from "@/components/features/cart/add-to-cart-button";
 import WishlistButton from "../features/wishlist/wishlist-button";
-import { cn } from "@/lib/utils/tailwind-merge";
 import { Link } from "@/i18n/navigation";
+import { resolveProductCover } from "@/lib/utils/product-image";
+import { cn } from "@/lib/utils/tailwind-merge";
 import { useLocale, useTranslations } from "next-intl";
 
 type ProductCardProps = { product: TProduct };
 
 export default function ProductCard({ product }: ProductCardProps) {
-  // Translations
   const t = useTranslations("product-listing.badge");
-
-  // Hooks
   const locale = useLocale();
 
-  // Variables
-  const { title, rating, price, discountValue, discountType, createdAt, stock, id } = product;
+  const { cover, title, rating, price, discountValue, discountType, createdAt, stock } = product;
+  const productHref = `/products/${product.id}`;
   const productLifeTime =
     (new Date().getTime() - new Date(createdAt).getTime()) / (1000 * 60 * 60 * 24);
   const isNewProduct = productLifeTime < 7;
@@ -28,60 +28,52 @@ export default function ProductCard({ product }: ProductCardProps) {
     discountType === "PERCENT" ? +price - (+price * +discountValue) / 100 : +price - +discountValue;
 
   return (
-    <section className="flex flex-col justify-between h-[22.75rem]">
-      {/* Cover  */}
-      <section className="relative h-[17rem]">
-        {/* Header  */}
+    <section className="flex flex-col justify-between min-h-[20rem] sm:h-[22.75rem]">
+      <div className="relative h-[14rem] sm:h-[17rem]">
         <header
           className={cn(
             locale === "ar" && "font-tajawal",
-            "top-3 z-10 absolute flex justify-between px-3 w-full"
+            "top-3 z-20 absolute flex justify-between px-3 w-full pointer-events-none"
           )}
         >
-          {/* Add to wishlist */}
-          <WishlistButton productId={id} />
+          <div className="pointer-events-auto">
+            <WishlistButton product={product} />
+          </div>
 
-          {/* New  badge */}
-          {isNewProduct && <Badge variant="subtle">{t("new")}</Badge>}
-
-          {/* Sold out badge */}
-          {!stock && <Badge>{t("sold-out")}</Badge>}
-
-          {/* Hot badge */}
-          {isHotProduct && <Badge variant="secondary">{t("hot")}</Badge>}
+          <div className="flex gap-2">
+            {isNewProduct && <Badge variant="subtle">{t("new")}</Badge>}
+            {!stock && <Badge>{t("sold-out")}</Badge>}
+            {isHotProduct && <Badge variant="secondary">{t("hot")}</Badge>}
+          </div>
         </header>
 
-        {/* Cover  */}
-        <Link href={`/products/${id}`}>
-          <div className="relative h-full">
-            <Image
-              // src={"https://placehold.net/product.svg"}
-              src={"/assets/product-placeholder.webp"}
-              alt={title}
-              fill
-              sizes="auto"
-              priority
-              className="rounded-3xl"
-              style={{
-                objectFit: "cover",
-              }}
-            />
-          </div>
+        <Link
+          href={productHref}
+          className="block relative z-0 rounded-3xl w-full h-full overflow-hidden"
+          aria-label={title}
+        >
+          <Image
+            src={resolveProductCover(cover)}
+            alt={title}
+            fill
+            sizes="auto"
+            priority
+            className="rounded-3xl"
+            style={{
+              objectFit: "cover",
+            }}
+          />
         </Link>
-      </section>
+      </div>
 
-      {/* Details */}
       <footer className="font-semibold text-maroon-700 dark:text-softPink-200 text-lg leading-none">
-        <Link href={`/products/${id}`} className="hover:text-[#FBA707]">
+        <Link href={productHref} className="block hover:opacity-90 transition-opacity line-clamp-2">
           {title}
         </Link>
-        {/* Frame 328  */}
-        <div className="flex justify-between items-center pt-3">
-          {/* Frame 329 */}
-          <div className="dark:text-softPink-200">
-            {/* Rating */}
 
-            <Link href={`/products/${id}`} className="flex gap-1 pb-3">
+        <div className="flex justify-between items-center pt-3 gap-3">
+          <Link href={productHref} className="dark:text-softPink-200 flex-1 min-w-0">
+            <div className="flex gap-1 pb-3">
               {Array.from({ length: 5 }).map((_, idx) => (
                 <Star
                   key={idx}
@@ -92,26 +84,18 @@ export default function ProductCard({ product }: ProductCardProps) {
                   }
                 />
               ))}
-            </Link>
-            {/* PriceAfterDiscount */}
-            <Link href={`/products/${id}`}>
-              {`${priceAfterDiscount?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
-            </Link>
-            {/* Price */}
-            {price && priceAfterDiscount < +price && (
-              <Link
-                className="ps-2 font-medium text-zinc-400 dark:text-zinc-500 line-through"
-                href={`/products/${id}`}
-              >
+            </div>
+
+            {`${priceAfterDiscount?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
+
+            {price && (
+              <span className="ps-2 font-medium text-zinc-400 dark:text-zinc-500 line-through">
                 {`${Number(price)?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
               </Link>
             )}
-          </div>
+          </Link>
 
-          {/* Add to cart */}
-          <Button className="rounded-full size-10">
-            <ShoppingCart className="size-6 text-maroon-50" strokeWidth={1.48} />
-          </Button>
+          <AddToCartButton productId={product.id} stock={stock} variant="icon" />
         </div>
       </footer>
     </section>

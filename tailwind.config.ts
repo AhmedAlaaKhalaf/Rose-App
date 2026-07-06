@@ -171,6 +171,15 @@ const config: Config = {
         mulish: ["var(--font-mulish)", "sans-serif"],
         sarabun: ["var(--font-sarabun)", "sans-serif"],
       },
+      keyframes: {
+        "logo-pulse": {
+          "0%, 100%": { transform: "scale(1)", opacity: "1" },
+          "50%": { transform: "scale(1.08)", opacity: "0.65" },
+        },
+      },
+      animation: {
+        "logo-pulse": "logo-pulse 1.4s ease-in-out infinite",
+      },
     },
   },
   plugins: [tailwindcssAnimate],

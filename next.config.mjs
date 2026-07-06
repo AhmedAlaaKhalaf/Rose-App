@@ -2,18 +2,18 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["leaflet"],
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "rose-app.elevate-bootcamp.cloud",
-        pathname: "/storage/entities/**",
+        pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "placehold.net",
-        port: "",
-        pathname: "/*",
+        hostname: "www.rose-app.elevate-bootcamp.cloud",
+        pathname: "/**",
       },
     ],
   },

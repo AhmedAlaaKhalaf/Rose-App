@@ -100,12 +100,12 @@ export function LoginForm() {
           control={form.control}
           render={({ field, fieldState }) => (
             <Field className="gap-1.5" data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="form-rhf-demo-email">{t("username.label")}</FieldLabel>
+              <FieldLabel htmlFor="form-rhf-demo-username">{t("username.label")}</FieldLabel>
 
               <Input
                 {...field}
-                id="form-rhf-demo-email"
-                placeholder="username"
+                id="form-rhf-demo-username"
+                placeholder={t("username.placeholder")}
                 autoComplete="username"
                 aria-invalid={fieldState.invalid}
               />

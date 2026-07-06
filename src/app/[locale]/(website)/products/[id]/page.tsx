@@ -1,5 +1,5 @@
 import { productDetailsServices } from "@/lib/services/product-details.service";
-import { setRequestLocale } from "next-intl/server";
+import ProductInfo from "./_components/product-info";
 import ProductReviews from "./_components/products-reviews/product-reviews";
 import RelatedProducts from "./_components/related-products/related-products";
 import ProductGallery from "./_components/product-gallery";
@@ -11,40 +11,25 @@ type LocaleProps = {
   params: { locale: string; id: string };
 };
 
-export async function generateStaticParams() {  
-  const { payload } = await getProducts({ limit: `${API_STATIC_PRODUCTS_LIMIT}` });
-  const products = payload.data;
-
-  return products.map(({ id }) => ({
-    id,
-  }));
-}
-
-export default async function ProductPage({ params: { locale, id } }: LocaleProps) {
-  // Enable static rendering
+export default async function Page({ params: { locale, id } }: LocaleProps) {
   setRequestLocale(locale);
 
-  // Fetch product details
   const productDetails = await productDetailsServices(id);
-  const { title, cover, gallery, category } = productDetails.payload.product;
+  const { product } = productDetails.payload;
 
   return (
-    <main className="space-y-12 mb-112 lg:pt-16">
-      {/* product details */}
-      <section className="gap-16 grid grid-cols-1 lg:grid-cols-2 mb-[50px]">
-        {/* Product gallery */}
-        <ProductGallery title={title} imgCover={cover} images={Array(gallery)} />
+    <main className="mx-auto px-4 sm:px-6 lg:px-8 mt-24 md:mt-28 mb-16 md:mb-24 max-w-7xl">
+      <div className="space-y-14 md:space-y-20">
+        <ProductInfo product={product} />
 
-        {/* Product info */}
-        <ProductInfo {...productDetails?.payload.product} />
-      </section>
-      <section className="space-y-12">
-        {/* Product reviews  */}
-        <ProductReviews productDetails={productDetails} />
+        <div className="pt-10 md:pt-14 border-zinc-100 dark:border-zinc-800 border-t">
+          <ProductReviews productDetails={productDetails} />
+        </div>
 
-        {/* Related products  */}
-        <RelatedProducts id={category.id} />
-      </section>
+        <div className="pt-10 md:pt-14 border-zinc-100 dark:border-zinc-800 border-t">
+          <RelatedProducts id={product.category.id} />
+        </div>
+      </div>
     </main>
   );
 }

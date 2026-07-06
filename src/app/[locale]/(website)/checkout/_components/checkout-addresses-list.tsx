@@ -29,7 +29,7 @@ export default function CheckoutAddressesList({ userAddresses }: CheckoutAddress
       )}
     >
       {userAddresses.map((userAddress) => (
-        <CheckoutAddress key={userAddress._id} userAddress={userAddress} />
+        <CheckoutAddress key={userAddress.id} userAddress={userAddress} />
       ))}
     </section>
   );

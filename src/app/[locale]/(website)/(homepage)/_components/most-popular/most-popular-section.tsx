@@ -1,8 +1,9 @@
 import OccasionsFilterLinks from "./occasions-filter-links";
+import MostPopularProductsList from "./most-popular-products-list";
 import { SectionHead } from "@/components/ui/section-header";
+import { homepageContainer } from "@/lib/constants/homepage-spacing";
 import { getOccasions } from "@/lib/services/occasion.service";
 import { Suspense } from "react";
-import ProductsList from "@/components/shared/products-list";
 import ProductListSkeleton from "@/components/skeletons/shared/product-list.skeleton";
 import { SearchParams } from "@/lib/types/global";
 import OccasionsFilterSkeleton from "@/components/skeletons/most-popular/occasions-filter.skeleton";
@@ -13,36 +14,37 @@ type MostPopularSectionProps = {
 };
 
 export default async function MostPopularSection({ searchParams }: MostPopularSectionProps) {
-  // Translations
   const t = await getTranslations("most-popular");
 
-  // Services
   const {
     payload: { data: occasions },
   } = await getOccasions();
 
+  const defaultOccasionId = occasions[0]?.id;
+  const selectedOccasionId = String(searchParams?.occasionId ?? defaultOccasionId ?? "");
+
   return (
-    <section className="flex flex-col gap-10 w-full">
-      {/* Header */}
-      <header className="flex sm:flex-row flex-col justify-between items-center gap-4 sm:gap-0">
-        {/* Heading */}
-        <SectionHead size={"sm"} className="me-auto ltr:capitalize">
-          {t("heading")}
-        </SectionHead>
+    <section className="w-full">
+      <div className={homepageContainer}>
+        <div className="flex flex-col gap-6 lg:gap-10 w-full">
+          <header className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-center">
+            <SectionHead size="sm" className="ltr:capitalize">
+              {t("heading")}
+            </SectionHead>
 
-        {/* Occasions Filter */}
-        <Suspense fallback={<OccasionsFilterSkeleton />}>
-          <OccasionsFilterLinks occasions={occasions} searchParams={searchParams} />
-        </Suspense>
-      </header>
+            <Suspense fallback={<OccasionsFilterSkeleton />}>
+              <OccasionsFilterLinks
+                occasions={occasions}
+                selectedOccasionId={selectedOccasionId}
+              />
+            </Suspense>
+          </header>
 
-      {/* Products */}
-      <Suspense fallback={<ProductListSkeleton />}>
-        <ProductsList
-          className="gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-          searchParams={searchParams}
-        />
-      </Suspense>
+          <Suspense fallback={<ProductListSkeleton />} key={selectedOccasionId}>
+            <MostPopularProductsList occasionId={selectedOccasionId || undefined} />
+          </Suspense>
+        </div>
+      </div>
     </section>
   );
 }

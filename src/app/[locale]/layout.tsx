@@ -68,9 +68,10 @@ export default async function LocaleLayout({ children, params: { locale } }: Loc
   const messages = await getMessages();
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
       <body
-        className={`${sarabun.variable} ${mulish.variable} ${tajawal.variable} ${inter.variable} ${greatVibes.variable} ${locale === "ar" ? tajawal.className : sarabun.className}  antialiased`}
+        className={`${sarabun.variable} ${tajawal.variable} ${inter.variable} ${greatVibes.variable} antialiased`}
+        suppressHydrationWarning
       >
         <Providers locale={locale} messages={messages}>
           {children}

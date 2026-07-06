@@ -3,22 +3,19 @@
 import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { homepageContainer } from "@/lib/constants/homepage-spacing";
 
 export default function AboutSection() {
-  // Translation
   const t = useTranslations("about");
 
   return (
-    <section id="about" className="mx-auto py-12 w-full container">
-      <div className="px-4 container">
-        <div className="items-center gap-12 grid lg:grid-cols-2">
-          {/* Left Side - Images */}
-          <div className="relative flex justify-center items-center">
-            <div className="flex items-center gap-10 lg:gap-16">
-              {/* Large Purple Gift Box */}
+    <section id="about" className="py-10 sm:py-12 lg:py-16 xl:py-20 w-full overflow-hidden">
+      <div className={homepageContainer}>
+        <div className="items-center gap-10 sm:gap-12 lg:gap-16 xl:gap-20 grid lg:grid-cols-2">
+          <div className="relative flex justify-center items-center overflow-hidden">
+            <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-center lg:gap-16">
               <div
-                className="before:absolute relative before:inset-0 before:border-[#A6252A] before:border-4 min-w-36 max-w-126 h-96 overflow-hidden before:content-[''] before:pointer-events-none"
+                className="before:absolute relative before:inset-0 before:border-[#A6252A] before:border-4 w-56 sm:w-64 lg:w-72 h-72 sm:h-80 lg:h-96 overflow-hidden before:content-[''] before:pointer-events-none"
                 style={{
                   borderTopLeftRadius: "50px",
                   borderTopRightRadius: "120px",
@@ -37,11 +34,9 @@ export default function AboutSection() {
                 />
               </div>
 
-              {/* Right Column - Two Smaller Boxes */}
-              <div className="flex flex-col gap-4 min-w-36 max-w-48">
-                {/* Orange Gift Box - Circular */}
+              <div className="flex flex-col gap-4 w-40 sm:w-44 lg:w-48">
                 <div
-                  className="relative flex-shrink-0 bg-white min-w-36 max-w-48 h-48 overflow-hidden"
+                  className="relative flex-shrink-0 bg-white w-40 sm:w-44 lg:w-48 h-40 sm:h-44 lg:h-48 overflow-hidden"
                   style={{ borderRadius: "150px" }}
                 >
                   <Image
@@ -53,9 +48,8 @@ export default function AboutSection() {
                   />
                 </div>
 
-                {/* Teal Gift Box - Custom Rounded */}
                 <div
-                  className="relative flex-shrink-0 bg-white min-w-36 max-w-48 h-36 overflow-hidden"
+                  className="relative flex-shrink-0 bg-white w-40 sm:w-44 lg:w-48 h-28 sm:h-32 lg:h-36 overflow-hidden"
                   style={{
                     borderTopLeftRadius: "50px",
                     borderTopRightRadius: "100px",
@@ -76,17 +70,14 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right Side - Content */}
-          <div className="flex flex-col gap-4">
-            {/* Badge */}
+          <div className="flex flex-col gap-5 lg:gap-6">
             <div className="inline-flex justify-center items-center bg-[#FFE81A] shadow-lg rounded w-20 h-6">
               <span className="font-sarabun font-bold text-[#27272A] text-base uppercase leading-[100%] tracking-[0.25em]">
                 {t("badge")}
               </span>
             </div>
 
-            {/* Heading */}
-            <h2 className="max-w-2xl font-primary font-bold text-3xl leading-tight">
+            <h2 className="max-w-2xl font-primary font-bold text-2xl sm:text-3xl lg:text-3xl leading-tight">
               <span className="text-[#741C21]">{t("heading.delivering-the")}</span>
               <span className="text-[#FF668B]">{t("heading.finest")}</span>
               <span className="text-[#741C21]">{t("heading.gift-boxes-for-your")}</span>
@@ -94,21 +85,15 @@ export default function AboutSection() {
               <span className="text-[#741C21]">{t("heading.moments")}</span>
             </h2>
 
-            {/* Description */}
             <p className="max-w-2xl font-primary font-normal text-[#71717A] text-base leading-relaxed">
               {t("description")}
             </p>
 
-            {/* Discover Button */}
-            <Link
-              href={"/about"}
-              className="group flex items-center gap-2.5 bg-[#A6252A] hover:bg-[#8B1F23] mt-2 px-4 py-2.5 rounded-lg w-fit font-semibold text-white transition-colors"
-            >
+            <button className="group flex items-center gap-2.5 bg-[#A6252A] hover:bg-[#8B1F23] mt-2 px-4 py-2.5 rounded-lg w-fit font-semibold text-white transition-colors">
               {t("button")}
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
 
-            {/* Features Grid */}
             <div className="gap-4 grid sm:grid-cols-2 mt-2">
               <div className="flex items-center gap-4">
                 <Check className="flex-shrink-0 w-6 h-6 text-[#741C21]" strokeWidth={3} />

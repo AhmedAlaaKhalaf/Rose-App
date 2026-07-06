@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { TicketPercent } from "lucide-react";
 import { useTranslations } from "next-intl";
 import useUserCart from "@/hooks/cart/use-user-cart";
+import { getCartItems } from "@/lib/utils/cart";
 
 export default function CartSummary() {
   // Translation
@@ -13,14 +14,11 @@ export default function CartSummary() {
   // Get user cart
   const { data } = useUserCart();
 
-  // User cart data
-  const userCart = data?.payload ?? null;
-  const userCartItems = userCart?.cartItems ?? [];
-  const userCartTotalPrice = userCartItems.reduce(
-    (sum, item) => sum + Number(item.price) * item.quantity,
-    0
-  );
-  // const userCartAppliedCoupons = userCart?.appliedCoupons ?? [];
+    // User cart data
+    const userCart = data?.cart ?? null;
+    const userCartItems = getCartItems(data);
+    const userCartTotalPrice = userCart?.totalPrice ?? 0;
+    const userCartAppliedCoupons = userCart?.appliedCoupons ?? [];
 
   // Calculate subtotal from cart items (price * quantity)
   const subtotal = userCartItems.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0);

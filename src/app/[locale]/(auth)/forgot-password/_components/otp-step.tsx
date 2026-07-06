@@ -1,84 +1,55 @@
 "use client";
 
-import { Controller, useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { VerifyOtpFields } from "@/lib/types/auth-types/forgot-password";
-import useVerifyOtp from "../_hooks/use-verify-otp";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import { Form } from "@/components/ui/form";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import { getOtpTimeLeft, startOtpTimer } from "../../_utils/otp-timer-presisted";
 import { useEffect, useState } from "react";
-import { verifyOtpSchema } from "@/lib/schemes/auth.schemes";
+import { useForm } from "react-hook-form";
+import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Link } from "@/i18n/navigation";
-import ErrorAlert from "../../_components/error-alert";
-import { cn } from "@/lib/utils/tailwind-merge";
 import { useTranslations } from "next-intl";
-import useSendOTP from "../_hooks/af-task/use-send-otp";
+import { getOtpTimeLeft, startOtpTimer } from "../../_utils/otp-timer-presisted";
+import useForgotPassword from "../_hooks/use-forgot-password";
 
 type StepOtpProps = {
   email: string;
-  onNext: () => void;
+  onTokenSubmit: (token: string) => void;
   onBack: () => void;
 };
 
-export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
-  //state
-  const [timer, setTimer] = useState(getOtpTimeLeft || 0);
+type FormValues = { token: string };
 
-  // translation
+export default function OtpStep({ email, onTokenSubmit, onBack }: StepOtpProps) {
+  const [timer, setTimer] = useState(getOtpTimeLeft());
+
   const t = useTranslations("forgot-password");
 
-  // hooks
-  const { verifyOtp, isVerifyPending, verifyError } = useVerifyOtp();
-  const { isPending, sendOTP } = useSendOTP();
+  // resending the reset email
+  const { isPending, forgotPassword } = useForgotPassword();
 
-  // react hook form
-  const form = useForm<VerifyOtpFields>({
-    defaultValues: {
-      resetCode: "",
-    },
-    resolver: zodResolver(verifyOtpSchema(t)),
+  const form = useForm<FormValues>({
+    defaultValues: { token: "" },
   });
 
-  // otp value
-  const otpValue = form.watch("resetCode");
-  const onSubmit = (data: VerifyOtpFields) => {
-    verifyOtp(data, {
-      onSuccess: () => {
-        localStorage.removeItem("otp_time");
-        onNext();
-      },
-      onError: (err) => {
-        form.setError("resetCode", { message: err.message });
-      },
-    });
+  const onSubmit = (data: FormValues) => {
+    if (!data.token.trim()) {
+      form.setError("token", { message: t("token-required") });
+      return;
+    }
+    if (typeof window !== "undefined") localStorage.removeItem("otp_time");
+    onTokenSubmit(data.token.trim());
   };
 
-  // auto send
-  useEffect(() => {
-    if (otpValue.length === 6) {
-      verifyOtp(
-        { resetCode: otpValue },
-        {
-          onSuccess: () => {
-            localStorage.removeItem("otp_time");
-          },
-          onError: (err) => {
-            form.setError("resetCode", { message: err.message });
-          },
-        }
-      );
-    } else {
-      form.clearErrors("resetCode");
-    }
-  }, [form, otpValue, verifyOtp]);
-
-  // resend otp
   const handleResend = () => {
     if (!email) return;
-    sendOTP(
+    forgotPassword(
       { email },
       {
         onSuccess: () => {
@@ -89,16 +60,13 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
     );
   };
 
-  // timer count down
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimer(getOtpTimeLeft());
-    }, 1000);
+    const interval = setInterval(() => setTimer(getOtpTimeLeft()), 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="flex flex-col justify-center items-center">
+    <section className="flex flex-col justify-center items-center w-full">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-4 mb-9 w-full">
           <div className="space-y-1">
@@ -122,30 +90,27 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
             </div>
           </div>
 
-          {/* otp field */}
-          <Controller
-            name="resetCode"
+          {/* token field — paste the code from the email */}
+          <FormField
             control={form.control}
+            name="token"
             render={({ field }) => (
-              <InputOTP maxLength={6} value={field.value} onChange={field.onChange}>
-                <InputOTPGroup className="justify-center gap-x-3 mt-4 w-full">
-                  {[0, 1, 2, 3, 4, 5].map((i) => (
-                    <InputOTPSlot
-                      key={i}
-                      index={i}
-                      className={cn(
-                        form.formState.errors.resetCode && "border-red-500 ring-1 ring-red-500"
-                      )}
-                    />
-                  ))}
-                </InputOTPGroup>
-              </InputOTP>
+              <FormItem>
+                <FormLabel>{t("token-label")}</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder={t("token-placeholder")}
+                    autoComplete="one-time-code"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             )}
           />
 
-          {/* timer */}
           <div className="flex justify-end w-full">
-            <p className="mt-6 text-zinc-700 dark:text-zinc-400 text-sm text-center">
+            <p className="mt-2 text-zinc-700 dark:text-zinc-400 text-sm text-center">
               {timer > 0 ? (
                 <>
                   {t.rich("otp-time-left", {
@@ -166,39 +131,19 @@ export default function OtpStep({ email, onNext, onBack }: StepOtpProps) {
                       {t("otp-resending")} <Loader2 className="animate-spin" />
                     </>
                   ) : (
-                    <>{t("otp-resend")}</>
+                    t("otp-resend")
                   )}
                 </button>
               )}
             </p>
           </div>
 
-          {/* Form validation error */}
-          {form.formState.errors.resetCode && (
-            <ErrorAlert message={form.formState.errors.resetCode.message} />
-          )}
-
-          {/* Server error (only if no form error) */}
-          {!form.formState.errors.resetCode && verifyError && (
-            <ErrorAlert message={verifyError.message} />
-          )}
-
-          {/* Submit button */}
-          <Button
-            type="submit"
-            disabled={isVerifyPending}
-            className="flex justify-center items-center gap-x-2 mt-4 w-full"
-          >
-            {isVerifyPending ? (
-              <>
-                {t("verifying-otp")} <Loader2 className="animate-spin" />
-              </>
-            ) : (
-              <>{t("verify-otp")} </>
-            )}
+          <Button type="submit" className="flex justify-center items-center gap-x-2 mt-4 w-full">
+            {t("verify-otp")}
           </Button>
         </form>
       </Form>
+
       <div className="flex justify-center items-center gap-1 pt-5 border-t border-t-zinc-200 dark:border-t-zinc-700 w-full font-medium text-sm">
         <p className="font-medium text-zinc-800 dark:text-zinc-50 text-sm text-center">
           {t.rich("otp-need-help", {

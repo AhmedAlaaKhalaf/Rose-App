@@ -23,7 +23,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import NotificationsSkeleton from "./notifications-skeleton";
 import useMarkNotificationRead from "@/hooks/notifications/use-mark-notification-read";
 import { useTranslations } from "next-intl";
-import Loading from "@/app/[locale]/loading";
+import LogoSpinner from "@/components/shared/logo-spinner";
 import { useSession } from "next-auth/react";
 import { markAllNotificationsAsRead } from "@/lib/actions/notification.action";
 
@@ -36,7 +36,7 @@ export default function Notifications() {
   const t = useTranslations("notifications");
 
   // hooks
-  const session = useSession();
+  const { data: session, status } = useSession();
 
   const {
     data: notificationsList,
@@ -44,7 +44,7 @@ export default function Notifications() {
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = useNotifications(session.data?.accessToken);
+  } = useNotifications(status === "authenticated" ? session?.accessToken : undefined);
 
   const { markRead } = useMarkNotificationRead();
 
@@ -221,7 +221,9 @@ export default function Notifications() {
                     ))}
                 </InfiniteScroll>
                 {/* loader */}
-                <div>{isFetching && hasNextPage && <Loading />}</div>
+                <div className="flex justify-center py-4">
+                  {isFetching && hasNextPage && <LogoSpinner size={48} />}
+                </div>
               </>
             )}
           </ul>

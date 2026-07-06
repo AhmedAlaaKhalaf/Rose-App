@@ -1,5 +1,6 @@
 import { TUserAddress } from "../types/user-address";
 import { getDecodedToken } from "@/hooks/shared/use-decoded-token";
+import { normalizeAddressesResponse } from "../utils/addresses";
 
 export async function getUserAddresses() {
   const token = await getDecodedToken();
@@ -13,11 +14,11 @@ export async function getUserAddresses() {
     },
   });
 
-  const payload: ApiResponse<{ addresses: TUserAddress[] }> = await response.json();
+  const payload = await response.json();
 
-  if ("message" in payload) {
-    throw new Error(payload.message);
+  if (!response.ok || payload?.status === false) {
+    throw new Error(payload?.message || "Failed to fetch addresses");
   }
 
-  return payload;
+  return normalizeAddressesResponse(payload) as { addresses: TUserAddress[] };
 }

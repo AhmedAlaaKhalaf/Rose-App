@@ -7,11 +7,12 @@ const authPages = ["/login", "/register", "/forgot-password"];
 const publicPages = [
   "/",
   "/products",
-  "/products/[^/]+",
-  "/categories",
-  "/occasions",
-  "/contact",
+  "/checkout",
   "/about",
+  "/contact",
+  "/occasions",
+  "/cart",
+  "/wishlist",
 ];
 
 // Matches product detail paths: /products/:id or /:locale/products/:id

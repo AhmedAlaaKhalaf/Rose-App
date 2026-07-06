@@ -65,11 +65,11 @@ export default function ShippingAddress({
           <div className="flex flex-col gap-3 h-[320px] overflow-y-auto scrollbar-primary">
             {addresses.map((address) => {
               // Check if the address is selected
-              const isSelected = selectedAddress?._id === address._id;
+              const isSelected = selectedAddress?.id === address.id;
 
               return (
                 <button
-                  key={address._id}
+                  key={address.id}
                   type="button"
                   onClick={() => onSelectAddress(address)}
                   className={`border p-4 rounded-lg py-3 px-4 flex justify-between items-start text-left transition-colors ${
@@ -78,10 +78,8 @@ export default function ShippingAddress({
                 >
                   <div className="flex flex-col gap-2">
                     {/* City */}
-                    <h3
-                      className={`text-2xl font-semibold ${isSelected ? "text-white" : "text-black dark:text-white"}`}
-                    >
-                      {address.city}
+                    <h3 className={`text-2xl font-semibold ${isSelected ? "text-white" : "text-black dark:text-white"}`}>
+                      {address.title} · {address.city}
                     </h3>
 
                     {/* Street */}

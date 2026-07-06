@@ -7,7 +7,7 @@ export type TReview = {
   productId: string;
   headline: string;
   content: string;
-  rating: 4;
+  rating: number;
   createdAt: string;
   updatedAt: string;
   user: {
@@ -15,6 +15,7 @@ export type TReview = {
     username: string;
     firstName: string;
     lastName: string;
+    photo?: string;
   };
   product: {
     id: string;

@@ -1,15 +1,17 @@
 import { userAddressSchema } from "../schemas/user-address.schema";
+import type { TAddressInput } from "./addresses";
 
 export type TUserAddress = {
+  id: string;
+  title: string;
+  isPrimary: boolean;
+  city: string;
   street: string;
   phone: string;
-  city: string;
-  lat: string;
-  long: string;
-  username: string;
-  _id: string;
+  latitude: number;
+  longitude: number;
 };
 
-export type TUserAddressDetails = Omit<TUserAddress, "_id">;
+export type TUserAddressDetails = TAddressInput;
 
 export type TUserAddressFormFields = z.infer<ReturnType<typeof userAddressSchema>>;

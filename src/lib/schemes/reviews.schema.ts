@@ -3,7 +3,10 @@ import z from "zod";
 
 export const reviewSchema = (t: Translation) =>
   z.object({
-    rating: z.number().max(5),
-    title: z.string().nonempty(t("title-field")).min(3).max(20),
-    comment: z.string().nonempty().max(200),
+    rating: z
+      .number()
+      .min(1, t("rating-required"))
+      .max(5),
+    title: z.string().trim().min(1, t("title-field")).min(3).max(100),
+    comment: z.string().trim().min(1, t("comment-required")).max(500),
   });

@@ -4,7 +4,7 @@ export default function ProductCardSkeleton() {
   return (
     <section className="space-y-4">
       {/* Cover */}
-      <section className="relative h-[17rem]">
+      <section className="relative h-[14rem] sm:h-[17rem]">
         <Skeleton className="h-full w-full rounded-3xl bg-zinc-300 dark:bg-zinc-600" />
       </section>
 

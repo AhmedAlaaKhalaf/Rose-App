@@ -1,9 +1,5 @@
-import { LoaderCircle } from "lucide-react";
+import LogoSpinner from "@/components/shared/logo-spinner";
 
-export default function Loading() {
-  return (
-    <div className="px-4 w-full h-screen flex justify-center items-center">
-      <LoaderCircle className="animate-spin text-primary" size={40} />
-    </div>
-  );
+export default function LocaleLoading() {
+  return <LogoSpinner fullScreen size={96} />;
 }

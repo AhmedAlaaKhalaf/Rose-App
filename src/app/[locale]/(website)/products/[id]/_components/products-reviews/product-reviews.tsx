@@ -8,24 +8,18 @@ type ReviewsProps = {
 };
 
 export default async function ProductReviews({ productDetails }: ReviewsProps) {
-  // Variables
   const {
     payload: { product },
   } = productDetails;
 
   return (
-    <>
-      {/* Section Header */}
-      <ReviewsHeader rateAvg={product?.rating} rateCount={product?.ratings} />
+    <section className="space-y-8">
+      <ReviewsHeader rateAvg={product.rating} rateCount={product.ratings} />
 
-      {/* Section Content */}
-      <div className="lg:grid lg:grid-cols-12 lg:grid-cols-12">
-        {/* Product reviews */}
-        <Reviews productId={product?.id} />
-
-        {/* Review form  */}
-        <ReviewForm id={product?.id} />
+      <div className="gap-8 lg:gap-10 grid lg:grid-cols-[minmax(0,1fr)_380px] items-start">
+        <Reviews productId={product.id} />
+        <ReviewForm id={product.id} />
       </div>
-    </>
+    </section>
   );
 }

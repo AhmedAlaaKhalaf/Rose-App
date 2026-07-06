@@ -3,25 +3,25 @@
 import { RegisterFormFields, RegisterResponse } from "../types/auth";
 
 export async function registerAction(fields: RegisterFormFields) {
-  const response = await fetch(`${process.env.API}/auth/signup`, {
+  const body: Record<string, string> = {
+    username: fields.username,
+    firstName: fields.firstName,
+    lastName: fields.lastName,
+    email: fields.email,
+    password: fields.password,
+    confirmPassword: fields.confirmPassword,
+  };
+
+  if (fields.gender) body.gender = fields.gender;
+  if (fields.phone) body.phone = fields.phone;
+
+  const response = await fetch(`${process.env.API}/auth/register`, {
     method: "POST",
-    body: JSON.stringify({
-      firstName: fields.firstName,
-      lastName: fields.lastName,
-      email: fields.email,
-      password: fields.password,
-      rePassword: fields.rePassword,
-      phone: fields.phone,
-      gender: fields.gender,
-    }),
+    body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
     },
   });
-
-  if (!response.ok) {
-    console.log(`Failed to create new account -  ${response.statusText}`);
-  }
 
   const payload: ApiResponse<RegisterResponse> = await response.json();
 

@@ -1,30 +1,23 @@
-import { useMutation } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
-import { useQueryClient } from "@tanstack/react-query";
-import { addToCartAction } from "@/app/[locale]/(website)/products/_actions/add-to-cart.action";
-import { TAddToCartPayload } from "@/lib/types/add-to-cart";
-import { addToGuestCart } from "@/lib/utils/cart/guest-cart";
-export function useAddToCart() {
+import { addToCartAction } from "@/lib/actions/cart.action";
+import { tryNormalizeCartPayload } from "@/lib/utils/cart";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CART_QUERY_KEY, setCartCache } from "./cart-query";
+
+export default function useAddToCart() {
   const queryClient = useQueryClient();
-  const { status } = useSession();
 
   return useMutation({
-    mutationFn: async (payload: TAddToCartPayload) => {
-      //  Guest
-      if (status === "unauthenticated") {
-        return addToGuestCart(payload);
-      }
-
-      // Authenticated
-      if (status === "authenticated") {
-        return await addToCartAction(payload);
-      }
-
-      // loading
-      throw new Error("Please wait...");
+    mutationFn: async ({ productId, quantity = 1 }: { productId: string; quantity?: number }) => {
+      const payload = await addToCartAction(productId, quantity);
+      return tryNormalizeCartPayload(payload);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
+    onSuccess: (cart) => {
+      if (cart) {
+        setCartCache(queryClient, cart);
+        return;
+      }
+
+      queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY });
     },
   });
 }

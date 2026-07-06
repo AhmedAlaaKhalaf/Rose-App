@@ -1,17 +1,16 @@
-import { API_DASHBOARD_PRODUCTS_LIMIT, API_PRODUCTS_LIMIT } from "../constants/global-constants";
+import { API_DASHBOARD_PRODUCTS_LIMIT } from "../constants/global-constants";
+import { API_CACHE_REVALIDATE } from "../constants/api-cache";
 import { TDashboardProduct } from "../types/dashboard";
 import { SearchParams } from "../types/global";
-import { TProduct } from "../types/product";  
+import { TProductCard } from "../types/product";
+import { buildProductQueryParams } from "../utils/product-filters";
 
 export async function getProducts(searchParams?: SearchParams) {
-  const params = new URLSearchParams({
-    limit: API_PRODUCTS_LIMIT.toString(),
-    // fields: "cover,title,rating,price,discountType,createdAt,stock",
-    // sort: "-sold",
-    ...searchParams,
-  });
+  const params = new URLSearchParams(buildProductQueryParams(searchParams));
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/products?${params.toString()}`);
+  const response = await fetch(`${process.env.API}/products?${params.toString()}`, {
+    next: { revalidate: API_CACHE_REVALIDATE },
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch products");
@@ -19,9 +18,25 @@ export async function getProducts(searchParams?: SearchParams) {
 
   const payload: ApiResponse<PaginatedData<TProduct[]>> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message);
+  if (payload.status === false) {
+    throw new Error("message" in payload ? payload.message : "Failed to fetch products");
+  }
 
   return payload;
+}
+
+export async function getProductsWithOccasionFallback(occasionId?: string) {
+  if (!occasionId) {
+    return getProducts();
+  }
+
+  const filtered = await getProducts({ occasionId });
+
+  if (filtered.payload.data.length > 0) {
+    return filtered;
+  }
+
+  return getProducts();
 }
 
 export async function getDashboardProducts(searchParams?: SearchParams) {

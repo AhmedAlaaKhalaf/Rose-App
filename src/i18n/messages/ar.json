@@ -11,7 +11,13 @@
     "from": "من",
     "to": "إلى",
     "reset": "مسح",
-    "loading-more": "جاري تحميل المزيد…"
+    "loading-more": "جاري تحميل المزيد…",
+    "filters": "التصفية",
+    "all-occasions": "كل المناسبات",
+    "select-occasion": "اختر المناسبة",
+    "select-price": "نطاق السعر",
+    "apply": "تطبيق",
+    "clear-filters": "مسح التصفية"
   },
   "testimonials": {
     "title": "التعليقات",
@@ -35,6 +41,16 @@
     "myOrders": "طلباتي",
     "dashboard": "لوحة التحكم",
     "logout": "تسجيل الخروج"
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "occasions": "المناسبات",
+    "contact": "تواصل معنا",
+    "about": "من نحن",
+    "terms": "الشروط والأحكام",
+    "privacy": "سياسة الخصوصية",
+    "faqs": "الأسئلة الشائعة"
   },
   "best-selling": {
     "header": "الأكثر مبيعًا",
@@ -158,11 +174,35 @@
     "otp-time-left": "يمكنك طلب رمز آخر خلال: <span>{time} ث</span>",
     "otp-resend": "إرسال رمز جديد",
     "otp-resending": "جارى ارسال رمز جديد",
-    "verify-otp": "تأكيد رمز التحقق",
+    "verify-otp": "متابعة",
     "verifying-otp": "جارى تأكيد رمز التحقق",
     "otp-need-help": "هل تحتاج مساعدة؟ <a>تواصل معنا</a>",
     "otp-required": "يرجى إدخال رمز التحقق الصحيح (6 أرقام)",
+    "token-label": "رمز إعادة التعيين",
+    "token-placeholder": "الصق الرمز من بريدك الإلكتروني",
+    "token-required": "يرجى إدخال رمز إعادة التعيين من بريدك الإلكتروني",
+    "token-require": "يرجى إدخال رمز إعادة التعيين من بريدك الإلكتروني",
     "new-password-success-toast": "تم تغيير كلمة المرور الخاصة بك بنجاح، يرجى تسجيل الدخول"
+  },
+  "login": {
+    "title": "مرحبًا بعودتك!",
+    "username": {
+      "label": "اسم المستخدم",
+      "placeholder": "أدخل اسم المستخدم"
+    },
+    "email": {
+      "label": "البريد الإلكتروني"
+    },
+    "password": {
+      "label": "كلمة المرور"
+    },
+    "rememberMe": "تذكرني",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "submit": "تسجيل الدخول",
+    "noAccount": "ليس لديك حساب؟",
+    "createAccount": "أنشئ حسابًا الآن!",
+    "username-invalid": "اسم المستخدم غير صحيح.",
+    "password-invalid": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم واحد، ورمز خاص واحد."
   },
   "auth": {
     "register": {
@@ -177,16 +217,20 @@
           "placeholder": "شمس"
         }
       },
+      "username": {
+        "title": "اسم المستخدم",
+        "placeholder": "abdulrahman_shams"
+      },
       "email": {
         "title": "البريد الإلكتروني",
         "placeholder": "user@example.com"
       },
       "phone": {
-        "title": "رقم الهاتف",
+        "title": "رقم الهاتف (اختياري)",
         "placeholder": "1012345678"
       },
       "gender": {
-        "title": "الجنس",
+        "title": "الجنس (اختياري)",
         "placeholder": "اختر الجنس",
         "options": {
           "male": "ذكر",
@@ -203,7 +247,23 @@
       },
       "button": "إنشاء حساب",
       "user-question": "لديك حساب بالفعل؟",
-      "link": "تسجيل الدخول"
+      "link": "تسجيل الدخول",
+      "success-toast": "تم إنشاء حسابك بنجاح.",
+      "email-verification": {
+        "title": "تحقق من بريدك الإلكتروني",
+        "desc": "يرجى التحقق من بريدك الإلكتروني أولاً قبل إنشاء الحساب. سنرسل لك رمزًا مكونًا من 6 أرقام.",
+        "verify-button": "تحقق من البريد الإلكتروني",
+        "send-success": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
+        "verified-badge": "تم التحقق من البريد",
+        "otp-title": "تأكيد البريد الإلكتروني",
+        "otp-description": "أدخل الرمز المكون من 6 أرقام المرسل إلى {email}. <span>تغيير البريد</span>",
+        "otp-required": "يرجى إدخال رمز صحيح مكون من 6 أرقام",
+        "otp-time-left": "يمكنك طلب رمز آخر خلال: <span>{time}ث</span>",
+        "otp-resend": "إعادة إرسال الرمز",
+        "otp-resending": "جارٍ إعادة الإرسال",
+        "confirm-button": "تأكيد البريد الإلكتروني",
+        "verifying-otp": "جارٍ تأكيد البريد"
+      }
     },
     "login": {
       "title": "مرحبًا بعودتك!",
@@ -222,6 +282,12 @@
       "password-invalid": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم واحد، ورمز خاص واحد."
     },
     "validation": {
+      "username": {
+        "required": "يرجى إدخال اسم المستخدم",
+        "min": "يجب أن يحتوي اسم المستخدم على {min} أحرف على الأقل",
+        "max": "يجب ألا يتجاوز اسم المستخدم {max} حرفًا",
+        "invalid": "يمكن أن يحتوي اسم المستخدم على حروف وأرقام وشرطة سفلية فقط"
+      },
       "firstName": {
         "required": "يرجى إدخال الاسم الأول",
         "min": "يجب أن يحتوي الاسم الأول على {min} أحرف على الأقل",
@@ -252,8 +318,11 @@
         "special": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
         "mismatch": "كلمتا المرور غير متطابقتين"
       },
-      "rePassword": {
+      "confirmPassword": {
         "required": "يرجى تأكيد كلمة المرور"
+      },
+      "token": {
+        "required": "يرجى إدخال رمز إعادة التعيين من بريدك الإلكتروني"
       },
       "gender": {
         "required": "يرجى اختيار الجنس"
@@ -275,6 +344,9 @@
   },
 
   "user-address": {
+    "map": {
+      "pick-location": "انقر على الخريطة لتحديد موقع التوصيل"
+    },
     "modal": {
       "addresses-list": {
         "title": "عناويني",
@@ -307,6 +379,10 @@
           "title": "المدينة",
           "placeholder": "أدخل اسم المدينة"
         },
+        "title": {
+          "title": "اسم العنوان",
+          "placeholder": "مثال: المنزل، العمل"
+        },
         "address": {
           "title": "العنوان بالتفصيل",
           "placeholder": "أدخل عنوانك بالكامل"
@@ -318,6 +394,11 @@
       }
     },
     "validation": {
+      "title": {
+        "required": "رجاءً أدخل اسم العنوان",
+        "min": "يجب ألا يقل اسم العنوان عن {min} أحرف",
+        "max": "يجب ألا يزيد اسم العنوان عن {max} أحرف"
+      },
       "city": {
         "required": "رجاءً أدخل المدينة",
         "min": "يجب ألا يقل اسم المدينة عن {min} أحرف",
@@ -337,6 +418,46 @@
   "related-products": {
     "header": "منتجات ذات الصلة"
   },
+  "cart": {
+    "title": "سلة التسوق",
+    "order-summary": "ملخص الطلب",
+    "items-count": "{count} منتج",
+    "add-to-cart": "أضف إلى السلة",
+    "added-success": "تمت إضافة المنتج إلى السلة",
+    "add-failed": "فشل في إضافة المنتج إلى السلة",
+    "login-required": "يرجى تسجيل الدخول لإضافة منتجات إلى السلة",
+    "out-of-stock": "هذا المنتج غير متوفر",
+    "remove-item": "إزالة المنتج",
+    "removed-success": "تمت إزالة المنتج من السلة",
+    "remove-failed": "فشل في إزالة المنتج",
+    "update-failed": "فشل في تحديث الكمية",
+    "discount": "الخصم",
+    "checkout": "إتمام الشراء",
+    "continue-shopping": "متابعة التسوق",
+    "empty-title": "سلتك فارغة",
+    "empty-desc": "يبدو أنك لم تضف أي هدايا بعد. استكشف مجموعتنا واعثر على شيء مميز."
+  },
+  "wishlist": {
+    "title": "قائمة أمنياتي",
+    "summary": "ملخص القائمة",
+    "summary-desc": "احفظ هداياك المفضلة هنا وأضفها إلى السلة عندما تكون جاهزًا.",
+    "items-count": "{count} منتج",
+    "remove-item": "إزالة المنتج",
+    "removed-success": "تمت إزالة المنتج من القائمة",
+    "remove-failed": "فشل في إزالة المنتج",
+    "continue-shopping": "متابعة التسوق",
+    "empty-title": "قائمة أمنياتك فارغة",
+    "empty-desc": "اضغط على القلب في أي منتج لحفظه هنا لاحقًا.",
+    "login-title": "سجّل الدخول لعرض قائمة أمنياتك",
+    "login-desc": "احفظ هداياك المفضلة واطلع عليها من أي جهاز.",
+    "login-button": "تسجيل الدخول"
+  },
+  "addresses": {
+    "title": "عناويني",
+    "login-title": "سجّل الدخول لإدارة عناوينك",
+    "login-desc": "أضف وعدّل واحفظ عناوين التوصيل لتسريع عملية الشراء.",
+    "login-button": "تسجيل الدخول"
+  },
   "checkout": {
     "shipping-address": "عنوان الشحن",
     "summary": "الملخص",
@@ -349,6 +470,13 @@
     "checkout-error": "فشل إنشاء الطلب",
     "checkout-button": "إتمام الطلب",
     "checkout-loading": "جاري التحميل...",
+    "cash-description": "ستدفع نقدًا عند استلام طلبك.",
+    "credit-description": "أدخل بيانات بطاقتك أدناه لإتمام الدفع بأمان عبر Stripe.",
+    "complete-card-payment": "إتمام الدفع بالبطاقة",
+    "pay-now": "ادفع الآن",
+    "payment-processing": "جاري معالجة الدفع...",
+    "cart-empty-checkout": "سلة التسوق فارغة. أضف منتجات قبل إتمام الطلب.",
+    "stripe-key-missing": "لم يتم إعداد Stripe. أضف NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY إلى ملف .env (يجب أن يطابق حساب Stripe الخاص بالخادم)، ثم أعد تشغيل خادم التطوير.",
     "coupon-code": "كود الخصم",
     "apply-coupon": "تطبيق الخصم",
     "no-coupons-applied": "لا يوجد خصمات مطبقة",
@@ -362,8 +490,13 @@
     "header": "التعليقات",
     "second-head": "التقييم العام:",
     "title-field": "الرجاء إدخال عنوان المراجعة",
+    "rating-required": "الرجاء اختيار التقييم",
+    "comment-required": "الرجاء إدخال مراجعتك",
     "general-rate": "{rate} <span>({count} تعليق)</span>",
     "login-need": "الرجاء تسجيل الدخول لتتمكن من مراجعة المنتج",
+    "login-button": "تسجيل الدخول",
+    "write-review": "اكتب مراجعة",
+    "no-reviews": "لا توجد مراجعات بعد. كن أول من يشارك تجربته.",
     "form-rate-label": "تقييمك:",
     "title-field-label": "العنوان",
     "review-comment": "رايك",
@@ -372,6 +505,14 @@
     "review-form-button": "أضف مراجعة",
     "add-review-toast": "لقد قمت باضافه مراجعة بنجاح",
     "no-reviews-found": "لا توجد مراجعات لهذا المنتج"
+  },
+  "product-details": {
+    "breadcrumb-home": "الرئيسية",
+    "breadcrumb-products": "المنتجات",
+    "reviews-count": "{count} مراجعة",
+    "discount-badge": "خصم {value}%",
+    "in-stock": "{count} متوفر",
+    "add-to-cart": "أضف إلى السلة"
   },
   "orders": {
     "title": "الطلبات",
@@ -422,46 +563,42 @@
     "nav-occasions": "المناسبات",
     "nav-products": "المنتجات"
   },
-  "cart": {
-    "title": "السلة",
-    "item": {
-      "ratings-count": "التقييمات",
-      "rating": "التقييم",
-      "currency": "ج.م"
-    },
-    "buttons": {
-      "clear": "تفريغ السلة",
-      "remove": "إزالة",
-      "continue-shopping": "متابعة التسوق"
-    },
-    "products": "المنتجات",
-    "empty-cart": {
-      "title": "السلة فارغة",
-      "description": "يبدو أنك لم تضف أي منتجات بعد."
-    },
-    "toast-messages": {
-      "success": {
-        "clear": "تم إفراغ السلة بنجاح",
-        "delete": "تم حذف المنتج بنجاح",
-        "update": "تم تعديل المنتج بنجاح"
-      },
-      "fail": {
-        "clear": "فشل إفراغ السلة",
-        "delete": "فشل حذف المنتج",
-        "update": "فشل تعديل المنتج"
-      }
-    }
+  "aboutPage": {
+    "title": "من نحن",
+    "subtitle": "هدايا مدروسة لكل لحظة مميزة",
+    "mission-title": "مهمتنا",
+    "mission-text": "في روز، نؤمن أن كل احتفال يستحق هدية لا تُنسى. من الورود المختارة بعناية إلى الهدايا المغلفة بأناقة، نساعدك على التعبير عن الحب والامتنان والفرح بسهولة.",
+    "values-title": "لماذا تختار روز",
+    "cta": "استكشف المنتجات"
   },
-  "product-page": {
-    "left-in-stock": "متبقى في المخزون",
-    "EGP": "جم",
-    "out-of-stock": "نفذ من المخزون",
-    "rating": "التقييم",
-    "ratings": "التقييمات",
-    "No-ratings-yet": "لا يوجد تقييمات حتى الآن",
-    "Add-to-Cart": "أضف إلى السلة",
-    "Adding-to-Cart": "جارى الإضافة إلى السلة...",
-    "added-to-cart-success": "تمت إضافة المنتج إلى سلة التسوق بنجاح",
-    "added-to-cart-error": "حدث خطأ أثناء إضافة المنتج إلى السلة"
+  "contactPage": {
+    "title": "تواصل معنا",
+    "subtitle": "نحن هنا لمساعدتك في الطلبات والهدايا والطلبات الخاصة",
+    "form-title": "أرسل لنا رسالة",
+    "name": "الاسم الكامل",
+    "name-placeholder": "اسمك",
+    "email": "البريد الإلكتروني",
+    "email-placeholder": "you@example.com",
+    "subject": "الموضوع",
+    "subject-placeholder": "كيف يمكننا مساعدتك؟",
+    "message": "الرسالة",
+    "message-placeholder": "أخبرنا المزيد عن طلبك...",
+    "submit": "إرسال الرسالة",
+    "success": "شكرًا لك! سنعود إليك قريبًا.",
+    "info-title": "تواصل معنا",
+    "email-label": "البريد الإلكتروني",
+    "email-value": "hello@rose-app.com",
+    "phone-label": "الهاتف",
+    "phone-value": "+20 100 000 0000",
+    "address-label": "العنوان",
+    "address-value": "القاهرة، مصر",
+    "hours-label": "ساعات العمل",
+    "hours-value": "يوميًا، 9:00 ص – 9:00 م"
+  },
+  "occasionsPage": {
+    "title": "المناسبات",
+    "subtitle": "اعثر على الهدية المثالية لكل احتفال",
+    "view-products": "تسوق لهذه المناسبة",
+    "empty": "لا توجد مناسبات متاحة حاليًا."
   }
 }

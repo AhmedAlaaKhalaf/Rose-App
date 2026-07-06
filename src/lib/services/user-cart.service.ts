@@ -1,38 +1,24 @@
 import { authOptions } from "@/auth";
 import { TUserCart } from "../types/cart";
-import { getServerSession } from "next-auth";
+import { normalizeCartPayload } from "../utils/cart";
 
-export async function getUserCart() {
-  const token = await getServerSession(authOptions);
+export const getUserCart = async () => {
+  const response = await fetch("/api/cart", {
+    cache: "no-store",
+    credentials: "include",
+  });
 
-  if (!token) {
-    throw new Error("Authentication token is required");
+  if (!response.ok) {
+    throw new Error("Failed to fetch user cart");
   }
 
-  try {
-    const response = await fetch(`${process.env.API}/cart`, {
-      next: {
-        tags: ["user-cart"],
-      },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  const payload = await response.json();
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch cart: ${response.status} ${response.statusText}`);
-    }
-
-    const payload: ApiResponse<TUserCart> = await response.json();
-
-    if ("message" in payload) {
-      throw new Error(payload.message);
-    }
-
-    return payload;
-  } catch (error) {
-    throw new Error(
-      `Failed to get user cart: ${error instanceof Error ? error.message : "Unknown error"}`
-    );
+  if (payload?.status === false) {
+    throw new Error(payload.message || "Failed to fetch user cart");
   }
-}
+
+  return normalizeCartPayload(payload);
+};
+
+export type { TUserCart };

@@ -1,3 +1,4 @@
+import { API_CACHE_REVALIDATE } from "../constants/api-cache";
 import { TOccasion } from "../types/occasion";
 
 export async function getOccasions({
@@ -5,7 +6,8 @@ export async function getOccasions({
   limit = 6,
 }: { pageParam?: number; limit?: number } = {}) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/occasions?page=${pageParam}&limit=${limit}`
+    `${process.env.NEXT_PUBLIC_API}/occasions?page=${pageParam}&limit=${limit}`,
+    { next: { revalidate: API_CACHE_REVALIDATE } }
   );
 
   if (!response.ok) {
@@ -16,9 +18,9 @@ export async function getOccasions({
 
   if ("message" in payload) throw new Error(payload.message);
 
-  // const sortedOccasions = [...payload.payload.data].sort((a, b) =>
-  //   a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
-  // );
+  const sortedOccasions = [...payload.payload.data].sort((a, b) =>
+    a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
+  );
 
   // return { ...payload, occasions: sortedOccasions };
 

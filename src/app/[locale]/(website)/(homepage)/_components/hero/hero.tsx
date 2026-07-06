@@ -3,35 +3,28 @@ import PromoCard from "./promo-card";
 import CarouselSection from "./carousel";
 import Occasions from "./occasions";
 import Features from "./features";
-
-/**
- * Hero Component
- * --------------
- * Main hero section of the homepage.
- * Combines multiple sub-sections:
- * - PromoCard (static promotional content)
- * - CarouselSection (hero image carousel)
- * - Occasions (occasion-based cards)
- * - Features (key selling points)
- */
+import {
+  homepageContainer,
+  homepageHeroRowGap,
+  homepageHeroStack,
+} from "@/lib/constants/homepage-spacing";
 
 export default function Hero() {
   return (
-    <section className="space-y-6 mx-auto py-6 w-full container">
-      {/* Banner section: Promo card + Hero carousel */}
-      <div className="flex md:flex-row flex-col items-center gap-6 h-full">
-        {/* Promotional static card */}
-        <PromoCard />
+    <section className="w-full">
+      <div className={`${homepageContainer} ${homepageHeroStack}`}>
+        <div
+          className={`flex flex-col lg:flex-row lg:h-full lg:items-center ${homepageHeroRowGap} w-full min-w-0`}
+        >
+          <PromoCard />
+          <div className="flex-1 min-w-0 w-full lg:min-w-0">
+            <CarouselSection />
+          </div>
+        </div>
 
-        {/* Main hero carousel */}
-        <CarouselSection />
+        <Occasions />
+        <Features />
       </div>
-
-      {/* Occasion-based cards */}
-      <Occasions />
-
-      {/* Feature highlights */}
-      <Features />
     </section>
   );
 }

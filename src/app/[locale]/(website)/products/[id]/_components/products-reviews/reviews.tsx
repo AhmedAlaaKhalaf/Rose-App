@@ -1,56 +1,33 @@
 "use client";
 
+import ErrorBoundary from "@/components/shared/error-boundary";
+import ReviewCardSkeleton from "@/components/skeletons/review-card/review-card.skeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useTranslations } from "next-intl";
 import { useProductReviews } from "../../_hooks/use-product-reviews";
 import ReviewCard from "./review-card";
-import ReviewCardSkeleton from "@/components/skeletons/review-card/review-card.skeleton";
-import ErrorBoundary from "@/components/shared/error-boundary";
-import { useLocale, useTranslations } from "next-intl";
-import { cn } from "@/lib/utils/tailwind-merge";
-import { Rose } from "lucide-react";
 
 export default function Reviews({ productId }: { productId: string }) {
-  // Translations
   const t = useTranslations("product-reviews");
-
-  // Services
   const { reviewsOfProduct, isLoading, error, refetch } = useProductReviews(productId);
 
-  // Hooks
-  const locale = useLocale();
-
-  // Handling Loading state
-  if (isLoading) return <ReviewCardSkeleton />;
-
-  // Handling Error
   if (error) return <ErrorBoundary onRetry={refetch} error={error} />;
 
-  return (
-    <ScrollArea
-      className="lg:col-span-8 me-1 p-2 pe-4 border-border lg:border-e"
-      dir={locale === "ar" ? "rtl" : "ltr"}
-      id="reviews"
-    >
-      <div className="min-h-96">
-        {/* Loading  */}
-        {isLoading && <ReviewCardSkeleton />}
+  const reviews = reviewsOfProduct?.payload.data ?? [];
 
-        {!reviewsOfProduct?.payload.data.length ? (
-          <div
-            className={cn(
-              locale === "ar" && "font-tajawal",
-              "flex flex-col justify-center items-center gap-3 col-span-4 py-20 font-medium text-zinc-500 text-sm capitalize leading-none"
-            )}
-          >
-            <Rose className="size-12 text-zinc-500" strokeWidth={1.75} />
-            {t("no-reviews-found")}
-          </div>
-        ) : (
-          reviewsOfProduct?.payload.data.map((review) => (
-            <ReviewCard key={review.id} review={review} />
-          ))
-        )}
-      </div>
-    </ScrollArea>
+  return (
+    <div className="bg-white dark:bg-zinc-900/30 border border-zinc-100 dark:border-zinc-800 rounded-2xl min-h-[20rem] overflow-hidden">
+      <ScrollArea className="h-[28rem] md:h-[32rem]">
+        <div className="p-5 md:p-6">
+          {isLoading ? (
+            <ReviewCardSkeleton />
+          ) : reviews.length === 0 ? (
+            <p className="py-16 text-zinc-500 text-sm text-center">{t("no-reviews")}</p>
+          ) : (
+            reviews.map((review) => <ReviewCard key={review.id} review={review} />)
+          )}
+        </div>
+      </ScrollArea>
+    </div>
   );
 }

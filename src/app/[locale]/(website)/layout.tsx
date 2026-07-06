@@ -7,14 +7,9 @@ type LocaleProps = {
 
 export default function LocaleLayout({ children }: LocaleProps) {
   return (
-    <div className="max-w-screen overflow-x-hidden">
-      {/* Header */}
+    <div className="w-full max-w-full overflow-x-hidden">
       <Header />
-
-      {/* Children */}
-      <div className="mx-auto px-4 pt-5 lg:pt-16 container">{children}</div>
-
-      {/* Footer */}
+      {children}
       <Footer />
     </div>
   );

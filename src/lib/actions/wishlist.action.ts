@@ -1,54 +1,48 @@
 "use server";
 
 import { getDecodedToken } from "@/hooks/shared/use-decoded-token";
-import { TWishlistItem } from "../types/wishlist";
+import { formatApiError } from "../utils/api-error";
 
-export async function addToWishlistAction(productId: string) {
+async function getAuthHeaders() {
   const token = await getDecodedToken();
 
-  const response = await fetch(`${process.env.API}/wishlist`, {
-    method: "POST",
-    body: JSON.stringify({
-      productId,
-    }),
-    headers: {
-      authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to save products in your wishlist");
+  if (!token) {
+    throw new Error("You must be logged in to manage your wishlist");
   }
 
-  const payload: ApiResponse<
-    DataResponse<{
-      wishlistItem: TWishlistItem;
-    }>
-  > = await response.json();
+  return {
+    authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+}
 
-  if ("message" in payload) throw new Error(payload.message);
+export async function addToWishlistAction(productId: string) {
+  const response = await fetch(`${process.env.API}/wishlist`, {
+    method: "POST",
+    body: JSON.stringify({ productId }),
+    headers: await getAuthHeaders(),
+  });
+
+  const payload = await response.json();
+
+  if (!response.ok || payload?.status === false) {
+    throw new Error(formatApiError(payload, "Failed to add product to wishlist"));
+  }
 
   return payload;
 }
 
-export async function removeFromWishlistAction(productId: string) {
-  const token = await getDecodedToken();
-
-  const response = await fetch(`${process.env.API}/wishlist/${productId}`, {
+export async function removeFromWishlistAction(wishlistItemId: string) {
+  const response = await fetch(`${process.env.API}/wishlist/${wishlistItemId}`, {
     method: "DELETE",
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
+    headers: await getAuthHeaders(),
   });
-  if (!response.ok) {
-    console.log(token);
-    throw new Error("Failed to delete product from your wishlist");
+
+  const payload = await response.json();
+
+  if (!response.ok || payload?.status === false) {
+    throw new Error(formatApiError(payload, "Failed to remove product from wishlist"));
   }
-
-  const payload: ApiResponse<undefined> = await response.json();
-
-  if (!payload.status) throw new Error(payload.message);
 
   return payload;
 }
