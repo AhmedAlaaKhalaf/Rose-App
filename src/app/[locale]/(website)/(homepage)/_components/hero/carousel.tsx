@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import {
   Carousel,
@@ -13,7 +12,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 
 export default function CarouselSection() {
@@ -45,14 +44,13 @@ export default function CarouselSection() {
           loop: true,
         }}
       >
-        <CarouselContent dir={locale === "ar" ? "rtl" : "ltr"}>
+        <CarouselContent>
           {imagesCarouselHeroSectionData.map((item, index) => (
             <CarouselItem
               className="relative w-full min-h-[16rem] sm:min-h-[20rem] lg:h-[27.5rem] lg:aspect-[955/440]"
               key={index}
             >
               <Image
-                priority
                 sizes="auto"
                 src={`/assets/${item}`}
                 fill

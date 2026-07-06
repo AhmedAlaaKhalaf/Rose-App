@@ -11,7 +11,7 @@ import { resolveProductCover } from "@/lib/utils/product-image";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { useLocale, useTranslations } from "next-intl";
 
-type ProductCardProps = { product: TProduct };
+type ProductCardProps = { product: TProductCard };
 
 export default function ProductCard({ product }: ProductCardProps) {
   const t = useTranslations("product-listing.badge");
@@ -91,7 +91,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {price && (
               <span className="ps-2 font-medium text-zinc-400 dark:text-zinc-500 line-through">
                 {`${Number(price)?.toFixed(2)} ${locale === "ar" ? "ج.م" : "EGP"}`}
-              </Link>
+              </span>
             )}
           </Link>
 

@@ -1,29 +1,20 @@
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import Image from "next/image";
-import { Input } from "../../ui/input";
-import { Globe } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import HeaderNavigation from "./header-navigation";
 import MobileNavigation from "./mobile-navigation";
-// import LoginIcon from "./login-icon";
 import LanguageSwitcher from "@/components/ui/language-switcher";
 import Notifications from "@/app/[locale]/(website)/_components/notifications/notifications";
 import UserDropdown from "./user-dropdown";
 import CartLink from "./cart-link";
 import WishlistLink from "./wishlist-link";
-import Search from "../search/search";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
-import UserDropdown from "./user-dropdown";
-export default async function Header() {
-  const session = await getServerSession(authOptions);
-  const isLoggedIn = !!session;
-  const firstName = session?.user?.firstName || "User";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "@/auth";
+
+export default function Header() {
+  // const session = getServerSession(authOptions);
+  // const isLoggedIn = !!session;
+  // const firstName = session?.user?.firstName || "User";
+  // All the commented code is waiting for the authentication to be implemented
 
   return (
     <header>
@@ -31,10 +22,10 @@ export default async function Header() {
         <div className="flex justify-between items-center px-2 lg:px-0">
           {/* logo */}
           <Link href="/" className="w-1/4 md:w-auto cursor-pointer">
-            <Image sizes="auto" src="/assets/logo.svg" priority alt="Logo" width={85} height={80} />
+            <Image sizes="auto" src="/assets/logo.png" alt="Logo" width={85} height={80} />
           </Link>
           {/* delivery location */}
-          {isLoggedIn && (
+          {/* {isLoggedIn && (
             <div className="hidden sm:flex flex-col gap-2">
               <p className="text-zinc-500 text-sm">Deliver to:</p>
               <div className="flex gap-2">
@@ -42,29 +33,36 @@ export default async function Header() {
                 <p className="text-primary">Cairo</p>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* search bar */}
           <div className="hidden md:block sm:w-2/3">
-            <Search />
+            {/* <Input
+              id="search"
+              type="text"
+              placeholder="What awesome gift are you looking for?"
+              className="w-full"
+            /> */}
+            {/* <Search /> */}
           </div>
 
           {/* icons */}
           <div className="flex justify-end items-stretch w-3/4 sm:w-auto">
             {/* login */}
-            {isLoggedIn ? (
+            {/* {isLoggedIn ? (
               <div className="hidden sm:flex flex-col gap-2">
                 <p className="text-zinc-500 text-sm">Hello</p>
                 <p className="text-primary">{firstName}</p>
               </div>
             ) : (
-              // <div className="hidden sm:block">
-              //   <LoginIcon />
-              // </div>
               <div className="hidden sm:block">
-                <UserDropdown />
+                <LoginIcon />
               </div>
-            )}
+            )} */}
+
+            <div className="hidden sm:block">
+              <UserDropdown />
+            </div>
 
             {/* mobile toggle */}
             <MobileNavigation />
@@ -79,11 +77,26 @@ export default async function Header() {
                 <Notifications />
               </Link>
             </div>
-            {/* Language switcher */}
+            {/* language switcher old for me*/}
+            {/* <DropdownMenu>
+              <DropdownMenuTrigger className="p-4 text-zinc-700 dark:text-zinc-50 cursor-pointer">
+                <Globe className="w-5 sm:w-6 h-5 sm:h-6" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <Link href="/">
+                  <DropdownMenuItem>English</DropdownMenuItem>
+                </Link>
+                <Link href="/ar">
+                  <DropdownMenuItem className="font-tajawalMedium text-right">
+                    العربية
+                  </DropdownMenuItem>
+                </Link>
+              </DropdownMenuContent>
+            </DropdownMenu> */}
             <LanguageSwitcher />
           </div>
         </div>
-      </div>
+      </div>  
       {/* header nav */}
       <div className="hidden sm:block bg-primary mx-auto">
         <HeaderNavigation />

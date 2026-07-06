@@ -20,5 +20,6 @@ export type TAddressInput = {
 };
 
 export type TAddressResponse = {
+  message: string;
   addresses: TAddress[];
 };

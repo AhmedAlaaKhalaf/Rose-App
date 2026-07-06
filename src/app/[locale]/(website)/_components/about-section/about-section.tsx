@@ -92,30 +92,30 @@ export default function AboutSection() {
             <button className="group flex items-center gap-2.5 bg-[#A6252A] hover:bg-[#8B1F23] mt-2 px-4 py-2.5 rounded-lg w-fit font-semibold text-white transition-colors">
               {t("button")}
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Link>
+            </button>
 
             <div className="gap-4 grid sm:grid-cols-2 mt-2">
               <div className="flex items-center gap-4">
                 <Check className="flex-shrink-0 w-6 h-6 text-[#741C21]" strokeWidth={3} />
-                <span className="font-primary font-normal text-[#27272A] text-sm leading-[100%] tracking-[0]">
+                <span className="font-primary font-normal text-[#27272A] text-base leading-[100%] tracking-[0]">
                   {t("features.competitive-prices")}
                 </span>
               </div>
               <div className="flex items-center gap-4">
                 <Check className="flex-shrink-0 w-6 h-6 text-[#741C21]" strokeWidth={3} />
-                <span className="font-primary font-normal text-[#27272A] text-sm leading-[100%] tracking-[0]">
+                <span className="font-primary font-normal text-[#27272A] text-base leading-[100%] tracking-[0]">
                   {t("features.premium-quality")}
                 </span>
               </div>
               <div className="flex items-center gap-4">
                 <Check className="flex-shrink-0 w-6 h-6 text-[#741C21]" strokeWidth={3} />
-                <span className="font-primary font-normal text-[#27272A] text-sm leading-[100%] tracking-[0]">
+                <span className="font-primary font-normal text-[#27272A] text-base leading-[100%] tracking-[0]">
                   {t("features.perfect-occasion")}
                 </span>
               </div>
               <div className="flex items-center gap-4">
                 <Check className="flex-shrink-0 w-6 h-6 text-[#741C21]" strokeWidth={3} />
-                <span className="font-primary font-normal text-[#27272A] text-sm leading-[100%] tracking-[0]">
+                <span className="font-primary font-normal text-[#27272A] text-base leading-[100%] tracking-[0]">
                   {t("features.fast-delivery")}
                 </span>
               </div>

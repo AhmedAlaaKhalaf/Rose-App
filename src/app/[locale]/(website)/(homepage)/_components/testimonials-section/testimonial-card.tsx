@@ -35,7 +35,7 @@ export default function TestimonialCard({ item }: TPageProps) {
         </Avatar>
 
         <CardHeader>
-          <CardTitle className="font-semibold text-zinc-800 capitalize">
+          <CardTitle className="font-semibold text-zinc-800">
             {t("testimonial-user-name", {
               name: `${item?.name}`,
             })}

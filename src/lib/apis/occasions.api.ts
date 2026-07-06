@@ -22,7 +22,5 @@ export async function getOccasions({
     a.title.localeCompare(b.title, undefined, { sensitivity: "base" })
   );
 
-  // return { ...payload, occasions: sortedOccasions };
-
-  return payload;
+  return { ...payload, occasions: sortedOccasions };
 }

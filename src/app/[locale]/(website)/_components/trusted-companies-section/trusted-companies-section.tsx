@@ -43,6 +43,6 @@ export default function TrustedCompaniesSection() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -28,7 +28,7 @@ import { signIn } from "next-auth/react";
 
 export function LoginForm() {
   // Translation
-  const t = useTranslations("auth.login");
+  const t = useTranslations("login");
 
   // Router for client-side navigation (doesn't trigger beforeunload)
   const router = useRouter();
@@ -65,11 +65,6 @@ export function LoginForm() {
       if (!response?.ok) {
         setError(response?.error || "Login failed");
         setIsPending(false);
-        if (!response?.ok) {
-          setError(response?.error || "Login failed");
-          setIsPending(false);
-          return;
-        }
         return;
       }
 

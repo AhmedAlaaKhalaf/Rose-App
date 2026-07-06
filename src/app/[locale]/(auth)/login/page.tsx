@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 export default function Page() {
   // Translation
-  const t = useTranslations("auth.login");
+  const t = useTranslations("login");
 
   return (
     <section className="space-y-6 mx-auto w-full max-w-[25.5rem] overflow-auto">

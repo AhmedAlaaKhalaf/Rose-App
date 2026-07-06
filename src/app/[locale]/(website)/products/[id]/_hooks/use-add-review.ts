@@ -8,7 +8,6 @@ export default function useAddReview() {
   const queryClient = useQueryClient();
 
   const { isPending, error, mutate } = useMutation({
-    mutationKey: ["productReviews", productId],
     mutationFn: async (fields: TReviewFields & { productId: string }) => {
       const token = checkToken();
 

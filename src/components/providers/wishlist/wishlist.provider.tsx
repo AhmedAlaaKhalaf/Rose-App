@@ -8,11 +8,6 @@ import { parseGuestWishlist, productToWishlistItem, mergeWishlistItems } from "@
 import { useSession } from "next-auth/react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
-type TLocaleWishlistItem = {
-  productId: string;
-  ApiWishlistId: string;
-};
-
 type TWishlistContext = {
   items: TWishlistItem[];
   toggleWishlist: (product: TProductCard) => void;

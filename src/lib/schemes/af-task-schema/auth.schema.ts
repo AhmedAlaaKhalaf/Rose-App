@@ -6,7 +6,7 @@ export const emailStepSchema = (t: Translation) =>
     email: z.string().email(t("validation-email")).nonempty(t("email-require")),
   });
 
-export const newPasswordSchema = (t: Translation) =>
+export const newPasswordSchems = (t: Translation) =>
   z
     .object({
       token: z.string().nonempty(t("token-require")),

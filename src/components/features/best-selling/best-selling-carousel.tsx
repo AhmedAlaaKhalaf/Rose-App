@@ -21,7 +21,7 @@ export default async function BestSellingCarousel() {
       opts={{
         align: "start",
       }}
-      className="mx-auto max-w-[20.25rem] sm:max-w-full"
+      className="w-full"
     >
       <CarouselContent>
         {products.map((product) => (

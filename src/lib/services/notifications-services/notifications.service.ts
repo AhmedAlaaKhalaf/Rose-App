@@ -1,13 +1,8 @@
-import { API_NOTIFICATIONS_LIMIT } from "@/lib/constants/global-constants";
-import { TNotification } from "../../types/notifications";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import { TPaginatedNotifications } from "../../types/notifications";
 
 interface GetNotificationsParams {
   pageParam?: number;
   limit?: number;
-  type?: "ORDER" | "PROMOTION" | "SYSTEM" | "REVIEW" | "OTHER";
-  isRead?: boolean;
 }
 
 export async function getNotifications({
@@ -19,7 +14,8 @@ export async function getNotifications({
     credentials: "include",
   });
 
-  const { pageParam = 1, limit = API_NOTIFICATIONS_LIMIT } = searchParams;
+  if (!res.ok) {
+    let errorMessage = "Error fetching notifications";
 
     try {
       const errorData = await res.json();
@@ -28,17 +24,7 @@ export async function getNotifications({
       // ignore parse errors
     }
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/notifications?${params.toString()}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch notifications");
+    throw new Error(errorMessage);
   }
 
   return res.json();

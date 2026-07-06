@@ -1,4 +1,3 @@
-import { authOptions } from "@/auth";
 import { TUserCart } from "../types/cart";
 import { normalizeCartPayload } from "../utils/cart";
 

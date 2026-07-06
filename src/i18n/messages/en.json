@@ -2,11 +2,8 @@
   "Metadata": {
     "app-title": "Rose App"
   },
-  "products": {
+  "Products": {
     "occasion": "Occasion",
-    "category": "Category",
-    "rating": "Rating",
-    "Reset": "Reset All",
     "price": "Price",
     "from": "from",
     "to": "to",
@@ -134,23 +131,6 @@
         "verifying-otp": "Confirming email"
       }
     },
-    "login": {
-      "title": "Welcome back!",
-      "username": {
-        "label": "username"
-      },
-      "password": {
-        "label": "Password"
-      },
-      "rememberMe": "Remember me",
-      "forgotPassword": "Forgot your password?",
-      "submit": "Login",
-
-      "noAccount": "Don’t have an account yet?",
-      "createAccount": "Create one now!",
-      "email-invalid": "Invalid email address.",
-      "password-invalid": "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
-    },
     "validation": {
       "username": {
         "required": "Please enter a username",
@@ -197,44 +177,13 @@
       "gender": {
         "required": "Please select your gender"
       }
-    },
-    "promoCardheroSection": {
-      "badge": "Starting from 10.99 EGP",
-      "title": "Special Gifts For The People You Love",
-      "button": "Shop Now"
-    },
-    "carouselheroSection": {
-      "heading": "Say It with Flowers",
-      "subheading": "Elegant gifts for every special moment.",
-      "cta": "I’m buying!"
-    },
-    "forgot-password": {
-      "title": "Forgot Password?",
-      "desc": "Worry not, we’ll send you instructions to help you reset it.",
-      "field-lable": "Email",
-      "footer": "Don’t have an account yet? <a>Create one now!</a>",
-      "email-form-button": "Continue",
-      "new-password-title": "Create a new password",
-      "new-password-desc": "Set a strong password to secure your account.",
-      "new-password-field-one-label": "Password",
-      "new-password-button": "Reset Password",
-      "new-password-footer": "Need help? <a>Contact us</a>",
-      "new-password-field-two-label": "Confirm Password",
-      "validation-email": "In-Valid Email",
-      "email-require": "Email is Require",
-      "password-require": "Please enter your password",
-      "rePassword-require": "Please enter your confirm password",
-      "password-confirmPassword": "password and confirm Password don't match",
-      "strong-password": "Password must be at least 8 characters, one uppercase letter,one lowercase letter and one special character",
-      "sendotp-toast": "OTP sent to your email",
-      "otp-cooldown-error-toast": "You cannot ask for another OTP right now, please wait for {duration}s"
     }
   },
   "gallery": {
     "badge": "GALLERY",
     "heading": "Check Out our Wonderful Gallery"
   },
-  "promo-card-hero-section": {
+  "promoCardheroSection": {
     "badge": "Starting from 10.99 EGP",
     "title": "Special Gifts For The People You Love",
     "button": "Shop Now"
@@ -257,15 +206,15 @@
       "fast-delivery": "Fast & Reliable Delivery"
     }
   },
-  "carousel-hero-section": {
+  "carouselheroSection": {
     "heading": "Say It with Flowers",
-    "sub-heading": "Elegant gifts for every special moment.",
+    "subheading": "Elegant gifts for every special moment.",
     "cta": "I’m buying!"
   },
   "forgot-password": {
     "title": "Forgot Password?",
     "desc": "Worry not, we’ll send you instructions to help you reset it.",
-    "field-label": "Email",
+    "field-lable": "Email",
     "footer": "Don’t have an account yet? <a>Create one now!</a>",
     "email-form-button": "Continue",
     "new-password-title": "Create a new password",
@@ -280,7 +229,7 @@
     "rePassword-require": "Please enter your confirm password",
     "password-confirmPassword": "password and confirm Password don't match",
     "strong-password": "Password must be at least 8 characters, one uppercase letter,one lowercase letter and one special character",
-    "send-otp-toast": "OTP sent to your email",
+    "sendotp-toast": "OTP sent to your email",
     "otp-cooldown-error-toast": "You cannot ask for another OTP right now, please wait for {duration}s",
     "otp-title": "Enter the OTP Code",
     "otp-description": "We have sent a 6-digit code to {email} <span>edit</span>",
@@ -435,18 +384,6 @@
       }
     }
   },
-  "product-page": {
-    "left-in-stock": "left in stock",
-    "EGP": "EGP",
-    "out-of-stock": "Out of stock",
-    "rating": "Rating",
-    "ratings": "ratings",
-    "No-ratings-yet": "No Ratings Yet",
-    "Add-to-Cart": "Add to Cart",
-    "Adding-to-Cart": "adding to cart...",
-    "added-to-cart-success": "Product added to cart successfully",
-    "added-to-cart-error": "Failed to add product to cart"
-  },
   "related-products": {
     "header": "Related Products"
   },
@@ -532,11 +469,10 @@
     "form-rate-label": "Your rating:",
     "title-field-label": "Title",
     "review-comment": "Review",
-    "text-area-placeholder": "What do you think of this product?",
-    "title-field-placeholder": "Enter review title",
+    "text-area-placholder": "What do you think of this product?",
+    "title-field-placholder": "Enter review title",
     "review-form-button": "Add Review",
-    "add-review-toast": "You Review Added Successfully",
-    "no-reviews-found": "No reviews found for this product"
+    "add-review-toast": "You Review Added Successfully"
   },
   "product-details": {
     "breadcrumb-home": "Home",
@@ -597,7 +533,7 @@
   },
   "dashboard-layout": {
     "home-button": "Preview website",
-    "breadcrumb-segment": "Dashboard",
+    "breadcrumb-segmentone": "Dashboard",
     "breadcrumb-categories": "Categories",
     "breadcrumb-occasions": "Occasions",
     "breadcrumb-products": "Products",

@@ -3,7 +3,7 @@ import ProductCard from "./product-card";
 import { Rose } from "lucide-react";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { getProducts } from "@/lib/services/product.service";
-import { SearchParams, TLocale } from "@/lib/types/global";
+import { SearchParams } from "@/lib/types/global";
 import { getLocale, getTranslations } from "next-intl/server";
 
 type ProductsListProps = {
@@ -16,7 +16,7 @@ const ProductsList = React.forwardRef<HTMLDivElement, ProductsListProps>(
     const t = await getTranslations("product-listing");
 
     // Hooks
-    const locale = (await getLocale()) as TLocale;
+    const locale = await getLocale();
 
     // Services
     const {

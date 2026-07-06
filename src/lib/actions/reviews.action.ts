@@ -1,7 +1,6 @@
 "use server";
 
 import { getToken } from "next-auth/jwt";
-import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 type AddReviewBody = {
@@ -22,8 +21,7 @@ export async function addReviewAction(fields: AddReviewBody, userToken: string |
       cookies: {
         [cookieName]: rawToken,
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } as any,
+    } as unknown as Parameters<typeof getToken>[0]["req"],
   });
 
   const accessToken = userToken ?? token?.accessToken;
@@ -40,8 +38,6 @@ export async function addReviewAction(fields: AddReviewBody, userToken: string |
     },
     body: JSON.stringify(fields),
   });
-
-  revalidateTag("productReviews");
 
   const payload = await res.json();
 

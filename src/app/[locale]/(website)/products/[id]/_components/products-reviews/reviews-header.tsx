@@ -2,8 +2,8 @@
 
 import { SectionHead } from "@/components/ui/section-header";
 import { useFormatter, useTranslations } from "next-intl";
-import { Star } from "lucide-react";
 import { Rating } from "@/components/ui/star-rating";
+import { Star } from "lucide-react";
 
 type HeaderProps = {
   rateAvg: number;

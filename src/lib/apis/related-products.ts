@@ -20,7 +20,7 @@ export async function getRelatedProducts(categoryId: string) {
 
   const payload: ApiResponse<PaginatedData<TProductCard[]>> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message);
+  if ("message" in payload) throw new Error(payload.message as string);
 
   return payload;
 }

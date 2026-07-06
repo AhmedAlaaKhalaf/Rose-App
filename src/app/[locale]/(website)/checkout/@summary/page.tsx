@@ -8,11 +8,11 @@ import useUserCart from "@/hooks/cart/use-user-cart";
 import { getCartItems } from "@/lib/utils/cart";
 
 export default function CartSummary() {
-  // Translation
-  const t = useTranslations("checkout");
+    // Translation
+    const t = useTranslations("checkout");
 
-  // Get user cart
-  const { data } = useUserCart();
+    // Get user cart
+    const { data } = useUserCart();
 
     // User cart data
     const userCart = data?.cart ?? null;
@@ -20,73 +20,77 @@ export default function CartSummary() {
     const userCartTotalPrice = userCart?.totalPrice ?? 0;
     const userCartAppliedCoupons = userCart?.appliedCoupons ?? [];
 
-  // Calculate subtotal from cart items (price * quantity)
-  const subtotal = userCartItems.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0);
+    // Calculate subtotal from cart items (price * quantity)
+    const subtotal = userCartItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+    );
 
-  // Derive discount and total from API response
-  const total = userCartTotalPrice;
-  const discount = subtotal > total ? subtotal - total : 0;
+    // Derive discount and total from API response
+    const total = userCartTotalPrice || subtotal;
+    const discount = subtotal > total ? subtotal - total : 0;
 
-  return (
-    <div className="flex flex-col gap-6">
-      <h2 className="font-semibold text-black dark:text-white text-3xl">{t("summary")}</h2>
-      <div className="flex flex-col gap-3 bg-zinc-50 p-4 rounded-sm">
-        {/* Apply Coupon Input*/}
-        <div className="flex justify-between items-stretch gap-2">
-          <div className="flex-1">
-            <Input type="text" placeholder={t("coupon-code")} className="w-full h-12" />
-          </div>
-          <Button variant="default" className="flex items-center gap-2 px-5 h-12">
-            <TicketPercent className="size-5" />
-            {t("apply-coupon")}
-          </Button>
-        </div>
+    return <div className="flex flex-col gap-6">
+        <h2 className="text-3xl font-semibold text-black dark:text-white">{t("summary")}</h2>
+        <div className="flex flex-col gap-3 bg-zinc-50 p-4 rounded-sm">
 
-        {/* Applied Coupons */}
-        <div className="flex flex-col gap-3 p-4 border border-zinc-300 rounded-sm min-h-[120px]">
-          {/* {userCartAppliedCoupons.length === 0 ? (
-            <p className="text-zinc-400 italic">{t("no-coupons-applied")}</p>
-          ) : (
-            <div className="flex flex-wrap gap-2">
-              {userCartAppliedCoupons.map((code) => (
-                <span
-                  key={code}
-                  className="bg-primary/10 px-3 py-1 border border-primary/20 rounded-full font-medium text-primary text-sm"
-                >
-                  {code}
-                </span>
-              ))}
+            {/* Apply Coupon Input*/}
+            <div className="flex justify-between items-stretch gap-2">
+                <div className="flex-1">
+                    <Input type="text" placeholder={t("coupon-code")} className="w-full h-12"/>
+                </div>
+                <Button variant="default" className="flex items-center gap-2 h-12 px-5">
+                    <TicketPercent className="size-5" />
+                    {t("apply-coupon")}</Button>
             </div>
-          )} */}
-        </div>
 
-        {/* Subtotal */}
-        <div className="flex justify-between items-center">
-          <p className="text-black dark:text-white text-lg">{t("subtotal")}</p>
-          <p className="text-black dark:text-white text-lg">
-            {subtotal.toLocaleString()} {t("currency")}
-          </p>
-        </div>
+            {/* Applied Coupons */}
+            <div className="flex flex-col gap-3 border border-zinc-300 rounded-sm p-4 min-h-[120px]">
+                {userCartAppliedCoupons.length === 0 ? (
+                    <p className="text-zinc-400 italic">
+                        {t("no-coupons-applied")}
+                    </p>
+                ) : (
+                    <div className="flex flex-wrap gap-2">
+                        {userCartAppliedCoupons.map((code) => (
+                            <span
+                                key={code}
+                                className="px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20"
+                            >
+                                {code}
+                            </span>
+                        ))}
+                    </div>
+                )}
+            </div>
 
-        {/* Discount Applied */}
-        <div className="flex flex-nowrap justify-between items-center gap-2">
-          <div className="bg-zinc-300 w-1/3 h-[1px]"></div>
-          <p className="font-semibold text-zinc-500 dark:text-zinc-400">
-            {discount > 0
-              ? t("discount-applied", { amount: discount.toLocaleString() })
-              : t("no-coupons-applied")}
-          </p>
-          <div className="bg-zinc-300 w-1/3 h-[1px]"></div>
-        </div>
+            {/* Subtotal */}
+            <div className="flex justify-between items-center">
+                <p className="text-lg text-black dark:text-white">{t("subtotal")}</p>
+                <p className="text-lg text-black dark:text-white">
+                    {subtotal.toLocaleString()} {t("currency")}
+                </p>
+            </div>
 
-        {/* Total */}
-        <div className="flex justify-between items-center">
-          <p className="font-semibold text-black dark:text-white text-2xl">{t("total")}</p>
-          <p className="font-semibold text-black dark:text-white text-2xl">
-            {total.toLocaleString()} {t("currency")}
-          </p>
+             {/* Discount Applied */}
+            <div className="flex items-center justify-between gap-2 flex-nowrap">
+                <div className="w-1/3 h-[1px] bg-zinc-300"></div>
+                <p className="text-zinc-500 font-semibold dark:text-zinc-400">
+                    {discount > 0
+                        ? t("discount-applied", { amount: discount.toLocaleString() })
+                        : t("no-coupons-applied")}
+                </p>
+                <div className="w-1/3 h-[1px] bg-zinc-300"></div>
+            </div>
+
+            {/* Total */}
+            <div className="flex justify-between items-center">
+                <p className="text-2xl font-semibold text-black dark:text-white">{t("total")}</p>
+                <p className="text-2xl font-semibold text-black dark:text-white">
+                    {total.toLocaleString()} {t("currency")}
+                </p>
+            </div>
+
         </div>
-      </div>
     </div>
-  );
 }

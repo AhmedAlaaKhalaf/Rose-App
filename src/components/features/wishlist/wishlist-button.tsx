@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
-type WishlistButtonProp = { productId: string };
+type WishlistButtonProp = { product: TProductCard };
 
 export default function WishlistButton({ product }: WishlistButtonProp) {
   const t = useTranslations("product-listing.wishlist-button");
@@ -25,7 +25,7 @@ export default function WishlistButton({ product }: WishlistButtonProp) {
 
   const toggleUserWishlist = async () => {
     if (!isLoggedIn) {
-      toggleWishlist(productId);
+      toggleWishlist(product);
       return;
     }
 

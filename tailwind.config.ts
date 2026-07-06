@@ -168,8 +168,6 @@ const config: Config = {
         en: ["var(--font-sarabun)", "sans-serif"],
         ar: ["var(--font-tajawal)", "sans-serif"],
         nunitoSans: ["var(--font-nunitoSans)", "sans-serif"],
-        mulish: ["var(--font-mulish)", "sans-serif"],
-        sarabun: ["var(--font-sarabun)", "sans-serif"],
       },
       keyframes: {
         "logo-pulse": {

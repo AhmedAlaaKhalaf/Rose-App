@@ -234,9 +234,9 @@ export function UpdateAddressModalButton({ userAddress }: { userAddress: TUserAd
         {/* Content  */}
         <section className="flex flex-col gap-4">
           {/* Title  */}
-          <header className="flex items-center gap-4 pb-3 border-zinc-200 border-b font-medium text-maroon-600 text-2xl leading-none">
+          <header className="flex items-center gap-4 border-b border-zinc-200 pb-3 font-medium text-2xl leading-none text-maroon-600">
             {isLastStep && (
-              <Button type="button" className="rounded-full size-9" onClick={handleBackButton}>
+              <Button type="button" className="size-9 rounded-full" onClick={handleBackButton}>
                 <ArrowLeft strokeWidth={1.46} />
               </Button>
             )}
@@ -262,14 +262,14 @@ export function UpdateAddressModalButton({ userAddress }: { userAddress: TUserAd
                   <Button
                     type="button"
                     onClick={handleNextButton}
-                    className="mt-9 rounded-xl w-full"
+                    className="rounded-xl mt-9 w-full"
                   >
                     {t("button-steps.first")}
                   </Button>
                 )}
 
                 {isLastStep && (
-                  <Button type="submit" className="mt-9 rounded-xl w-full" disabled={isPending}>
+                  <Button type="submit" className="rounded-xl mt-9 w-full" disabled={isPending}>
                     {t("button-steps.second.update")}
                   </Button>
                 )}

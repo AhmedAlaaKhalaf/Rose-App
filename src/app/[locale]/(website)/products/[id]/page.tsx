@@ -1,11 +1,9 @@
+import { setRequestLocale } from "next-intl/server";
+
 import { productDetailsServices } from "@/lib/services/product-details.service";
 import ProductInfo from "./_components/product-info";
 import ProductReviews from "./_components/products-reviews/product-reviews";
 import RelatedProducts from "./_components/related-products/related-products";
-import ProductGallery from "./_components/product-gallery";
-import ProductInfo from "./_components/product-info";
-import { getProducts } from "@/lib/services/product.service";
-import { API_STATIC_PRODUCTS_LIMIT } from "@/lib/constants/global-constants";
 
 type LocaleProps = {
   params: { locale: string; id: string };

@@ -16,7 +16,7 @@ export async function getProducts(searchParams?: SearchParams) {
     throw new Error("Failed to fetch products");
   }
 
-  const payload: ApiResponse<PaginatedData<TProduct[]>> = await response.json();
+  const payload: ApiResponse<PaginatedData<TProductCard[]>> = await response.json();
 
   if (payload.status === false) {
     throw new Error("message" in payload ? payload.message : "Failed to fetch products");

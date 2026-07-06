@@ -9,8 +9,8 @@ export default function useNotifications(token: string | undefined) {
     enabled: !!token,
 
     getNextPageParam: (lastPage) => {
-      if (lastPage.payload.metadata.page < lastPage.payload.metadata.totalPages) {
-        return lastPage.payload.metadata.page + 1;
+      if (lastPage.metadata.currentPage < lastPage.metadata.totalPages) {
+        return lastPage.metadata.currentPage + 1;
       }
 
       return undefined;

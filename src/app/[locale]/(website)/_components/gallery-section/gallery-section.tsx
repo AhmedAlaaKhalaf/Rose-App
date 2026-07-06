@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { SectionHead, SectionTitle } from "@/components/ui/section-header";
@@ -53,17 +55,6 @@ export default function GallerySection() {
             </div>
           ))}
         </div>
-        {/* Column 2 */}
-        <div className="gap-4 grid">
-          <div className="relative aspect-[419/411] overflow-hidden">
-            <Image
-              fill
-              src="/assets/images/gallery-2.png"
-              alt="Birthday gift box with red ribbon"
-              className="object-cover"
-              sizes="(min-width: 1024px) 427px, 100vw"
-            />
-          </div>
 
         {/* Desktop — fluid masonry scaled to container width */}
         <div className="hidden lg:block relative w-full max-w-full aspect-[1281/1147]">
