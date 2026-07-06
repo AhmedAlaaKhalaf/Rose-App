@@ -20,7 +20,8 @@ export default function LoginPopover() {
   };
 
   const handleMouseLeave = (e: React.MouseEvent) => {
-    const relatedTarget = e.relatedTarget as HTMLElement;
+    // relatedTarget can be null or a non-Node (e.g. window) when leaving the page
+    const relatedTarget = e.relatedTarget instanceof Node ? e.relatedTarget : null;
 
     // Check if mouse is moving to an element inside the popover
     if (relatedTarget && containerRef.current && containerRef.current.contains(relatedTarget)) {

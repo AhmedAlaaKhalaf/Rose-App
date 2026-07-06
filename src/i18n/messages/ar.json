@@ -109,7 +109,6 @@
         }
       }
     },
-
     "products": {
       "header": "كل المنتجات",
       "search-placeholder": "ابحث...",
@@ -134,7 +133,6 @@
       }
     }
   },
-
   "promoCardheroSection": {
     "badge": "ابتداءً من 10.99 ج.م",
     "title": "هدايا مميزة للأشخاص الذين تحبهم",
@@ -310,7 +308,6 @@
       }
     }
   },
-
   "product-listing": {
     "badge": {
       "new": "جديد",
@@ -323,7 +320,6 @@
     },
     "no-products-message": "لا توجد منتجات للعرض"
   },
-
   "user-address": {
     "map": {
       "pick-location": "انقر على الخريطة لتحديد موقع التوصيل"
@@ -530,7 +526,6 @@
     "like-head": "المنتجات التي قد تعجبك:",
     "currency": "ج.م"
   },
-
   "dashboard-layout": {
     "home-button": "الصفحه الرئيسية",
     "breadcrumb-segmentone": "لوحة التحكم",
@@ -580,5 +575,17 @@
     "subtitle": "اعثر على الهدية المثالية لكل احتفال",
     "view-products": "تسوق لهذه المناسبة",
     "empty": "لا توجد مناسبات متاحة حاليًا."
+  },
+  "products": {
+    "category": "الفئة",
+    "occasion": "المناسبة",
+    "rating": "التقييم",
+    "price": "السعر",
+    "from": "من",
+    "to": "إلى",
+    "reset": "مسح",
+    "Reset": "إعادة تعيين الكل",
+    "filters": "الفلاتر",
+    "loading-more": "جاري تحميل المزيد…"
   }
 }

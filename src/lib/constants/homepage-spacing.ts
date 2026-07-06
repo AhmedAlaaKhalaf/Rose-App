@@ -1,7 +1,7 @@
 /** Homepage spacing aligned with Rose App Enhanced Figma */
 
 /** Shared centered container — same width & margin for every homepage section */
-export const homepageContainer = "mx-auto w-full px-4 container";
+export const homepageContainer = "mx-auto w-full px-4 sm:px-6 lg:px-8 container";
 
 /** Vertical gap between major homepage sections */
 export const homepageSectionGap =

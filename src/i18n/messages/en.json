@@ -267,7 +267,6 @@
     "username-invalid": "Invalid user name.",
     "password-invalid": "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
   },
-
   "dashboard": {
     "overview": {
       "1st-row": {
@@ -285,7 +284,6 @@
         }
       }
     },
-
     "products": {
       "header": "all products",
       "search-placeholder": "Search...",
@@ -310,7 +308,6 @@
       }
     }
   },
-
   "user-address": {
     "map": {
       "pick-location": "Click on the map to set your delivery location"
@@ -343,7 +340,6 @@
             "update": "update Address"
           }
         },
-
         "city": {
           "title": "city",
           "placeholder": "Enter city name"
@@ -518,7 +514,6 @@
     "like-head": "Products you may like:",
     "currency": "EGP"
   },
-
   "product-listing": {
     "badge": {
       "new": "new",
@@ -580,5 +575,17 @@
     "subtitle": "Find the perfect gift for every celebration",
     "view-products": "Shop this occasion",
     "empty": "No occasions available yet."
+  },
+  "products": {
+    "category": "Category",
+    "occasion": "Occasion",
+    "rating": "Rating",
+    "price": "Price",
+    "from": "from",
+    "to": "to",
+    "reset": "Reset",
+    "Reset": "Reset All",
+    "filters": "Filters",
+    "loading-more": "Loading more…"
   }
 }
