@@ -6,7 +6,11 @@ import { usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/tailwind-merge";
 import { useTranslations } from "next-intl";
 
-export default function HeaderNavigation() {
+type HeaderNavigationProps = {
+  onNavigate?: () => void;
+};
+
+export default function HeaderNavigation({ onNavigate }: HeaderNavigationProps) {
   const pathname = usePathname();
   const t = useTranslations("navigation");
 
@@ -21,6 +25,7 @@ export default function HeaderNavigation() {
           <Link
             href={item.href}
             key={item.labelKey}
+            onClick={() => onNavigate?.()}
             className={cn(
               "flex items-center gap-2 p-4 sm:p-2 md:p-3 text-black dark:text-zinc-50 sm:text-zinc-50 dark:sm:text-zinc-800",
               isActive &&
