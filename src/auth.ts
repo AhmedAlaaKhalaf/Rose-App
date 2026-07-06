@@ -44,7 +44,8 @@ export const authOptions: NextAuthOptions = {
 
         // Throw error if authentication fails (status === false)
         if (payload?.status === false) {
-          throw new Error(payload.message || "Invalid credentials");
+          const message = "message" in payload ? payload.message : undefined;
+          throw new Error(message || "Invalid credentials");
         }
 
         // Return user object to NextAuth

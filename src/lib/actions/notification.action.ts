@@ -45,7 +45,10 @@ export async function markAllNotificationsAsRead() {
 
   const payload: ApiResponse<{ message: string }> = await response.json();
 
-  if (!payload.status) throw new Error(payload.message);
+  if (!payload.status) {
+    const message = "message" in payload ? payload.message : undefined;
+    throw new Error(message || "Failed to mark all notification as read");
+  }
 
   return payload;
 }

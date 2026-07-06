@@ -1,5 +1,5 @@
 declare type SuccessfulResponse<T> = {
-  status: boolean;
+  status: true;
   code: number;
 } & T;
 
@@ -20,7 +20,7 @@ declare type PaginatedData<T> = {
 };
 
 declare type ErrorResponse = {
-  status: boolean;
+  status: false;
   code: number;
   message: string;
   errors?: ValidationErrorResponse[];

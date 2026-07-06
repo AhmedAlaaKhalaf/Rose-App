@@ -27,5 +27,5 @@ export function parseProductGallery(gallery?: string): string[] {
 
 export function getProductImages(cover?: string, gallery?: string): string[] {
   const images = [resolveProductCover(cover), ...parseProductGallery(gallery).map(resolveProductCover)];
-  return [...new Set(images)];
+  return Array.from(new Set(images));
 }

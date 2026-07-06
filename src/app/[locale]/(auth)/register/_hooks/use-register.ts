@@ -14,7 +14,8 @@ export default function useRegister() {
       const payload = await registerAction(fields);
 
       if (payload?.status === false) {
-        throw new Error(payload.message || "Registration failed");
+        const message = "message" in payload ? payload.message : undefined;
+        throw new Error(message || "Registration failed");
       }
 
       return payload;

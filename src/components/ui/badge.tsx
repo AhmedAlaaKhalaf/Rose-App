@@ -14,6 +14,8 @@ const badgeVariants = cva(
           "bg-maroon-50 hover:bg-maroon-100 text-maroon-600 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:text-softPink-300",
         subtle:
           "bg-zinc-100 hover:bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:text-zinc-50",
+        outline:
+          "border border-zinc-300 bg-transparent text-zinc-700 hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700",
       },
     },
     defaultVariants: {

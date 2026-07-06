@@ -9,7 +9,8 @@ export default function useSendOTP() {
       const payload = await sendEmailVerificationAction(fields);
 
       if (payload?.status === false) {
-        throw new Error(payload.message || "Failed to send verification code");
+        const message = "message" in payload ? payload.message : undefined;
+        throw new Error(message || "Failed to send verification code");
       }
 
       return payload;

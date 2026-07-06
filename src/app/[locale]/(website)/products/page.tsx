@@ -4,11 +4,9 @@ import { SearchParams } from "@/lib/types/global";
 import { serializeProductFiltersKey } from "@/lib/utils/product-filters";
 import { Suspense } from "react";
 import FiltersSidebar from "./_components/filters-sidebar";
+import { PRODUCT_GRID_CLASS } from "./_components/product-grid.constants";
 
 type ProductsPageProps = { searchParams: SearchParams };
-
-export const PRODUCT_GRID_CLASS =
-  "gap-4 sm:gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4";
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
   const filtersKey = serializeProductFiltersKey(searchParams);

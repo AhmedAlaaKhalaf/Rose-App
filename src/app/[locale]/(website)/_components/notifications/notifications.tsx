@@ -164,7 +164,7 @@ export default function Notifications() {
                           <DropdownMenu
                             modal={false}
                             onOpenChange={(open) =>
-                              setOpenDropdownId(open ? notification?._id : null)
+                              setOpenDropdownId(open ? (notification?._id ?? null) : null)
                             }
                             open={openDropdownId === notification?._id}
                           >
@@ -186,7 +186,7 @@ export default function Notifications() {
                                   <DropdownMenuItem
                                     onClick={(e) => {
                                       e.stopPropagation();
-                                      markRead([notification?._id]);
+                                      markRead(String(notification?._id ?? notification?.id ?? ""));
                                       setOpenDropdownId(null);
                                     }}
                                     className={`flex items-center gap-1 cursor-pointer text-zinc-800 dark:text-zinc-50 ${notification?.isRead ? "pointer-events-none text-zinc-400 dark:text-zinc-500" : ""}`}

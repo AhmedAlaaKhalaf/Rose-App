@@ -8,7 +8,8 @@ export default function useVerifyOtp() {
       const payload = await confirmEmailVerificationAction(fields);
 
       if (payload?.status === false) {
-        throw new Error(payload.message || "Invalid verification code");
+        const message = "message" in payload ? payload.message : undefined;
+        throw new Error(message || "Invalid verification code");
       }
 
       return payload;

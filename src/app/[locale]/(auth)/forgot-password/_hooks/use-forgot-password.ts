@@ -9,7 +9,8 @@ export default function useForgotPassword() {
       const payload = await forgotPasswordAction(fields);
 
       if (payload?.status === false) {
-        throw new Error(payload.message || "Failed to send reset email");
+        const message = "message" in payload ? payload.message : undefined;
+        throw new Error(message || "Failed to send reset email");
       }
 
       return payload;
