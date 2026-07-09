@@ -587,5 +587,70 @@
     "Reset": "Reset All",
     "filters": "Filters",
     "loading-more": "Loading more…"
+  },
+  "termsPage": {
+    "title": "Terms & Conditions",
+    "updated": "Last updated",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of terms",
+        "body": "By using Rose, you agree to these terms. If you do not agree, please stop using the platform."
+      },
+      "orders": {
+        "title": "Orders and payments",
+        "body": "All orders are subject to product availability and payment confirmation. We may cancel incomplete or fraudulent orders."
+      },
+      "delivery": {
+        "title": "Delivery",
+        "body": "We aim to deliver on time, but timelines may vary due to operational constraints or incomplete addresses."
+      },
+      "returns": {
+        "title": "Returns and refunds",
+        "body": "Returns and refunds are handled according to the Rose refund policy and the order/product condition."
+      }
+    }
+  },
+  "privacyPage": {
+    "title": "Privacy Policy",
+    "updated": "Last updated",
+    "sections": {
+      "collection": {
+        "title": "Data we collect",
+        "body": "We collect details such as name, email, phone, and address to process and deliver your orders."
+      },
+      "usage": {
+        "title": "How we use data",
+        "body": "Your data is used to process orders, communicate updates, provide support, and improve service quality."
+      },
+      "sharing": {
+        "title": "Data sharing",
+        "body": "We do not sell your personal data. We may share it only with trusted service providers when required."
+      },
+      "security": {
+        "title": "Data security",
+        "body": "We apply reasonable safeguards to protect your data from unauthorized access and misuse."
+      }
+    }
+  },
+  "faqsPage": {
+    "title": "FAQs",
+    "faqs": [
+      {
+        "q": "How can I track my order?",
+        "a": "You can track order updates from the Orders page in your account."
+      },
+      {
+        "q": "What payment methods are supported?",
+        "a": "Cash on delivery and credit card payments are supported, based on availability."
+      },
+      {
+        "q": "Can I change my delivery address?",
+        "a": "Yes, you can update/select an address before placing the order."
+      },
+      {
+        "q": "When will I receive a refund?",
+        "a": "Refund timelines depend on your payment method and our refund policy."
+      }
+    ]
   }
 }
