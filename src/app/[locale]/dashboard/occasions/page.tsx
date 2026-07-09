@@ -1,3 +1,5 @@
-export default function Page() {
-  return <div>Occasion Page</div>;
+import AdminEntityManager from "../_components/admin-entity-manager";
+
+export default function OccasionsPage() {
+  return <AdminEntityManager title="Occasions" endpoint="occasions" />;
 }

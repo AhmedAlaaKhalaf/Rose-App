@@ -62,7 +62,7 @@ export default function DashboardProductItem({ product }: DashboardProductItemPr
                     variant={"secondary"}
                     className="bg-[#0063D01A]/10 hover:bg-[#0063D01A]/20 w-full text-blue-600"
                   >
-                    <Link href={"/dashboard/products/edit"}>
+                    <Link href={`/dashboard/products/edit/${id}`}>
                       <Pencil />
                       {t("edit")}
                     </Link>
@@ -84,7 +84,7 @@ export default function DashboardProductItem({ product }: DashboardProductItemPr
             variant={"secondary"}
             className="bg-[#0063D01A]/10 hover:bg-[#0063D01A]/20 w-fit text-blue-600"
           >
-            <Link href={"/dashboard/products/edit"}>
+            <Link href={`/dashboard/products/edit/${id}`}>
               <Pencil />
               {t("edit")}
             </Link>

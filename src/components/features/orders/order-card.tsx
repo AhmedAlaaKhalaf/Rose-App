@@ -64,11 +64,11 @@ export default function OrderCard({ order }: OrderCardProps) {
   return (
     <div className="bg-white shadow-md mx-auto border border-gray-200 rounded-2xl max-w-[1280px] overflow-hidden">
       {/* Header */}
-      <div className="flex justify-between items-center bg-[#A6252A] px-4 h-14 text-white">
-        <div className="font-primary font-semibold text-2xl leading-none">
+      <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-2 bg-[#A6252A] px-3 sm:px-4 py-2 text-white">
+        <div className="font-primary font-semibold text-lg sm:text-2xl leading-tight break-all">
           {t("order-header")} {order.orderNumber || `#${order._id}` || "N/A"}
         </div>
-        <div className="font-primary font-normal text-base leading-none">
+        <div className="font-primary font-normal text-sm sm:text-base leading-tight sm:text-right">
           {t("created-in")} {formattedCreatedAt}
         </div>
       </div>
@@ -76,24 +76,24 @@ export default function OrderCard({ order }: OrderCardProps) {
       {/* Content */}
       <div className="bg-gray-50 px-4 pt-4 pb-6 border-gray-200 border-t">
         {/* Total + Payment */}
-        <div className="flex justify-between items-center mb-4 pb-4">
-          <div className="flex items-center gap-3">
-            <span className="font-primary font-medium text-gray-900 text-2xl leading-none">
+        <div className="flex lg:flex-row flex-col lg:justify-between lg:items-center gap-3 mb-4 pb-4">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <span className="font-primary font-medium text-gray-900 text-xl sm:text-2xl leading-tight">
               {t("total-price")} {formatPrice(order.totalPrice || 0)} EGP
             </span>
             <span
-              className={`px-3 py-1 rounded-full text-white font-primary font-semibold text-base leading-none ${paymentStatus.color}`}
+              className={`px-3 py-1 rounded-full text-white font-primary font-semibold text-sm sm:text-base leading-none ${paymentStatus.color}`}
             >
               {paymentStatus.label}
             </span>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <span className="font-primary font-semibold text-black text-base leading-none">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-primary font-semibold text-black text-sm sm:text-base leading-none">
               {t("status")}:
             </span>
             <span
-              className={`px-3 py-1 rounded-full text-white font-primary font-semibold text-base leading-none ${status.color}`}
+              className={`px-3 py-1 rounded-full text-white font-primary font-semibold text-sm sm:text-base leading-none ${status.color}`}
             >
               {status.label}
             </span>
@@ -104,23 +104,20 @@ export default function OrderCard({ order }: OrderCardProps) {
 
         {/* Payment + Delivery */}
         <div className="space-y-3 mb-6 text-sm">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="font-medium" style={{ color: "#71717A" }}>
               {t("payment-method")}
             </span>
             <div className="flex items-center gap-2">
               <Banknote className="w-5 h-5" style={{ color: "#71717A" }} />
-              <span
-                className="font-primary font-semibold text-[16px] leading-none"
-                style={{ color: "#71717A" }}
-              >
+              <span className="font-primary font-semibold text-sm sm:text-base leading-none" style={{ color: "#71717A" }}>
                 {order.paymentType === "cash" ? t("cash") : t("credit-card")}
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="font-medium text-gray-700">{t("delivery-status")}</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-medium text-gray-700 text-sm sm:text-base">{t("delivery-status")}</span>
             <div className="flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +138,7 @@ export default function OrderCard({ order }: OrderCardProps) {
                   d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0h-.01M15 17a2 2 0 104 0m-4 0h-.01M9 17h6"
                 />
               </svg>
-              <span className="font-primary font-semibold text-[16px] leading-none">
+              <span className="font-primary font-semibold text-sm sm:text-base leading-none">
                 <span className={deliveryStatus.color}>{deliveryStatus.label}</span>
               </span>
             </div>
@@ -164,10 +161,10 @@ export default function OrderCard({ order }: OrderCardProps) {
                   .map((item, index) => (
                     <div
                       key={`${item.product._id}-preview-${index}`}
-                      className="flex items-stretch gap-0 shadow-sm hover:shadow-md pr-5 border border-gray-200 rounded-xl min-h-[150px] overflow-hidden transition-all duration-300"
+                      className="flex items-stretch gap-0 shadow-sm hover:shadow-md pr-3 sm:pr-5 border border-gray-200 rounded-xl min-h-[130px] sm:min-h-[150px] overflow-hidden transition-all duration-300"
                       style={{ backgroundColor: "#FAFAFA" }}
                     >
-                      <div className="relative flex-shrink-0 w-[120px] min-h-full">
+                      <div className="relative flex-shrink-0 w-[96px] sm:w-[120px] min-h-full">
                         <Image
                           sizes="auto"
                           src={item.product?.imgCover || "/placeholder.png"}
@@ -177,28 +174,28 @@ export default function OrderCard({ order }: OrderCardProps) {
                         />
                       </div>
 
-                      <div className="flex flex-col flex-1 justify-between pt-1 pb-3 pl-4 min-w-0">
+                      <div className="flex flex-col flex-1 justify-between pt-1 pb-2 sm:pb-3 pl-3 sm:pl-4 min-w-0">
                         <div className="space-y-1">
-                          <h3 className="font-semibold text-[#8B1538] text-base line-clamp-2">
+                          <h3 className="font-semibold text-[#8B1538] text-sm sm:text-base line-clamp-2">
                             {item.product?.title || "Product"}
                           </h3>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-yellow-500 text-lg">★</span>
-                            <span className="font-medium text-gray-700 text-sm">
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            <span className="text-yellow-500 text-base sm:text-lg">★</span>
+                            <span className="font-medium text-gray-700 text-xs sm:text-sm">
                               {t("rating")} {formatRating(item.product?.rateAvg)}/5
                             </span>
-                            <span className="text-blue-600 text-sm">
+                            <span className="text-blue-600 text-xs sm:text-sm">
                               ({format.number(item.product?.rateCount || 0)} rating
                               {item.product?.rateCount === 1 ? "" : "s"})
                             </span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-red-500 text-sm">
+                          <span className="font-medium text-red-500 text-xs sm:text-sm">
                             (×{item.quantity || 1})
                           </span>
-                          <span className="font-bold text-gray-900 text-lg">
-                            {formatPrice(item.price || 0)} <span className="text-base">EGP</span>
+                          <span className="font-bold text-gray-900 text-base sm:text-lg">
+                            {formatPrice(item.price || 0)} <span className="text-sm sm:text-base">EGP</span>
                           </span>
                         </div>
                       </div>
@@ -210,13 +207,13 @@ export default function OrderCard({ order }: OrderCardProps) {
                   .map((item, index) => (
                     <div
                       key={`${item.product._id}-fade-${index}`}
-                      className="flex items-stretch gap-0 shadow-sm hover:shadow-md pr-5 border border-gray-200 rounded-xl min-h-[150px] overflow-hidden transition-all duration-300"
+                      className="flex items-stretch gap-0 shadow-sm hover:shadow-md pr-3 sm:pr-5 border border-gray-200 rounded-xl min-h-[130px] sm:min-h-[150px] overflow-hidden transition-all duration-300"
                       style={{
                         backgroundColor: "#FAFAFA",
                         opacity: showAll || !showToggle ? 1 : 0.5,
                       }}
                     >
-                      <div className="relative flex-shrink-0 w-[120px] min-h-full">
+                      <div className="relative flex-shrink-0 w-[96px] sm:w-[120px] min-h-full">
                         <Image
                           sizes="auto"
                           src={item.product?.imgCover || "/placeholder.png"}
@@ -226,28 +223,28 @@ export default function OrderCard({ order }: OrderCardProps) {
                         />
                       </div>
 
-                      <div className="flex flex-col flex-1 justify-between pt-1 pb-3 pl-4 min-w-0">
+                      <div className="flex flex-col flex-1 justify-between pt-1 pb-2 sm:pb-3 pl-3 sm:pl-4 min-w-0">
                         <div className="space-y-1">
-                          <h3 className="font-semibold text-[#8B1538] text-base line-clamp-2">
+                          <h3 className="font-semibold text-[#8B1538] text-sm sm:text-base line-clamp-2">
                             {item.product?.title || "Product"}
                           </h3>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-yellow-500 text-lg">★</span>
-                            <span className="font-medium text-gray-700 text-sm">
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            <span className="text-yellow-500 text-base sm:text-lg">★</span>
+                            <span className="font-medium text-gray-700 text-xs sm:text-sm">
                               {t("rating")} {formatRating(item.product?.rateAvg)}/5
                             </span>
-                            <span className="text-blue-600 text-sm">
+                            <span className="text-blue-600 text-xs sm:text-sm">
                               ({format.number(item.product?.rateCount || 0)} rating
                               {item.product?.rateCount === 1 ? "" : "s"})
                             </span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-red-500 text-sm">
+                          <span className="font-medium text-red-500 text-xs sm:text-sm">
                             (×{item.quantity || 1})
                           </span>
-                          <span className="font-bold text-gray-900 text-lg">
-                            {formatPrice(item.price || 0)} <span className="text-base">EGP</span>
+                          <span className="font-bold text-gray-900 text-base sm:text-lg">
+                            {formatPrice(item.price || 0)} <span className="text-sm sm:text-base">EGP</span>
                           </span>
                         </div>
                       </div>

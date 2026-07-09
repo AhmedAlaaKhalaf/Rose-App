@@ -16,7 +16,7 @@ export type TMonthlyRevenue = {
 }
 
 export type TOrderStatistics = {
-    "message": "string",
+    "message": string,
     "statistics": {
         "ordersByStatus": TOrderStatisticsByStatus[],
         "dailyRevenue": TDailyRevenue[],

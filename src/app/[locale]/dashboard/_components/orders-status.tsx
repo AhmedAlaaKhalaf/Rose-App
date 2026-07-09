@@ -13,7 +13,7 @@ export default function OrdersStatus() {
     queryKey: ["order-statistics", session?.accessToken],
     queryFn: () => {
       if (!session?.accessToken) throw new Error("Unauthorized")
-      return getOrderStatus(session.accessToken)
+      return getOrderStatus(session.accessToken, session.user?.role)
     },
     enabled: !!session?.accessToken,
   })
