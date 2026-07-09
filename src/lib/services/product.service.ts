@@ -4,6 +4,7 @@ import { TDashboardProduct } from "../types/dashboard";
 import { SearchParams } from "../types/global";
 import { TProductCard } from "../types/product";
 import { buildProductQueryParams } from "../utils/product-filters";
+import { formatApiError } from "../utils/api-error";
 
 export async function getProducts(searchParams?: SearchParams) {
   const params = new URLSearchParams(buildProductQueryParams(searchParams));
@@ -42,7 +43,6 @@ export async function getProductsWithOccasionFallback(occasionId?: string) {
 export async function getDashboardProducts(searchParams?: SearchParams) {
   const params = new URLSearchParams({
     limit: API_DASHBOARD_PRODUCTS_LIMIT.toString(),
-    fields: "title,rateAvg,rateCount,price,sold,quantity",
     ...searchParams,
   });
 
@@ -52,13 +52,11 @@ export async function getDashboardProducts(searchParams?: SearchParams) {
     },
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch dashboard products");
-  }
-
   const payload: ApiResponse<PaginatedData<TDashboardProduct[]>> = await response.json();
 
-  if ("message" in payload) throw new Error(payload.message);
+  if (!response.ok || "message" in payload) {
+    throw new Error(formatApiError(payload, "Failed to fetch dashboard products"));
+  }
 
   return payload;
 }

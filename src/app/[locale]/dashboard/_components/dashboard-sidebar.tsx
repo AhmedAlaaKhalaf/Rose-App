@@ -14,7 +14,7 @@ export default function DashboardSidebar() {
 
   return (
     <>
-      <aside className="hidden md:flex flex-col justify-between items-center col-span-2 bg-white p-6 border-black/10 border-r h-screen">
+      <aside className="hidden md:flex flex-col justify-between items-center col-span-2 bg-white p-6 border-black/10 border-r h-screen sticky top-0">
         {/* Sidebar: Logo, HomeButton, NavLinks */}
         <div className="flex flex-col items-center gap-6 w-full">
           {/* Logo */}
